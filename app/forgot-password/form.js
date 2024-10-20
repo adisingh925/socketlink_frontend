@@ -6,7 +6,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 
-function ResetPassword() {
+function ForgotPassword() {
   const router = useRouter();
   const [email, setEmail] = useState({ email: "" });
   const [snackbarState, setSnackbarState] = useState(false);
@@ -97,4 +97,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default ForgotPassword;
