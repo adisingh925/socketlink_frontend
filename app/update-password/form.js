@@ -3,11 +3,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../components/firebase";
 import { confirmPasswordReset } from 'firebase/auth';
-import { useRouter } from "next/navigation";
 import Toast from "../components/toast";
+import { useSearchParams } from "next/navigation";
 
 function UpdatePassword() {
-    const router = useRouter();
+    const searchParams = useSearchParams()
 
     const [password, setPassword] = useState({
         password: "",
@@ -16,18 +16,6 @@ function UpdatePassword() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [oobCode, setOobCode] = useState("");
-
-    useEffect(() => {
-        // Check if the router is ready and oobCode exists
-        try {
-            if (router.query.oobCode) {
-                setOobCode(router.query.oobCode);
-            }
-        } catch (error) {
-            console.error("Error getting oobCode: ", error);
-        }
-    }, [router]);
 
     const handleSubmitClicked = async (e) => {
         e.preventDefault();
@@ -38,7 +26,7 @@ function UpdatePassword() {
             return;
         }
 
-        confirmPasswordReset(auth, oobCode, password.password).then(() => {
+        confirmPasswordReset(auth, searchParams.get("oobCode"), password.password).then(() => {
             setSeverity("success");
             setSnackbarText("Password updated successfully!");
             setSnackbarState(true);
