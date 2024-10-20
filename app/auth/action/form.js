@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../components/firebase";
+import { auth } from "../../components/firebase";
 import { confirmPasswordReset } from 'firebase/auth';
-import Toast from "../components/toast";
+import Toast from "../../components/toast";
 import { useSearchParams } from "next/navigation";
 
 function UpdatePassword() {
@@ -17,7 +17,7 @@ function UpdatePassword() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
 
-    const handleSubmitClicked = async (e) => {
+    const handleUpdatePasswordClicked = async (e) => {
         e.preventDefault();
         if (password.password !== password.retype_password) {
             setSeverity("error");
@@ -43,7 +43,7 @@ function UpdatePassword() {
 
     return (
         <>
-            <section className="bg-blue dark:bg-gray-900">
+            {searchParams.get("mode") === "resetPassword" && <section className="bg-blue dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                     <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
                         <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -52,7 +52,7 @@ function UpdatePassword() {
                         <form
                             className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
                             action="#"
-                            onSubmit={handleSubmitClicked}
+                            onSubmit={handleUpdatePasswordClicked}
                         >
                             <div>
                                 <label
@@ -102,7 +102,7 @@ function UpdatePassword() {
                         </form>
                     </div>
                 </div>
-            </section>
+            </section>}
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
         </>
     );
