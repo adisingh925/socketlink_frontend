@@ -140,7 +140,7 @@ function UpdatePassword() {
                                 </p>
                             ) : isVerified === -1 ? (
                                 <p className="mt-4 text-sm text-red-500 dark:text-red-400">
-                                    We couldn't verify your email. Please check the link and try again.
+                                    We couldn&apos;t verify your email. Please check the link and try again.
                                 </p>
                             ) : (
                                 <p className="mt-4 text-sm text-green-500 dark:text-green-400">
