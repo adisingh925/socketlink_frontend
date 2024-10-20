@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../../components/firebase";
-import { confirmPasswordReset } from 'firebase/auth';
+import { confirmPasswordReset, applyActionCode } from 'firebase/auth';
 import Toast from "../../components/toast";
 import { useSearchParams } from "next/navigation";
 
@@ -16,6 +16,20 @@ function UpdatePassword() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
+    const [isVerified, setIsVerified] = useState(0); // To track verification status
+
+    useEffect(() => {
+        if (searchParams.get("mode") === "verifyEmail") {
+            applyActionCode(auth, searchParams.get("oobCode")).then(() => {
+                setIsVerified(1);
+            }).catch((error) => {
+                setIsVerified(-1);
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+            });
+        }
+    }, []);
 
     const handleUpdatePasswordClicked = async (e) => {
         e.preventDefault();
@@ -39,6 +53,15 @@ function UpdatePassword() {
 
     const onChange = (event) => {
         setPassword({ ...password, [event.target.name]: event.target.value });
+    };
+
+    const getStatusMessage = () => {
+        switch (isVerified) {
+            case 0: return "Verifying Email...";
+            case 1: return "Email Verified Successfully!";
+            case -1: return "Verification Failed. Please try again.";
+            default: return "Verification Failed. Please try again.";
+        }
     };
 
     return (
@@ -103,6 +126,32 @@ function UpdatePassword() {
                     </div>
                 </div>
             </section>}
+
+            {searchParams.get("mode") === "verifyEmail" && (
+                <section className="bg-blue dark:bg-gray-900">
+                    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+                        <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+                            <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                                {getStatusMessage()} {/* Dynamically changes */}
+                            </h2>
+                            {isVerified === 0 ? (
+                                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                                    Please wait while we verify your email address.
+                                </p>
+                            ) : isVerified === -1 ? (
+                                <p className="mt-4 text-sm text-red-500 dark:text-red-400">
+                                    We couldn't verify your email. Please check the link and try again.
+                                </p>
+                            ) : (
+                                <p className="mt-4 text-sm text-green-500 dark:text-green-400">
+                                    Your email has been successfully verified!
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            )}
+
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
         </>
     );
