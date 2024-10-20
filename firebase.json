@@ -16,8 +16,8 @@
         "destination": "/signup.html"
       },
       {
-        "source": "/update-password",
-        "destination": "/update-password.html"
+        "source": "/auth/action",
+        "destination": "/auth/action.html"
       },
       {
         "source": "/forgot-password",
