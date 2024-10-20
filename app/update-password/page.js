@@ -1,10 +1,10 @@
 // app/login/page.js
-import ResetPassword from './form';
+import UpdatePassword from './form';
 
 export default function SignupPage() {
     return (
         <main>
-            <ResetPassword />
+            <UpdatePassword />
         </main>
     );
 }
