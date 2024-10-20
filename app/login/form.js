@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
@@ -11,12 +11,24 @@ import Toast from "../components/toast";
 function Login() {
     const router = useRouter();
     const [credentials, setCredentials] = useState({ email: "", password: "" });
-    const [error, setError] = useState(null);
     const [emailPasswordLoading, setEmailPasswordLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
+    const [loading, setLoading] = useState(true); // New loading state
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                router.push("/"); // Redirect to homepage if authenticated
+            } else {
+                setLoading(false); // Set loading to false when checking is done
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup subscription on unmount
+    }, [router]);
 
     const handleLoginClicked = async (e) => {
         e.preventDefault();
@@ -24,7 +36,6 @@ function Login() {
 
         signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((_result) => {
             setEmailPasswordLoading(false);
-            router.push("/");
         }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
@@ -40,7 +51,6 @@ function Login() {
 
         signInWithPopup(auth, provider).then((_result) => {
             setGoogleLoading(false);
-            router.push("/");
         }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
@@ -52,6 +62,10 @@ function Login() {
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value });
     };
+
+    if (loading) {
+        return <div className="flex items-center justify-center h-screen">Loading...</div>; // Show loading while checking auth
+    }
 
     return (
         <>
@@ -137,7 +151,6 @@ function Login() {
                                 {googleLoading ? 'Signing in with Google...' : 'Sign in with Google'}
                             </button>
 
-                            {error && <p className="text-sm font-light text-red-500">{error}</p>}
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Don’t have an account yet?{" "}
                                 <Link href="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">

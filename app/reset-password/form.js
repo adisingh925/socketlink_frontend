@@ -1,15 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Toast from "../components/toast";
+import { useRouter } from "next/navigation";
 
 function ResetPassword() {
+  const router = useRouter();
   const [email, setEmail] = useState({ email: "" });
   const [snackbarState, setSnackbarState] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
   const [severity, setSeverity] = useState("");
+  const [loading, setLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        router.push("/"); // Redirect to homepage if authenticated
+      } else {
+        setLoading(false); // Set loading to false when checking is done
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, [router]);
 
   const onChange = (event) => {
     setEmail({ ...email, [event.target.name]: event.target.value });
@@ -27,6 +42,10 @@ function ResetPassword() {
       setSnackbarState(true);
     });
   };
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>; // Show loading while checking auth
+  }
 
   return (
     <>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Toast from "../components/toast";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
@@ -15,12 +15,25 @@ function Signup() {
     const [severity, setSeverity] = useState("");
     const [emailPasswordLoading, setEmailPasswordLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [loading, setLoading] = useState(true); // New loading state
 
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
         retypePassword: "",
     });
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                router.push("/");
+            } else {
+                setLoading(false);
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup subscription on unmount
+    }, [router]);
 
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value });
@@ -60,7 +73,6 @@ function Signup() {
 
         signInWithPopup(auth, provider).then((_result) => {
             setGoogleLoading(false);
-            router.push("/");
         }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
@@ -68,6 +80,10 @@ function Signup() {
             setGoogleLoading(false);
         });
     };
+
+    if (loading) {
+        return <div className="flex items-center justify-center h-screen">Loading...</div>; // Show loading while checking auth
+    }
 
     return (
         <>
