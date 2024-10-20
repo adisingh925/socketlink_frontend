@@ -36,26 +36,15 @@ function Login() {
         e.preventDefault();
         setEmailPasswordLoading(true);
 
-        if(credentials.password.length < 6) {
-            setSeverity("error");
-            setSnackbarText("Password should be at least 6 characters long.");
-            setSnackbarState(true);
+        signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((_result) => {
             setEmailPasswordLoading(false);
-            return;
-        }
-
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
-            const user = userCredential.user;
-            console.log('User signed in:', user);
             router.push("/");
-            setEmailPasswordLoading(false);
-        } catch (error) {
+        }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
             setEmailPasswordLoading(false);
-        }
+        });
     };
 
     const handleGoogleLogin = async () => {
@@ -63,18 +52,15 @@ function Login() {
 
         const provider = new GoogleAuthProvider();
 
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            console.log('Google user signed in:', user);
-            router.push("/");
+        signInWithPopup(auth, provider).then((_result) => {
             setGoogleLoading(false);
-        } catch (error) {
+            router.push("/");
+        }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
             setGoogleLoading(false);
-        }
+        });
     };
 
     const onChange = (event) => {

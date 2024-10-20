@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import Toast from "../components/toast";
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
 
 function Signup() {
@@ -46,44 +46,26 @@ function Signup() {
         setEmailPasswordLoading(true);
 
         if (credentials.password !== credentials.retypePassword) {
+            setEmailPasswordLoading(false);
             setSeverity("error");
             setSnackbarText("Passwords do not match.");
             setSnackbarState(true);
-            setEmailPasswordLoading(false);
-            return;
-        } else if (credentials.password.length < 6) {
-            setSeverity("error");
-            setSnackbarText("Password should be at least 6 characters long.");
-            setSnackbarState(true);
-            setEmailPasswordLoading(false);
             return;
         }
 
         const { email, password } = credentials;
 
-        try {
-            const response = await axios.post("http://localhost:9001/signup", {
-                email,
-                password,
-            });
-
-            if (response.data.code === 1) {
-                setSeverity("success");
-                setSnackbarText(response.data.message);
-                setSnackbarState(true);
-                setEmailPasswordLoading(false);
-            } else {
-                setSeverity("error");
-                setSnackbarText(response.data.message);
-                setSnackbarState(true);
-                setEmailPasswordLoading(false);
-            }
-        } catch (error) {
+        createUserWithEmailAndPassword(auth, email, password).then((result) => {
+            const user = result.user;
+            sendEmailVerification(user);
+            setEmailPasswordLoading(false);
+            router.push("/login");
+        }).catch((error) => {
             setSeverity("error");
-            setSnackbarText("Signup failed. Please try again.");
+            setSnackbarText(error.message);
             setSnackbarState(true);
             setEmailPasswordLoading(false);
-        }
+        });
     };
 
     const handleGoogleSignup = async () => {
@@ -91,18 +73,15 @@ function Signup() {
 
         const provider = new GoogleAuthProvider();
 
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            console.log('Google user signed in:', user);
-            router.push("/");
+        signInWithPopup(auth, provider).then((_result) => {
             setGoogleLoading(false);
-        } catch (error) {
+            router.push("/");
+        }).catch((error) => {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
             setGoogleLoading(false);
-        }
+        });
     };
 
     return (
