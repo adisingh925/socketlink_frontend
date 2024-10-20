@@ -37,7 +37,7 @@ function ResetPassword() {
               Forgot your password?
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
-              Don't fret! Just type in your email and we will send you a link to
+              Don&apos;t fret! Just type in your email and we will send you a link to
               reset your password!
             </p>
             <form
