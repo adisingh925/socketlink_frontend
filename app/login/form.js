@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from "../components/firebase"; // Adjust the path as necessary
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
 import Toast from "../components/toast";
 
@@ -17,20 +17,6 @@ function Login() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyACZU__jbP-tw6x8D81A2NrmH7E1yn8aTI",
-        authDomain: "socketlink-830db.firebaseapp.com",
-        projectId: "socketlink-830db",
-        storageBucket: "socketlink-830db.appspot.com",
-        messagingSenderId: "361357261532",
-        appId: "1:361357261532:web:d706d1883ab5a593051219",
-        measurementId: "G-SGP3J8PTY5"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
 
     const handleLoginClicked = async (e) => {
         e.preventDefault();
