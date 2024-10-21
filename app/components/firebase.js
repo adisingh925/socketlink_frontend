@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyACZU__jbP-tw6x8D81A2NrmH7E1yn8aTI",
-    authDomain: "socketlink-830db.firebaseapp.com",
+    authDomain: "socketlink.io",
     projectId: "socketlink-830db",
     storageBucket: "socketlink-830db.appspot.com",
     messagingSenderId: "361357261532",
