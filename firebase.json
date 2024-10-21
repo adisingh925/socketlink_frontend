@@ -45,18 +45,6 @@
             "value": "none"
           },
           {
-            "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://apis.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google.com https://www.google.co.in https://googleads.g.doubleclick.net https://picolon-bucket.s3.ap-south-1.amazonaws.com; font-src 'self'; connect-src 'self' https://api.picolon.com wss://api.picolon.com https://www.google-analytics.com https://content-language.googleapis.com https://www.google.com https://www.googletagmanager.com https://d13y0ma1duxpwi.cloudfront.net https://googleads.g.doubleclick.net https://www.google.co.in https://google.com https://identitytoolkit.googleapis.com; media-src 'self' blob:; frame-src 'self' https://td.doubleclick.net;"
-          },          
-          {
-            "key": "Cross-Origin-Opener-Policy",   
-            "value": "unsafe-none"
-          },
-          {
-            "key": "Cross-Origin-Embedder-Policy",
-            "value": "unsafe-none"
-          },
-          {
             "key": "Referrer-Policy",
             "value": "no-referrer"
           },
