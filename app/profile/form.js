@@ -103,7 +103,6 @@ function Profile() {
                                         {isEmailVerified ? "Verified" : "Verify"}
                                     </button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
