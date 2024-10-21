@@ -23,6 +23,61 @@
         "source": "/forgot-password",
         "destination": "/forgot-password.html"
       }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Permitted-Cross-Domain-Policies",
+            "value": "none"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.googleadservices.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google.com https://www.google.co.in https://googleads.g.doubleclick.net https://picolon-bucket.s3.ap-south-1.amazonaws.com; font-src 'self'; connect-src 'self' https://api.picolon.com wss://api.picolon.com https://www.google-analytics.com https://content-language.googleapis.com https://www.google.com https://www.googletagmanager.com https://d13y0ma1duxpwi.cloudfront.net https://googleads.g.doubleclick.net https://www.google.co.in https://google.com; media-src 'self' blob:; frame-src 'self' https://td.doubleclick.net;"
+          },
+          {
+            "key": "Cross-Origin-Opener-Policy",   
+            "value": "same-origin-allow-popups"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains; preload"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(self), microphone=(self), camera=(self)"
+          },
+          {
+            "key": "Expect-CT",
+            "value": "max-age=86400, enforce"
+          },
+          {
+            "key": "X-Robots-Tag",
+            "value": "follow, index"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      }
     ]
   }
 }
