@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { sendEmailVerification, multiFactor, TotpMultiFactorGenerator, TotpSecret, getMultiFactorResolver, reauthenticateWithCredential, reauthenticateWithPopup, GoogleAuthProvider, EmailAuthProvider } from "firebase/auth"; // For changing email and sending email verification
 import Toast from "../components/toast";

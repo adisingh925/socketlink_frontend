@@ -77,6 +77,8 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
                             type="text"
                             name="code"
                             id="code"
+                            minLength={6}
+                            maxLength={6}
                             value={code}
                             autoComplete="off"
                             onChange={(e) => setCode(e.target.value)}
