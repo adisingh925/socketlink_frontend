@@ -178,11 +178,11 @@ function UpdatePassword() {
                             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 {getStatusMessageRevert()} {/* Dynamically changes */}
                             </h2>
-                            {isVerified === 0 ? (
+                            {isReverted === 0 ? (
                                 <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
                                     Please wait while we revert the second factor addition.
                                 </p>
-                            ) : isVerified === -1 ? (
+                            ) : isReverted === -1 ? (
                                 <p className="mt-4 text-sm text-red-500 dark:text-red-400">
                                     We couldn&apos;t revert the second factor addition. Please check the link and try again.
                                 </p>
