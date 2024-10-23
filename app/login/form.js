@@ -49,9 +49,9 @@ function Login() {
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
-                setEmailPasswordLoading(false);
+                resetLoading();
             }
-        });
+        })
     };
 
     const handleGoogleLogin = async () => {
@@ -69,9 +69,9 @@ function Login() {
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
-                setGoogleLoading(false);
+                resetLoading();
             }
-        });
+        })
     };
 
     const handleMFASubmit = async (e) => {
@@ -88,29 +88,30 @@ function Login() {
                 setSeverity("success");
                 setSnackbarText("MFA verification successful!");
                 setSnackbarState(true);
-                setIsOpen(false);
             }).catch((error) => {
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
             }).finally(() => {
-                setCode('');
-                setIsOpen(false);
-                setGoogleLoading(false);
-                setEmailPasswordLoading(false);
+                closeDialog();
             });
         } catch (error) {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
+            closeDialog();
         }
     };
+
+    const resetLoading = () => {
+        setEmailPasswordLoading(false);
+        setGoogleLoading(false);
+    }
 
     const closeDialog = () => {
         setIsOpen(false);
         setCode('');
-        setGoogleLoading(false);
-        setEmailPasswordLoading(false);
+        resetLoading();
     };
 
     const onChange = (event) => {
