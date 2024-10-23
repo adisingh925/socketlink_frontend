@@ -171,6 +171,9 @@ function Profile() {
                         }
                     } else {
                         console.error("Error generating TOTP secret : ", error.code);
+                        setSeverity("error");
+                        setSnackbarText(error.message);
+                        setSnackbarState(true);
                     }
                 });
             }).catch((error) => {

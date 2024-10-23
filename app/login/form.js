@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getMultiFactorResolver, TotpMultiFactorGenerator } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
 import Toast from "../components/toast";
 import NavigationBar from "../components/navbar";
+import Mfa from "../components/inputTotpDialog";
 
 function Login() {
     const router = useRouter();
@@ -18,6 +19,9 @@ function Login() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
     const [loading, setLoading] = useState(true); // New loading state
+    const [code, setCode] = useState('');
+    const [isOpen, setIsOpen] = useState(false); // Track dialog state
+    const authError = useRef(null);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -38,10 +42,15 @@ function Login() {
         signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((_result) => {
             setEmailPasswordLoading(false);
         }).catch((error) => {
-            setSeverity("error");
-            setSnackbarText(error.message);
-            setSnackbarState(true);
-            setEmailPasswordLoading(false);
+            if (error.code === "auth/multi-factor-auth-required") {
+                authError.current = error;
+                setIsOpen(true); // Open the dialog if MFA is required
+            } else {
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+                setEmailPasswordLoading(false);
+            }
         });
     };
 
@@ -53,11 +62,55 @@ function Login() {
         signInWithPopup(auth, provider).then((_result) => {
             setGoogleLoading(false);
         }).catch((error) => {
+            if (error.code === "auth/multi-factor-auth-required") {
+                authError.current = error;
+                setIsOpen(true); // Open the dialog if MFA is required
+            } else {
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+                setGoogleLoading(false);
+            }
+        });
+    };
+
+    const handleMFASubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const mfaResolver = getMultiFactorResolver(auth, authError.current);
+            const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(
+                mfaResolver.hints[0].uid,
+                code
+            );
+
+            mfaResolver.resolveSignIn(multiFactorAssertion).then((_userCredential) => {
+                setSeverity("success");
+                setSnackbarText("MFA verification successful!");
+                setSnackbarState(true);
+                setIsOpen(false);
+            }).catch((error) => {
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+            }).finally(() => {
+                setCode('');
+                setIsOpen(false);
+                setGoogleLoading(false);
+                setEmailPasswordLoading(false);
+            });
+        } catch (error) {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
-            setGoogleLoading(false);
-        });
+        }
+    };
+
+    const closeDialog = () => {
+        setIsOpen(false);
+        setCode('');
+        setGoogleLoading(false);
+        setEmailPasswordLoading(false);
     };
 
     const onChange = (event) => {
@@ -168,6 +221,8 @@ function Login() {
             </div>
 
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
+
+            <Mfa handleSubmit={handleMFASubmit} code={code} setCode={setCode} isOpen={isOpen} setIsOpen={setIsOpen} closeDialog={closeDialog} />
         </>
     );
 }
