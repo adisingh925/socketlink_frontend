@@ -16,7 +16,8 @@ function UpdatePassword() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [isVerified, setIsVerified] = useState(0); // To track verification status
+    const [isVerified, setIsVerified] = useState(0); // To track verification 
+    const [isReverted, setIsReverted] = useState(0); // To track second factor addition
 
     useEffect(() => {
         if (searchParams.get("mode") === "verifyEmail") {
@@ -24,6 +25,15 @@ function UpdatePassword() {
                 setIsVerified(1);
             }).catch((error) => {
                 setIsVerified(-1);
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+            });
+        } else if (searchParams.get("mode") === "revertSecondFactorAddition") {
+            applyActionCode(auth, searchParams.get("oobCode")).then(() => {
+                setIsReverted(1);
+            }).catch((error) => {
+                setIsReverted(-1);
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
@@ -61,6 +71,15 @@ function UpdatePassword() {
             case 1: return "Email Verified Successfully!";
             case -1: return "Verification Failed. Please try again.";
             default: return "Verification Failed. Please try again.";
+        }
+    };
+
+    const getStatusMessageRevert = () => {
+        switch (isReverted) {
+            case 0: return "Reverting Second Factor Addition...";
+            case 1: return "Second Factor Addition Reverted Successfully!";
+            case -1: return "Reverting Failed. Please try again.";
+            default: return "Reverting Failed. Please try again.";
         }
     };
 
@@ -145,6 +164,31 @@ function UpdatePassword() {
                             ) : (
                                 <p className="mt-4 text-sm text-green-500 dark:text-green-400">
                                     Your email has been successfully verified!
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {searchParams.get("mode") === "revertSecondFactorAddition" && (
+                <section className="bg-blue dark:bg-gray-900">
+                    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+                        <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+                            <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                                {getStatusMessageRevert()} {/* Dynamically changes */}
+                            </h2>
+                            {isVerified === 0 ? (
+                                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                                    Please wait while we revert the second factor addition.
+                                </p>
+                            ) : isVerified === -1 ? (
+                                <p className="mt-4 text-sm text-red-500 dark:text-red-400">
+                                    We couldn&apos;t revert the second factor addition. Please check the link and try again.
+                                </p>
+                            ) : (
+                                <p className="mt-4 text-sm text-green-500 dark:text-green-400">
+                                    Second factor addition has been successfully reverted!
                                 </p>
                             )}
                         </div>
