@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "firebase/auth";
 import { auth } from "../components/firebase"; // Adjust the path if necessary
 import { useRouter } from "next/navigation"; // useRouter for navigation
+import Link from "next/link";
 
 const navigation = [
     { name: "Dashboard", href: "#", current: true },
@@ -60,30 +61,30 @@ export default function NavigationBar() {
                                 <>
                                     <div className="flex justify-start space-x-4">
                                         {/* If the user is signed in */}
-                                        <a
-                                            href="#"
+                                        <Link
+                                            href="/"
                                             className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                         >
                                             Dashboard
-                                        </a>
+                                        </Link>
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <div className="flex justify-end space-x-4">
                                         {/* If the user is signed out */}
-                                        <a
+                                        <Link
                                             href="/login"
                                             className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                         >
                                             Login
-                                        </a>
-                                        <a
+                                        </Link>
+                                        <Link
                                             href="/signup"
                                             className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                         >
                                             Signup
-                                        </a>
+                                        </Link>
                                     </div>
                                 </>
                             )}
