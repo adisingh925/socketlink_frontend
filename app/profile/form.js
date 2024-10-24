@@ -200,11 +200,7 @@ function Profile() {
     };
 
     if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-                Loading...
-            </div>
-        ); // Show loading while checking auth
+        return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
     }
 
     return (

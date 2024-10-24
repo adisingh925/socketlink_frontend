@@ -11,7 +11,7 @@ import NavigationBar from "../components/navbar";
 import Mfa from "../components/inputTotpDialog";
 
 function Signup() {
-    const router = useRouter(); 
+    const router = useRouter();
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
@@ -132,7 +132,7 @@ function Signup() {
     };
 
     if (loading) {
-        return <div className="flex items-center justify-center h-screen">Loading...</div>; // Show loading while checking auth
+        return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
     }
 
     return (
