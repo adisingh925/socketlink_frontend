@@ -9,6 +9,11 @@ import NavigationBar from "./components/navbar";
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true); // Loading state
+  const [stats, setStats] = useState({
+    totalMessages: 0,
+    connectedUsers: 0,
+    averagePayloadSize: 0,
+  });
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -16,11 +21,19 @@ export default function Home() {
         router.push("/login"); // Redirect to login if not authenticated
       } else {
         setLoading(false); // User is authenticated, set loading to false
+        fetchStats(); // Fetch stats once user is authenticated
       }
     });
 
     return () => unsubscribe(); // Cleanup subscription on unmount
   }, [router]);
+
+  // Function to fetch dashboard stats
+  const fetchStats = async () => {
+    const response = await fetch("/api/stats"); // Replace with your actual API call to fetch stats
+    const data = await response.json();
+    setStats(data);
+  };
 
   if (loading) {
     return (
@@ -32,27 +45,41 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col h-[100dvh]">
+      <div className="flex flex-col h-[100dvh] bg-gray-900">
         <NavigationBar />
-        <div className="relative flex flex-col items-center justify-center flex-grow p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <div className="flex flex-col items-center justify-center flex-grow p-8">
           {/* Main Content */}
           <div className="z-10 text-center">
-            <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-              Welcome to Your Awesome App!
-            </h1>
-            <p className="text-lg text-gray-200 mb-8 max-w-md mx-auto">
-              Connect, chat, and share with people around the world. We bring you
-              the best way to communicate.
+            <h1 className="text-5xl font-bold text-white mb-4">Dashboard</h1>
+            <p className="text-lg text-gray-400 mb-8 max-w-md mx-auto">
+              Overview of your WebSocket server statistics.
             </p>
-
-            {/* Call to Action Button */}
-            <a
-              href="/dashboard" // Redirect to the dashboard or another page
-              className="rounded-full bg-blue-500 text-white px-6 py-3 text-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
-            >
-              Get Started
-            </a>
           </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
+            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-white">Total Messages Sent</h2>
+              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.totalMessages}</p>
+            </div>
+            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-white">Connected Users</h2>
+              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.connectedUsers}</p>
+            </div>
+            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-bold text-white">Average Payload Size</h2>
+              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.averagePayloadSize} KB</p>
+            </div>
+            {/* Add more stat cards as needed */}
+          </div>
+
+          {/* Call to Action Button */}
+          <a
+            href="/create-server" // Redirect to the page for creating a new server
+            className="rounded-full bg-blue-600 text-white px-6 py-3 text-lg font-medium hover:bg-blue-700 transition-colors shadow-lg mt-10"
+          >
+            Create New WebSocket Server
+          </a>
         </div>
       </div>
     </>
