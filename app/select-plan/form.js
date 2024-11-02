@@ -1,51 +1,71 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign } from "react-icons/fi";
 
 function SelectWebSocketPlan() {
-    const router = useRouter();
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     const [region] = useState(searchParams.get('region'));
-
     const [selectedPlan, setSelectedPlan] = useState(null);
 
-    // Define WebSocket plans with unique color themes
+    // Define WebSocket plans
     const plans = [
-        { id: 1, name: "Basic", maxConnections: 5000, scalableUpTo: 10000, messagesPerSecond: 10, price: "$50/month", color: "bg-blue-700", buttonColor: "bg-blue-500 hover:bg-blue-600" },
-        { id: 2, name: "Standard", maxConnections: 10000, scalableUpTo: 20000, messagesPerSecond: 10, price: "$100/month", color: "bg-green-700", buttonColor: "bg-green-500 hover:bg-green-600" },
-        { id: 3, name: "Pro", maxConnections: 20000, scalableUpTo: 40000, messagesPerSecond: 10, price: "$150/month", color: "bg-purple-700", buttonColor: "bg-purple-500 hover:bg-purple-600" },
+        { id: 1, name: "Trial", maxConnections: 500, scalableUpTo: "No Scaling", messagesPerSecond: 10, price: "Free" },
+        { id: 2, name: "Basic", maxConnections: 5000, scalableUpTo: "10,000 connections", messagesPerSecond: 10, price: "50/month" },
+        { id: 3, name: "Standard", maxConnections: 10000, scalableUpTo: "20,000 connections", messagesPerSecond: 10, price: "100/month" },
+        { id: 4, name: "Pro", maxConnections: 20000, scalableUpTo: "40,000 connections", messagesPerSecond: 10, price: "150/month" },
     ];
 
     const handlePlanSelection = (plan) => {
         setSelectedPlan(plan);
         alert(`You selected the ${plan.name} plan for region ${region} with ${plan.maxConnections} connections.`);
-        // Navigate to a confirmation or checkout page if desired
-        // router.push('/checkout');
     };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900 px-4 py-6">
-            <div className="p-4 sm:p-6 bg-gray-800 text-white rounded-lg w-full max-w-lg">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-center">Select a Plan</h2>
-                <p className="text-center mb-6">Region : {region}</p>
+            <div className="text-white w-full max-w-lg">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">Choose Your WebSocket Plan</h2>
+                <p className="text-center text-gray-400 mb-8">Region : {region}</p>
 
-                <div className="grid gap-4">
+                <div className="space-y-6">
                     {plans.map(plan => (
                         <div
                             key={plan.id}
-                            className={`p-4 rounded-lg border ${plan.color} text-white border-gray-600`}
+                            className={`p-6 rounded-lg shadow-lg transition transform ${plan.name === "Trial" ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"} sm:hover:scale-105`}
                         >
-                            <h4 className="font-bold text-lg mb-2">{plan.name}</h4>
-                            <p><strong>Connections :</strong> {plan.maxConnections}</p>
-                            <p><strong>Scalable Up To :</strong> {plan.scalableUpTo} connections</p>
-                            <p><strong>Messages :</strong> {plan.messagesPerSecond} messages / connection / second</p>
-                            <p className="mt-2"><strong>Price :</strong> {plan.price}</p>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className={`text-xl font-bold ${plan.name === "Trial" ? "text-yellow-300" : "text-blue-400"}`}>
+                                    {plan.name} Plan
+                                    {plan.name === "Trial" && (
+                                        <span className="text-xs font-semibold bg-yellow-500 text-gray-900 py-1 px-2 rounded-lg ml-2 align-middle">Free for 3 Days</span>
+                                    )}
+                                </h3>
+                                <div className={`flex items-center text-lg font-semibold ${plan.name === "Trial" ? "text-yellow-300" : "text-blue-300"}`}>
+                                    <FiDollarSign /> {plan.price}
+                                </div>
+                            </div>
+
+                            <div className="text-gray-300 text-sm space-y-3">
+                                <div className="flex items-center">
+                                    <FiUsers className={`${plan.name === "Trial" ? "text-yellow-300" : "text-blue-400"} mr-2`} />
+                                    <p><strong>Max Connections :</strong> {plan.maxConnections.toLocaleString()}</p>
+                                </div>
+                                <div className="flex items-center">
+                                    <FiTrendingUp className={`${plan.name === "Trial" ? "text-yellow-300" : "text-green-400"} mr-2`} />
+                                    <p><strong>Scalable Up To :</strong> {plan.scalableUpTo}</p>
+                                </div>
+                                <div className="flex items-center">
+                                    <FiZap className={`${plan.name === "Trial" ? "text-yellow-300" : "text-yellow-400"} mr-2`} />
+                                    <p><strong>Messages per Second :</strong> {plan.messagesPerSecond} per connection</p>
+                                </div>
+                            </div>
+
                             <button
                                 onClick={() => handlePlanSelection(plan)}
-                                className={`mt-4 w-full text-white ${plan.buttonColor} focus:ring-4 focus:outline-none focus:ring-opacity-50 font-medium rounded-lg text-sm px-4 py-2`}
+                                className={`mt-6 w-full ${plan.name === "Trial" ? "bg-yellow-500 hover:bg-yellow-600 text-black" : "bg-blue-600 hover:bg-blue-700 text-white"} font-medium rounded-lg text-sm px-4 py-2`}
                             >
-                                Select Plan
+                                {plan.name === "Trial" ? "Start 3-Day Trial" : `Select ${plan.name} Plan`}
                             </button>
                         </div>
                     ))}
