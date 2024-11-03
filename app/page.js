@@ -47,39 +47,31 @@ export default function Home() {
     <>
       <div className="flex flex-col h-[100dvh] bg-gray-900">
         <NavigationBar />
-        <div className="flex flex-col items-center justify-center flex-grow p-8">
+        <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8">
           {/* Main Content */}
           <div className="z-10 text-center">
-            <h1 className="text-5xl font-bold text-white mb-4">Dashboard</h1>
-            <p className="text-lg text-gray-400 mb-8 max-w-md mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 md:mb-4">Dashboard</h1>
+            <p className="text-base md:text-lg text-gray-400 mb-6 md:mb-8 max-w-sm md:max-w-md mx-auto">
               Overview of your WebSocket server statistics.
             </p>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
-            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
-              <h2 className="text-2xl font-bold text-white">Total Messages Sent</h2>
-              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.totalMessages}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-10 max-w-md sm:max-w-3xl mx-auto">
+            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
+              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Total Messages Sent</h2>
+              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.totalMessages}</p>
             </div>
-            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
-              <h2 className="text-2xl font-bold text-white">Connected Users</h2>
-              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.connectedUsers}</p>
+            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
+              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Connected Users</h2>
+              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.connectedUsers}</p>
             </div>
-            <div className="bg-gray-800 rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
-              <h2 className="text-2xl font-bold text-white">Average Payload Size</h2>
-              <p className="text-4xl font-semibold text-gray-300 mt-2">{stats.averagePayloadSize} KB</p>
+            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
+              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Average Payload Size</h2>
+              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.averagePayloadSize} KB</p>
             </div>
             {/* Add more stat cards as needed */}
           </div>
-
-          {/* Call to Action Button */}
-          <a
-            href="/create-server" // Redirect to the page for creating a new server
-            className="rounded-full bg-blue-600 text-white px-6 py-3 text-lg font-medium hover:bg-blue-700 transition-colors shadow-lg mt-10"
-          >
-            Create New WebSocket Server
-          </a>
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
+import { auth } from "../components/firebase";
 
 // Fetch regions function
 async function fetchRegions() {
@@ -19,19 +20,30 @@ function RegionSelectionForm() {
     const router = useRouter();
     const [regions, setRegions] = useState([]);
     const [selectedRegion, setSelectedRegion] = useState(null);
+    const [spinner, setSpinner] = useState(true); // Loading state
     const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
-        setLoading(true); // Start loading
-        fetchRegions()
-            .then((regionsData) => {
-                setRegions(regionsData);
-                setLoading(false); // End loading after fetching
-            })
-            .catch((error) => {
-                console.error(error);
-                setLoading(false); // Ensure loading ends on error as well
-            });
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (!user) {
+                router.push("/login"); // Redirect to login if not authenticated
+            } else {
+                setLoading(false); // User is authenticated, set loading to false
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup subscription on unmount
+    }, [router]);
+
+    useEffect(() => {
+        setSpinner(true); // Start loading
+        fetchRegions().then((regionsData) => {
+            setRegions(regionsData);
+            setSpinner(false); // End loading after fetching
+        }).catch((error) => {
+            console.error(error);
+            setSpinner(false); // Ensure loading ends on error as well
+        });
     }, []);
 
     const handleSelectRegion = (regionSlug) => {
@@ -45,12 +57,16 @@ function RegionSelectionForm() {
         }
     };
 
+    if (loading) {
+        return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900 px-4 py-6">
             <form onSubmit={handleSubmit} className="p-4 sm:p-6 bg-gray-800 text-white rounded-lg w-full max-w-3xl">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-center">Select a region closest to your users</h2>
 
-                {loading ? (
+                {spinner ? (
                     <div className="flex justify-center items-center h-48">
                         <FaSpinner className="animate-spin text-blue-600 text-3xl" />
                         <span className="ml-2 text-blue-600">Loading regions...</span>
