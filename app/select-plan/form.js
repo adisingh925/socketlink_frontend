@@ -17,22 +17,14 @@ function SelectWebSocketPlan() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [loading, setLoading] = useState(true); // New loading state
-    const [plans, setPlans] = useState([]); // New plans state
-
-    // /** Define WebSocket plans */
-    // const plans = [
-    //     { id: 1, name: "Trial", maxConnections: 500, scalableUpTo: "No Scaling", messagesPerSecond: 10, price: "Free" },
-    //     { id: 2, name: "Basic", maxConnections: 5000, scalableUpTo: "10,000 connections", messagesPerSecond: 10, price: "50/month" },
-    //     { id: 3, name: "Standard", maxConnections: 10000, scalableUpTo: "20,000 connections", messagesPerSecond: 10, price: "100/month" },
-    //     { id: 4, name: "Pro", maxConnections: 20000, scalableUpTo: "40,000 connections", messagesPerSecond: 10, price: "150/month" },
-    // ];
+    const [loading, setLoading] = useState(true);
+    const [plans, setPlans] = useState([]);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             try {
                 if (!user) {
-                    router.push("/login"); // Redirect to login if not authenticated
+                    router.push("/login");
                 } else {
                     try {
                         const userDocRef = collection(db, "plans");
@@ -40,8 +32,6 @@ function SelectWebSocketPlan() {
 
                         if (!querySnapshot.empty) {
                             setPlans(querySnapshot.docs.map(doc => doc.data()));
-                            const plans = querySnapshot.docs.map(doc => doc.data());
-                            console.log(plans); // Logs all documents in the "plans" collection
                         } else {
                             setPlans(null);
                             setSnackbarText("No plans found!");
@@ -63,17 +53,16 @@ function SelectWebSocketPlan() {
             }
         });
 
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, [router]);
 
-    const handlePlanSelection = () => {
-
+    const handlePlanSelection = (plan) => {
         setSnackbarState(true);
         setSnackbarText("Processing...");
         setSeverity("info");
 
         auth.currentUser.getIdToken(/* forceRefresh */ true).then((token) => {
-            axios.get('http://localhost:9001/api/v1/trial', {
+            axios.get(`http://localhost:9001/api/v1/subscription/${plan.plan_id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -102,7 +91,7 @@ function SelectWebSocketPlan() {
     };
 
     function numberToWords(num) {
-        const units = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"];
+        const units = ["", "Thousand", "Million", "Billion", "Trillion", "quadrillion", "quintillion"];
         let i = 0;
 
         // Convert number to absolute value and handle zero

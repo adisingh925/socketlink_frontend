@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 
@@ -15,16 +15,6 @@ function SubscribedPlans() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
 
-    const planConfig = {
-        1: {
-            name: "Trial",
-            price: "Free",
-            max_connections: 500,
-            features: ["500 simultaneous connections", "10 messages per second", "No Scaling"],
-            apiKey: "trial-api-key"
-        }
-    };
-
     function convertSecondsToDate(seconds) {
         const milliseconds = seconds * 1000;
         return new Date(milliseconds);
@@ -34,14 +24,36 @@ function SubscribedPlans() {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
-                    const userDocRef = doc(db, "subscriptions", user.email);
-                    const docSnap = await getDoc(userDocRef);
+                    const userDocs = doc(db, "subscriptions", user.email);
+                    const userDocSnap = await getDoc(userDocs);
 
-                    if (docSnap.exists()) {
-                        setPlan(docSnap.data());
+                    if (userDocSnap.exists()) {
+                        const planDocSnap = await getDoc(userDocSnap.data().planRef);
+
+                        if (planDocSnap.exists()) {
+                            setPlan({
+                                plan_name: planDocSnap.data().plan_name,
+                                connections: planDocSnap.data().connections,
+                                max_payload_size_in_kb: planDocSnap.data().max_payload_size_in_kb,
+                                msg_per_day: planDocSnap.data().msg_per_day,
+                                msg_per_second_per_connection: planDocSnap.data().msg_per_second_per_connection,
+                                apiKey: userDocSnap.data().apiKey,
+                                start_time: userDocSnap.data().start_time,
+                                end_time: userDocSnap.data().end_time,
+                                status: userDocSnap.data().status,
+                                price: planDocSnap.data().price,
+                            });
+
+                            console.log(plan); // Logs the subscribed plan
+                        } else {
+                            setPlan(null);
+                            setSnackbarText("No subscribed plan found!");
+                            setSeverity("warning");
+                            setSnackbarState(true);
+                        }
                     } else {
                         setPlan(null);
-                        setSnackbarText("No subscribed plan found.");
+                        setSnackbarText("No subscribed plan found!");
                         setSeverity("warning");
                         setSnackbarState(true);
                     }
@@ -61,7 +73,7 @@ function SubscribedPlans() {
     }, []);
 
     if (loading) {
-        return <div className="flex items-center justify-center h-screen bg-gray-900 text-white text-lg">Loading...</div>;
+        return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
     }
 
     return (
@@ -71,11 +83,11 @@ function SubscribedPlans() {
                     {plan ? (
                         <>
                             <h2 className="text-3xl font-bold text-center text-yellow-400 mb-6">
-                                {planConfig[plan.planId].name} Plan
+                                {plan.plan_name} Plan
                             </h2>
                             <div className="space-y-6">
-                                <InfoRow label="Subscription" value={planConfig[plan.planId].price} />
-                                <InfoRow label="Max Connections" value={`${plan.max_connections}`} valueColor="text-green-400" />
+                                <InfoRow label="Price" value={"$ " + plan.price} />
+                                <InfoRow label="Max Connections" value={`${plan.connections}`} valueColor="text-green-400" />
                                 <InfoRow label="Messages per Second" value="10 / connection" valueColor="text-blue-500" />
                                 <InfoRow
                                     label="Started On"
@@ -107,19 +119,19 @@ function SubscribedPlans() {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="mt-6">
+                                {/* <div className="mt-6">
                                     <h3 className="text-lg font-semibold text-blue-400">Features</h3>
                                     <ul className="list-disc list-inside space-y-1 mt-2 text-gray-300">
                                         {planConfig[plan.planId].features.map((feature, index) => (
                                             <li key={index}>{feature}</li>
                                         ))}
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="mt-8 text-center">
                                 <Link href="/choose-region">
                                     <button className="px-6 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-600 transition duration-200">
-                                        Manage Plan
+                                        Change Plan
                                     </button>
                                 </Link>
                             </div>
