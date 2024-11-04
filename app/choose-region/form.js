@@ -20,29 +20,29 @@ function RegionSelectionForm() {
     const router = useRouter();
     const [regions, setRegions] = useState([]);
     const [selectedRegion, setSelectedRegion] = useState(null);
-    const [spinner, setSpinner] = useState(true); // Loading state
-    const [loading, setLoading] = useState(true); // Loading state
+    const [spinner, setSpinner] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (!user) {
-                router.push("/login"); // Redirect to login if not authenticated
+                router.push("/login");
             } else {
-                setLoading(false); // User is authenticated, set loading to false
+                setLoading(false);
             }
         });
 
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, [router]);
 
     useEffect(() => {
-        setSpinner(true); // Start loading
+        setSpinner(true);
         fetchRegions().then((regionsData) => {
             setRegions(regionsData);
-            setSpinner(false); // End loading after fetching
+            setSpinner(false);
         }).catch((error) => {
             console.error(error);
-            setSpinner(false); // Ensure loading ends on error as well
+            setSpinner(false);
         });
     }, []);
 
@@ -58,7 +58,13 @@ function RegionSelectionForm() {
     };
 
     if (loading) {
-        return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
+        return (
+            <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">
+                <div className="flex flex-col items-center space-y-4">
+                    <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -74,7 +80,7 @@ function RegionSelectionForm() {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {regions
-                            .filter(region => region.available) // Only include available regions
+                            .filter(region => region.available) 
                             .map((region) => (
                                 <div
                                     key={region.slug}

@@ -18,25 +18,30 @@ export default function Home() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        router.push("/login"); // Redirect to login if not authenticated
+        router.push("/login");
       } else {
-        setLoading(false); // User is authenticated, set loading to false
-        fetchStats(); // Fetch stats once user is authenticated
+        setLoading(false);
+        fetchStats();
       }
     });
 
-    return () => unsubscribe(); // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, [router]);
 
-  // Function to fetch dashboard stats
   const fetchStats = async () => {
-    const response = await fetch("/api/stats"); // Replace with your actual API call to fetch stats
+    const response = await fetch("/api/stats");
     const data = await response.json();
     setStats(data);
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">Loading...</div>; // Show loading while checking auth
+    return (
+      <div className="flex items-center justify-center h-[100dvh] bg-gray-900 text-white">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+        </div>
+      </div>
+    );
   }
 
   return (
