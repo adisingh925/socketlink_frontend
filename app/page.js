@@ -37,43 +37,58 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        Loading...
+      <div className="flex items-center justify-center h-screen bg-gray-800 text-white text-xl font-semibold">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-blue-400"></div>
+        <span className="ml-4">Loading...</span>
       </div>
     ); // Show loading while checking auth
   }
 
   return (
     <>
-      <div className="flex flex-col h-[100dvh] bg-gray-900">
+      <div className="flex flex-col h-screen bg-gray-900 text-white">
         <NavigationBar />
         <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8">
-          {/* Main Content */}
-          <div className="z-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 md:mb-4">Dashboard</h1>
-            <p className="text-base md:text-lg text-gray-400 mb-6 md:mb-8 max-w-sm md:max-w-md mx-auto">
-              Overview of your WebSocket server statistics.
+          {/* Main Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
+              Dashboard
+            </h1>
+            <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
+              Real-time overview of your WebSocket server performance and user activity.
             </p>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-10 max-w-md sm:max-w-3xl mx-auto">
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
-              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Total Messages Sent</h2>
-              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.totalMessages}</p>
-            </div>
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
-              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Connected Users</h2>
-              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.connectedUsers}</p>
-            </div>
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 md:p-6 flex flex-col items-center justify-center">
-              <h2 className="text-xl md:text-2xl font-bold text-white text-center">Average Payload Size</h2>
-              <p className="text-3xl md:text-4xl font-semibold text-gray-300 mt-2">{stats.averagePayloadSize} KB</p>
-            </div>
-            {/* Add more stat cards as needed */}
+          <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto">
+            <StatCard
+              title="Messages Sent"
+              stat={stats.totalMessages}
+              color="bg-gradient-to-r from-blue-500 to-blue-700"
+            />
+            <StatCard
+              title="Connected Users"
+              stat={stats.connectedUsers}
+              color="bg-gradient-to-r from-green-500 to-green-700"
+            />
+            <StatCard
+              title="Average Payload Size"
+              stat={`${stats.averagePayloadSize} KB`}
+              color="bg-gradient-to-r from-purple-500 to-purple-700"
+            />
           </div>
         </div>
       </div>
     </>
+  );
+}
+
+// Reusable StatCard component
+function StatCard({ title, stat, color }) {
+  return (
+    <div className={`${color} rounded-lg shadow-md p-6 transition-transform transform hover:scale-105`}>
+      <h2 className="text-xl md:text-2xl font-semibold text-center mb-3">{title}</h2>
+      <p className="text-4xl md:text-5xl font-bold text-center">{stat}</p>
+    </div>
   );
 }

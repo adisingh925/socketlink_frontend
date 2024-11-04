@@ -56,7 +56,6 @@ export default function NavigationBar() {
                             />
                         </div>
                         <div className="hidden sm:ml-6 sm:block flex-1">
-                            {/* <div className="flex justify-end space-x-4"> */}
                             {user ? (
                                 <>
                                     <div className="flex justify-start space-x-4">
@@ -66,6 +65,13 @@ export default function NavigationBar() {
                                             className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                         >
                                             Dashboard
+                                        </Link>
+
+                                        <Link
+                                            href="/my-plans"
+                                            className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                        >
+                                            My Plans
                                         </Link>
                                     </div>
                                 </>
@@ -88,7 +94,6 @@ export default function NavigationBar() {
                                     </div>
                                 </>
                             )}
-                            {/* </div> */}
                         </div>
                     </div>
 
