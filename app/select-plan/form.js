@@ -67,6 +67,7 @@ function SelectWebSocketPlan() {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((response) => {
+                console.log(response.data);
                 if (response.data.code === 0) {
                     setSnackbarText(response.data.message);
                     setSeverity("warning");

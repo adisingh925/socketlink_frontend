@@ -80,7 +80,7 @@ function RegionSelectionForm() {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {regions
-                            .filter(region => region.available) 
+                            .filter(region => region.available)
                             .map((region) => (
                                 <div
                                     key={region.slug}
