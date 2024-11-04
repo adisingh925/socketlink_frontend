@@ -6,13 +6,6 @@ import { auth } from "../components/firebase"; // Adjust the path if necessary
 import { useRouter } from "next/navigation"; // useRouter for navigation
 import Link from "next/link";
 
-const navigation = [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
-];
-
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
@@ -121,14 +114,9 @@ export default function NavigationBar() {
                                 </div>
                                 <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
                                     <MenuItem>
-                                        <a href="/profile" className="block px-4 py-2 text-sm text-gray-700">
+                                        <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700">
                                             Your Profile
-                                        </a>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                                            Settings
-                                        </a>
+                                        </Link>
                                     </MenuItem>
                                     <MenuItem>
                                         <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-gray-700">
@@ -146,21 +134,21 @@ export default function NavigationBar() {
                 <div className="space-y-1 px-2 pb-3 pt-2">
                     {user ? (
                         <>
-                            <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                                 Dashboard
-                            </a>
+                            </Link>
                             <button onClick={handleLogout} className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                                 Sign out
                             </button>
                         </>
                     ) : (
                         <>
-                            <a href="/login" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link href="/login" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                                 Login
-                            </a>
-                            <a href="/signup" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            </Link>
+                            <Link href="/signup" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                                 Signup
-                            </a>
+                            </Link>
                         </>
                     )}
                 </div>
