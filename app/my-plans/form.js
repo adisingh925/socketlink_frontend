@@ -139,7 +139,7 @@ function SubscribedPlans() {
                     ) : (
                         <div className="text-center text-gray-300">
                             <h2 className="text-3xl font-bold mb-4">No Subscription Found</h2>
-                            <p className="mb-4">It seems you haven't subscribed to any plans yet.</p>
+                            <p className="mb-4">It seems you haven&apos;t subscribed to any plans yet.</p>
                             <Link href="/choose-region">
                                 <button className="px-6 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-600 transition duration-200">
                                     Choose a Plan
