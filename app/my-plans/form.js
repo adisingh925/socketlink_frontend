@@ -81,8 +81,8 @@ function SubscribedPlans() {
 
     return (
         <>
-            <div className="flex items-center justify-center min-h-screen bg-gray-900 px-6 py-10">
-                <div className="w-full max-w-lg p-8 bg-white/10 backdrop-blur-md text-white rounded-2xl shadow-xl border border-white/20">
+            <div className="flex items-center justify-center min-h-screen px-6 py-10">
+                <div className="w-full max-w-lg p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
                     {plan ? (
                         <>
                             <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
