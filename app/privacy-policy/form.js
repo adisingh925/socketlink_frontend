@@ -233,7 +233,7 @@ function PrivacyPolicy() {
 
           <h2 className="text-lg font-bold mt-4 mb-2">8. Contact Us</h2>
           <p className="mb-4">
-            If you have any questions or concerns about this Privacy Policy, please contact us at <Link href="mailto:info@picolon.com" className="text-blue-600 font-bold">info@picolon.com</Link>.
+            If you have any questions or concerns about this Privacy Policy, please contact us at <Link href="mailto:support@socketlink.com" className="text-blue-600 font-bold">support@socketlink.com</Link>.
           </p>
 
         </div>
