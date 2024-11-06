@@ -62,7 +62,8 @@ function SelectWebSocketPlan() {
         setSeverity("info");
 
         auth.currentUser.getIdToken(/* forceRefresh */ true).then((token) => {
-            axios.get(`http://localhost:9001/api/v1/subscription/${plan.plan_id}`, {
+            console.log(plan);
+            axios.get(`http://localhost:9001/api/v1/subscription/${plan.plan_id}/${region}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

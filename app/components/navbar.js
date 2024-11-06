@@ -55,16 +55,36 @@ export default function NavigationBar() {
                                         {/* If the user is signed in */}
                                         <Link
                                             href="/"
-                                            className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
                                         >
                                             Dashboard
                                         </Link>
 
                                         <Link
                                             href="/my-plans"
-                                            className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
                                         >
                                             My Plans
+                                        </Link>
+
+                                        <Link
+                                            href="/terms-conditions"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        >
+                                            Terms & Conditions
+                                        </Link>
+
+                                        <Link
+                                            href="/privacy-policy"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        >
+                                            Privacy Policy
+                                        </Link>
+                                        <Link
+                                            href="/contact-us"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        >
+                                            Contact Us
                                         </Link>
                                     </div>
                                 </>
