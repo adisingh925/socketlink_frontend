@@ -86,6 +86,12 @@ export default function NavigationBar() {
                                             Privacy Policy
                                         </Link>
                                         <Link
+                                            href="/contact-us"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        >
+                                            Contact Us
+                                        </Link>
+                                        <Link
                                             href="/choose-region"
                                             className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
                                         >

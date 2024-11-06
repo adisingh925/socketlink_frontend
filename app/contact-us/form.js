@@ -209,19 +209,7 @@ function ContactUs() {
                     <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
                         Contact Us
                     </h1>
-                    <p className="mt-2 text-xl leading-8 ">
-                        {/* If you have some opinions, suggestions or queries regarding this website feel free to share it with us using the form below, We would love to hear from you.<br /><br />
-
-            If you think it&apos;s something important and you want us to reply, please write to us at{" "}
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=info@picolon.com"
-              className="text-blue-600 font-bold"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              info@picolon.com
-            </a>
-            . We&apos;ll get back to you as soon as possible. */}
+                    <p className="mt-2 text-xl leading-8">
                         Incase you have any queries or suggestions, feel free to reach out to us at {" "} <a
                             href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
                             className="text-blue-600 font-bold"
@@ -230,26 +218,18 @@ function ContactUs() {
                         >support@socketlink.io</a>
                     </p>
 
-                    {/* Textbox for user queries */}
-                    {/* <form onSubmit={handleSubmit} className="mt-8">
-            <textarea
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-              rows="4"
-              placeholder="Write your query here..."
-            ></textarea>
-            <button
-              type="submit"
-              className="mt-4 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none"
-            >
-              Send
-            </button>
-          </form> */}
+                    {/* Address Section */}
+                    <div className="mt-6 text-lg">
+                        {/* <p>Our office is located at:</p> */}
+                        <address className="mt-2">
+                            Socketlink Inc.<br />
+                            Ayappa Society<br />
+                            Hitech City, Hyderabad<br />
+                            India
+                        </address>
+                    </div>
                 </div>
             </div>
-
-            {/* <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} /> */}
         </>
     );
 }
