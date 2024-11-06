@@ -59,7 +59,12 @@ export default function NavigationBar() {
                                         >
                                             Dashboard
                                         </Link>
-
+                                        <Link
+                                            href="/metrics"
+                                            className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        >
+                                            Metrics
+                                        </Link>
                                         <Link
                                             href="/my-plans"
                                             className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
@@ -81,10 +86,10 @@ export default function NavigationBar() {
                                             Privacy Policy
                                         </Link>
                                         <Link
-                                            href="/contact-us"
+                                            href="/choose-region"
                                             className="bg-gray-800 text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
                                         >
-                                            Contact Us
+                                            Pricing
                                         </Link>
                                     </div>
                                 </>
