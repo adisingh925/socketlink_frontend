@@ -7,6 +7,8 @@ import axios from "axios";
 import { auth, db } from "../components/firebase";
 import Toast from "../components/toast";
 import { collection, getDocs } from "firebase/firestore";
+import Head from "next/head";
+import Script from "next/script";
 
 function SelectWebSocketPlan() {
     const router = useRouter();
@@ -78,6 +80,42 @@ function SelectWebSocketPlan() {
                     setSeverity("success");
                     setSnackbarState(true);
                     router.push("/my-plans");
+                } else if (response.data.code === -1) {
+                    setSnackbarText(response.data.message);
+                    setSeverity("error");
+                    setSnackbarState(true);
+                } else if (response.data.code === 2) {
+                    const options = {
+                        key: "rzp_test_3jWpiXDU2zdqah",
+                        amount: response.data.amount,
+                        currency: "USD",
+                        order_id: response.data.order_id,
+                        name: 'Socketlink',
+                        description: response.data.plan_name,
+                        image: 'https://your-logo-url.com/logo.png',
+                        handler: function (response) {
+                            alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+                            // Optionally, send response details to the backend for verification
+                        },
+                        prefill: {
+                            name: auth.currentUser.displayName,
+                            email: auth.currentUser.email,
+                            contact: auth.currentUser.phoneNumber
+                        },
+                        theme: {
+                            color: '#F37254'
+                        },
+                        metadata: {
+                            email: auth.currentUser.email,
+                        }
+                    };
+
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+
+                    rzp.on('payment.failed', function (response) {
+                        alert(`Payment failed! Error: ${response.error.description}`);
+                    });
                 }
             }).catch((error) => {
                 console.error(error);
@@ -177,6 +215,11 @@ function SelectWebSocketPlan() {
             </div>
 
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
+
+            <Script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                strategy="afterInteractive" // Load after the page is interactive
+            />
         </>
     );
 }
