@@ -85,6 +85,7 @@ function SelectWebSocketPlan() {
                     setSeverity("error");
                     setSnackbarState(true);
                 } else if (response.data.code === 2) {
+                    console.log(auth.currentUser.phoneNumber);
                     const options = {
                         key: "rzp_test_3jWpiXDU2zdqah",
                         amount: response.data.amount,
@@ -92,10 +93,18 @@ function SelectWebSocketPlan() {
                         order_id: response.data.order_id,
                         name: 'Socketlink',
                         description: response.data.plan_name,
-                        image: 'https://your-logo-url.com/logo.png',
+                        image: 'https://picolon-bucket.s3.ap-south-1.amazonaws.com/picolon-full-image.webp',
                         handler: function (response) {
-                            alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-                            // Optionally, send response details to the backend for verification
+                            setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+                            setSeverity("success");
+                            setSnackbarState(true);
+                        },
+                        modal: {
+                            ondismiss: function () {
+                                setSnackbarText("Payment was cancelled by the user");
+                                setSeverity("warning");
+                                setSnackbarState(true);
+                            }
                         },
                         prefill: {
                             name: auth.currentUser.displayName,
@@ -105,8 +114,9 @@ function SelectWebSocketPlan() {
                         theme: {
                             color: '#F37254'
                         },
-                        metadata: {
-                            email: auth.currentUser.email,
+                        notes: {
+                            plan_id: response.data.plan_id,
+                            region: response.data.region
                         }
                     };
 
@@ -114,7 +124,9 @@ function SelectWebSocketPlan() {
                     rzp.open();
 
                     rzp.on('payment.failed', function (response) {
-                        alert(`Payment failed! Error: ${response.error.description}`);
+                        setSnackbarText(response.error.description);
+                        setSeverity("error");
+                        setSnackbarState(true);
                     });
                 }
             }).catch((error) => {
