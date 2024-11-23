@@ -17,10 +17,13 @@ function SubscribedPlans() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
 
-    function convertSecondsToDate(seconds) {
-        const milliseconds = seconds * 1000;
-        return new Date(milliseconds);
-    }
+    const statusMapping = [
+        { codes: new Set([6]), text: "Active", color: "text-green-600" },
+        { codes: new Set([1, 2, 3, 4, 5]), text: "Initializing Infrastructure", color: "text-gray-500" },
+        { codes: new Set([-1, -2, -3]), text: "Destroying Infrastructure", color: "text-yellow-500" },
+        { codes: new Set([-4]), text: "Inactive", color: "text-red-500" },
+        { codes: new Set([100, 101, 102, 103, 104, 105]), text: "Upgrading Infrastructure", color: "text-gray-500" },
+    ];
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -48,6 +51,25 @@ function SubscribedPlans() {
                 setSnackbarState(true);
             }).finally(() => {
                 setLoading(false);
+            });
+        });
+    }
+
+    const deletePlan = async () => {
+        auth.currentUser.getIdToken().then((token) => {
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/delete-subscription`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then(() => {
+                setSnackbarText("Subscription deleted successfully");
+                setSeverity("success");
+                setSnackbarState(true);
+                setPlan(null);
+            }).catch((error) => {
+                setSnackbarText(error.response.data.message);
+                setSeverity("error");
+                setSnackbarState(true);
             });
         });
     }
@@ -88,15 +110,15 @@ function SubscribedPlans() {
                                     icon={<FiClock />}
                                     label="Started On"
                                     value={new Date(plan.start_time)
-                                        .toLocaleDateString('en-GB')  // This formats the date as dd/mm/yyyy
+                                        .toLocaleDateString('en-GB')
                                         .split('/')
-                                        .join(' - ')}  // Replaces slashes with hyphens to achieve dd-mm-yyyy format
+                                        .join(' - ')}
                                     valueColor="text-white"
                                 />
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Expiring On"
-                                    value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + 30))
+                                    value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + plan.plan.duration))
                                         .toLocaleDateString('en-GB')
                                         .split('/')
                                         .join(' - ')}
@@ -105,8 +127,12 @@ function SubscribedPlans() {
                                 <InfoRow
                                     icon={<FiAlertCircle />}
                                     label="Account Status"
-                                    value={plan.status === 6 ? "Active" : "Paused"}
-                                    valueColor={plan.status === 6 ? "text-white" : "text-white"}
+                                    value={
+                                        statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"
+                                    }
+                                    valueColor={
+                                        statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
+                                    }
                                 />
                                 <div className="flex items-center justify-between">
                                     <span className="text-gray-400 flex items-center">
@@ -133,11 +159,9 @@ function SubscribedPlans() {
                                             Change Plan
                                         </button>
                                     </Link>
-                                    <Link href="/delete-plan">
-                                        <button className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
-                                            Delete Plan
-                                        </button>
-                                    </Link>
+                                    <button onClick={deletePlan} className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                        Delete Plan
+                                    </button>
                                 </div>
                             </div>
                         </>
