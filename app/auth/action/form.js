@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../../components/firebase";
 import { confirmPasswordReset, applyActionCode } from 'firebase/auth';
 import Toast from "../../components/toast";
