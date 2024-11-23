@@ -242,7 +242,7 @@ function Profile() {
                                     <button
                                         type="button"
                                         onClick={handleSendVerificationEmail}
-                                        className="ml-2 h-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        className="ml-2 h-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-3 py-2.5 transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
                                         disabled={isEmailVerified}
                                     >
                                         {isEmailVerified ? "Verified" : "Verify"}
@@ -258,8 +258,8 @@ function Profile() {
                                         <button
                                             type="button"
                                             onClick={handleDisable2FA}
-                                            className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-                                        >
+                                            className="w-full text-white bg-red-600 hover:bg-red-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-red-600 dark:hover:bg-red-700"
+                                            >
                                             Disable Two-Factor Authentication
                                         </button>
                                     </div>
@@ -268,8 +268,8 @@ function Profile() {
                                         <button
                                             type="button"
                                             onClick={handleEnable2FA}
-                                            className="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                                        >
+                                            className="w-full text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-green-600 dark:hover:bg-green-700"
+                                            >
                                             Enable Two-Factor Authentication
                                         </button>
                                     </div>
