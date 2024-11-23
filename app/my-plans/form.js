@@ -6,7 +6,7 @@ import { auth, db } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
-import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle } from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete } from "react-icons/fi";
 import axios from "axios";
 
 function SubscribedPlans() {
@@ -67,29 +67,46 @@ function SubscribedPlans() {
                     {plan ? (
                         <>
                             <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
-                                {plan.plan_name} Plan
+                                {plan.plan.plan_name} Plan
                             </h2>
                             <div className="space-y-6">
                                 <InfoRow icon={<FiDollarSign />} label="Price" value={"$ " + plan.plan.price} />
-                                <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.plan.connections}`} valueColor="text-green-400" />
-                                <InfoRow icon={<FiClock />} label="Messages per Second" value="10 / connection" valueColor="text-blue-500" />
+                                <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.plan.connections}`} valueColor="text-white" />
+                                <InfoRow icon={<FiMessageSquare />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
+                                <InfoRow icon={<FiClock />} label="Plan Duration" value={`${plan.plan.duration} days`} valueColor="text-white" />
+                                <div className="flex items-center justify-between">
+                                    <span className="text-gray-400 flex items-center">
+                                        <FiLink className="mr-2 text-xl text-yellow-400" /> Connection URL :
+                                    </span>
+                                    <div className="flex items-center">
+                                        <span className="font-semibold text-yellow-400 truncate glow">
+                                            {`${plan.subdomain}.socketlink.io`}
+                                        </span>
+                                    </div>
+                                </div>
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Started On"
-                                    value={new Date(plan.start_time).toLocaleDateString()}
-                                    valueColor="text-purple-400"
+                                    value={new Date(plan.start_time)
+                                        .toLocaleDateString('en-GB')  // This formats the date as dd/mm/yyyy
+                                        .split('/')
+                                        .join(' - ')}  // Replaces slashes with hyphens to achieve dd-mm-yyyy format
+                                    valueColor="text-white"
                                 />
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Expiring On"
-                                    value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + 30)).toLocaleDateString()}
-                                    valueColor="text-red-400"
+                                    value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + 30))
+                                        .toLocaleDateString('en-GB')
+                                        .split('/')
+                                        .join(' - ')}
+                                    valueColor="text-white"
                                 />
                                 <InfoRow
                                     icon={<FiAlertCircle />}
                                     label="Account Status"
                                     value={plan.status === 6 ? "Active" : "Paused"}
-                                    valueColor={plan.status === 6 ? "text-green-400" : "text-red-400"}
+                                    valueColor={plan.status === 6 ? "text-white" : "text-white"}
                                 />
                                 <div className="flex items-center justify-between">
                                     <span className="text-gray-400 flex items-center">
@@ -110,11 +127,18 @@ function SubscribedPlans() {
                                 </div>
                             </div>
                             <div className="mt-8 text-center">
-                                <Link href="/choose-region">
-                                    <button className="px-6 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-600 transition-transform duration-200 transform hover:scale-105 shadow-lg">
-                                        Change Plan
-                                    </button>
-                                </Link>
+                                <div className="flex-1">
+                                    <Link href="/choose-region">
+                                        <button className="flex-1 w-full text-white bg-yellow-600 hover:bg-yellow-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                            Change Plan
+                                        </button>
+                                    </Link>
+                                    <Link href="/delete-plan">
+                                        <button className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                            Delete Plan
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -136,7 +160,7 @@ function SubscribedPlans() {
     );
 }
 
-const InfoRow = ({ icon, label, value, valueColor = "text-gray-200" }) => (
+const InfoRow = ({ icon, label, value, valueColor = "text-white" }) => (
     <div className="flex items-center justify-between">
         <span className="text-gray-400 flex items-center">
             {icon && <span className="mr-2 text-xl text-blue-500">{icon}</span>}
