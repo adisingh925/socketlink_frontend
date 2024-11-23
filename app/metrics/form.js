@@ -5,33 +5,61 @@ import { useEffect, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
+import axios from "axios";
+import Toast from "../components/toast";
 
 export default function Metrics() {
     const router = useRouter();
     const [loading, setLoading] = useState(true); // Loading state
+    const [snackbarState, setSnackbarState] = useState(false);
+    const [snackbarText, setSnackbarText] = useState("");
+    const [severity, setSeverity] = useState("");
     const [stats, setStats] = useState({
-        totalMessages: 0,
+        messagesSent: 0,
         connectedUsers: 0,
         averagePayloadSize: 0,
     });
 
     useEffect(() => {
+        let intervalId;
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login");
             } else {
                 setLoading(false);
                 fetchStats();
+
+                intervalId = setInterval(fetchStats, 60 * 1000);
             }
         });
 
-        return () => unsubscribe();
+        return () => {
+            clearInterval(intervalId);
+            unsubscribe();
+        };
     }, [router]);
 
     const fetchStats = async () => {
-        const response = await fetch("/api/stats");
-        const data = await response.json();
-        setStats(data);
+        auth.currentUser.getIdToken().then((token) => {
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-metrics`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((response) => {
+                const { messages_sent, connections, averagePayloadSize } = response.data;
+
+                setStats({
+                    messagesSent: messages_sent || 0,
+                    connectedUsers: connections || 0,
+                    averagePayloadSize: averagePayloadSize || 0,
+                });
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+            });
+        });
     };
 
     if (loading) {
@@ -63,7 +91,7 @@ export default function Metrics() {
                     <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto">
                         <StatCard
                             title="Messages Sent"
-                            stat={stats.totalMessages}
+                            stat={stats.messagesSent}
                             color="bg-gradient-to-r from-blue-500 to-blue-700"
                         />
                         <StatCard
@@ -79,11 +107,13 @@ export default function Metrics() {
                     </div>
                 </div>
             </div>
+
+            <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
         </>
     );
 }
 
-// Reusable StatCard component
+/** Reusable StatCard component */
 function StatCard({ title, stat, color }) {
     return (
         <div className={`${color} rounded-lg shadow-md p-6 transition-transform transform hover:scale-105`}>

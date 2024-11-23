@@ -4,10 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FiUsers, FiTrendingUp, FiZap, FiDollarSign } from "react-icons/fi";
 import axios from "axios";
-import { auth, db } from "../components/firebase";
+import { auth } from "../components/firebase";
 import Toast from "../components/toast";
-import { collection, getDocs } from "firebase/firestore";
-import Head from "next/head";
 import Script from "next/script";
 
 function SelectWebSocketPlan() {
@@ -28,25 +26,22 @@ function SelectWebSocketPlan() {
                 if (!user) {
                     router.push("/login");
                 } else {
-                    try {
-                        const userDocRef = collection(db, "plans");
-                        const querySnapshot = await getDocs(userDocRef);
-
-                        if (!querySnapshot.empty) {
-                            setPlans(querySnapshot.docs.map(doc => doc.data()));
-                        } else {
-                            setPlans(null);
-                            setSnackbarText("No plans found!");
-                            setSeverity("warning");
+                    auth.currentUser.getIdToken().then((token) => {
+                        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }).then((response) => {
+                            console.log(response.data);
+                            setPlans(response.data);
+                        }).catch((error) => {
+                            setSnackbarText(error.message);
+                            setSeverity("error");
                             setSnackbarState(true);
-                        }
-                    } catch (err) {
-                        setSnackbarText(err.message);
-                        setSeverity("error");
-                        setSnackbarState(true);
-                    } finally {
-                        setLoading(false);
-                    }
+                        }).finally(() => {
+                            setLoading(false);
+                        });
+                    });
                 }
             } catch (error) {
                 setSeverity("error");
@@ -65,7 +60,7 @@ function SelectWebSocketPlan() {
 
         auth.currentUser.getIdToken(/* forceRefresh */ true).then((token) => {
             console.log(plan);
-            axios.get(`http://localhost:9001/api/v1/subscription/${plan.plan_id}/${region}`, {
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/subscription/${plan.plan_id}/${region}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -202,7 +197,7 @@ function SelectWebSocketPlan() {
                                 <div className="text-gray-300 text-sm space-y-3">
                                     <div className="flex items-center">
                                         <FiUsers className={`${plan.is_featured === true ? "text-yellow-300" : "text-blue-400"} mr-2`} />
-                                        <p><strong>Max Connections :</strong> {plan.connections.toLocaleString()}</p>
+                                        <p><strong>Max Connections :</strong> {parseInt(plan.connections, 10).toLocaleString()}</p>
                                     </div>
                                     <div className="flex items-center">
                                         <FiTrendingUp className={`${plan.is_featured === true ? "text-yellow-300" : "text-green-400"} mr-2`} />
@@ -216,8 +211,10 @@ function SelectWebSocketPlan() {
 
                                 <button
                                     onClick={() => handlePlanSelection(plan)}
-                                    className={`mt-6 w-full ${plan.is_featured === true ? "bg-yellow-500 hover:bg-yellow-600 text-black" : "bg-blue-600 hover:bg-blue-700 text-white"} font-medium rounded-lg text-sm px-4 py-2`}
-                                >
+                                    className={`mt-6 w-full ${plan.is_featured
+                                        ? "bg-yellow-500 hover:bg-yellow-600 text-black"
+                                        : "bg-blue-600 hover:bg-blue-700 text-white"
+                                        } font-medium rounded-lg text-sm px-4 py-2 active:scale-95 transition-transform duration-150 focus:outline-none`}                                >
                                     {plan.name === "Trial" ? "Start 3-Day Trial" : `Select ${plan.plan_name} Plan`}
                                 </button>
                             </div>
@@ -230,7 +227,7 @@ function SelectWebSocketPlan() {
 
             <Script
                 src="https://checkout.razorpay.com/v1/checkout.js"
-                strategy="afterInteractive" // Load after the page is interactive
+                strategy="afterInteractive"
             />
         </>
     );

@@ -7,6 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle } from "react-icons/fi";
+import axios from "axios";
 
 function SubscribedPlans() {
     const router = useRouter();
@@ -24,45 +25,7 @@ function SubscribedPlans() {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
-                try {
-                    const userDocs = doc(db, "subscriptions", user.email);
-                    const userDocSnap = await getDoc(userDocs);
-
-                    if (userDocSnap.exists()) {
-                        const planDocSnap = await getDoc(userDocSnap.data().planRef);
-
-                        if (planDocSnap.exists()) {
-                            setPlan({
-                                plan_name: planDocSnap.data().plan_name,
-                                connections: planDocSnap.data().connections,
-                                max_payload_size_in_kb: planDocSnap.data().max_payload_size_in_kb,
-                                msg_per_day: planDocSnap.data().msg_per_day,
-                                msg_per_second_per_connection: planDocSnap.data().msg_per_second_per_connection,
-                                apiKey: userDocSnap.data().apiKey,
-                                start_time: userDocSnap.data().start_time,
-                                end_time: userDocSnap.data().end_time,
-                                status: userDocSnap.data().status,
-                                price: planDocSnap.data().price,
-                            });
-                        } else {
-                            setPlan(null);
-                            setSnackbarText("No subscribed plan found!");
-                            setSeverity("warning");
-                            setSnackbarState(true);
-                        }
-                    } else {
-                        setPlan(null);
-                        setSnackbarText("No subscribed plan found!");
-                        setSeverity("warning");
-                        setSnackbarState(true);
-                    }
-                } catch (err) {
-                    setSnackbarText(err.message);
-                    setSeverity("error");
-                    setSnackbarState(true);
-                } finally {
-                    setLoading(false);
-                }
+                await getSubscriptionDetails();
             } else {
                 router.push("/login");
             }
@@ -70,6 +33,25 @@ function SubscribedPlans() {
 
         return () => unsubscribe();
     }, []);
+
+    const getSubscriptionDetails = async () => {
+        auth.currentUser.getIdToken().then((token) => {
+
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/my-subscription`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((response) => {
+                setPlan(response.data);
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+            }).finally(() => {
+                setLoading(false);
+            });
+        });
+    }
 
     if (loading) {
         return (
@@ -95,13 +77,13 @@ function SubscribedPlans() {
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Started On"
-                                    value={convertSecondsToDate(plan.start_time.seconds).toLocaleDateString() + " " + convertSecondsToDate(plan.start_time.seconds).toLocaleTimeString()}
+                                    value={"test"}
                                     valueColor="text-purple-400"
                                 />
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Expiring On"
-                                    value={convertSecondsToDate(plan.end_time.seconds).toLocaleDateString() + " " + convertSecondsToDate(plan.end_time.seconds).toLocaleTimeString()}
+                                    value={"test"}
                                     valueColor="text-red-400"
                                 />
                                 <InfoRow
