@@ -36,7 +36,6 @@ function SubscribedPlans() {
 
     const getSubscriptionDetails = async () => {
         auth.currentUser.getIdToken().then((token) => {
-
             axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/my-subscription`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -63,7 +62,7 @@ function SubscribedPlans() {
 
     return (
         <>
-            <div className="flex items-center justify-center min-h-screen px-6 py-10">
+            <div className="flex items-center justify-center min-h-screen px-6 py-10 bg-gray-900">
                 <div className="w-full max-w-lg p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
                     {plan ? (
                         <>
@@ -71,26 +70,26 @@ function SubscribedPlans() {
                                 {plan.plan_name} Plan
                             </h2>
                             <div className="space-y-6">
-                                <InfoRow icon={<FiDollarSign />} label="Price" value={"$ " + plan.price} />
-                                <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.connections}`} valueColor="text-green-400" />
+                                <InfoRow icon={<FiDollarSign />} label="Price" value={"$ " + plan.plan.price} />
+                                <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.plan.connections}`} valueColor="text-green-400" />
                                 <InfoRow icon={<FiClock />} label="Messages per Second" value="10 / connection" valueColor="text-blue-500" />
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Started On"
-                                    value={"test"}
+                                    value={new Date(plan.start_time).toLocaleDateString()}
                                     valueColor="text-purple-400"
                                 />
                                 <InfoRow
                                     icon={<FiClock />}
                                     label="Expiring On"
-                                    value={"test"}
+                                    value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + 30)).toLocaleDateString()}
                                     valueColor="text-red-400"
                                 />
                                 <InfoRow
                                     icon={<FiAlertCircle />}
                                     label="Account Status"
-                                    value={plan.status === 1 ? "Active" : "Paused"}
-                                    valueColor={plan.status === 1 ? "text-green-400" : "text-red-400"}
+                                    value={plan.status === 6 ? "Active" : "Paused"}
+                                    valueColor={plan.status === 6 ? "text-green-400" : "text-red-400"}
                                 />
                                 <div className="flex items-center justify-between">
                                     <span className="text-gray-400 flex items-center">
