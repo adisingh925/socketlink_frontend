@@ -68,7 +68,7 @@ function RegionSelectionForm() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900 px-4 py-6">
+        <div className="flex items-center justify-center min-h-screen px-4 py-6">
             <form onSubmit={handleSubmit} className="p-4 sm:p-6 bg-gray-800 text-white rounded-lg w-full max-w-3xl">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-center">Select a region closest to your users</h2>
 

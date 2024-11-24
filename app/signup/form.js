@@ -145,7 +145,7 @@ function Signup() {
         <>
             <div className="flex flex-col h-[100dvh]">
                 <NavigationBar />
-                <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">
+                <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0 mt-20">
                     <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -224,7 +224,7 @@ function Signup() {
                                         >
                                             I accept the{" "}
                                             <Link
-                                                href="/terms"
+                                                href="/terms-conditions"
                                                 className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                             >
                                                 Terms and Conditions

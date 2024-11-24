@@ -32,18 +32,18 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900 text-white">
+    <div className="flex flex-col h-[100dvh] text-white">
       <NavigationBar />
-      <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8">
+      <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
         {/* Main Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
             Dashboard
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
-          You can now easily integrate real-time communication into your applications using our powerful WebSocket infrastructure. With the API key we provide, you will have access to fast, reliable, and scalable WebSocket connections for building chat apps, live notifications, gaming, and more!
+            You can now easily integrate real-time communication into your applications using our powerful WebSocket infrastructure. With the API key we provide, you will have access to fast, reliable, and scalable WebSocket connections for building chat apps, live notifications, gaming, and more!
 
-Purchase a subscription today and start building amazing real-time applications with ease.
+            Purchase a subscription today and start building amazing real-time applications with ease.
           </p>
         </div>
 

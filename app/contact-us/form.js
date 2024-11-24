@@ -6,6 +6,7 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import Toast from "../components/toast";
+import FloatingNavigationBar from "../components/navbar";
 
 function ContactUs() {
 
@@ -204,29 +205,32 @@ function ContactUs() {
         `}
             </Script>
 
-            <div className="isolate h-[100dvh] bg-gray-900 px-6 py-8 sm:py-8 lg:px-8 dark:text-white">
-                <div className="mx-auto max-w-2xl text-center">
-                    <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
-                        Contact Us
-                    </h1>
-                    <p className="mt-2 text-xl leading-8">
-                        Incase you have any queries or suggestions, feel free to reach out to us at {" "} <a
-                            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
-                            className="text-blue-600 font-bold"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >support@socketlink.io</a>
-                    </p>
+            <div className="flex flex-col h-[100dvh] bg-gray-900">
+                <FloatingNavigationBar />
+                <div className="isolate h-[100dvh] bg-gray-900 px-6 py-8 sm:py-8 lg:px-8 dark:text-white mt-20">
+                    <div className="mx-auto max-w-2xl text-center">
+                        <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
+                            Contact Us
+                        </h1>
+                        <p className="mt-2 text-xl leading-8">
+                            Incase you have any queries or suggestions, feel free to reach out to us at {" "} <a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
+                                className="text-blue-600 font-bold"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >support@socketlink.io</a>
+                        </p>
 
-                    {/* Address Section */}
-                    <div className="mt-6 text-lg">
-                        {/* <p>Our office is located at:</p> */}
-                        <address className="mt-2">
-                            Socketlink Inc.<br />
-                            Ayappa Society<br />
-                            Hitech City, Hyderabad<br />
-                            India
-                        </address>
+                        {/* Address Section */}
+                        <div className="mt-6 text-lg">
+                            {/* <p>Our office is located at:</p> */}
+                            <address className="mt-2">
+                                Socketlink Inc.<br />
+                                Ayappa Society<br />
+                                Hitech City, Hyderabad<br />
+                                India
+                            </address>
+                        </div>
                     </div>
                 </div>
             </div>

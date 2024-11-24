@@ -74,9 +74,9 @@ export default function Metrics() {
 
     return (
         <>
-            <div className="flex flex-col h-screen bg-gray-900 text-white">
+            <div className="flex flex-col h-[100dvh] text-white">
                 <NavigationBar />
-                <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8">
+                <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
                     {/* Main Header */}
                     <div className="text-center mb-12">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
