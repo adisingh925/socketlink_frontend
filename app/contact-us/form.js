@@ -205,9 +205,9 @@ function ContactUs() {
         `}
             </Script>
 
-            <div className="flex flex-col h-[100dvh] bg-gray-900">
+            <div className="flex flex-col h-[100dvh] ">
                 <FloatingNavigationBar />
-                <div className="isolate h-[100dvh] bg-gray-900 px-6 py-8 sm:py-8 lg:px-8 dark:text-white mt-20">
+                <div className="isolate h-[100dvh] px-6 py-8 sm:py-8 lg:px-8 dark:text-white mt-20">
                     <div className="mx-auto max-w-2xl text-center">
                         <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
                             Contact Us
