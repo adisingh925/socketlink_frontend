@@ -176,16 +176,15 @@ function SubscribedPlans() {
                                                 Change Plan
                                             </button>
                                         </Link>
-                                        {plan.status === -4 ? (
-                                            <Link href="/renew">
-                                                <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
-                                                    Renew Plan
-                                                </button>
-                                            </Link>
-                                        ) : (
+                                        <Link href="/renew">
+                                            <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                                Renew Plan
+                                            </button>
+                                        </Link>
+                                        {plan.status !== -4 && (
                                             <button
                                                 onClick={deletePlan}
-                                                className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150"
+                                                className="flex-1 w-full mt-5 text-white bg-red-600 hover:bg-red-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150"
                                             >
                                                 Delete Plan
                                             </button>
