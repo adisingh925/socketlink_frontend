@@ -21,7 +21,7 @@ function SubscribedPlans() {
     const statusMapping = [
         { codes: new Set([6]), text: "Active", color: "text-green-600" },
         { codes: new Set([1, 2, 3, 4, 5]), text: "Initializing Infrastructure", color: "text-gray-500" },
-        { codes: new Set([-1, -2, -3]), text: "Destroying Infrastructure", color: "text-yellow-500" },
+        { codes: new Set([-1, -2, -3]), text: "Destroying Infrastructure", color: "text-gray-500" },
         { codes: new Set([-4]), text: "Inactive", color: "text-red-500" },
         { codes: new Set([100, 101, 102, 103, 104, 105]), text: "Upgrading Infrastructure", color: "text-gray-500" },
     ];
@@ -29,7 +29,13 @@ function SubscribedPlans() {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
-                await getSubscriptionDetails();
+                // Call getSubscriptionDetails every second
+                const intervalId = setInterval(() => {
+                    getSubscriptionDetails();
+                }, 2000); // 1000ms = 1 second
+
+                // Cleanup the interval when the component unmounts or when the user logs out
+                return () => clearInterval(intervalId);
             } else {
                 router.push("/login");
             }
@@ -176,11 +182,13 @@ function SubscribedPlans() {
                                                 Change Plan
                                             </button>
                                         </Link>
-                                        <Link href="/renew">
-                                            <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
-                                                Renew Plan
-                                            </button>
-                                        </Link>
+                                        {plan.plan.price !== 0 && (
+                                            <Link href="/renew">
+                                                <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                                    Renew Plan
+                                                </button>
+                                            </Link>
+                                        )}
                                         {plan.status !== -4 && (
                                             <button
                                                 onClick={deletePlan}
