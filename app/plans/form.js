@@ -1,18 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign } from "react-icons/fi";
+import { useRouter } from 'next/navigation';
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
 import Script from "next/script";
 import NavigationBar from "../components/navbar";
+import RegionSelectionDialog from "../components/region";
 
 function SelectWebSocketPlan() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const [region] = useState(searchParams.get('region'));
 
     /** states */
     const [snackbarState, setSnackbarState] = useState(false);
@@ -20,6 +19,11 @@ function SelectWebSocketPlan() {
     const [severity, setSeverity] = useState("");
     const [loading, setLoading] = useState(true);
     const [plans, setPlans] = useState([]);
+    const [isRegionDialogOpen, setIsRegionDialogOpen] = useState(false);
+    const [selectedPlanId, setSelectedPlanId] = useState(null);
+
+    const handleRegionDialogOpen = () => setIsRegionDialogOpen(true);
+    const handleRegionDialogClose = () => setIsRegionDialogOpen(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -54,14 +58,15 @@ function SelectWebSocketPlan() {
         return () => unsubscribe();
     }, [router]);
 
-    const handlePlanSelection = (plan) => {
+    const handleRegionSelection = (region) => {
+        console.log(region);
+        handleRegionDialogClose();
         setSnackbarState(true);
         setSnackbarText("Processing...");
         setSeverity("info");
 
         auth.currentUser.getIdToken(/* forceRefresh */ true).then((token) => {
-            console.log(plan);
-            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/subscription/${plan.plan_id}/${region}`, {
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/subscription/${selectedPlanId}/${region}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -137,6 +142,11 @@ function SelectWebSocketPlan() {
         });
     };
 
+    const handlePlanSelection = (plan) => {
+        setSelectedPlanId(plan.plan_id);
+        handleRegionDialogOpen();
+    };
+
     function numberToWords(num) {
         const units = ["", "Thousand", "Million", "Billion", "Trillion", "quadrillion", "quintillion"];
         let i = 0;
@@ -171,43 +181,85 @@ function SelectWebSocketPlan() {
 
     return (
         <>
-            <div className="flex flex-col h-[100dvh] ">
+            <div className="flex flex-col h-[100dvh]">
                 <NavigationBar />
-                <div className="flex items-center justify-center px-4 py-6 mt-20 ">
-                    <div className="text-white w-full max-w-lg">
-                        <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">Choose Your Plan</h2>
-                        <p className="text-center text-gray-400 mb-8">Region : {region}</p>
-
-                        <div className="space-y-6">
-                            {plans.map(plan => (
+                <div className="flex flex-col flex-grow items-center justify-center px-4 py-6 mt-[100px]">
+                    <div className="text-white w-full max-w-screen">
+                        <div className="flex flex-wrap justify-center gap-4">
+                            {plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
-                                    className={`p-6 rounded-lg shadow-lg transition transform ${plan.is_featured === true ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"} sm:hover:scale-105`}
+                                    className={`h-[500px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
+                                        } sm:hover:scale-105`}
                                 >
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h3 className={`text-xl font-bold ${plan.is_featured === true ? "text-yellow-300" : "text-blue-400"}`}>
-                                            {plan.plan_name + " Plan"}
-                                            {plan.is_featured === true && (
-                                                <span className="text-xs font-semibold bg-yellow-500 text-gray-900 py-1 px-2 rounded-lg ml-2 align-middle">Free for 3 Days</span>
-                                            )}
-                                        </h3>
-                                        <div className={`flex items-center text-lg font-semibold ${plan.is_featured === true ? "text-yellow-300" : "text-blue-300"}`}>
-                                            <FiDollarSign /> {plan.price}
+                                    <div className="flex flex-col justify-between flex-1">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3
+                                                className={`text-xl font-bold ${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                    }`}
+                                            >
+                                                {plan.plan_name + " Plan"}
+                                                {plan.is_featured && (
+                                                    <span className="text-xs font-semibold bg-yellow-500 text-gray-900 py-1 px-2 rounded-lg ml-2 align-middle">
+                                                        Free for 3 Days
+                                                    </span>
+                                                )}
+                                            </h3>
+                                            <div
+                                                className={`flex items-center text-lg font-semibold ${plan.is_featured ? "text-yellow-300" : "text-blue-300"
+                                                    }`}
+                                            >
+                                                <FiDollarSign /> {plan.price}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="text-gray-300 text-sm space-y-3">
-                                        <div className="flex items-center">
-                                            <FiUsers className={`${plan.is_featured === true ? "text-yellow-300" : "text-blue-400"} mr-2`} />
-                                            <p><strong>Max Connections :</strong> {parseInt(plan.connections, 10).toLocaleString()}</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <FiTrendingUp className={`${plan.is_featured === true ? "text-yellow-300" : "text-green-400"} mr-2`} />
-                                            <p><strong>Scalable Up To :</strong> {plan.is_scalable === true ? (plan.connections * 2).toLocaleString() : "No Scaling"}</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <FiZap className={`${plan.is_featured === true ? "text-yellow-300" : "text-yellow-400"} mr-2`} />
-                                            <p><strong>Messages per Day :</strong> {numberToWords(plan.msg_per_day)} </p>
+                                        <div className="text-gray-300 text-sm flex-1 flex flex-col justify-evenly">
+                                            <div className="flex items-center">
+                                                <FiUsers
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Max Connections :</strong>{" "}
+                                                    {parseInt(plan.connections, 10).toLocaleString()}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiTrendingUp
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-green-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Scalable Up To :</strong>{" "}
+                                                    {plan.is_scalable
+                                                        ? (plan.connections * 2).toLocaleString()
+                                                        : "No Scaling"}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiZap
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Messages per Day :</strong> {numberToWords(plan.msg_per_day)}{" "}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiLink
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Custom Subdomain :</strong> {"Available"}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiClock className={`${plan.is_featured ? "text-yellow-300" : "text-orange-400"} mr-2`} />
+                                                <p>
+                                                    <strong>Support :</strong> 24/7 customer support
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -216,8 +268,11 @@ function SelectWebSocketPlan() {
                                         className={`mt-6 w-full ${plan.is_featured
                                             ? "bg-yellow-500 hover:bg-yellow-600 text-black"
                                             : "bg-blue-600 hover:bg-blue-700 text-white"
-                                            } font-medium rounded-lg text-sm px-4 py-2 active:scale-95 transition-transform duration-150 focus:outline-none`}                                >
-                                        {plan.name === "Trial" ? "Start 3-Day Trial" : `Select ${plan.plan_name} Plan`}
+                                            } font-medium rounded-lg text-sm px-4 py-2 active:scale-95 transition-transform duration-150 focus:outline-none`}
+                                    >
+                                        {plan.name === "Trial"
+                                            ? "Start 3-Day Trial"
+                                            : `Select ${plan.plan_name} Plan`}
                                     </button>
                                 </div>
                             ))}
@@ -225,6 +280,8 @@ function SelectWebSocketPlan() {
                     </div>
                 </div>
             </div>
+
+            <RegionSelectionDialog isOpen={isRegionDialogOpen} onClose={handleRegionDialogClose} handleRegionSelection={handleRegionSelection} />
 
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
 

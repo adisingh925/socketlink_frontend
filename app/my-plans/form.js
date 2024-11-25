@@ -158,7 +158,7 @@ function SubscribedPlans() {
                                 <div className="mt-8 text-center">
                                     <div className="flex-1">
                                         <Link href="/choose-region">
-                                            <button className="flex-1 w-full text-white bg-yellow-600 hover:bg-yellow-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                            <button className="flex-1 w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150">
                                                 Change Plan
                                             </button>
                                         </Link>

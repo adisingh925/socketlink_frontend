@@ -96,7 +96,7 @@ export default function FloatingNavigationBar() {
                                         Contact Us
                                     </Link>
                                     <Link
-                                        href="/choose-region"
+                                        href="/select-plan"
                                         className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
                                     >
                                         Pricing
