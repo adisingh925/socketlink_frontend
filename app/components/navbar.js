@@ -3,14 +3,16 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "firebase/auth";
 import { auth } from "../components/firebase"; // Adjust the path if necessary
-import { useRouter } from "next/navigation"; // useRouter for navigation
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
 export default function FloatingNavigationBar() {
+    const pathname = usePathname()
+
     const [user, setUser] = useState(null); // To store authenticated user info
     const router = useRouter(); // For programmatic navigation
 
@@ -27,6 +29,9 @@ export default function FloatingNavigationBar() {
         await signOut(auth);
         router.push("/login"); // Redirect to login after sign out
     };
+
+    // Function to determine if the current path matches the link
+    const isActive = (path) => pathname === path;
 
     return (
         <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-5xl bg-gray-800 rounded-lg shadow-lg">
@@ -61,43 +66,64 @@ export default function FloatingNavigationBar() {
                                 <div className="flex justify-start space-x-4">
                                     <Link
                                         href="/"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Dashboard
                                     </Link>
                                     <Link
                                         href="/metrics"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/metrics") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Metrics
                                     </Link>
                                     <Link
                                         href="/my-plans"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/my-plans") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         My Plans
                                     </Link>
                                     <Link
                                         href="/terms-conditions"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Terms & Conditions
                                     </Link>
                                     <Link
                                         href="/privacy-policy"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Privacy Policy
                                     </Link>
                                     <Link
                                         href="/contact-us"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/contact-us") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Contact Us
                                     </Link>
                                     <Link
                                         href="/pricing"
-                                        className="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-600"
+                                        className={classNames(
+                                            isActive("/pricing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Pricing
                                     </Link>
@@ -106,13 +132,19 @@ export default function FloatingNavigationBar() {
                                 <div className="flex justify-end space-x-4">
                                     <Link
                                         href="/login"
-                                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                        className={classNames(
+                                            isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         href="/signup"
-                                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                        className={classNames(
+                                            isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
                                     >
                                         Signup
                                     </Link>
@@ -174,7 +206,7 @@ export default function FloatingNavigationBar() {
                                 Login
                             </Link>
                             <Link href="/signup" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-                                Signup
+                                Sign up
                             </Link>
                         </>
                     )}
