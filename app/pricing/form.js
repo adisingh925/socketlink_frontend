@@ -189,7 +189,7 @@ function SelectWebSocketPlan() {
                             {plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
-                                    className={`h-[500px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
+                                    className={`h-[400px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
                                         } sm:hover:scale-105`}
                                 >
                                     <div className="flex flex-col justify-between flex-1">
