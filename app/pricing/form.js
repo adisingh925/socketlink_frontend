@@ -85,7 +85,6 @@ function SelectWebSocketPlan() {
                     setSeverity("error");
                     setSnackbarState(true);
                 } else if (response.data.code === 2) {
-                    console.log(auth.currentUser.phoneNumber);
                     const options = {
                         key: "rzp_test_3jWpiXDU2zdqah",
                         amount: response.data.amount,
@@ -98,6 +97,7 @@ function SelectWebSocketPlan() {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
                             setSnackbarState(true);
+                            router.push("/my-plans");
                         },
                         modal: {
                             ondismiss: function () {

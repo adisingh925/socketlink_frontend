@@ -95,17 +95,29 @@ function SubscribedPlans() {
                                     {plan.plan.plan_name} Plan
                                 </h2>
                                 <div className="space-y-3">
-                                    <InfoRow icon={<FiDollarSign />} label="Price" value={"$ " + plan.plan.price} />
-                                    <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.plan.connections}`} valueColor="text-white" />
+                                    <InfoRow icon={<FiDollarSign />} label="Price" value={
+                                        plan.plan?.price !== null && plan.plan?.price !== undefined
+                                            ? `$ ${plan.plan?.price}`
+                                            : <span className="text-gray-500">Initializing</span>
+                                    } />
+                                    <InfoRow icon={<FiUsers />} label="Max Connections" value={
+                                        plan.plan?.connections !== null && plan.plan?.connections !== undefined
+                                            ? plan.plan?.connections
+                                            : <span className="text-gray-500">Initializing</span>
+                                    } valueColor="text-white" />
                                     <InfoRow icon={<FiMessageSquare />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
-                                    <InfoRow icon={<FiClock />} label="Plan Duration" value={`${plan.plan.duration} days`} valueColor="text-white" />
+                                    <InfoRow icon={<FiClock />} label="Plan Duration" value={
+                                        plan.plan?.duration !== null && plan.plan?.duration !== undefined
+                                            ? `${plan.plan?.duration} days`
+                                            : <span className="text-gray-500">Initializing</span>
+                                    } valueColor="text-white" />
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 flex items-center">
                                             <FiLink className="mr-2 text-xl text-yellow-400" /> Connection URL :
                                         </span>
                                         <div className="flex items-center">
-                                            <span className="font-semibold text-yellow-400 truncate glow">
-                                                {`${plan.subdomain}.socketlink.io`}
+                                            <span className={`font-semibold ${plan.subdomain ? "text-yellow-400 glow" : "text-gray-500"}`}>
+                                                {plan.subdomain ? `${plan.subdomain}.socketlink.io` : "Initializing"}
                                             </span>
                                         </div>
                                     </div>
@@ -138,16 +150,22 @@ function SubscribedPlans() {
                                             <FiKey className="mr-2 text-xl text-yellow-400" /> API Key :
                                         </span>
                                         <div className="flex items-center">
-                                            <span className="font-semibold text-yellow-400 truncate glow">
-                                                {plan.apiKey.slice(0, 4)}••••••{plan.apiKey.slice(-4)}
-                                            </span>
-                                            <button
-                                                onClick={() => navigator.clipboard.writeText(plan.apiKey)}
-                                                className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
-                                                title="Copy API Key"
-                                            >
-                                                Copy
-                                            </button>
+                                            {plan.apiKey ? (
+                                                <>
+                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                        {plan.apiKey.slice(0, 4)}••••••{plan.apiKey.slice(-4)}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => navigator.clipboard.writeText(plan.apiKey)}
+                                                        className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
+                                                        title="Copy API Key"
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <span className="font-semibold text-gray-500">Initializing</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -158,9 +176,20 @@ function SubscribedPlans() {
                                                 Change Plan
                                             </button>
                                         </Link>
-                                        <button onClick={deletePlan} className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
-                                            Delete Plan
-                                        </button>
+                                        {plan.status === -4 ? (
+                                            <Link href="/renew">
+                                                <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
+                                                    Renew Plan
+                                                </button>
+                                            </Link>
+                                        ) : (
+                                            <button
+                                                onClick={deletePlan}
+                                                className="flex-1 w-full mt-5 text-white bg-red-500 hover:bg-red-600 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150"
+                                            >
+                                                Delete Plan
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </>
