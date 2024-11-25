@@ -169,7 +169,7 @@ function SubscribedPlans() {
                                 <h2 className="text-3xl font-bold mb-4">No Subscription Found</h2>
                                 <p className="mb-4">It seems you haven&apos;t subscribed to any plans yet.</p>
                                 <Link href="/pricing">
-                                    <button className="px-6 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-600 transition-transform duration-200 transform hover:scale-105 shadow-lg">
+                                    <button className="flex-1 w-full text-black bg-yellow-600 hover:bg-yellow-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 transition-transform duration-150">
                                         Choose a Plan
                                     </button>
                                 </Link>
