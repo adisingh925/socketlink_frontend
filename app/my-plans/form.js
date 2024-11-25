@@ -87,14 +87,14 @@ function SubscribedPlans() {
         <>
             <div className="flex flex-col h-[100dvh]">
                 <FloatingNavigationBar />
-                <div className="flex items-center justify-center px-6 py-10 mt-20">
+                <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow">
                     <div className="w-full max-w-lg p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
                         {plan ? (
                             <>
                                 <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
                                     {plan.plan.plan_name} Plan
                                 </h2>
-                                <div className="space-y-6">
+                                <div className="space-y-3">
                                     <InfoRow icon={<FiDollarSign />} label="Price" value={"$ " + plan.plan.price} />
                                     <InfoRow icon={<FiUsers />} label="Max Connections" value={`${plan.plan.connections}`} valueColor="text-white" />
                                     <InfoRow icon={<FiMessageSquare />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
@@ -130,12 +130,8 @@ function SubscribedPlans() {
                                     <InfoRow
                                         icon={<FiAlertCircle />}
                                         label="Account Status"
-                                        value={
-                                            statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"
-                                        }
-                                        valueColor={
-                                            statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
-                                        }
+                                        value={statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"}
+                                        valueColor={statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"}
                                     />
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 flex items-center">
@@ -157,7 +153,7 @@ function SubscribedPlans() {
                                 </div>
                                 <div className="mt-8 text-center">
                                     <div className="flex-1">
-                                        <Link href="/choose-region">
+                                        <Link href="/pricing">
                                             <button className="flex-1 w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150">
                                                 Change Plan
                                             </button>
@@ -172,7 +168,7 @@ function SubscribedPlans() {
                             <div className="text-center text-gray-300">
                                 <h2 className="text-3xl font-bold mb-4">No Subscription Found</h2>
                                 <p className="mb-4">It seems you haven&apos;t subscribed to any plans yet.</p>
-                                <Link href="/choose-region">
+                                <Link href="/pricing">
                                     <button className="px-6 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-600 transition-transform duration-200 transform hover:scale-105 shadow-lg">
                                         Choose a Plan
                                     </button>
