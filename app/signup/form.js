@@ -133,7 +133,7 @@ function Signup() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-[100dvh] text-white">
+            <div className="flex items-center justify-center h-[100dvh] text-white dark:bg-gray-900">
                 <div className="flex flex-col items-center space-y-4">
                     <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
                 </div>
@@ -143,7 +143,7 @@ function Signup() {
 
     return (
         <>
-            <div className="flex flex-col h-[100dvh]">
+            <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0 mt-20">
                     <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">

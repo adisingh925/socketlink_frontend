@@ -64,9 +64,9 @@ function TermsAndConditions() {
         `}
       </Script>
 
-      <div className="flex flex-col h-[100dvh]">
+      <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <FloatingNavigationBar />
-        <div className="container mx-auto p-8 dark:text-white mt-20">
+        <div className="container mx-auto p-8 dark:text-white mt-20 dark:bg-gray-900">
           <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
             Terms and Conditions
           </h1>

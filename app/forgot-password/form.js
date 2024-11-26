@@ -6,7 +6,6 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
-const router = useRouter();
 
 function ForgotPassword() {
   const router = useRouter();
@@ -47,7 +46,7 @@ function ForgotPassword() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[100dvh] text-white">
+      <div className="flex items-center justify-center h-[100dvh] text-white dark:bg-gray-900">
         <div className="flex flex-col items-center space-y-4">
           <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
         </div>
@@ -57,7 +56,7 @@ function ForgotPassword() {
 
   return (
     <>
-      <div className="flex flex-col h-[100dvh]">
+      <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <NavigationBar />
         <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">
           <div className="p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8 w-full max-w-md">

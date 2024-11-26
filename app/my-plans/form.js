@@ -83,15 +83,17 @@ function SubscribedPlans() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-[100dvh] text-white">
-                <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+            <div className="flex items-center justify-center h-[100dvh] text-white dark:bg-gray-900">
+                <div className="flex flex-col items-center space-y-4">
+                    <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+                </div>
             </div>
         );
     }
 
     return (
         <>
-            <div className="flex flex-col h-[100dvh]">
+            <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow">
                     <div className="w-full max-w-lg p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">

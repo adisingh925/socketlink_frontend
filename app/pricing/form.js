@@ -171,7 +171,7 @@ function SelectWebSocketPlan() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-[100dvh] text-white">
+            <div className="flex items-center justify-center h-[100dvh] text-white dark:bg-gray-900">
                 <div className="flex flex-col items-center space-y-4">
                     <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
                 </div>
@@ -181,7 +181,7 @@ function SelectWebSocketPlan() {
 
     return (
         <>
-            <div className="flex flex-col h-[100dvh]">
+            <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col flex-grow items-center justify-center px-4 py-6 mt-[100px]">
                     <div className="text-white w-full max-w-screen">
