@@ -31,7 +31,7 @@ function ContactUs() {
     }, [router]);
 
     const sendQuery = async (message) => {
-        const url = 'http://localhost:9001/api/v1/query';
+        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/query`;
 
         const body = {
             query: message,
