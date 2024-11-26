@@ -6,6 +6,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
+const router = useRouter();
 
 function ForgotPassword() {
   const router = useRouter();
@@ -53,6 +54,7 @@ function ForgotPassword() {
       </div>
     );
   }
+
   return (
     <>
       <div className="flex flex-col h-[100dvh]">

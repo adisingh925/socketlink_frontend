@@ -1,35 +1,52 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import Toast from "../components/toast";
 import FloatingNavigationBar from "../components/navbar";
+import { auth } from "../components/firebase";
+import { useRouter } from "next/navigation";
 
 function ContactUs() {
-
-    const pathname = usePathname();
+    const router = useRouter();
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(true); // New loading state
+    const [snackbarState, setSnackbarState] = useState(false);
+    const [snackbarText, setSnackbarText] = useState("");
+    const [severity, setSeverity] = useState("");
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (!user) {
+                router.push("/login");
+            } else {
+                setLoading(false);
+            }
+        });
+
+        return () => unsubscribe();
+    }, [router]);
 
     const sendQuery = async (message) => {
-        const url = 'https://api.picolon.com/api/v1/reporting';
+        const url = 'http://localhost:9001/api/v1/query';
 
         const body = {
-            type: 'user-query',
-            message: message,
+            query: message,
         };
 
         try {
             const response = await axios.post(url, body, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${await auth.currentUser.getIdToken()}`,
                 },
             });
 
             if (response.status === 200) {
-                setSnackbarText('Thankyou! We\'ve received your query.');
+                setSnackbarText('Thankyou! We\'ve received your query, and we\'ll get back to you shortly.');
                 setSeverity('success');
                 setSnackbarState(true);
             }
@@ -64,6 +81,16 @@ function ContactUs() {
             setQuery(''); // Clear the input field
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-[100dvh] text-white">
+                <div className="flex flex-col items-center space-y-4">
+                    <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -205,7 +232,7 @@ function ContactUs() {
         `}
             </Script>
 
-            <div className="flex flex-col h-[100dvh] ">
+            <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="isolate h-[100dvh] px-6 py-8 sm:py-8 lg:px-8 dark:text-white mt-20">
                     <div className="mx-auto max-w-2xl text-center">
@@ -213,27 +240,37 @@ function ContactUs() {
                             Contact Us
                         </h1>
                         <p className="mt-2 text-xl leading-8">
-                            Incase you have any queries or suggestions, feel free to reach out to us at {" "} <a
+                            In case you have any queries or suggestions, feel free to reach out to us at{" "}
+                            <a
                                 href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
-                                className="text-blue-600 font-bold"
+                                className="text-blue-600 dark:text-blue-400 font-bold underline hover:text-blue-700 dark:hover:text-blue-300"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                            >support@socketlink.io</a>
+                            >
+                                support@socketlink.io
+                            </a>
                         </p>
 
-                        {/* Address Section */}
-                        <div className="mt-6 text-lg">
-                            {/* <p>Our office is located at:</p> */}
-                            <address className="mt-2">
-                                Socketlink Inc.<br />
-                                Ayappa Society<br />
-                                Hitech City, Hyderabad<br />
-                                India
-                            </address>
-                        </div>
+                        <form onSubmit={handleSubmit} className="mt-8">
+                            <textarea
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"
+                                rows="4"
+                                placeholder="Write your query here..."
+                            ></textarea>
+                            <button
+                                type="submit"
+                                className="mt-4 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none"
+                            >
+                                Send
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
+
+            <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
         </>
     );
 }
