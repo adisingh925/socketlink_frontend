@@ -75,10 +75,10 @@ function ContactUs() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent page reload
+        e.preventDefault();
         if (query.trim()) {
-            sendQuery(query); // Call the function with the user's message
-            setQuery(''); // Clear the input field
+            sendQuery(query);
+            setQuery('');
         }
     };
 
@@ -240,7 +240,7 @@ function ContactUs() {
                             Contact Us
                         </h1>
                         <p className="mt-2 text-xl leading-8">
-                            In case you have any queries or suggestions, feel free to reach out to us at{" "}
+                            In case you have any queries or suggestions, send us your query using the form below or reach out to us at{" "}
                             <a
                                 href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
                                 className="text-blue-600 dark:text-blue-400 font-bold underline hover:text-blue-700 dark:hover:text-blue-300"

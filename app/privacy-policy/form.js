@@ -175,9 +175,9 @@ function PrivacyPolicy() {
         `}
       </Script>
 
-      <div className="flex flex-col h-[100dvh] ">
+      <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <FloatingNavigationBar />
-        <div className="container p-8  dark:text-white mt-20">
+        <div className="container p-8  dark:text-white mt-20 dark:bg-gray-900">
           <h1 className="mb-8 text-5xl tracking-tight font-extrabold">
             Privacy Policy
           </h1>
