@@ -32,7 +32,7 @@ function SubscribedPlans() {
                 // Call getSubscriptionDetails every second
                 const intervalId = setInterval(() => {
                     getSubscriptionDetails();
-                }, 2000); // 1000ms = 1 second
+                }, 5000); // 1000ms = 1 second
 
                 // Cleanup the interval when the component unmounts or when the user logs out
                 return () => clearInterval(intervalId);
