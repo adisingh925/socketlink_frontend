@@ -6,7 +6,7 @@ import { auth, db } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
-import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete } from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe } from "react-icons/fi";
 import axios from "axios";
 import FloatingNavigationBar from "../components/navbar";
 
@@ -91,6 +91,28 @@ function SubscribedPlans() {
         );
     }
 
+    function numberToWords(num) {
+        const units = ["", "Thousand", "Million", "Billion", "Trillion", "quadrillion", "quintillion"];
+        let i = 0;
+
+        // Convert number to absolute value and handle zero
+        let absNum = Math.abs(num);
+        if (absNum === 0) return "zero";
+
+        // Continue dividing the number by 1000 to reduce its size and track the units
+        while (absNum >= 1000 && i < units.length - 1) {
+            absNum /= 1000;
+            i++;
+        }
+
+        // Format the result to 1 decimal place and append the appropriate unit
+        const formattedNum = absNum.toFixed(1).replace(/\.0$/, ""); // Remove trailing .0 if any
+        const result = `${formattedNum} ${units[i]}`;
+
+        // Add "negative" if the original number was negative
+        return num < 0 ? `negative ${result}` : result;
+    }
+
     return (
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
@@ -114,9 +136,15 @@ function SubscribedPlans() {
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
                                     <InfoRow icon={<FiMessageSquare />} label="Messages / Second" value="10 / connection" valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageSquare />} label="Messages / Day" value={numberToWords(plan.plan.msg_per_day)} valueColor="text-white" />
                                     <InfoRow icon={<FiClock />} label="Plan Duration" value={
                                         plan.plan?.duration !== null && plan.plan?.duration !== undefined
                                             ? `${plan.plan?.duration} days`
+                                            : <span className="text-gray-500">Initializing</span>
+                                    } valueColor="text-white" />
+                                    <InfoRow icon={<FiGlobe />} label="Region" value={
+                                        plan.region !== null && plan.region !== undefined
+                                            ? `${plan.region}`
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
                                     <div className="flex items-center justify-between">
