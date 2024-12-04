@@ -37,10 +37,9 @@ function SelectWebSocketPlan() {
                                 Authorization: `Bearer ${token}`,
                             },
                         }).then((response) => {
-                            console.log(response.data);
                             setPlans(response.data);
                         }).catch((error) => {
-                            setSnackbarText(error.message);
+                            setSnackbarText(error.response.data.message);
                             setSeverity("error");
                             setSnackbarState(true);
                         }).finally(() => {
@@ -79,7 +78,11 @@ function SelectWebSocketPlan() {
                     setSnackbarText(response.data.message);
                     setSeverity("success");
                     setSnackbarState(true);
-                    router.push("/my-plans");
+
+                    // Wait for 3 seconds before navigating to another screen
+                    setTimeout(() => {
+                        router.push("/my-plans");
+                    }, 3000); // 3000ms = 3 seconds
                 } else if (response.data.code === -1) {
                     setSnackbarText(response.data.message);
                     setSeverity("error");
@@ -186,7 +189,7 @@ function SelectWebSocketPlan() {
                 <div className="flex flex-col flex-grow items-center justify-center px-4 py-6 mt-[100px]">
                     <div className="text-white w-full max-w-screen">
                         <div className="flex flex-wrap justify-center gap-4">
-                            {plans.map((plan) => (
+                            {plans && plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
                                     className={`h-[400px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"

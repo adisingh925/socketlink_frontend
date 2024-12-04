@@ -193,10 +193,73 @@ export default function FloatingNavigationBar() {
                 <div className="space-y-1 px-2 pb-3 pt-2">
                     {user ? (
                         <>
-                            <Link href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link
+                                href="/"
+                                className={classNames(
+                                    isActive("/") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
                                 Dashboard
                             </Link>
-                            <button onClick={handleLogout} className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link
+                                href="/metrics"
+                                className={classNames(
+                                    isActive("/metrics") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Metrics
+                            </Link>
+                            <Link
+                                href="/my-plans"
+                                className={classNames(
+                                    isActive("/my-plans") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                My Plans
+                            </Link>
+                            <Link
+                                href="/terms-conditions"
+                                className={classNames(
+                                    isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Terms & Conditions
+                            </Link>
+                            <Link
+                                href="/privacy-policy"
+                                className={classNames(
+                                    isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Privacy Policy
+                            </Link>
+                            <Link
+                                href="/contact-us"
+                                className={classNames(
+                                    isActive("/contact-us") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Contact Us
+                            </Link>
+                            <Link
+                                href="/pricing"
+                                className={classNames(
+                                    isActive("/pricing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Pricing
+                            </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                            >
                                 Sign out
                             </button>
                         </>

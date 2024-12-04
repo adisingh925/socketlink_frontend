@@ -20,10 +20,10 @@ function SubscribedPlans() {
 
     const statusMapping = [
         { codes: new Set([6]), text: "Active", color: "text-green-600" },
-        { codes: new Set([1, 2, 3, 4, 5]), text: "Initializing Infrastructure", color: "text-gray-500" },
-        { codes: new Set([-1, -2, -3]), text: "Destroying Infrastructure", color: "text-gray-500" },
+        { codes: new Set([1, 2, 3, 4, 5]), text: "Initializing", color: "text-gray-500" },
+        { codes: new Set([-1, -2, -3]), text: "Destroying", color: "text-gray-500" },
         { codes: new Set([-4]), text: "Inactive", color: "text-red-500" },
-        { codes: new Set([100, 101, 102, 103, 104, 105]), text: "Upgrading Infrastructure", color: "text-gray-500" },
+        { codes: new Set([100, 101, 102, 103, 104, 105]), text: "Upgrading", color: "text-gray-500" },
     ];
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function SubscribedPlans() {
                 // Call getSubscriptionDetails every second
                 const intervalId = setInterval(() => {
                     getSubscriptionDetails();
-                }, 5000); // 1000ms = 1 second
+                }, 5000); 
 
                 // Cleanup the interval when the component unmounts or when the user logs out
                 return () => clearInterval(intervalId);
@@ -53,7 +53,7 @@ function SubscribedPlans() {
             }).then((response) => {
                 setPlan(response.data);
             }).catch((error) => {
-                setSnackbarText(error.message);
+                setSnackbarText(error.response.data.message);
                 setSeverity("error");
                 setSnackbarState(true);
             }).finally(() => {
@@ -150,9 +150,18 @@ function SubscribedPlans() {
                                     <InfoRow
                                         icon={<FiAlertCircle />}
                                         label="Account Status"
-                                        value={statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"}
-                                        valueColor={statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"}
+                                        value={
+                                            plan.status === 6 && plan.health_status == null
+                                                ? "Resolving DNS"
+                                                : statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"
+                                        }
+                                        valueColor={
+                                            plan.status === 6 && plan.health_status == null
+                                                ? "text-gray-500"
+                                                : statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
+                                        }
                                     />
+
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 flex items-center">
                                             <FiKey className="mr-2 text-xl text-yellow-400" /> API Key :
@@ -184,13 +193,6 @@ function SubscribedPlans() {
                                                 Change Plan
                                             </button>
                                         </Link>
-                                        {plan.plan.price !== 0 && (
-                                            <Link href="/renew">
-                                                <button className="flex-1 w-full mt-5 text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center transition-transform duration-150">
-                                                    Renew Plan
-                                                </button>
-                                            </Link>
-                                        )}
                                         {plan.status !== -4 && (
                                             <button
                                                 onClick={deletePlan}
@@ -223,7 +225,7 @@ function SubscribedPlans() {
 }
 
 const InfoRow = ({ icon, label, value, valueColor = "text-white" }) => (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between text-sm sm:text-base">
         <span className="text-gray-400 flex items-center">
             {icon && <span className="mr-2 text-xl text-blue-500">{icon}</span>}
             {label} :
@@ -231,5 +233,6 @@ const InfoRow = ({ icon, label, value, valueColor = "text-white" }) => (
         <span className={`font-semibold ${valueColor}`}>{value}</span>
     </div>
 );
+
 
 export default SubscribedPlans;
