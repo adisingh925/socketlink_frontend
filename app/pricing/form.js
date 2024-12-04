@@ -186,7 +186,7 @@ function SelectWebSocketPlan() {
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
-                <div className="flex flex-col flex-grow items-center justify-center px-4 py-6 mt-[100px]">
+                <div className="flex flex-col flex-grow items-center justify-center px-4 py-6 mt-[100px] dark:bg-gray-900">
                     <div className="text-white w-full max-w-screen">
                         <div className="flex flex-wrap justify-center gap-4">
                             {plans && plans.map((plan) => (
