@@ -32,7 +32,7 @@ function SubscribedPlans() {
                 // Call getSubscriptionDetails every second
                 const intervalId = setInterval(() => {
                     getSubscriptionDetails();
-                }, 5000); 
+                }, 5000);
 
                 // Cleanup the interval when the component unmounts or when the user logs out
                 return () => clearInterval(intervalId);
@@ -53,7 +53,7 @@ function SubscribedPlans() {
             }).then((response) => {
                 setPlan(response.data);
             }).catch((error) => {
-                setSnackbarText(error.response.data.message);
+                setSnackbarText(error.message);
                 setSeverity("error");
                 setSnackbarState(true);
             }).finally(() => {
@@ -113,7 +113,7 @@ function SubscribedPlans() {
                                             ? plan.plan?.connections
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
-                                    <InfoRow icon={<FiMessageSquare />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageSquare />} label="Messages / Second" value="10 / connection" valueColor="text-white" />
                                     <InfoRow icon={<FiClock />} label="Plan Duration" value={
                                         plan.plan?.duration !== null && plan.plan?.duration !== undefined
                                             ? `${plan.plan?.duration} days`
@@ -124,9 +124,22 @@ function SubscribedPlans() {
                                             <FiLink className="mr-2 text-xl text-yellow-400" /> Connection URL :
                                         </span>
                                         <div className="flex items-center">
-                                            <span className={`font-semibold ${plan.subdomain ? "text-yellow-400 glow" : "text-gray-500"}`}>
-                                                {plan.subdomain ? `${plan.subdomain}.socketlink.io` : "Initializing"}
-                                            </span>
+                                            {plan.subdomain ? (
+                                                <>
+                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                        {`${plan.subdomain}.socketlink.io`.slice(0, 4)}••••••{`${plan.subdomain}.socketlink.io`.slice(-4)}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => navigator.clipboard.writeText(`${plan.subdomain}.socketlink.io`)}
+                                                        className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
+                                                        title="Copy API Key"
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <span className="font-semibold text-gray-500">Initializing</span>
+                                            )}
                                         </div>
                                     </div>
                                     <InfoRow

@@ -39,7 +39,7 @@ function SelectWebSocketPlan() {
                         }).then((response) => {
                             setPlans(response.data);
                         }).catch((error) => {
-                            setSnackbarText(error.response.data.message);
+                            setSnackbarText(error.message);
                             setSeverity("error");
                             setSnackbarState(true);
                         }).finally(() => {
