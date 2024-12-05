@@ -6,7 +6,7 @@ import { auth, db } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
-import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe } from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle } from "react-icons/fi";
 import axios from "axios";
 import FloatingNavigationBar from "../components/navbar";
 
@@ -117,7 +117,7 @@ function SubscribedPlans() {
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
-                <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow">
+                <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
                         {plan ? (
                             <>
@@ -130,23 +130,38 @@ function SubscribedPlans() {
                                             ? `$ ${plan.plan?.price}`
                                             : <span className="text-gray-500">Initializing</span>
                                     } />
-                                    <InfoRow icon={<FiUsers />} label="Max Connections" value={
-                                        plan.plan?.connections !== null && plan.plan?.connections !== undefined
-                                            ? plan.plan?.connections
-                                            : <span className="text-gray-500">Initializing</span>
-                                    } valueColor="text-white" />
-                                    <InfoRow icon={<FiMessageSquare />} label="Messages / Second" value="10 / connection" valueColor="text-white" />
-                                    <InfoRow icon={<FiMessageSquare />} label="Messages / Day" value={numberToWords(plan.plan.msg_per_day)} valueColor="text-white" />
                                     <InfoRow icon={<FiClock />} label="Plan Duration" value={
                                         plan.plan?.duration !== null && plan.plan?.duration !== undefined
                                             ? `${plan.plan?.duration} days`
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
+                                    <InfoRow icon={<FiUsers />} label="Max Connections" value={
+                                        plan.plan?.connections !== null && plan.plan?.connections !== undefined
+                                            ? plan.plan?.connections
+                                            : <span className="text-gray-500">Initializing</span>
+                                    } valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageCircle />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageCircle />} label="Messages per Day" value={numberToWords(plan.plan.msg_per_day)} valueColor="text-white" />
+                                    <InfoRow icon={<FiInfo />} label="Max Payload Size" value={numberToWords(plan.plan.max_payload_size_in_kb) + "Kb"} valueColor="text-white" />
                                     <InfoRow icon={<FiGlobe />} label="Region" value={
                                         plan.region !== null && plan.region !== undefined
                                             ? `${plan.region}`
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
+                                    <InfoRow
+                                        icon={<FiAlertCircle />}
+                                        label="Account Status"
+                                        value={
+                                            plan.status === 6 && plan.health_status == null
+                                                ? "Resolving DNS"
+                                                : statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"
+                                        }
+                                        valueColor={
+                                            plan.status === 6 && plan.health_status == null
+                                                ? "text-gray-500"
+                                                : statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
+                                        }
+                                    />
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 flex items-center">
                                             <FiLink className="mr-2 text-xl text-yellow-400" /> Connection URL :
@@ -170,39 +185,28 @@ function SubscribedPlans() {
                                             )}
                                         </div>
                                     </div>
-                                    <InfoRow
-                                        icon={<FiClock />}
-                                        label="Started On"
-                                        value={new Date(plan.start_time)
-                                            .toLocaleDateString('en-GB')
-                                            .split('/')
-                                            .join(' - ')}
-                                        valueColor="text-white"
-                                    />
-                                    <InfoRow
-                                        icon={<FiClock />}
-                                        label="Expiring On"
-                                        value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + plan.plan.duration))
-                                            .toLocaleDateString('en-GB')
-                                            .split('/')
-                                            .join(' - ')}
-                                        valueColor="text-white"
-                                    />
-                                    <InfoRow
-                                        icon={<FiAlertCircle />}
-                                        label="Account Status"
-                                        value={
-                                            plan.status === 6 && plan.health_status == null
-                                                ? "Resolving DNS"
-                                                : statusMapping.find((status) => status.codes.has(plan.status))?.text || "Unknown"
-                                        }
-                                        valueColor={
-                                            plan.status === 6 && plan.health_status == null
-                                                ? "text-gray-500"
-                                                : statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
-                                        }
-                                    />
-
+                                    {plan.plan.price === 0 && (
+                                        <>
+                                            <InfoRow
+                                                icon={<FiClock />}
+                                                label="Started On"
+                                                value={new Date(plan.start_time)
+                                                    .toLocaleDateString('en-GB')
+                                                    .split('/')
+                                                    .join(' - ')}
+                                                valueColor="text-white"
+                                            />
+                                            <InfoRow
+                                                icon={<FiClock />}
+                                                label="Expiring On"
+                                                value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + plan.plan.duration))
+                                                    .toLocaleDateString('en-GB')
+                                                    .split('/')
+                                                    .join(' - ')}
+                                                valueColor="text-white"
+                                            />
+                                        </>
+                                    )}
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-400 flex items-center">
                                             <FiKey className="mr-2 text-xl text-yellow-400" /> API Key :
@@ -225,6 +229,12 @@ function SubscribedPlans() {
                                                 <span className="font-semibold text-gray-500">Initializing</span>
                                             )}
                                         </div>
+                                    </div>
+                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                        <p>
+                                            <strong className="text-yellow-400">Note :</strong> Our pay-per-minute billing ensures you only pay for what you use.
+                                            This is perfect for reducing costs and maximizing flexibility for your usage needs.
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="mt-8 text-center">

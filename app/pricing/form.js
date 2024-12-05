@@ -100,7 +100,9 @@ function SelectWebSocketPlan() {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
                             setSnackbarState(true);
-                            router.push("/my-plans");
+                            setTimeout(() => {
+                                router.push("/my-plans");
+                            }, 3000); // 3000ms = 3 seconds
                         },
                         modal: {
                             ondismiss: function () {
