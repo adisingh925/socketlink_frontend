@@ -194,7 +194,7 @@ function SelectWebSocketPlan() {
                             {plans && plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
-                                    className={`h-[400px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
+                                    className={`h-[500px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
                                         } sm:hover:scale-105`}
                                 >
                                     <div className="flex flex-col justify-between flex-1">
@@ -265,6 +265,13 @@ function SelectWebSocketPlan() {
                                                     <strong>Support :</strong> 24/7 customer support
                                                 </p>
                                             </div>
+                                            {plan.price === 50 && (
+                                                <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                                    <p>
+                                                        <strong className="text-yellow-400">Example (Max Capacity) :</strong> Imagine a high-performance server with a maximum room capacity of 5 users and a total of 10,000 active connections. Each connection sends 5 messages per second, each message being 1 KB in size. This results in a total throughput of 50,000 messages per second.
+                                                    </p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 
