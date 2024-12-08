@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
@@ -259,6 +259,26 @@ function SelectWebSocketPlan() {
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
+                                                <FiHome
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Max Rooms :</strong>{" "}
+                                                    {"Unlimited"}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiUsers
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Max Members per Room :</strong>{" "}
+                                                    {parseInt(plan.connections, 10).toLocaleString()}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
                                                 <FiLink
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
                                                         } mr-2`}
@@ -305,7 +325,6 @@ function SelectWebSocketPlan() {
                                                     </div>
                                                 )}
                                             </div>
-
                                         </div>
                                     </div>
 
