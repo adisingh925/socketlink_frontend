@@ -38,6 +38,7 @@ function RegionSelectionDialog({ isOpen, onClose, handleRegionSelection }) {
     useEffect(() => {
         setSpinner(true);
         fetchRegions().then((regionsData) => {
+            console.log(regionsData);
             setRegions(regionsData);
             setSpinner(false);
         }).catch((error) => {

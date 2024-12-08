@@ -6,7 +6,7 @@ import { auth, db } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
-import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle } from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle, FiCpu } from "react-icons/fi";
 import axios from "axios";
 import FloatingNavigationBar from "../components/navbar";
 
@@ -162,12 +162,11 @@ function SubscribedPlans() {
                                                 : statusMapping.find((status) => status.codes.has(plan.status))?.color || "text-gray-300"
                                         }
                                     />
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-gray-400 flex items-center">
-                                            <FiLink className="mr-2 text-xl text-yellow-400" /> Connection URL :
-                                        </span>
-                                        <div className="flex items-center">
-                                            {plan.subdomain ? (
+                                    <InfoRow
+                                        icon={<FiLink className="text-yellow-400" />}
+                                        label="Connection URL"
+                                        value={
+                                            plan.subdomain ? (
                                                 <>
                                                     <span className="font-semibold text-yellow-400 truncate glow">
                                                         {`${plan.subdomain}.socketlink.io`.slice(0, 4)}••••••{`${plan.subdomain}.socketlink.io`.slice(-4)}
@@ -175,16 +174,16 @@ function SubscribedPlans() {
                                                     <button
                                                         onClick={() => navigator.clipboard.writeText(`${plan.subdomain}.socketlink.io`)}
                                                         className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
-                                                        title="Copy API Key"
+                                                        title="Copy Connection URL"
                                                     >
                                                         Copy
                                                     </button>
                                                 </>
                                             ) : (
                                                 <span className="font-semibold text-gray-500">Initializing</span>
-                                            )}
-                                        </div>
-                                    </div>
+                                            )
+                                        }
+                                    />
                                     {plan.plan.price === 0 && (
                                         <>
                                             <InfoRow
@@ -207,12 +206,11 @@ function SubscribedPlans() {
                                             />
                                         </>
                                     )}
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-gray-400 flex items-center">
-                                            <FiKey className="mr-2 text-xl text-yellow-400" /> API Key :
-                                        </span>
-                                        <div className="flex items-center">
-                                            {plan.apiKey ? (
+                                    <InfoRow
+                                        icon={<FiKey className="text-yellow-400" />}
+                                        label="API Key"
+                                        value={
+                                            plan.apiKey ? (
                                                 <>
                                                     <span className="font-semibold text-yellow-400 truncate glow">
                                                         {plan.apiKey.slice(0, 4)}••••••{plan.apiKey.slice(-4)}
@@ -227,9 +225,9 @@ function SubscribedPlans() {
                                                 </>
                                             ) : (
                                                 <span className="font-semibold text-gray-500">Initializing</span>
-                                            )}
-                                        </div>
-                                    </div>
+                                            )
+                                        }
+                                    />
                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
                                         <p>
                                             <strong className="text-yellow-400">Note :</strong> Our pay-per-minute billing ensures you only pay for what you use.

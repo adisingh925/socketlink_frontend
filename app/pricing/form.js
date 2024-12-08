@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiHome } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
@@ -37,7 +37,12 @@ function SelectWebSocketPlan() {
                                 Authorization: `Bearer ${token}`,
                             },
                         }).then((response) => {
-                            setPlans(response.data);
+                            const updatedPlans = response.data.map(plan => ({
+                                ...plan,
+                                max_room_size: 5,
+                            }));
+                            console.log("Updated plans:", updatedPlans);
+                            setPlans(updatedPlans);
                         }).catch((error) => {
                             setSnackbarText(error.message);
                             setSeverity("error");
@@ -184,6 +189,21 @@ function SelectWebSocketPlan() {
         );
     }
 
+    const handleMsgPerMinuteSliderChange = (e, plan) => {
+        plan.msg_per_second_per_connection = parseInt(e);
+        setPlans([...plans]);
+    }
+
+    const handleMaxPayloadSizeHandler = (e, plan) => {
+        plan.max_payload_size_in_kb = parseInt(e);
+        setPlans([...plans]);
+    }
+
+    const handleMaxRoomSizeHandler = (e, plan) => {
+        plan.max_room_size = parseInt(e);
+        setPlans([...plans]);
+    }
+
     return (
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
@@ -194,7 +214,7 @@ function SelectWebSocketPlan() {
                             {plans && plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
-                                    className={`h-[500px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
+                                    className={`h-[600px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
                                         } sm:hover:scale-105`}
                                 >
                                     <div className="flex flex-col justify-between flex-1">
@@ -230,18 +250,6 @@ function SelectWebSocketPlan() {
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
-                                                <FiTrendingUp
-                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-green-400"
-                                                        } mr-2`}
-                                                />
-                                                <p>
-                                                    <strong>Scalable Up To :</strong>{" "}
-                                                    {plan.is_scalable
-                                                        ? (plan.connections * 2).toLocaleString()
-                                                        : "No Scaling"}
-                                                </p>
-                                            </div>
-                                            <div className="flex items-center">
                                                 <FiZap
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
                                                         } mr-2`}
@@ -250,7 +258,70 @@ function SelectWebSocketPlan() {
                                                     <strong>Messages per Day :</strong> {numberToWords(plan.msg_per_day)}{" "}
                                                 </p>
                                             </div>
-                                            <div className="flex items-center">
+                                            <div className="flex flex-col items-start space-y-2 w-full">
+                                                {/* Icon and Text */}
+                                                <div className="flex items-center">
+                                                    <FiFastForward className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
+                                                        } mr-2`} />
+                                                    <p>
+                                                        <strong>Messages per Minute :</strong> {plan.msg_per_second_per_connection} / connection
+                                                    </p>
+                                                </div>
+
+                                                {/* Slider */}
+                                                <input
+                                                    type="range"
+                                                    min="1"
+                                                    max="300"
+                                                    step="1"
+                                                    value={plan.msg_per_second_per_connection}
+                                                    onChange={(e) => handleMsgPerMinuteSliderChange(e.target.value, plan)}
+                                                    className="w-full"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col items-start space-y-2 w-full mt-3">
+                                                {/* Icon and Text */}
+                                                <div className="flex items-center">
+                                                    <FiDatabase className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`} />
+                                                    <p>
+                                                        <strong>Max Payload Size :</strong> {plan.max_payload_size_in_kb.toLocaleString()} Byte
+                                                    </p>
+                                                </div>
+
+                                                {/* Slider */}
+                                                <input
+                                                    type="range"
+                                                    min="1"
+                                                    max={plan.max_payload_size_in_kb}
+                                                    step="1"
+                                                    value={plan.max_payload_size_in_kb}
+                                                    onChange={(e) => handleMaxPayloadSizeHandler(e.target.value, plan)}
+                                                    className="w-full"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col items-start space-y-2 w-full mt-3">
+                                                {/* Icon and Text */}
+                                                <div className="flex items-center">
+                                                    <FiHome className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`} />
+                                                    <p>
+                                                        <strong>Max Room Size :</strong> {plan.max_room_size.toLocaleString()}
+                                                    </p>
+                                                </div>
+
+                                                {/* Slider */}
+                                                <input
+                                                    type="range"
+                                                    min="2"
+                                                    max="1024"
+                                                    step="1"
+                                                    value={plan.max_room_size}
+                                                    onChange={(e) => handleMaxRoomSizeHandler(e.target.value, plan)}
+                                                    className="w-full"
+                                                />
+                                            </div>
+                                            <div className="flex items-center mt-2">
                                                 <FiLink
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
                                                         } mr-2`}
@@ -265,13 +336,40 @@ function SelectWebSocketPlan() {
                                                     <strong>Support :</strong> 24/7 customer support
                                                 </p>
                                             </div>
-                                            {plan.price === 50 && (
-                                                <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
-                                                    <p>
-                                                        <strong className="text-yellow-400">Example (Max Capacity) :</strong> Imagine a high-performance server with a maximum room capacity of 5 users and a total of 10,000 active connections. Each connection sends 5 messages per second, each message being 1 KB in size. This results in a total throughput of 50,000 messages per second.
-                                                    </p>
-                                                </div>
-                                            )}
+                                            <div>
+                                                {plan.price === 29 && (
+                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                                        <p>
+                                                            <strong className="text-yellow-400">Example (Max Capacity):</strong> Imagine a high-performance server with a maximum room capacity of 5 users and a total of 10,000 active connections. Each connection sends 5 messages per second, each message being 1 KB in size. This results in a total throughput of 50,000 messages per second.
+                                                        </p>
+                                                    </div>
+                                                )}
+
+                                                {plan.price === 49 && (
+                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                                        <p>
+                                                            <strong className="text-yellow-400">Example (Max Capacity):</strong> Imagine a high-performance server with a maximum room capacity of 5 users and a total of 10,000 active connections. Each connection sends 5 messages per second, each message being 1 KB in size. This results in a total throughput of 50,000 messages per second.
+                                                        </p>
+                                                    </div>
+                                                )}
+
+                                                {plan.price === 99 && (
+                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                                        <p>
+                                                            <strong className="text-yellow-400">Example (Max Capacity):</strong> Imagine a server with a maximum room capacity of 20 users and a total of 20,000 active connections. Each connection sends 10 messages per second, each message being 1 KB in size. This results in a total throughput of 500,000 messages per second.
+                                                        </p>
+                                                    </div>
+                                                )}
+
+                                                {plan.price === 199 && (
+                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                                        <p>
+                                                            <strong className="text-yellow-400">Example (Max Capacity):</strong> Imagine an enterprise-grade server with a maximum room capacity of 50 users and a total of 40,000 active connections. Each connection sends 30 messages per second, each message being 1 KB in size. This results in a total throughput of 2,000,000 messages per second.
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </div>
+
                                         </div>
                                     </div>
 
