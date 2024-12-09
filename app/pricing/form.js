@@ -33,6 +33,7 @@ function SelectWebSocketPlan() {
                     router.push("/login");
                 } else {
                     auth.currentUser.getIdToken().then((token) => {
+                        console.log(token);
                         axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
                             headers: {
                                 Authorization: `Bearer ${token}`,
@@ -215,7 +216,7 @@ function SelectWebSocketPlan() {
                                                 className={`flex items-center text-lg font-semibold ${plan.is_featured ? "text-yellow-300" : "text-blue-300"
                                                     }`}
                                             >
-                                                <FiDollarSign /> {plan.price}
+                                                <FiDollarSign /> {plan.price / 100}
                                             </div>
                                         </div>
 
