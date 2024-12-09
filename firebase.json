@@ -50,6 +50,10 @@
       {
         "source": "/terms-conditions",
         "destination": "/terms-conditions.html"
+      },
+      {
+        "source": "/billing",
+        "destination": "/billing.html"
       }
     ],
     "headers": [
