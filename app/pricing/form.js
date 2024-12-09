@@ -33,7 +33,6 @@ function SelectWebSocketPlan() {
                     router.push("/login");
                 } else {
                     auth.currentUser.getIdToken().then((token) => {
-                        console.log(token);
                         axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
                             headers: {
                                 Authorization: `Bearer ${token}`,
@@ -60,7 +59,6 @@ function SelectWebSocketPlan() {
     }, [router]);
 
     const handleRegionSelection = (region) => {
-        console.log(region);
         handleRegionDialogClose();
         setSnackbarState(true);
         setSnackbarText("Processing...");
