@@ -127,7 +127,7 @@ function SubscribedPlans() {
                                 <div className="space-y-3">
                                     <InfoRow icon={<FiDollarSign />} label="Price" value={
                                         plan.plan?.price !== null && plan.plan?.price !== undefined
-                                            ? `$ ${plan.plan?.price}`
+                                            ? `$ ${plan.plan?.price / 100}`
                                             : <span className="text-gray-500">Initializing</span>
                                     } />
                                     <InfoRow icon={<FiClock />} label="Plan Duration" value={
