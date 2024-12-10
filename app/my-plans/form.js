@@ -29,14 +29,13 @@ function SubscribedPlans() {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                // Call getSubscriptionDetails every second
+                getSubscriptionDetails();
+
                 const intervalId = setInterval(() => {
                     getSubscriptionDetails();
                 }, 5000);
 
-                getSubscriptionDetails();
-
-                // Cleanup the interval when the component unmounts or when the user logs out
+                /** Cleanup the interval when the component unmounts or when the user logs out */ 
                 return () => clearInterval(intervalId);
             } else {
                 router.push("/login");
