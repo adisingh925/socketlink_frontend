@@ -13,28 +13,27 @@ function classNames(...classes) {
 export default function FloatingNavigationBar() {
     const pathname = usePathname()
 
-    const [user, setUser] = useState(null); // To store authenticated user info
-    const router = useRouter(); // For programmatic navigation
+    const [user, setUser] = useState(null); 
+    const router = useRouter(); 
 
     useEffect(() => {
-        // Listen for auth state changes
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
         });
 
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe(); 
     }, []);
 
     const handleLogout = async () => {
         await signOut(auth);
-        router.push("/login"); // Redirect to login after sign out
+        router.push("/login"); 
     };
 
-    // Function to determine if the current path matches the link
+    /** Function to determine if the current path matches the link */ 
     const isActive = (path) => pathname === path;
 
     return (
-        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-5xl bg-gray-800 rounded-lg shadow-lg">
+        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-gray-800 rounded-lg shadow-lg">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -90,6 +89,15 @@ export default function FloatingNavigationBar() {
                                         )}
                                     >
                                         My Plans
+                                    </Link>
+                                    <Link
+                                        href="/billing"
+                                        className={classNames(
+                                            isActive("/billing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
+                                    >
+                                        Billing
                                     </Link>
                                     <Link
                                         href="/terms-conditions"
@@ -219,6 +227,15 @@ export default function FloatingNavigationBar() {
                                 )}
                             >
                                 My Plans
+                            </Link>
+                            <Link
+                                href="/billing"
+                                className={classNames(
+                                    isActive("/billing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Billing
                             </Link>
                             <Link
                                 href="/terms-conditions"
