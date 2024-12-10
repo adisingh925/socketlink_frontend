@@ -27,35 +27,15 @@ function SelectWebSocketPlan() {
     const handleRegionDialogClose = () => setIsRegionDialogOpen(false);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async (user) => {
-            try {
-                if (!user) {
-                    router.push("/login");
-                } else {
-                    auth.currentUser.getIdToken().then((token) => {
-                        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                            },
-                        }).then((response) => {
-                            setPlans(response.data);
-                        }).catch((error) => {
-                            setSnackbarText(error.message);
-                            setSeverity("error");
-                            setSnackbarState(true);
-                        }).finally(() => {
-                            setLoading(false);
-                        });
-                    });
-                }
-            } catch (error) {
-                setSeverity("error");
-                setSnackbarText(error.message);
-                setSnackbarState(true);
-            }
+        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`).then((response) => {
+            setPlans(response.data);
+        }).catch((error) => {
+            setSnackbarText(error.message);
+            setSeverity("error");
+            setSnackbarState(true);
+        }).finally(() => {
+            setLoading(false);
         });
-
-        return () => unsubscribe();
     }, [router]);
 
     const handleRegionSelection = (region) => {
@@ -79,10 +59,9 @@ function SelectWebSocketPlan() {
                     setSeverity("success");
                     setSnackbarState(true);
 
-                    // Wait for 3 seconds before navigating to another screen
                     setTimeout(() => {
                         router.push("/my-plans");
-                    }, 3000); // 3000ms = 3 seconds
+                    }, 3000);
                 } else if (response.data.code === -1) {
                     setSnackbarText(response.data.message);
                     setSeverity("error");
@@ -148,8 +127,14 @@ function SelectWebSocketPlan() {
     };
 
     const handlePlanSelection = (plan) => {
-        setSelectedPlanId(plan.plan_id);
-        handleRegionDialogOpen();
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setSelectedPlanId(plan.plan_id);
+                handleRegionDialogOpen();
+            } else {
+                router.push("/login");
+            }
+        });
     };
 
     function numberToWords(num) {

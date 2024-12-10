@@ -14,23 +14,23 @@ function classNames(...classes) {
 export default function FloatingNavigationBar() {
     const pathname = usePathname()
 
-    const [user, setUser] = useState(null); 
-    const router = useRouter(); 
+    const [user, setUser] = useState(null);
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
         });
 
-        return () => unsubscribe(); 
+        return () => unsubscribe();
     }, []);
 
     const handleLogout = async () => {
         await signOut(auth);
-        router.push("/login"); 
+        router.push("/login");
     };
 
-    /** Function to determine if the current path matches the link */ 
+    /** Function to determine if the current path matches the link */
     const isActive = (path) => pathname === path;
 
     return (
@@ -138,25 +138,60 @@ export default function FloatingNavigationBar() {
                                     </Link>
                                 </div>
                             ) : (
-                                <div className="flex justify-end space-x-4">
-                                    <Link
-                                        href="/login"
-                                        className={classNames(
-                                            isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                            "rounded-md px-3 py-2 text-sm font-medium"
-                                        )}
-                                    >
-                                        Login
-                                    </Link>
-                                    <Link
-                                        href="/signup"
-                                        className={classNames(
-                                            isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                            "rounded-md px-3 py-2 text-sm font-medium"
-                                        )}
-                                    >
-                                        Signup
-                                    </Link>
+                                <div className="flex justify-between items-center">
+                                    {/* Left section */}
+                                    <div className="space-x-4">
+                                        <Link
+                                            href="/pricing"
+                                            className={classNames(
+                                                isActive("/pricing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Pricing
+                                        </Link>
+                                        <Link
+                                            href="/terms-conditions"
+                                            className={classNames(
+                                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Terms & Conditions
+                                        </Link>
+                                        <Link
+                                            href="/privacy-policy"
+                                            className={classNames(
+                                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Privacy Policy
+                                        </Link>
+                                    </div>
+
+
+                                    {/* Right section */}
+                                    <div className="flex space-x-4">
+                                        <Link
+                                            href="/login"
+                                            className={classNames(
+                                                isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Login
+                                        </Link>
+                                        <Link
+                                            href="/signup"
+                                            className={classNames(
+                                                isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Signup
+                                        </Link>
+                                    </div>
                                 </div>
                             )}
                         </div>

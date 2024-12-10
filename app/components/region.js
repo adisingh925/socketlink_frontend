@@ -24,15 +24,7 @@ function RegionSelectionDialog({ isOpen, onClose, handleRegionSelection }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (!user) {
-                router.push("/login");
-            } else {
-                setLoading(false);
-            }
-        });
-
-        return () => unsubscribe();
+        setLoading(false);
     }, [router]);
 
     useEffect(() => {
