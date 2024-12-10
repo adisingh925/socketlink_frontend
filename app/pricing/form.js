@@ -293,7 +293,7 @@ function SelectWebSocketPlan() {
                                                 </p>
                                             </div>
                                             <div>
-                                                {plan.price === 29 && (
+                                                {plan.price === 2900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
                                                         <p>
                                                             <strong>Our most generous plan yet! Ideal for small businesses and startups.</strong>
@@ -301,14 +301,14 @@ function SelectWebSocketPlan() {
                                                     </div>
                                                 )}
 
-                                                {plan.price === 49 && (
+                                                {plan.price === 4900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
                                                         <p>
                                                             <strong>This plan is perfect for small to medium-sized businesses.</strong>
                                                         </p>
                                                     </div>
                                                 )}
-                                                {plan.price === 99 && (
+                                                {plan.price === 9900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
                                                         <p>
                                                             <strong>A great plan for medium to large businesses.</strong>
@@ -316,7 +316,7 @@ function SelectWebSocketPlan() {
                                                     </div>
                                                 )}
 
-                                                {plan.price === 199 && (
+                                                {plan.price === 19900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
                                                         <p>
                                                             <strong>The best plan for large businesses and enterprises.</strong>
