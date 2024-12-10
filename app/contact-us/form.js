@@ -257,6 +257,7 @@ function ContactUs() {
                                 onChange={(e) => setQuery(e.target.value)}
                                 className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"
                                 rows="4"
+                                maxLength={1000}
                                 placeholder="Write your query here..."
                             ></textarea>
                             <button
