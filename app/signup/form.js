@@ -17,9 +17,9 @@ function Signup() {
     const [severity, setSeverity] = useState("");
     const [emailPasswordLoading, setEmailPasswordLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
-    const [loading, setLoading] = useState(true); // New loading state
+    const [loading, setLoading] = useState(true); 
     const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false); // Track dialog state
+    const [isOpen, setIsOpen] = useState(false);
     const authError = useRef(null);
 
     const [credentials, setCredentials] = useState({
@@ -37,7 +37,7 @@ function Signup() {
             }
         });
 
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe(); 
     }, [router]);
 
     const onChange = (event) => {
@@ -81,7 +81,7 @@ function Signup() {
         }).catch((error) => {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
-                setIsOpen(true); // Open the dialog if MFA is required
+                setIsOpen(true); 
             } else {
                 setSeverity("error");
                 setSnackbarText(error.message);

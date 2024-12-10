@@ -18,21 +18,21 @@ function Login() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [loading, setLoading] = useState(true); // New loading state
+    const [loading, setLoading] = useState(true); 
     const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false); // Track dialog state
+    const [isOpen, setIsOpen] = useState(false); 
     const authError = useRef(null);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                router.push("/"); // Redirect to homepage if authenticated
+                router.push("/"); 
             } else {
-                setLoading(false); // Set loading to false when checking is done
+                setLoading(false); 
             }
         });
 
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe(); 
     }, [router]);
 
     const handleLoginClicked = async (e) => {
@@ -44,7 +44,7 @@ function Login() {
         }).catch((error) => {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
-                setIsOpen(true); // Open the dialog if MFA is required
+                setIsOpen(true); 
             } else {
                 setSeverity("error");
                 setSnackbarText(error.message);
@@ -64,7 +64,7 @@ function Login() {
         }).catch((error) => {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
-                setIsOpen(true); // Open the dialog if MFA is required
+                setIsOpen(true);
             } else {
                 setSeverity("error");
                 setSnackbarText(error.message);
