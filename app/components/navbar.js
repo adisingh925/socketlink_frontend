@@ -320,10 +320,34 @@ export default function FloatingNavigationBar() {
                         </>
                     ) : (
                         <>
-                            <Link href="/login" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link href="/pricing" className={classNames(
+                                isActive("/pricing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
+                                Pricing
+                            </Link>
+                            <Link href="/terms-conditions" className={classNames(
+                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
+                                Terms & Conditions
+                            </Link>
+                            <Link href="/privacy-policy" className={classNames(
+                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
+                                Privacy Policy
+                            </Link>
+                            <Link href="/login" className={classNames(
+                                isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
                                 Login
                             </Link>
-                            <Link href="/signup" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                            <Link href="/signup" className={classNames(
+                                isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
                                 Sign up
                             </Link>
                         </>
