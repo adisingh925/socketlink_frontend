@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
-import { auth } from "./firebase";
+import { FaSpinner } from 'react-icons/fa'; 
 
-// Fetch regions function
 async function fetchRegions() {
     const response = await fetch("https://api.digitalocean.com/v2/regions", {
         headers: {
