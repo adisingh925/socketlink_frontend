@@ -36,14 +36,14 @@ export default function Home() {
       <NavigationBar />
       <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
         {/* Main Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
+        {/* <div className="text-center mb-12"> */}
+          {/* <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
             Dashboard
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
             You can now easily integrate real-time communication into your applications using our powerful WebSocket infrastructure. Purchase a subscription today and start building amazing real-time applications with ease.
-          </p>
-        </div>
+          </p> */}
+        {/* </div> */}
 
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
