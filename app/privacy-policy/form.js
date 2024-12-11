@@ -236,9 +236,10 @@ function PrivacyPolicy() {
 
             <h2 className="text-lg font-bold mt-4 mb-2">8. Contact Us</h2>
             <p className="mb-4">
-              If you have any questions or concerns about this Privacy Policy, please contact us at <Link href="mailto:support@socketlink.com" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300">support@socketlink.com</Link>.
+              If you have any questions or concerns about this Privacy Policy, please <Link href="/contact-us" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300">
+                contact us.
+              </Link>
             </p>
-
           </div>
         </div>
       </div>

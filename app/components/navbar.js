@@ -136,6 +136,15 @@ export default function FloatingNavigationBar() {
                                     >
                                         Pricing
                                     </Link>
+                                    <Link
+                                        href="/docs"
+                                        className={classNames(
+                                            isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            "rounded-md px-3 py-2 text-sm font-medium"
+                                        )}
+                                    >
+                                        Docs
+                                    </Link>
                                 </div>
                             ) : (
                                 <div className="flex justify-between items-center">
@@ -149,6 +158,15 @@ export default function FloatingNavigationBar() {
                                             )}
                                         >
                                             Pricing
+                                        </Link>
+                                        <Link
+                                            href="/docs"
+                                            className={classNames(
+                                                isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Docs
                                         </Link>
                                         <Link
                                             href="/terms-conditions"
@@ -311,6 +329,15 @@ export default function FloatingNavigationBar() {
                             >
                                 Pricing
                             </Link>
+                            <Link
+                                href="/docs"
+                                className={classNames(
+                                    isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                )}
+                            >
+                                Docs
+                            </Link>
                         </>
                     ) : (
                         <>
@@ -319,6 +346,12 @@ export default function FloatingNavigationBar() {
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Pricing
+                            </Link>
+                            <Link href="/docs" className={classNames(
+                                isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
+                                Docs
                             </Link>
                             <Link href="/terms-conditions" className={classNames(
                                 isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
