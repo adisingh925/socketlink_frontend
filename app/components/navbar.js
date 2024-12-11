@@ -311,12 +311,6 @@ export default function FloatingNavigationBar() {
                             >
                                 Pricing
                             </Link>
-                            <button
-                                onClick={handleLogout}
-                                className="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                            >
-                                Sign out
-                            </button>
                         </>
                     ) : (
                         <>
