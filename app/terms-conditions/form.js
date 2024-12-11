@@ -121,7 +121,7 @@ function TermsAndConditions() {
             <h2 className="text-lg font-bold mt-4 mb-2">8. Contact Us</h2>
             <p>
               For any questions or concerns regarding these Terms and Conditions, please{" "}
-              <Link href="/contact-us" className="text-blue-600 font-bold">
+              <Link href="/contact-us" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300">
                 contact us.
               </Link>
             </p>

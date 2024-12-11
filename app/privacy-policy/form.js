@@ -208,7 +208,7 @@ function PrivacyPolicy() {
 
             <h2 className="text-lg font-bold mt-4 mb-2">3. Cookies</h2>
             <p className="mb-4">
-              We use cookies and similar technologies to enhance your experience on our website. This includes the use of Google Analytics to collect information about your usage of the site to help us improve our services. Google Analytics may use cookies to collect data on website usage and report on trends. You can opt out of Google Analytics by installing the browser add-on available at <a href="https://tools.google.com/dlpage/gaoptout" className="text-blue-600 font-bold" target="_blank" rel="nofollow noopener noreferrer">
+              We use cookies and similar technologies to enhance your experience on our website. This includes the use of Google Analytics to collect information about your usage of the site to help us improve our services. Google Analytics may use cookies to collect data on website usage and report on trends. You can opt out of Google Analytics by installing the browser add-on available at <a href="https://tools.google.com/dlpage/gaoptout" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300" target="_blank" rel="nofollow noopener noreferrer">
                 opt out of Google Analytics
               </a>
               .
@@ -236,7 +236,7 @@ function PrivacyPolicy() {
 
             <h2 className="text-lg font-bold mt-4 mb-2">8. Contact Us</h2>
             <p className="mb-4">
-              If you have any questions or concerns about this Privacy Policy, please contact us at <Link href="mailto:support@socketlink.com" className="text-blue-600 font-bold">support@socketlink.com</Link>.
+              If you have any questions or concerns about this Privacy Policy, please contact us at <Link href="mailto:support@socketlink.com" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300">support@socketlink.com</Link>.
             </p>
 
           </div>
