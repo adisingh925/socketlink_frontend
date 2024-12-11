@@ -27,23 +27,35 @@ function SubscribedPlans() {
     ];
 
     useEffect(() => {
+        let intervalId;
+
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                clearInterval(intervalId);
+            } else if (document.visibilityState === 'visible') {
+                intervalId = setInterval(getSubscriptionDetails, 5000);
+            }
+        };
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 getSubscriptionDetails();
-
-                const intervalId = setInterval(() => {
-                    getSubscriptionDetails();
-                }, 5000);
-
-                /** Cleanup the interval when the component unmounts or when the user logs out */ 
-                return () => clearInterval(intervalId);
+                intervalId = setInterval(getSubscriptionDetails, 5000);
             } else {
+                clearInterval(intervalId);
                 router.push("/login");
             }
         });
 
-        return () => unsubscribe();
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            clearInterval(intervalId);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            unsubscribe();
+        };
     }, [router]);
+
 
     const getSubscriptionDetails = async () => {
         auth.currentUser.getIdToken().then((token) => {
