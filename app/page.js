@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth } from "./components/firebase"; // Adjust the path as necessary
+import { auth } from "./components/firebase";
 import { useRouter } from "next/navigation";
 import NavigationBar from "./components/navbar";
 
 export default function Home() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -37,7 +37,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
         {/* Main Header */}
         {/* <div className="text-center mb-12"> */}
-          {/* <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
+        {/* <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
             Dashboard
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
@@ -128,7 +128,6 @@ export default function Home() {
             <h3 className="text-xl font-semibold text-white mb-2">Sports Updates</h3>
             <p className="text-gray-400">Provide live sports scores and commentary to fans.</p>
           </div>
-
         </div>
       </div>
     </div>
