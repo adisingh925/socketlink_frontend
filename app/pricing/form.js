@@ -203,9 +203,13 @@ function SelectWebSocketPlan() {
                         <div className="flex flex-wrap justify-center gap-4">
                             {plans && plans.map((plan) => (
                                 <div
+
                                     key={plan.plan_id}
-                                    className={`h-[500px] max-w-[400px] flex-grow flex flex-col justify-between p-6 m-2 rounded-lg shadow-lg transition transform ${plan.is_featured ? "bg-indigo-700 border border-indigo-400" : "bg-gray-800"
+                                    className={`w-[400px] max-w-lg h-[500px] flex-grow flex flex-col justify-between p-4 sm:p-8 m-2 rounded-2xl shadow-xl border transition transform ${plan.is_featured
+                                            ? "bg-indigo-700 border-indigo-400 text-white"
+                                            : "bg-gray-800 border-white/20 text-white"
                                         } sm:hover:scale-105`}
+
                                 >
                                     <div className="flex flex-col justify-between flex-1">
                                         <div className="flex items-center justify-between mb-4">
