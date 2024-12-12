@@ -32,9 +32,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col h-[100dvh] text-white dark:bg-gray-900 overflow-y-auto">
+    <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
       <NavigationBar />
-      <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
+      <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
         {/* Main Header */}
         {/* <div className="text-center mb-12"> */}
         {/* <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
@@ -48,7 +48,7 @@ export default function Home() {
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {/* Existing Cards */}
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -58,7 +58,7 @@ export default function Home() {
             <p className="text-gray-400">Build powerful chat applications with minimal setup.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17v-5a2 2 0 112 0v5m3-5v10m-3-5a2 2 0 11-4 0m7-4v-2a4 4 0 10-8 0v2a4 4 0 008 0z" />
@@ -69,7 +69,7 @@ export default function Home() {
           </div>
 
           {/* New Cards */}
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 3v12m6-12v12m6-8v8m-6-4h-6" />
@@ -79,7 +79,7 @@ export default function Home() {
             <p className="text-gray-400">Stream video and audio in real-time to large audiences.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11M9 21V9m0 0l-5 5m5-5l5 5" />
@@ -89,7 +89,7 @@ export default function Home() {
             <p className="text-gray-400">Edit documents in real-time with multiple participants.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18l6-6m0 0l6-6m-6 6l6 6m-6-6H6" />
@@ -99,7 +99,7 @@ export default function Home() {
             <p className="text-gray-400">Enable fast-paced multiplayer gaming experiences.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12" />
@@ -109,7 +109,7 @@ export default function Home() {
             <p className="text-gray-400">Stream stock market updates instantly to your users.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4h16v16H4V4zm4 4h8v8H8V8z" />
@@ -119,7 +119,7 @@ export default function Home() {
             <p className="text-gray-400">Control IoT devices and receive live updates effortlessly.</p>
           </div>
 
-          <div className="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-center text-white rounded-2xl shadow-xl border border-white/20">
             <div className="text-blue-500 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 12h12m-6-6v12" />
