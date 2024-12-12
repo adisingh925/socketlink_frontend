@@ -225,7 +225,7 @@ function Billing() {
                 <NavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <div className="space-y-4 md:space-y-6">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Billing Information
                             </h1>
