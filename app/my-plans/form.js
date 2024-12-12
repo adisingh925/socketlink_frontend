@@ -26,6 +26,10 @@ function SubscribedPlans() {
         { codes: new Set([100, 101, 102, 103, 104, 105]), text: "Upgrading", color: "text-gray-500" },
     ];
 
+    const handleRedirect = () => {
+        router.push("/pricing");
+    };
+
     useEffect(() => {
         let intervalId;
 
@@ -63,6 +67,7 @@ function SubscribedPlans() {
                     setSnackbarText("Please verify your email using the link sent to your email inbox!");
                     setSeverity("error");
                     setSnackbarState(true);
+                    setLoading(false);
                     return;
                 } else {
                     getSubscriptionDetails(true);
@@ -71,6 +76,7 @@ function SubscribedPlans() {
                 setSnackbarText(error.message);
                 setSeverity("error");
                 setSnackbarState(true);
+                setLoading(false);
                 return;
             });
         } else {
@@ -288,14 +294,19 @@ function SubscribedPlans() {
                                 </div>
                             </>
                         ) : (
-                            <div className="text-center text-gray-300">
-                                <h2 className="text-3xl font-bold mb-4">No Subscription Found</h2>
-                                <p className="mb-4">It seems you haven&apos;t subscribed to any plans yet.</p>
-                                <Link href="/pricing">
-                                    <button className="flex-1 w-full text-black bg-yellow-600 hover:bg-yellow-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 transition-transform duration-150">
-                                        Choose a Plan
-                                    </button>
-                                </Link>
+                            <div className="space-y-4">
+                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                                    No Subscription Found
+                                </h1>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    It seems you haven&apos;t subscribed to any plans yet.
+                                </p>
+                                <button
+                                    onClick={handleRedirect}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Choose a Plan
+                                </button>
                             </div>
                         )}
                     </div>

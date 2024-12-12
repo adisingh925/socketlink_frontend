@@ -198,8 +198,8 @@ function Billing() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-                    <div className="bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">
-                        <div className="p-6 space-y-4 sm:p-8">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
+                        <div className="space-y-4">
                             <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                                 Wallet Inactive
                             </h1>
@@ -224,7 +224,7 @@ function Billing() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-                    <div className="bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Billing Information

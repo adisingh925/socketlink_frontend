@@ -31,31 +31,36 @@ function ContactUs() {
     }, [router]);
 
     const sendQuery = async (message) => {
-        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/query`;
+        auth.currentUser.getIdToken().then((token) => {
+            const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/query`;
 
-        const body = {
-            query: message,
-        };
+            const body = {
+                query: message,
+            };
 
-        try {
-            const response = await axios.post(url, body, {
+            axios.post(url, body, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${await auth.currentUser.getIdToken()}`,
+                    'Authorization': `Bearer ${token}`,
                 },
-            });
-
-            if (response.status === 200) {
-                setSnackbarText('Thankyou! We\'ve received your query, and we\'ll get back to you shortly.');
-                setSeverity('success');
+            }).then((response) => {
+                if (response.status === 200) {
+                    setSnackbarText('Thankyou! We\'ve received your query, and we\'ll get back to you shortly.');
+                    setSeverity('success');
+                    setSnackbarState(true);
+                    setQuery('');
+                }
+            }).catch((error) => {
+                setSnackbarText('Failed to send query!');
+                setSeverity('error');
                 setSnackbarState(true);
-            }
-        } catch (error) {
+            });
+        }).catch((error) => {
             setSnackbarText('Failed to send query!');
             setSeverity('error');
             setSnackbarState(true);
-        }
-    };
+        });
+    }
 
     const structuredData = {
         "@context": "https://schema.org",
@@ -78,7 +83,6 @@ function ContactUs() {
         e.preventDefault();
         if (query.trim()) {
             sendQuery(query);
-            setQuery('');
         }
     };
 
