@@ -33,14 +33,14 @@ function SubscribedPlans() {
             if (document.visibilityState === 'hidden') {
                 clearInterval(intervalId);
             } else if (document.visibilityState === 'visible') {
-                intervalId = setInterval(getSubscriptionDetails, 5000);
+                intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
             }
         };
 
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
-                getSubscriptionDetails();
-                intervalId = setInterval(getSubscriptionDetails, 5000);
+                checkEmailVerificationAndGetSubscriptionDetails();
+                intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
             } else {
                 clearInterval(intervalId);
                 router.push("/login");
@@ -56,9 +56,30 @@ function SubscribedPlans() {
         };
     }, [router]);
 
+    const checkEmailVerificationAndGetSubscriptionDetails = async () => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return;
+                } else {
+                    getSubscriptionDetails(true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            getSubscriptionDetails();
+        }
+    }
 
-    const getSubscriptionDetails = async () => {
-        auth.currentUser.getIdToken().then((token) => {
+    const getSubscriptionDetails = async (refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/my-subscription`, {
                 headers: {
                     Authorization: `Bearer ${token}`,

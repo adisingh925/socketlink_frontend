@@ -41,7 +41,29 @@ export default function Metrics() {
     }, [router]);
 
     const fetchStats = async () => {
-        auth.currentUser.getIdToken().then((token) => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return;
+                } else {
+                    getMetrics(true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            getMetrics();
+        }
+    }
+
+    const getMetrics = async (refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-metrics`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -60,7 +82,7 @@ export default function Metrics() {
                 setSnackbarState(true);
             });
         });
-    };
+    }
 
     if (loading) {
         return (

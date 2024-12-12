@@ -13,18 +13,18 @@ function ForgotPassword() {
   const [snackbarState, setSnackbarState] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
   const [severity, setSeverity] = useState("");
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        router.push("/"); // Redirect to homepage if authenticated
+        router.push("/");
       } else {
-        setLoading(false); // Set loading to false when checking is done
+        setLoading(false);
       }
     });
 
-    return () => unsubscribe(); // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, [router]);
 
   const onChange = (event) => {

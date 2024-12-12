@@ -9,7 +9,6 @@ import Toast from "../components/toast";
 import Script from "next/script";
 import NavigationBar from "../components/navbar";
 import RegionSelectionDialog from "../components/region";
-import { FaFacebookMessenger, FaShippingFast, FaWizardsOfTheCoast } from "react-icons/fa";
 
 function SelectWebSocketPlan() {
     const router = useRouter();
@@ -38,13 +37,39 @@ function SelectWebSocketPlan() {
         });
     }, [router]);
 
+    const checkEmailVerificationAndCreateResource = (region) => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return;
+                } else {
+                    createResource(region, true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            createResource(region);
+        }
+    };
+
     const handleRegionSelection = (region) => {
         handleRegionDialogClose();
         setSnackbarState(true);
-        setSnackbarText("Processing...");
+        setSnackbarText("Creating your resource, please wait...");
         setSeverity("info");
 
-        auth.currentUser.getIdToken(/* forceRefresh */ true).then((token) => {
+        checkEmailVerificationAndCreateResource(region);
+    };
+
+    const createResource = async (region, refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/subscription/${selectedPlanId}/${region}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -124,7 +149,7 @@ function SelectWebSocketPlan() {
             setSeverity("error");
             setSnackbarState(true);
         });
-    };
+    }
 
     const handlePlanSelection = (plan) => {
         auth.onAuthStateChanged((user) => {
