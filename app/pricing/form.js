@@ -26,15 +26,37 @@ function SelectWebSocketPlan() {
     const handleRegionDialogClose = () => setIsRegionDialogOpen(false);
 
     useEffect(() => {
-        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`).then((response) => {
-            setPlans(response.data);
-        }).catch((error) => {
-            setSnackbarText(error.message);
-            setSeverity("error");
-            setSnackbarState(true);
-        }).finally(() => {
-            setLoading(false);
-        });
+        const fetchPlans = async () => {
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
+                        headers: {
+                            'Authorization': `Bearer ${await auth.currentUser.getIdToken()}`
+                        }
+                    }).then((response) => {
+                        setPlans(response.data);
+                    }).catch((error) => {
+                        setSnackbarText(error.message);
+                        setSeverity("error");
+                        setSnackbarState(true);
+                    }).finally(() => {
+                        setLoading(false);
+                    });
+                } else {
+                    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`).then((response) => {
+                        setPlans(response.data);
+                    }).catch((error) => {
+                        setSnackbarText(error.message);
+                        setSeverity("error");
+                        setSnackbarState(true);
+                    }).finally(() => {
+                        setLoading(false);
+                    });
+                }
+            });
+        }
+
+        fetchPlans();
     }, [router]);
 
     const checkEmailVerificationAndCreateResource = (region) => {
