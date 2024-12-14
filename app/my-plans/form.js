@@ -229,7 +229,7 @@ function SubscribedPlans() {
                                             <InfoRow
                                                 icon={<FiClock />}
                                                 label="Started On"
-                                                value={new Date(plan.start_time)
+                                                value={new Date(plan.created_at)
                                                     .toLocaleDateString('en-GB')
                                                     .split('/')
                                                     .join(' - ')}
@@ -238,7 +238,7 @@ function SubscribedPlans() {
                                             <InfoRow
                                                 icon={<FiClock />}
                                                 label="Expiring On"
-                                                value={new Date(new Date(plan.start_time).setDate(new Date(plan.start_time).getDate() + plan.plan.duration))
+                                                value={new Date(new Date(plan.created_at).setDate(new Date(plan.created_at).getDate() + plan.plan.duration))
                                                     .toLocaleDateString('en-GB')
                                                     .split('/')
                                                     .join(' - ')}
