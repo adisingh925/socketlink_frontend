@@ -25,7 +25,7 @@ function Profile() {
     const [fullTotpSecret, setFullTotpSecret] = useState(null); // Full TOTP Secret
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login"); // Redirect to login if not authenticated
             } else {
@@ -35,8 +35,6 @@ function Profile() {
                 setLoading(false); // User is authenticated, set loading to false
             }
         });
-
-        return () => unsubscribe(); // Cleanup subscription on unmount
     }, [router]);
 
     const handleSendVerificationEmail = async () => {

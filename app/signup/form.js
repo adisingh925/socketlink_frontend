@@ -29,15 +29,13 @@ function Signup() {
     });
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 router.push("/");
             } else {
                 setLoading(false);
             }
         });
-
-        return () => unsubscribe(); 
     }, [router]);
 
     const onChange = (event) => {

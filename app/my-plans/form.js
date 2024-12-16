@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../components/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { auth } from "../components/firebase";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle, FiCpu } from "react-icons/fi";
@@ -33,15 +32,7 @@ function SubscribedPlans() {
     useEffect(() => {
         let intervalId;
 
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === 'hidden') {
-                clearInterval(intervalId);
-            } else if (document.visibilityState === 'visible') {
-                intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
-            }
-        };
-
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 checkEmailVerificationAndGetSubscriptionDetails();
                 intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
@@ -51,12 +42,8 @@ function SubscribedPlans() {
             }
         });
 
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-
         return () => {
             clearInterval(intervalId);
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-            unsubscribe();
         };
     }, [router]);
 

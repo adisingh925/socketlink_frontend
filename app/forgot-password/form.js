@@ -16,15 +16,13 @@ function ForgotPassword() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         router.push("/");
       } else {
         setLoading(false);
       }
     });
-
-    return () => unsubscribe();
   }, [router]);
 
   const onChange = (event) => {

@@ -2,68 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import Script from "next/script";
-import Head from "next/head";
-import { usePathname } from "next/navigation";
 import FloatingNavigationBar from "../components/navbar";
 
 function TermsAndConditions() {
 
-  const pathname = usePathname();
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Terms and Conditions",
-    "url": "https://picolon.com/terms-conditions",
-    "description": "Review our terms and conditions to fully understand the rules and guidelines for using our WebSocket API service effectively and securely.",
-    "datePublished": "2024-07-21",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Picolon",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://picolon-bucket.s3.ap-south-1.amazonaws.com/picolon-full-image.webp"
-      },
-      "url": "https://picolon.com"
-    }
-  };
-
   return (
     <>
-      <Head>
-        {/* title */}
-        <title>Terms and Conditions</title>
-
-        {/* description */}
-        <meta
-          name="description"
-          content="Review our terms and conditions to fully understand the rules and guidelines for using our WebSocket API service effectively and securely."
-        />
-
-        {/* keywords */}
-        <meta name="keywords" content="terms and conditions, websocket API, service terms, usage guidelines, API terms, user agreement, subscription service" />
-
-        {/* other meta tags */}
-        {/* ... other meta tags as per your original code ... */}
-      </Head>
-
-      <Script
-        type="application/ld+json"
-        id="structured-data"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-2PCLJ13WYM" strategy="worker" />
-      <Script id="google-analytics" strategy="worker">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-2PCLJ13WYM');
-        `}
-      </Script>
-
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <FloatingNavigationBar />
         <div className="container mx-auto p-8 dark:text-white mt-20 dark:bg-gray-900">

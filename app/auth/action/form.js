@@ -16,8 +16,8 @@ function UpdatePassword() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [isVerified, setIsVerified] = useState(0); // To track verification 
-    const [isReverted, setIsReverted] = useState(0); // To track second factor addition
+    const [isVerified, setIsVerified] = useState(0);
+    const [isReverted, setIsReverted] = useState(0);
 
     useEffect(() => {
         if (searchParams.get("mode") === "verifyEmail") {
@@ -138,7 +138,7 @@ function UpdatePassword() {
                             <button
                                 type="submit"
                                 className="w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150"
-                                >
+                            >
                                 Update password
                             </button>
                         </form>

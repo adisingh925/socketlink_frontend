@@ -24,15 +24,13 @@ function Billing() {
     };
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login");
             } else {
                 getBillingDetails();
             }
         });
-
-        return () => unsubscribe();
     }, [router]);
 
     const getBillingDetails = async () => {

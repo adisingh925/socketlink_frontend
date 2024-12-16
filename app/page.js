@@ -10,15 +10,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (!user) {
         router.push("/login");
       } else {
         setLoading(false);
       }
     });
-
-    return () => unsubscribe();
   }, [router]);
 
   if (loading) {
@@ -35,16 +33,6 @@ export default function Home() {
     <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
       <NavigationBar />
       <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-        {/* Main Header */}
-        {/* <div className="text-center mb-12"> */}
-        {/* <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
-            Dashboard
-          </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
-            You can now easily integrate real-time communication into your applications using our powerful WebSocket infrastructure. Purchase a subscription today and start building amazing real-time applications with ease.
-          </p> */}
-        {/* </div> */}
-
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {/* Existing Cards */}

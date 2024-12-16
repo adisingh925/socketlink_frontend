@@ -23,7 +23,7 @@ export default function Metrics() {
     useEffect(() => {
         let intervalId;
 
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login");
             } else {
@@ -36,7 +36,6 @@ export default function Metrics() {
 
         return () => {
             clearInterval(intervalId);
-            unsubscribe();
         };
     }, [router]);
 

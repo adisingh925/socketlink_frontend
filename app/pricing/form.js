@@ -128,7 +128,7 @@ function SelectWebSocketPlan() {
                             setSnackbarState(true);
                             setTimeout(() => {
                                 router.push("/my-plans");
-                            }, 3000); // 3000ms = 3 seconds
+                            }, 3000); 
                         },
                         modal: {
                             ondismiss: function () {

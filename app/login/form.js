@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { auth } from "../components/firebase"; // Adjust the path as necessary
+import { auth } from "../components/firebase"; 
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getMultiFactorResolver, TotpMultiFactorGenerator } from 'firebase/auth';
-import { FcGoogle } from "react-icons/fc"; // Import the Google icon
+import { FcGoogle } from "react-icons/fc"; 
 import Toast from "../components/toast";
 import NavigationBar from "../components/navbar";
 import Mfa from "../components/inputTotpDialog";
@@ -24,15 +24,13 @@ function Login() {
     const authError = useRef(null);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 router.push("/"); 
             } else {
                 setLoading(false); 
             }
         });
-
-        return () => unsubscribe(); 
     }, [router]);
 
     const handleLoginClicked = async (e) => {
