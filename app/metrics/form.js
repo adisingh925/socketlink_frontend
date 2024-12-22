@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth } from "../components/firebase"; // Adjust the path as necessary
+import { auth } from "../components/firebase"; 
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
 import axios from "axios";
@@ -11,7 +11,7 @@ import moment from "moment/moment";
 
 export default function Metrics() {
     const router = useRouter();
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true); 
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
@@ -141,7 +141,7 @@ function MetricsChart({ title, data, color }) {
     const interval = Math.ceil(data.length / 10);
 
     return (
-        <div className="bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-700">
+        <div className="bg-gray-800 rounded-2xl shadow-lg p-4 border-2 border-white/20">
             <h2 className="text-2xl font-semibold text-center text-white mb-6 shadow-sm">
                 {title}
             </h2>

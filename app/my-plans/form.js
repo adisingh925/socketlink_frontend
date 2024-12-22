@@ -145,7 +145,7 @@ function SubscribedPlans() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20">
                         {plan ? (
                             <>
                                 <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">

@@ -66,7 +66,7 @@ function ContactUs() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-[100dvh] text-white">
+            <div className="flex items-center justify-center h-[100dvh] text-white dark:bg-gray-900">
                 <div className="flex flex-col items-center space-y-4">
                     <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
                 </div>
@@ -99,7 +99,7 @@ function ContactUs() {
                             <textarea
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"
+                                className="w-full p-4 border-2 border-gray-300 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"
                                 rows="4"
                                 maxLength={1000}
                                 placeholder="Write your query here..."
