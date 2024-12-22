@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
 import axios from "axios";
 import Toast from "../components/toast";
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+import moment from "moment/moment";
 
 export default function Metrics() {
     const router = useRouter();
@@ -15,9 +16,9 @@ export default function Metrics() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
     const [stats, setStats] = useState({
-        messagesSent: 0,
-        connectedUsers: 0,
-        averagePayloadSize: 0,
+        messagesSent: [],
+        connectedUsers: [],
+        averagePayloadSize: [],
     });
 
     useEffect(() => {
@@ -70,11 +71,11 @@ export default function Metrics() {
             }).then((response) => {
                 const { messages_sent, connections, averagePayloadSize } = response.data;
 
-                setStats({
-                    messagesSent: messages_sent || 0,
-                    connectedUsers: connections || 0,
-                    averagePayloadSize: averagePayloadSize || 0,
-                });
+                setStats((prevStats) => ({
+                    messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
+                    connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
+                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: averagePayloadSize || 0 }],
+                }));
             }).catch((error) => {
                 setSnackbarText(error.message);
                 setSeverity("error");
@@ -97,8 +98,7 @@ export default function Metrics() {
         <>
             <div className="flex flex-col h-[100dvh] text-white dark:bg-gray-900">
                 <NavigationBar />
-                <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20">
-                    {/* Main Header */}
+                <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20 dark:bg-gray-900">
                     <div className="text-center mb-12">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
                             Metrics
@@ -108,22 +108,22 @@ export default function Metrics() {
                         </p>
                     </div>
 
-                    {/* Stats Section */}
-                    <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto">
-                        <StatCard
-                            title="Messages Sent"
-                            stat={stats.messagesSent}
-                            color="bg-gradient-to-r from-blue-500 to-blue-700"
+                    {/* Charts Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full px-4">
+                        <MetricsChart
+                            title="Messages Sent Over Time"
+                            data={stats.messagesSent}
+                            color="#4f46e5"
                         />
-                        <StatCard
-                            title="Connected Users"
-                            stat={stats.connectedUsers}
-                            color="bg-gradient-to-r from-green-500 to-green-700"
+                        <MetricsChart
+                            title="Connected Users Over Time"
+                            data={stats.connectedUsers}
+                            color="#10b981"
                         />
-                        <StatCard
-                            title="Average Payload Size"
-                            stat={`${stats.averagePayloadSize} KB`}
-                            color="bg-gradient-to-r from-purple-500 to-purple-700"
+                        <MetricsChart
+                            title="Average Payload Size Over Time"
+                            data={stats.averagePayloadSize}
+                            color="#a855f7"
                         />
                     </div>
                 </div>
@@ -134,12 +134,59 @@ export default function Metrics() {
     );
 }
 
-/** Reusable StatCard component */
-function StatCard({ title, stat, color }) {
+function MetricsChart({ title, data, color }) {
+    const [hovered, setHovered] = useState(false);
+
     return (
-        <div className={`${color} rounded-lg shadow-md p-6 transition-transform transform hover:scale-105`}>
-            <h2 className="text-xl md:text-2xl font-semibold text-center mb-3">{title}</h2>
-            <p className="text-4xl md:text-5xl font-bold text-center">{stat}</p>
+        <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 rounded-lg shadow-lg p-6 border border-gray-700">
+            <h2 className="text-2xl font-semibold text-center text-white mb-6 shadow-sm">
+                {title}
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+                <LineChart
+                    data={data}
+                    margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                    <XAxis
+                        dataKey="time"
+                        tick={{ fill: '#bbb' }}
+                        dy={10}
+                        tickFormatter={(timeStr) => moment(timeStr, "HH:mm:ss").format('HH:mm')} />
+                    <YAxis
+                        tickFormatter={(value) => {
+                            if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+                            if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
+                            return value;
+                        }}
+                        tick={{ fill: '#bbb' }}
+                    />
+                    <Tooltip
+                        contentStyle={{ backgroundColor: '#222', borderColor: '#444' }}
+                        labelStyle={{ color: '#fff' }}
+                        itemStyle={{ color: '#fff' }}
+                        formatter={(value) => new Intl.NumberFormat().format(value)}
+                    />
+                    <Legend
+                        layout="horizontal"
+                        align="center"
+                        wrapperStyle={{
+                            color: '#bbb',
+                            paddingTop: '20px',
+                        }}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="value"
+                        stroke={color}
+                        strokeWidth={3}
+                        dot={hovered ? { stroke: color, strokeWidth: 2, r: 5 } : false} // Show dots only when hovered
+                        activeDot={{ r: 8 }}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
         </div>
     );
 }
