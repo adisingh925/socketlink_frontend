@@ -109,7 +109,7 @@ export default function Metrics() {
                     </div>
 
                     {/* Charts Section */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
                         <MetricsChart
                             title="Messages Sent Over Time"
                             data={stats.messagesSent}
@@ -141,7 +141,7 @@ function MetricsChart({ title, data, color }) {
     const interval = Math.ceil(data.length / 10);
 
     return (
-        <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+        <div className="bg-gray-800 rounded-lg shadow-lg p-4 border border-gray-700">
             <h2 className="text-2xl font-semibold text-center text-white mb-6 shadow-sm">
                 {title}
             </h2>
