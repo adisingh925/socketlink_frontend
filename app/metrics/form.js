@@ -137,6 +137,9 @@ export default function Metrics() {
 function MetricsChart({ title, data, color }) {
     const [hovered, setHovered] = useState(false);
 
+    // Calculate how many intervals should be displayed
+    const interval = Math.ceil(data.length / 10);
+
     return (
         <div className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
             <h2 className="text-2xl font-semibold text-center text-white mb-6 shadow-sm">
@@ -154,7 +157,9 @@ function MetricsChart({ title, data, color }) {
                         dataKey="time"
                         tick={{ fill: '#bbb' }}
                         dy={10}
-                        tickFormatter={(timeStr) => moment(timeStr, "HH:mm:ss").format('HH:mm')} />
+                        tickFormatter={(timeStr) => moment(timeStr, "HH:mm:ss").format('HH:mm')}
+                        interval={interval} // Control the number of intervals shown
+                    />
                     <YAxis
                         tickFormatter={(value) => {
                             if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
