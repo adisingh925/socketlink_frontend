@@ -69,12 +69,12 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, averagePayloadSize } = response.data;
+                const { messages_sent, connections, payload_size } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
                     connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
-                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: averagePayloadSize || 0 }],
+                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: payload_size || 0 }],
                 }));
             }).catch((error) => {
                 setSnackbarText(error.message);
