@@ -19,7 +19,8 @@ export default function Metrics() {
         messagesSent: [],
         connectedUsers: [],
         averagePayloadSize: [],
-        totalPayloadSent: []
+        totalPayloadSent: [],
+        unauthorizedRequests: []
     });
 
     useEffect(() => {
@@ -70,14 +71,14 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, average_payload_size, total_payload_sent } = response.data;
+                const { messages_sent, connections, average_payload_size, total_payload_sent, total_rejected_requests } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
                     connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
                     averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: average_payload_size || 0 }],
                     totalPayloadSent: [...prevStats.totalPayloadSent, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / (1024 * 1024)) || 0 }],
-
+                    unauthorizedRequests: [...prevStats.unauthorizedRequests, { time: new Date().toLocaleTimeString(), value: total_rejected_requests || 0 }],
                 }));
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -116,22 +117,27 @@ export default function Metrics() {
                         <MetricsChart
                             title="Total Messages Sent"
                             data={stats.messagesSent}
-                            color="#4f46e5"
+                            color="#4f46e5" // Indigo
                         />
                         <MetricsChart
                             title="Connected Users"
                             data={stats.connectedUsers}
-                            color="#10b981"
+                            color="#10b981" // Green
                         />
                         <MetricsChart
-                            title="Average Payload Size (KB)"
-                            data={stats.averagePayloadSize}
-                            color="#a855f7"
+                            title="Unauthorized Requests"
+                            data={stats.unauthorizedRequests}
+                            color="#f59e0b" // Amber
                         />
                         <MetricsChart
                             title="Total Data Sent (MB)"
                             data={stats.totalPayloadSent}
-                            color="#a855f7"
+                            color="#ef4444" // Red
+                        />
+                        <MetricsChart
+                            title="Average Payload Size (KB)"
+                            data={stats.averagePayloadSize}
+                            color="#3b82f6" // Blue
                         />
                     </div>
                 </div>
