@@ -168,7 +168,12 @@ function SubscribedPlans() {
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
                                     <InfoRow icon={<FiMessageCircle />} label="Messages per Second" value="10 / connection" valueColor="text-white" />
-                                    <InfoRow icon={<FiMessageCircle />} label="Messages per Day" value={numberToWords(plan.plan.msg_per_day)} valueColor="text-white" />
+                                    <InfoRow
+                                        icon={<FiMessageCircle />}
+                                        label="Messages per Day"
+                                        value={plan.plan.msg_per_day === "-1" ? "Unlimited" : numberToWords(plan.plan.msg_per_day)}
+                                        valueColor="text-white"
+                                    />
                                     <InfoRow icon={<FiInfo />} label="Max Payload Size" value={numberToWords(plan.plan.max_payload_size_in_kb) + "Kb"} valueColor="text-white" />
                                     <InfoRow icon={<FiGlobe />} label="Region" value={
                                         plan.region !== null && plan.region !== undefined

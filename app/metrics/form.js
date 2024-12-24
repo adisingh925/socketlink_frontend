@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth } from "../components/firebase"; 
+import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
 import axios from "axios";
@@ -11,7 +11,7 @@ import moment from "moment/moment";
 
 export default function Metrics() {
     const router = useRouter();
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
@@ -19,6 +19,7 @@ export default function Metrics() {
         messagesSent: [],
         connectedUsers: [],
         averagePayloadSize: [],
+        totalPayloadSent: []
     });
 
     useEffect(() => {
@@ -69,12 +70,14 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, payload_size } = response.data;
+                const { messages_sent, connections, average_payload_size, total_payload_sent } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
                     connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
-                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: payload_size || 0 }],
+                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: average_payload_size || 0 }],
+                    totalPayloadSent: [...prevStats.totalPayloadSent, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / (1024 * 1024)) || 0 }],
+
                 }));
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -111,18 +114,23 @@ export default function Metrics() {
                     {/* Charts Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
                         <MetricsChart
-                            title="Messages Sent Over Time"
+                            title="Total Messages Sent"
                             data={stats.messagesSent}
                             color="#4f46e5"
                         />
                         <MetricsChart
-                            title="Connected Users Over Time"
+                            title="Connected Users"
                             data={stats.connectedUsers}
                             color="#10b981"
                         />
                         <MetricsChart
-                            title="Average Payload Size Over Time"
+                            title="Average Payload Size (KB)"
                             data={stats.averagePayloadSize}
+                            color="#a855f7"
+                        />
+                        <MetricsChart
+                            title="Total Data Sent (MB)"
+                            data={stats.totalPayloadSent}
                             color="#a855f7"
                         />
                     </div>
