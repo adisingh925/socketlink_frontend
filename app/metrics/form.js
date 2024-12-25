@@ -20,7 +20,8 @@ export default function Metrics() {
         connectedUsers: [],
         averagePayloadSize: [],
         totalPayloadSent: [],
-        unauthorizedRequests: []
+        unauthorizedRequests: [],
+        averageLatency: []
     });
 
     useEffect(() => {
@@ -71,7 +72,7 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, average_payload_size, total_payload_sent, total_rejected_requests } = response.data;
+                const { messages_sent, connections, average_payload_size, total_payload_sent, total_rejected_requests, average_latency } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
@@ -79,6 +80,7 @@ export default function Metrics() {
                     averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: average_payload_size || 0 }],
                     totalPayloadSent: [...prevStats.totalPayloadSent, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / (1024 * 1024)) || 0 }],
                     unauthorizedRequests: [...prevStats.unauthorizedRequests, { time: new Date().toLocaleTimeString(), value: total_rejected_requests || 0 }],
+                    averageLatency: [...prevStats.averageLatency, { time: new Date().toLocaleTimeString(), value: average_latency / 2000 || 0 }],
                 }));
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -123,6 +125,11 @@ export default function Metrics() {
                             title="Connected Users"
                             data={stats.connectedUsers}
                             color="#10b981" // Green
+                        />
+                        <MetricsChart
+                            title="Average Latency (ms)"
+                            data={stats.averageLatency}
+                            color="#f97316" // Rose Red
                         />
                         <MetricsChart
                             title="Unauthorized Requests"
