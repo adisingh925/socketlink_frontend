@@ -174,7 +174,7 @@ function SubscribedPlans() {
                                         value={plan.plan.msg_per_day === "-1" ? "Unlimited" : numberToWords(plan.plan.msg_per_day)}
                                         valueColor="text-white"
                                     />
-                                    <InfoRow icon={<FiInfo />} label="Max Payload Size" value={numberToWords(plan.plan.max_payload_size_in_kb) + "Kb"} valueColor="text-white" />
+                                    <InfoRow icon={<FiInfo />} label="Max Payload Size" value={numberToWords(plan.plan.max_payload_size_in_bytes / 1024) + "Kb"} valueColor="text-white" />
                                     <InfoRow icon={<FiGlobe />} label="Region" value={
                                         plan.region !== null && plan.region !== undefined
                                             ? `${plan.region}`

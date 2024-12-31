@@ -289,7 +289,7 @@ function SelectWebSocketPlan() {
                                                 />
                                                 <p>
                                                     <strong>Max Payload :</strong>{" "}
-                                                    {"Upto " + (plan.max_payload_size_in_kb).toLocaleString() + " KB"}
+                                                    {"Upto " + (plan.max_payload_size_in_bytes / 1024).toLocaleString() + " KB"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
