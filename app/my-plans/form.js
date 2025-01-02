@@ -240,15 +240,37 @@ function SubscribedPlans() {
                                     )}
                                     <InfoRow
                                         icon={<FiKey className="text-yellow-400" />}
-                                        label="API Key"
+                                        label="Client API Key"
                                         value={
-                                            plan.apiKey ? (
+                                            plan.client_api_key ? (
                                                 <>
                                                     <span className="font-semibold text-yellow-400 truncate glow">
-                                                        {plan.apiKey.slice(0, 4)}••••••{plan.apiKey.slice(-4)}
+                                                        {plan.client_api_key.slice(0, 4)}••••••{plan.client_api_key.slice(-4)}
                                                     </span>
                                                     <button
-                                                        onClick={() => navigator.clipboard.writeText(plan.apiKey)}
+                                                        onClick={() => navigator.clipboard.writeText(plan.client_api_key)}
+                                                        className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
+                                                        title="Copy API Key"
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <span className="font-semibold text-gray-500">Initializing</span>
+                                            )
+                                        }
+                                    />
+                                    <InfoRow
+                                        icon={<FiKey className="text-yellow-400" />}
+                                        label="Admin API Key"
+                                        value={
+                                            plan.admin_api_key ? (
+                                                <>
+                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                        {plan.admin_api_key.slice(0, 4)}••••••{plan.admin_api_key.slice(-4)}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => navigator.clipboard.writeText(plan.admin_api_key)}
                                                         className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
                                                         title="Copy API Key"
                                                     >
