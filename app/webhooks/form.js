@@ -79,7 +79,7 @@ function WebhookManagement() {
         const webhookBitmask = createWebhookBitmask(selectedWebhooks);
 
         auth.currentUser.getIdToken().then((token) => {
-            axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-webhook`,
+            axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-webhooks`,
                 {
                     webhook_url: webhookUrl,
                     webhook_secret: webhookSecret,
@@ -107,7 +107,7 @@ function WebhookManagement() {
     const fetchWebhooks = async () => {
         auth.currentUser.getIdToken().then((token) => {
             try {
-                axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-webhook`, {
+                axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-webhooks`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
