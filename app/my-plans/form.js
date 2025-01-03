@@ -78,7 +78,7 @@ function SubscribedPlans() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                if(response.data.code === 0){
+                if (response.data.code === 0) {
                     setSnackbarText(response.data.message);
                     setSeverity("info");
                     setSnackbarState(true);
@@ -88,7 +88,7 @@ function SubscribedPlans() {
                 setPlan(response.data);
             }).catch((error) => {
                 setSnackbarText(
-                    error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
+                    error?.response?.data?.message ?? "An error occurred while fetching subscription details!"
                 );
                 setSeverity("error");
                 setSnackbarState(true);

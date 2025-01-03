@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { auth } from "../components/firebase"; // Adjust path as necessary
+import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
 import Toast from "../components/toast";
@@ -40,13 +40,13 @@ function Billing() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                if(response.data.code === 0) {
+                if (response.data.code === 0) {
                     setSnackbarText(response.data.message);
                     setSeverity("info");
                     setSnackbarState(true);
                     return;
                 }
-                
+
                 const balance = response.data.balance;
                 if (balance < 0) {
                     setOutstandingBalance(Math.abs(balance) / 100);
@@ -56,7 +56,7 @@ function Billing() {
                     setOutstandingBalance(0);
                 }
             }).catch((error) => {
-                setSnackbarText(error?.response?.data?.message ?? error.message);
+                setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching billing details!");
                 setSeverity("error");
                 setSnackbarState(true);
             }).finally(() => {
@@ -200,27 +200,36 @@ function Billing() {
 
     if (walletBalance === null && outstandingBalance === null) {
         return (
-            <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
-                <NavigationBar />
-                <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
-                        <div className="space-y-4">
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                Wallet Inactive
-                            </h1>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                Your wallet is currently inactive. Buy a subscription to activate the wallet.
-                            </p>
-                            <button
-                                onClick={handleRedirect}
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
-                                Buy Subscription
-                            </button>
+            <>
+                <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
+                    <NavigationBar />
+                    <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
+                        <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border border-white/20">
+                            <div className="space-y-4">
+                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                                    Wallet Inactive
+                                </h1>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    Your wallet is currently inactive. Buy a subscription to activate the wallet.
+                                </p>
+                                <button
+                                    onClick={handleRedirect}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Buy Subscription
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <Toast
+                    message={snackbarText}
+                    severity={severity}
+                    setSnackbarState={setSnackbarState}
+                    snackbarState={snackbarState}
+                />
+            </>
         );
     }
 
