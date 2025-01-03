@@ -78,9 +78,18 @@ function SubscribedPlans() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
+                if(response.data.code === 0){
+                    setSnackbarText(response.data.message);
+                    setSeverity("info");
+                    setSnackbarState(true);
+                    return;
+                }
+
                 setPlan(response.data);
             }).catch((error) => {
-                setSnackbarText(error.message);
+                setSnackbarText(
+                    error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
+                );
                 setSeverity("error");
                 setSnackbarState(true);
             }).finally(() => {

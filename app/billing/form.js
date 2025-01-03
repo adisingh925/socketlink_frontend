@@ -40,6 +40,13 @@ function Billing() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
+                if(response.data.code === 0) {
+                    setSnackbarText(response.data.message);
+                    setSeverity("info");
+                    setSnackbarState(true);
+                    return;
+                }
+                
                 const balance = response.data.balance;
                 if (balance < 0) {
                     setOutstandingBalance(Math.abs(balance) / 100);
@@ -49,7 +56,7 @@ function Billing() {
                     setOutstandingBalance(0);
                 }
             }).catch((error) => {
-                setSnackbarText(error.message);
+                setSnackbarText(error?.response?.data?.message ?? error.message);
                 setSeverity("error");
                 setSnackbarState(true);
             }).finally(() => {

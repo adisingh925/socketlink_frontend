@@ -18,6 +18,7 @@ function WebhookManagement() {
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
     const [loading, setLoading] = useState(true);
+    const [isActive, setIsActive] = useState(false);
 
     const Webhooks = {
         ON_CONNECTION_INIT: 1 << 0,
@@ -43,6 +44,10 @@ function WebhookManagement() {
             }
         });
     }, [router]);
+
+    const handleRedirect = () => {
+        router.push("/pricing");
+    };
 
     function createWebhookBitmask(selectedWebhooks) {
         let bitmask = 0;
@@ -112,7 +117,17 @@ function WebhookManagement() {
                         Authorization: `Bearer ${token}`,
                     },
                 }).then((response) => {
-                    const { webhook_url, webhook_secret, webhooks } = response.data;
+                    if (response.data.code === 0) {
+                        setSnackbarText(response.data.message);
+                        setSeverity("info");
+                        setSnackbarState(true);
+                        setIsActive(false);
+                        return;
+                    }
+
+                    setIsActive(true);
+
+                    const { webhook_url, webhook_secret, webhooks } = response.data.subscription;
 
                     setWebhookUrl(webhook_url || "");
                     setWebhookSecret(webhook_secret || "");
@@ -126,7 +141,7 @@ function WebhookManagement() {
                     setSelectedWebhooks(selected);
                 }).catch((error) => {
                     setSnackbarText(
-                        error.response.data.message || "An error occurred while fetching webhooks!"
+                        error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
                     );
                     setSeverity("error");
                     setSnackbarState(true);
@@ -135,6 +150,8 @@ function WebhookManagement() {
                 setSnackbarText("Failed to load webhook config!");
                 setSeverity("error");
                 setSnackbarState(true);
+            } finally {
+                setLoading(false);
             }
         });
     };
@@ -155,68 +172,87 @@ function WebhookManagement() {
                 <FloatingNavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
-                        <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
-                            Webhook Management
-                        </h2>
-                        <div className="space-y-6">
-                            {/* Webhook URL */}
-                            <InfoRow
-                                input={
-                                    <input
-                                        type="url"
-                                        value={webhookUrl}
-                                        onChange={(e) => setWebhookUrl(e.target.value)}
-                                        placeholder="Enter your webhook URL"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    />
-                                }
-                                hint="Enter the URL of the webhook"
-                            />
-
-                            {/* Webhook Secret */}
-                            <InfoRow
-                                input={
-                                    <input
-                                        type="text"
-                                        value={webhookSecret}
-                                        onChange={(e) => setWebhookSecret(e.target.value)}
-                                        placeholder="Enter your webhook secret"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    />
-                                }
-                                hint="Enter your webhook secret for authentication"
-                            />
-
-                            {/* Webhook Selection */}
-                            <div className="space-y-2">
-                                <div className="flex flex-col gap-4">
-                                    {Object.entries(Webhooks).map(([key, value]) => (
-                                        <label
-                                            key={key}
-                                            className="flex items-center space-x-2 cursor-pointer"
-                                        >
+                        {isActive ? (
+                            <>
+                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                    Webhook Management
+                                </h2>
+                                <div className="space-y-6">
+                                    {/* Webhook URL */}
+                                    <InfoRow
+                                        input={
                                             <input
-                                                type="checkbox"
-                                                checked={selectedWebhooks.has(key)}
-                                                onChange={() => handleWebhookToggle(key)}
-                                                className="text-yellow-400 focus:ring-yellow-400"
+                                                type="url"
+                                                value={webhookUrl}
+                                                onChange={(e) => setWebhookUrl(e.target.value)}
+                                                placeholder="Enter your webhook URL"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             />
-                                            <span className="text-sm text-gray-300">
-                                                {key} {/* Displaying the key in capital letters with underscores */}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
+                                        }
+                                        hint="Enter the URL of the webhook"
+                                    />
 
-                            {/* Save Button */}
-                            <button
-                                onClick={saveWebhooks}
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
-                                Save Webhooks
-                            </button>
-                        </div>
+                                    {/* Webhook Secret */}
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="text"
+                                                value={webhookSecret}
+                                                onChange={(e) => setWebhookSecret(e.target.value)}
+                                                placeholder="Enter your webhook secret"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="Enter your webhook secret for authentication"
+                                    />
+
+                                    {/* Webhook Selection */}
+                                    <div className="space-y-2">
+                                        <div className="flex flex-col gap-4">
+                                            {Object.entries(Webhooks).map(([key, value]) => (
+                                                <label
+                                                    key={key}
+                                                    className="flex items-center space-x-2 cursor-pointer"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedWebhooks.has(key)}
+                                                        onChange={() => handleWebhookToggle(key)}
+                                                        className="text-yellow-400 focus:ring-yellow-400"
+                                                    />
+                                                    <span className="text-sm text-gray-300">
+                                                        {key} {/* Displaying the key in capital letters with underscores */}
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Save Button */}
+                                    <button
+                                        onClick={saveWebhooks}
+                                        className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                    >
+                                        Save Webhooks
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="space-y-4">
+                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                                    Webhooks Inactive
+                                </h1>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    It seems you haven&apos;t subscribed to any plans yet.
+                                </p>
+                                <button
+                                    onClick={handleRedirect}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Choose a Plan
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
