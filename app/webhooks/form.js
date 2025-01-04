@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import FloatingNavigationBar from "../components/navbar";
 import Toast from "../components/toast";
-import { FiCheckSquare, FiKey, FiLink, FiSave } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
