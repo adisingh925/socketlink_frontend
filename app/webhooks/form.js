@@ -21,7 +21,7 @@ function WebhookManagement() {
     const [isActive, setIsActive] = useState(false);
 
     const Webhooks = {
-        ON_CONNECTION_INIT: 1 << 0,
+        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0,
         ON_CONNECTION_OPEN: 1 << 1,
         ON_CONNECTION_CLOSE: 1 << 2,
         ON_MESSAGE: 1 << 3,
