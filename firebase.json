@@ -54,6 +54,10 @@
       {
         "source": "/billing",
         "destination": "/billing.html"
+      },
+      {
+        "source": "/webhooks",
+        "destination": "/webhooks.html"
       }
     ],
     "headers": [

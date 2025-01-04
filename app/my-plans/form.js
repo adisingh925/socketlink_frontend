@@ -85,7 +85,7 @@ function SubscribedPlans() {
                     return;
                 }
 
-                setPlan(response.data);
+                setPlan(response.data.subscription);
             }).catch((error) => {
                 setSnackbarText(
                     error?.response?.data?.message ?? "An error occurred while fetching subscription details!"
