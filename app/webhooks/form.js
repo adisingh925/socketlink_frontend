@@ -20,17 +20,47 @@ function WebhookManagement() {
     const [isActive, setIsActive] = useState(false);
 
     const Webhooks = {
-        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0,
-        ON_CONNECTION_OPEN: 1 << 1,
-        ON_CONNECTION_CLOSE: 1 << 2,
-        ON_MESSAGE: 1 << 3,
-        ON_RATE_LIMIT_EXCEEDED: 1 << 4,
-        ON_RATE_LIMIT_LIFTED: 1 << 5,
-        ON_MESSAGE_DROPPED: 1 << 6,
-        ON_DAILY_MESSAGE_LIMIT_EXHAUSTED: 1 << 7,
-        ON_MESSAGE_SIZE_EXCEEDED: 1 << 8,
-        ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 9,
-        ON_VERIFICATION_REQUEST: 1 << 10,
+        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0,            // 1 (binary 00000001)
+        ON_CONNECTION_OPEN: 1 << 1,                        // 2 (binary 00000010)
+        ON_CONNECTION_CLOSE: 1 << 2,                       // 4 (binary 00000100)
+        ON_MESSAGE: 1 << 3,                                // 8 (binary 00001000)
+
+        /** Message events in different room types */
+        ON_MESSAGE_PUBLIC_ROOM: 1 << 4,                    // 16 (binary 00010000)
+        ON_MESSAGE_PRIVATE_ROOM: 1 << 5,                   // 32 (binary 00100000)
+        ON_MESSAGE_PRIVATE_STATE_ROOM: 1 << 6,             // 64 (binary 01000000)
+        ON_MESSAGE_PUBLIC_STATE_ROOM: 1 << 7,              // 128 (binary 10000000)
+
+        /** common webhooks */
+        ON_RATE_LIMIT_EXCEEDED: 1 << 8,                    // 256 (binary 100000000)
+        ON_RATE_LIMIT_LIFTED: 1 << 9,                      // 512 (binary 1000000000)
+        ON_MESSAGE_DROPPED: 1 << 10,                       // 1024 (binary 10000000000)
+        ON_DAILY_MESSAGE_LIMIT_EXHAUSTED: 1 << 11,         // 2048 (binary 100000000000)
+        ON_MESSAGE_SIZE_EXCEEDED: 1 << 12,                 // 4096 (binary 1000000000000)
+        ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 13,          // 8192 (binary 10000000000000)
+        ON_VERIFICATION_REQUEST: 1 << 14,                  // 16384 (binary 100000000000000)
+
+        /** Connection open/close events in different room types */
+        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1 << 15,           // 32768 (binary 100000000000000)
+        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1 << 16,          // 65536 (binary 1000000000000000)
+        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1 << 17,    // 131072 (binary 10000000000000000)
+        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1 << 18,     // 262144 (binary 100000000000000000)
+
+        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1 << 19,          // 524288 (binary 100000000000000000)
+        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1 << 20,         // 1048576 (binary 1000000000000000000)
+        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1 << 21,   // 2097152 (binary 10000000000000000000)
+        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1 << 22,    // 4194304 (binary 100000000000000000000)
+
+        /** Room occupied/vacated events */
+        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1 << 23,             // 8388608 (binary 1000000000000000000000)
+        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1 << 24,            // 16777216 (binary 10000000000000000000000)
+        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1 << 25,      // 33554432 (binary 100000000000000000000000)
+        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1 << 26,       // 67108864 (binary 1000000000000000000000000)
+
+        ON_ROOM_VACATED_PUBLIC_ROOM: 1 << 27,              // 134217728 (binary 10000000000000000000000000)
+        ON_ROOM_VACATED_PRIVATE_ROOM: 1 << 28,             // 268435456 (binary 100000000000000000000000000)
+        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1 << 29,       // 536870912 (binary 1000000000000000000000000000)
+        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1 << 30         // 1073741824 (binary 10000000000000000000000000000)
     };
 
     useEffect(() => {
