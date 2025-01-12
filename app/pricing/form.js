@@ -270,10 +270,10 @@ function SelectWebSocketPlan() {
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Messages per Day :</strong> {numberToWords(plan.msg_per_day)}{" "}
+                                                    <strong>Messages per Day :</strong> {"Unlimited"}{" "}
                                                 </p>
                                             </div>
-                                            <div className="flex items-center">
+                                            {/* <div className="flex items-center">
                                                 <FiZap
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
                                                         } mr-2`}
@@ -281,7 +281,7 @@ function SelectWebSocketPlan() {
                                                 <p>
                                                     <strong>Messages per Second :</strong> {numberToWords(plan.msg_per_second_per_connection) + " / connection"}{" "}
                                                 </p>
-                                            </div>
+                                            </div> */}
                                             <div className="flex items-center">
                                                 <FiDatabase
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
@@ -289,7 +289,7 @@ function SelectWebSocketPlan() {
                                                 />
                                                 <p>
                                                     <strong>Max Payload :</strong>{" "}
-                                                    {"Upto " + (plan.max_payload_size_in_bytes / 1024).toLocaleString() + " KB"}
+                                                    {"Upto " + (plan.msg_size_allowed_in_bytes / 1024).toLocaleString() + " KB"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
