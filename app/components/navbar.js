@@ -34,7 +34,7 @@ export default function FloatingNavigationBar() {
     const isActive = (path) => pathname === path;
 
     return (
-        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-gray-800 rounded-lg shadow-lg">
+        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-gray-800 rounded-2xl shadow-lg">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
