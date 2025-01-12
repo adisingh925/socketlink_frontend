@@ -293,6 +293,16 @@ function SelectWebSocketPlan() {
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
+                                                <FiDatabase
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Monthly Data Transfer :</strong>{" "}
+                                                    {(plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024)).toLocaleString() + " TB"}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
                                                 <FiHome
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
