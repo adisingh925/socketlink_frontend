@@ -31,7 +31,7 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
     return (
         isOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="m-5 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">
+                <div className="m-5 bg-white rounded-2xl shadow dark:bg-gray-800 w-full max-w-md border-2 border-white/20">
                     <h2 className="text-lg font-semibold mb-4 px-5 pt-5">Setup Two-Factor Authentication</h2>
                     <p
                         htmlFor="email"
@@ -61,7 +61,7 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
                             type="button"
                             onClick={handleCopy}
                             className="ml-2 h-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
+                        >
                             <ClipboardIcon className="h-5 w-5" />
                         </button>
                     </div>
@@ -97,7 +97,7 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
                             <button
                                 type="submit"
                                 className="w-1/2 text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                                >
+                            >
                                 Submit
                             </button>
                         </div>

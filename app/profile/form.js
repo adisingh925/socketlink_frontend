@@ -212,7 +212,7 @@ function Profile() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">
-                    <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 w-full max-w-md">
+                    <div className="bg-white rounded-2xl shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 w-full max-w-md border-2 border-white/20">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Profile Settings
@@ -257,7 +257,7 @@ function Profile() {
                                             type="button"
                                             onClick={handleDisable2FA}
                                             className="w-full text-white bg-red-600 hover:bg-red-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-red-600 dark:hover:bg-red-700"
-                                            >
+                                        >
                                             Disable Two-Factor Authentication
                                         </button>
                                     </div>
@@ -267,7 +267,7 @@ function Profile() {
                                             type="button"
                                             onClick={handleEnable2FA}
                                             className="w-full text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-green-600 dark:hover:bg-green-700"
-                                            >
+                                        >
                                             Enable Two-Factor Authentication
                                         </button>
                                     </div>
