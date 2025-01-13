@@ -34,7 +34,7 @@ export default function FloatingNavigationBar() {
     const isActive = (path) => pathname === path;
 
     return (
-        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-gray-800 rounded-2xl shadow-lg">
+        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-8xl bg-gray-800 rounded-2xl shadow-lg">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -54,16 +54,16 @@ export default function FloatingNavigationBar() {
                         </DisclosureButton>
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex flex-shrink-0 items-center">
+                        <div className="flex flex-shrink-0 items-center" style={{ height: "150px" }}>
                             <img
                                 alt="Your Company"
-                                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                                className="h-8 w-auto"
+                                src="/images/socketlink.png"
+                                className="h-40 w-auto"
                             />
                         </div>
                         <div className="hidden sm:ml-6 sm:block flex-1">
                             {user ? (
-                                <div className="flex justify-start space-x-4">
+                                <div className="flex justify-start space-x-4 items-center" style={{ height: "150px" }}>
                                     <Link
                                         href="/"
                                         className={classNames(
@@ -156,8 +156,7 @@ export default function FloatingNavigationBar() {
                                     </Link>
                                 </div>
                             ) : (
-                                <div className="flex justify-between items-center">
-                                    {/* Left section */}
+                                <div className="flex justify-between items-center" style={{ height: "150px" }}>
                                     <div className="space-x-4">
                                         <Link
                                             href="/pricing"
@@ -196,9 +195,6 @@ export default function FloatingNavigationBar() {
                                             Privacy Policy
                                         </Link>
                                     </div>
-
-
-                                    {/* Right section */}
                                     <div className="flex space-x-4">
                                         <Link
                                             href="/login"
@@ -223,6 +219,7 @@ export default function FloatingNavigationBar() {
                             )}
                         </div>
                     </div>
+
                     {user && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             <button

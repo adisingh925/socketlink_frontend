@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome, FiCheck } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
@@ -128,7 +128,7 @@ function SelectWebSocketPlan() {
                             setSnackbarState(true);
                             setTimeout(() => {
                                 router.push("/my-plans");
-                            }, 3000); 
+                            }, 3000);
                         },
                         modal: {
                             ondismiss: function () {
@@ -327,8 +327,9 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
-                                                    <strong>Custom Subdomain :</strong> {"Available"}
+                                                <p className="flex items-center">
+                                                    <strong>Custom Subdomain :</strong>{" "}
+                                                    <FiCheck className="ml-2 text-green-500 text-xl font-bold" /> {/* Enlarged and bold */}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
