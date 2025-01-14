@@ -33,7 +33,7 @@ const Mfa = ({ handleSubmit, code, setCode, isOpen, closeDialog }) => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800 dark:border dark:border-gray-700">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800 border-2 border-white/20">
                                     <Dialog.Title
                                         as="h3"
                                         className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"

@@ -267,7 +267,7 @@ export default function FloatingNavigationBar() {
                                 href="/"
                                 className={classNames(
                                     isActive("/") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                    "block rounded-md px-3 py-2 text-base font-medium"
+                                    "block rounded-md px-3 py-2 text-base font-medium mt-5"
                                 )}
                             >
                                 Dashboard
@@ -358,7 +358,7 @@ export default function FloatingNavigationBar() {
                         <>
                             <Link href="/pricing" className={classNames(
                                 isActive("/pricing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                "block rounded-md px-3 py-2 text-base font-medium"
+                                "block rounded-md px-3 py-2 text-base font-medium mt-5"
                             )}>
                                 Pricing
                             </Link>
