@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
-import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle, FiCpu, FiDatabase } from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiClock, FiKey, FiAlertCircle, FiMessageSquare, FiLink, FiDelete, FiGlobe, FiMaximize, FiInfo, FiMessageCircle, FiCpu, FiDatabase, FiSend, FiTrendingUp, FiZap } from "react-icons/fi";
 import axios from "axios";
 import FloatingNavigationBar from "../components/navbar";
 
@@ -177,15 +177,16 @@ function SubscribedPlans() {
                                             ? plan.plan?.connections
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
-                                    {/* <InfoRow icon={<FiMessageCircle />} label="Messages per Second" value="10 / connection" valueColor="text-white" /> */}
-                                    <InfoRow icon={<FiDatabase />} label="Monthly Data transfer" value={plan.plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024) + " TB"} valueColor="text-white" />
+                                    <InfoRow icon={<FiZap />} label="Messages per Second" value="Upto 50,000 / second" valueColor="text-white" />
+                                    <InfoRow icon={<FiSend />} label="Monthly Data transfer" value={plan.plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024) + " TB"} valueColor="text-white" />
+                                    <InfoRow icon={<FiDatabase />} label="Data Storage" value={plan.plan.max_storage_allowed_in_gb + " GB"} valueColor="text-white" />
                                     <InfoRow
-                                        icon={<FiMessageCircle />}
+                                        icon={<FiTrendingUp />}
                                         label="Messages per Day"
                                         value={plan.plan.msg_per_day === undefined ? "Unlimited" : numberToWords(plan.plan.msg_per_day)}
                                         valueColor="text-white"
                                     />
-                                    <InfoRow icon={<FiInfo />} label="Max Payload Size" value={numberToWords(plan.plan.msg_size_allowed_in_bytes / 1024) + "Kb"} valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageCircle />} label="Max Message Size" value={numberToWords(plan.plan.msg_size_allowed_in_bytes / 1024) + "Kb"} valueColor="text-white" />
                                     <InfoRow icon={<FiGlobe />} label="Region" value={
                                         plan.region !== null && plan.region !== undefined
                                             ? `${plan.region}`
