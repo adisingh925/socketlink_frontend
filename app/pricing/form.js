@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome, FiCheck, FiMessageCircle } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome, FiCheck, FiMessageCircle, FiSliders } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
@@ -343,9 +343,24 @@ function SelectWebSocketPlan() {
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
-                                                <FiClock className={`${plan.is_featured ? "text-yellow-300" : "text-orange-400"} mr-2`} />
+                                                <div className="flex items-center">
+                                                    <FiClock className={`${plan.is_featured ? "text-yellow-300" : "text-orange-400"} mr-2`} />
+                                                    <p>
+                                                        <strong>Support :</strong>
+                                                        {plan.price <= 8000 ? " Standard Support (Best Effort, 8hr SLA)" :
+                                                            plan.price <= 12000 ? " Priority Support (24/7, 4hr SLA)" :
+                                                                plan.price <= 50000 ? " Premium Support (24/7, 1hr SLA)" :
+                                                                    " Enterprise Support (24/7, 30min SLA, Dedicated Manager)"}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiSliders
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"} mr-2`}
+                                                />
                                                 <p>
-                                                    <strong>Support :</strong> 24/7 customer support
+                                                    <strong>SLO :</strong> {"99.9% Uptime Guaranteed"}
                                                 </p>
                                             </div>
                                             <div>
