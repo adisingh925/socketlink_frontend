@@ -249,7 +249,7 @@ function SelectWebSocketPlan() {
                                                 className={`flex items-center text-lg font-semibold ${plan.is_featured ? "text-yellow-300" : "text-blue-300"
                                                     }`}
                                             >
-                                                <FiDollarSign /> {plan.price / 100}
+                                                <FiDollarSign /> {plan.price / 100 + " / month"}
                                             </div>
                                         </div>
 
