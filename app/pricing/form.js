@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome, FiCheck } from "react-icons/fi";
+import { FiUsers, FiTrendingUp, FiZap, FiDollarSign, FiLink, FiClock, FiShield, FiDatabase, FiFastForward, FiSend, FiUserCheck, FiHome, FiCheck, FiMessageCircle } from "react-icons/fi";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import Toast from "../components/toast";
@@ -273,23 +273,33 @@ function SelectWebSocketPlan() {
                                                     <strong>Messages per Day :</strong> {"Unlimited"}{" "}
                                                 </p>
                                             </div>
-                                            {/* <div className="flex items-center">
+                                            <div className="flex items-center">
                                                 <FiZap
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Messages per Second :</strong> {numberToWords(plan.msg_per_second_per_connection) + " / connection"}{" "}
+                                                    <strong>Messages per Second :</strong> {"Upto 50,000 per second"}{" "}
                                                 </p>
-                                            </div> */}
+                                            </div>
                                             <div className="flex items-center">
-                                                <FiDatabase
+                                                <FiMessageCircle
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Max Payload :</strong>{" "}
+                                                    <strong>Max Message Size :</strong>{" "}
                                                     {"Upto " + (plan.msg_size_allowed_in_bytes / 1024).toLocaleString() + " KB"}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <FiSend
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                        } mr-2`}
+                                                />
+                                                <p>
+                                                    <strong>Monthly Data Transfer :</strong>{" "}
+                                                    {(plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024)).toLocaleString() + " TB"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
@@ -298,8 +308,8 @@ function SelectWebSocketPlan() {
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Monthly Data Transfer :</strong>{" "}
-                                                    {(plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024)).toLocaleString() + " TB"}
+                                                    <strong>Data Storage :</strong>{" "}
+                                                    {(plan.max_storage_allowed_in_gb).toLocaleString() + " GB"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
