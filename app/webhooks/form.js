@@ -33,7 +33,7 @@ function WebhookManagement() {
         ON_RATE_LIMIT_EXCEEDED: 1 << 5,            // 32 (binary 00100000)
         ON_RATE_LIMIT_LIFTED: 1 << 6,              // 64 (binary 01000000)
         ON_MESSAGE_DROPPED: 1 << 7,               // 128 (binary 10000000)
-        ON_DAILY_MESSAGE_LIMIT_EXHAUSTED: 1 << 8, // 256 (binary 100000000)
+        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1 << 8, // 256 (binary 100000000)
         ON_MESSAGE_SIZE_EXCEEDED: 1 << 9,         // 512 (binary 1000000000)
         ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 10,  // 1024 (binary 10000000000)
         ON_VERIFICATION_REQUEST: 1 << 11,          // 2048 (binary 100000000000)
