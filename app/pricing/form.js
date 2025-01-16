@@ -283,7 +283,7 @@ function SelectWebSocketPlan() {
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Messages per Second :</strong> {"Upto 50,000 per second"}{" "}
+                                                    <strong>Messages per Second :</strong> {"Upto 50,000 / second"}{" "}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
