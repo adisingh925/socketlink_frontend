@@ -33,6 +33,10 @@ function Login() {
         });
     }, [router]);
 
+    useEffect(() => {
+        document.title = "Login | Socketlink";
+    });
+
     const handleLoginClicked = async (e) => {
         e.preventDefault();
         setEmailPasswordLoading(true);

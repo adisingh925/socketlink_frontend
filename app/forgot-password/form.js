@@ -25,6 +25,10 @@ function ForgotPassword() {
     });
   }, [router]);
 
+  useEffect(() => {
+    document.title = "Forget Password | Socketlink";
+  });
+
   const onChange = (event) => {
     setEmail({ ...email, [event.target.name]: event.target.value });
   };
