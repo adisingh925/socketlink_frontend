@@ -11,6 +11,7 @@ const roboto = Roboto({
 export const metadata = {
   title: "Socketlink",
   description: "A fully managed websocket server for real-time applications.",
+  icon: "/favicon.ico",
 };
 
 export default function RootLayout({ children }) {

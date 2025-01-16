@@ -44,14 +44,18 @@ export default function Metrics() {
         };
     }, [router]);
 
+    useEffect(() => {
+        document.title = "Metrics | Socketlink";
+    });
+
     const fetchStats = async () => {
         if (auth.currentUser.emailVerified === false) {
             auth.currentUser.reload().then(() => {
                 if (auth.currentUser.emailVerified === false) {
-                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    /* setSnackbarText("Please verify your email using the link sent to your email inbox!");
                     setSeverity("error");
                     setSnackbarState(true);
-                    return;
+                    return; */
                 } else {
                     getMetrics(true);
                 }
@@ -73,7 +77,7 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, average_payload_size, total_payload_sent, total_rejected_requests, average_latency, dropped_messages } = response.data;
+                const { messages_sent, connections, total_payload_sent, total_rejected_requests, average_latency, dropped_messages } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],

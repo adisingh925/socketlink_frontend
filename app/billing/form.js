@@ -24,17 +24,44 @@ function Billing() {
     };
 
     useEffect(() => {
+        document.title = "Billing | Socketlink";
+    });
+
+    useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login");
             } else {
-                getBillingDetails();
+                setLoading(false);
+                checkEmailVerificationAndFetchBillingDetails();
             }
         });
     }, [router]);
 
-    const getBillingDetails = async () => {
-        auth.currentUser.getIdToken().then((token) => {
+    const checkEmailVerificationAndFetchBillingDetails = async () => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    /* setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return; */
+                } else {
+                    getBillingDetails(true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            getBillingDetails();
+        }
+    }
+
+    const getBillingDetails = async (refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-balance`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -59,9 +86,7 @@ function Billing() {
                 setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching billing details!");
                 setSeverity("error");
                 setSnackbarState(true);
-            }).finally(() => {
-                setLoading(false);
-            });
+            })
         });
     };
 

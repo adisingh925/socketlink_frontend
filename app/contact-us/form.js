@@ -16,6 +16,10 @@ function ContactUs() {
     const [severity, setSeverity] = useState("");
 
     useEffect(() => {
+        document.title = "Contact Us | Socketlink";
+      });
+
+    useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (!user) {
                 router.push("/login");
@@ -25,8 +29,30 @@ function ContactUs() {
         });
     }, [router]);
 
-    const sendQuery = async (message) => {
-        auth.currentUser.getIdToken().then((token) => {
+    const checkEmailVerificationAndSendQuery = async () => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return;
+                } else {
+                    sendQuery(true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            sendQuery();
+        }
+    }
+
+    const sendQuery = async (message, refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/query`;
 
             const body = {
@@ -60,7 +86,7 @@ function ContactUs() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (query.trim()) {
-            sendQuery(query);
+            checkEmailVerificationAndSendQuery(query);
         }
     };
 

@@ -34,6 +34,7 @@ function SubscribedPlans() {
 
         auth.onAuthStateChanged((user) => {
             if (user) {
+                setLoading(false);
                 checkEmailVerificationAndGetSubscriptionDetails();
                 intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
             } else {
@@ -51,11 +52,10 @@ function SubscribedPlans() {
         if (auth.currentUser.emailVerified === false) {
             auth.currentUser.reload().then(() => {
                 if (auth.currentUser.emailVerified === false) {
-                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    /* setSnackbarText("Please verify your email using the link sent to your email inbox!");
                     setSeverity("error");
                     setSnackbarState(true);
-                    setLoading(false);
-                    return;
+                    return; */
                 } else {
                     getSubscriptionDetails(true);
                 }
@@ -63,7 +63,6 @@ function SubscribedPlans() {
                 setSnackbarText(error.message);
                 setSeverity("error");
                 setSnackbarState(true);
-                setLoading(false);
                 return;
             });
         } else {
@@ -93,9 +92,7 @@ function SubscribedPlans() {
                 );
                 setSeverity("error");
                 setSnackbarState(true);
-            }).finally(() => {
-                setLoading(false);
-            });
+            })
         });
     }
 

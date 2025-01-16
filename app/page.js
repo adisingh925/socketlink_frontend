@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { auth } from "./components/firebase";
 import { useRouter } from "next/navigation";
 import NavigationBar from "./components/navbar";
-import Head from "next/head";
 
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = "Home | Socketlink";
+  });
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -32,29 +35,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Home | Socketlink</title>
-        <meta name="description" content="Experience real-time chat, secure connections, live streaming, and more with our platform." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph Meta Tags for social media sharing */}
-        <meta property="og:title" content="Your App Name - Real-time Features" />
-        <meta property="og:description" content="Build powerful chat applications, enable live streaming, and collaborate securely." />
-        <meta property="og:image" content="/images/preview.png" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourwebsite.com" />
-
-        {/* Twitter Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Your App Name - Real-time Features" />
-        <meta name="twitter:description" content="Build powerful chat applications, enable live streaming, and collaborate securely." />
-        <meta name="twitter:image" content="/images/preview.png" />
-
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <NavigationBar />
         <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">

@@ -56,7 +56,7 @@ export default function FloatingNavigationBar() {
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex flex-shrink-0 items-center" style={{ height: "150px" }}>
                             <img
-                                alt="Your Company"
+                                alt="Socketlink Logo"
                                 src="/images/socketlink.png"
                                 className="h-40 w-auto"
                             />
@@ -71,7 +71,7 @@ export default function FloatingNavigationBar() {
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
-                                        Dashboard
+                                        Home
                                     </Link>
                                     <Link
                                         href="/metrics"
@@ -270,7 +270,7 @@ export default function FloatingNavigationBar() {
                                     "block rounded-md px-3 py-2 text-base font-medium mt-5"
                                 )}
                             >
-                                Dashboard
+                                Home
                             </Link>
                             <Link
                                 href="/metrics"

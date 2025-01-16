@@ -69,10 +69,14 @@ function WebhookManagement() {
                 router.push("/login");
             } else {
                 setLoading(false);
-                fetchWebhooks();
+                checkEmailVerificationAndFetchWebhookDetails();
             }
         });
     }, [router]);
+
+    useEffect(() => {
+        document.title = "Webhooks | Socketlink";
+    });
 
     const handleRedirect = () => {
         router.push("/pricing");
@@ -138,8 +142,30 @@ function WebhookManagement() {
         });
     };
 
-    const fetchWebhooks = async () => {
-        auth.currentUser.getIdToken().then((token) => {
+    const checkEmailVerificationAndFetchWebhookDetails = async () => {
+        if (auth.currentUser.emailVerified === false) {
+            auth.currentUser.reload().then(() => {
+                if (auth.currentUser.emailVerified === false) {
+                    /* setSnackbarText("Please verify your email using the link sent to your email inbox!");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                    return; */
+                } else {
+                    fetchWebhooks(true);
+                }
+            }).catch((error) => {
+                setSnackbarText(error.message);
+                setSeverity("error");
+                setSnackbarState(true);
+                return;
+            });
+        } else {
+            fetchWebhooks();
+        }
+    }
+
+    const fetchWebhooks = async (refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
             try {
                 axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-webhooks`, {
                     headers: {
