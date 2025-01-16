@@ -178,7 +178,7 @@ function SubscribedPlans() {
                                             ? plan.plan?.connections
                                             : <span className="text-gray-500">Initializing</span>
                                     } valueColor="text-white" />
-                                    <InfoRow icon={<FiZap />} label="Messages per Second" value="Upto 50,000 / second" valueColor="text-white" />
+                                    <InfoRow icon={<FiZap />} label="Messages / Second" value="Upto 50,000 / second" valueColor="text-white" />
                                     <InfoRow icon={<FiSend />} label="Monthly Data transfer" value={plan.plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024) + " TB"} valueColor="text-white" />
                                     <InfoRow icon={<FiDatabase />} label="Data Storage" value={plan.plan.max_storage_allowed_in_gb + " GB"} valueColor="text-white" />
                                     <InfoRow
