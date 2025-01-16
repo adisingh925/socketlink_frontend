@@ -30,6 +30,10 @@ function SubscribedPlans() {
     };
 
     useEffect(() => {
+        document.title = "My Plans | Socketlink";
+    });
+
+    useEffect(() => {
         let intervalId;
 
         auth.onAuthStateChanged((user) => {

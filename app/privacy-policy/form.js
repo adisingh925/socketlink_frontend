@@ -7,7 +7,7 @@ import FloatingNavigationBar from "../components/navbar";
 function PrivacyPolicy() {
 
   useEffect(() => {
-    document.title = "Profile | Socketlink";
+    document.title = "Privacy Policy | Socketlink";
   });
 
   return (
