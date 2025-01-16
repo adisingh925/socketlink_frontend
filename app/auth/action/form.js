@@ -20,6 +20,10 @@ function UpdatePassword() {
     const [isReverted, setIsReverted] = useState(0);
 
     useEffect(() => {
+        document.title = "Auth | Socketlink";
+    });
+
+    useEffect(() => {
         if (searchParams.get("mode") === "verifyEmail") {
             applyActionCode(auth, searchParams.get("oobCode")).then(() => {
                 setIsVerified(1);
