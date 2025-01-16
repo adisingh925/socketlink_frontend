@@ -26,6 +26,10 @@ function SelectWebSocketPlan() {
     const handleRegionDialogClose = () => setIsRegionDialogOpen(false);
 
     useEffect(() => {
+        document.title = "Pricing | Socketlink";
+    });
+
+    useEffect(() => {
         const fetchPlans = async () => {
             auth.onAuthStateChanged(async (user) => {
                 if (user) {

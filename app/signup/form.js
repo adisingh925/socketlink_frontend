@@ -17,7 +17,7 @@ function Signup() {
     const [severity, setSeverity] = useState("");
     const [emailPasswordLoading, setEmailPasswordLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [code, setCode] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const authError = useRef(null);
@@ -26,6 +26,10 @@ function Signup() {
         email: "",
         password: "",
         retypePassword: "",
+    });
+
+    useEffect(() => {
+        document.title = "Signup | Socketlink";
     });
 
     useEffect(() => {
@@ -79,7 +83,7 @@ function Signup() {
         }).catch((error) => {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
-                setIsOpen(true); 
+                setIsOpen(true);
             } else {
                 setSeverity("error");
                 setSnackbarText(error.message);

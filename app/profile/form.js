@@ -37,6 +37,10 @@ function Profile() {
         });
     }, [router]);
 
+    useEffect(() => {
+        document.title = "Profile | Socketlink";
+    });
+
     const handleSendVerificationEmail = async () => {
         if (!auth.currentUser.emailVerified) {
             auth.currentUser.reload().then(() => {
@@ -257,7 +261,7 @@ function Profile() {
                                             type="button"
                                             onClick={handleDisable2FA}
                                             className="w-full text-white bg-red-600 hover:bg-red-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-red-600 dark:hover:bg-red-700"
-                                            >
+                                        >
                                             Disable Two-Factor Authentication
                                         </button>
                                     </div>
@@ -267,7 +271,7 @@ function Profile() {
                                             type="button"
                                             onClick={handleEnable2FA}
                                             className="w-full text-white bg-green-600 hover:bg-green-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-green-600 dark:hover:bg-green-700"
-                                            >
+                                        >
                                             Enable Two-Factor Authentication
                                         </button>
                                     </div>

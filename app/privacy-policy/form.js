@@ -6,6 +6,10 @@ import FloatingNavigationBar from "../components/navbar";
 
 function PrivacyPolicy() {
 
+  useEffect(() => {
+    document.title = "Profile | Socketlink";
+  });
+
   return (
     <>
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">

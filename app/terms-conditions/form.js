@@ -6,6 +6,10 @@ import FloatingNavigationBar from "../components/navbar";
 
 function TermsAndConditions() {
 
+  useEffect(() => {
+    document.title = "Terms & Conditions | Socketlink";
+  });
+
   return (
     <>
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
