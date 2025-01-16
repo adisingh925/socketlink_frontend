@@ -89,9 +89,9 @@ export default function Metrics() {
                     droppedMessages: [...prevStats.droppedMessages, { time: new Date().toLocaleTimeString(), value: dropped_messages || 0 }],
                 }));
             }).catch((error) => {
-                setSnackbarText(error.message);
+                /* setSnackbarText("Failed to fetch metrics. Please try again later.");
                 setSeverity("error");
-                setSnackbarState(true);
+                setSnackbarState(true); */
             });
         });
     }

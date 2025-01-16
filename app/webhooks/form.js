@@ -173,9 +173,9 @@ function WebhookManagement() {
                     },
                 }).then((response) => {
                     if (response.data.code === 0) {
-                        setSnackbarText(response.data.message);
+                        /* setSnackbarText(response.data.message);
                         setSeverity("info");
-                        setSnackbarState(true);
+                        setSnackbarState(true); */
                         setIsActive(false);
                         return;
                     }

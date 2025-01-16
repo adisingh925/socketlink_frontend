@@ -40,7 +40,7 @@ function SelectWebSocketPlan() {
                     }).then((response) => {
                         setPlans(response.data);
                     }).catch((error) => {
-                        setSnackbarText(error.message);
+                        setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching Plans!");
                         setSeverity("error");
                         setSnackbarState(true);
                     }).finally(() => {
