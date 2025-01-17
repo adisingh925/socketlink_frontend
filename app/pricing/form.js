@@ -351,10 +351,10 @@ function SelectWebSocketPlan() {
                                                     <FiClock className={`${plan.is_featured ? "text-yellow-300" : "text-orange-400"} mr-2`} />
                                                     <p>
                                                         <strong>Support :</strong>
-                                                        {plan.price <= 8000 ? " Standard Support (Best Effort, 8hr SLA)" :
+                                                        {plan.price <= 8000 ? " Standard Support (8hr SLA)" :
                                                             plan.price <= 12000 ? " Priority Support (24/7, 4hr SLA)" :
                                                                 plan.price <= 50000 ? " Premium Support (24/7, 1hr SLA)" :
-                                                                    " Enterprise Support (24/7, 30min SLA, Dedicated Manager)"}
+                                                                    " Enterprise Support (24/7, 30min SLA)"}
                                                     </p>
                                                 </div>
 
