@@ -242,7 +242,7 @@ function SelectWebSocketPlan() {
                                                 className={`text-xl font-bold ${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                     }`}
                                             >
-                                                {plan.plan_name + " Plan"}
+                                                {plan.plan_name}
                                                 {plan.is_featured && (
                                                     <span className="text-xs font-semibold bg-yellow-500 text-gray-900 py-1 px-2 rounded-lg ml-2 align-middle">
                                                         Free for 3 Days
@@ -274,7 +274,7 @@ function SelectWebSocketPlan() {
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Messages per Day :</strong> {"Unlimited"}{" "}
+                                                    <strong>Messages / Day :</strong> {"Unlimited"}{" "}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
@@ -283,7 +283,7 @@ function SelectWebSocketPlan() {
                                                         } mr-2`}
                                                 />
                                                 <p>
-                                                    <strong>Messages per Second :</strong> {"Upto 50,000 / second"}{" "}
+                                                    <strong>Messages / Second :</strong> {"Upto 50,000 / second"}{" "}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
