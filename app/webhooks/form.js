@@ -129,8 +129,8 @@ function WebhookManagement() {
     };
 
     const saveWebhooks = () => {
-        if (!webhookUrl || selectedWebhooks.size === 0) {
-            setSnackbarText("Please fill all fields and select at least one webhook!");
+        if (!webhookUrl) {
+            setSnackbarText("Webhook URL is a required field!");
             setSeverity("error");
             setSnackbarState(true);
             return;
@@ -506,7 +506,7 @@ function WebhookManagement() {
                                         onClick={saveDbCredentials}
                                         className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
                                     >
-                                        Save and Activate SQL Integration
+                                        Save Credentials
                                     </button>
                                 </div>
                             </>
