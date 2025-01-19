@@ -513,7 +513,7 @@ function WebhookManagement() {
                         ) : (
                             <div className="space-y-4">
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                    Webhooks Inactive
+                                    MYSQL Integration Inactive
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-400">
                                     It seems you haven&apos;t subscribed to any plans yet.
@@ -529,7 +529,7 @@ function WebhookManagement() {
                     </div>
 
                     {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-y-auto">
                         {isActive ? (
                             <>
                                 <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
@@ -570,7 +570,7 @@ function WebhookManagement() {
                         ) : (
                             <div className="space-y-4">
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                    Webhooks & Integrations Inactive
+                                    Features Inactive
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-400">
                                     It seems you haven&apos;t subscribed to any plans yet.
