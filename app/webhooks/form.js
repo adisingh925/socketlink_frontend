@@ -175,7 +175,7 @@ function WebhookManagement() {
         auth.currentUser.getIdToken().then((token) => {
             axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-sql-integration`,
                 {
-                    db_url: dbHost,
+                    db_host: dbHost,
                     db_user: dbUser,
                     db_password: dbPassword,
                     db_name: dbName,
@@ -331,7 +331,7 @@ function WebhookManagement() {
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900">
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
                         {isActive ? (
                             <>
@@ -416,7 +416,7 @@ function WebhookManagement() {
                         )}
                     </div>
                     {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                         {isActive ? (
                             <>
                                 <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
@@ -529,7 +529,7 @@ function WebhookManagement() {
                     </div>
 
                     {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-y-auto">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-y-auto self-start">
                         {isActive ? (
                             <>
                                 <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
