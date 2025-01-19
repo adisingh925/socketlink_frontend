@@ -6,6 +6,7 @@ import Toast from "../components/toast";
 import axios from "axios";
 import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function WebhookManagement() {
     const router = useRouter();
@@ -18,6 +19,15 @@ function WebhookManagement() {
     const [severity, setSeverity] = useState("");
     const [loading, setLoading] = useState(true);
     const [isActive, setIsActive] = useState(false);
+
+    /** Database Credentials State */
+    const [dbHost, setDbHost] = useState("");
+    const [dbUser, setDbUser] = useState("");
+    const [dbPassword, setDbPassword] = useState("");
+    const [dbName, setDbName] = useState("");
+    const [dbPort, setDbPort] = useState("");
+
+    const [isInMemory, setIsInMemory] = useState(false);
 
     const Webhooks = {
         /** Connection-related events */
@@ -63,6 +73,11 @@ function WebhookManagement() {
         ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1 << 27   // 134217728 (binary 10000000000000000000000000000)
     };
 
+    const features = {
+        /** In-Memory Data Storing */
+        IN_MEMORY_DATA_STORING: 1 << 0, // 1 (binary 00000001)
+    }
+
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (!user) {
@@ -80,6 +95,13 @@ function WebhookManagement() {
 
     const handleRedirect = () => {
         router.push("/pricing");
+    };
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    // Function to toggle password visibility
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     function createWebhookBitmask(selectedWebhooks) {
@@ -142,6 +164,42 @@ function WebhookManagement() {
         });
     };
 
+    const saveDbCredentials = () => {
+        if (!dbHost || !dbUser || !dbPassword || !dbName || !dbPort) {
+            setSnackbarText("Please fill all database fields!");
+            setSeverity("error");
+            setSnackbarState(true);
+            return;
+        }
+
+        auth.currentUser.getIdToken().then((token) => {
+            axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-sql-integration`,
+                {
+                    db_url: dbHost,
+                    db_user: dbUser,
+                    db_password: dbPassword,
+                    db_name: dbName,
+                    db_port: dbPort,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            ).then(() => {
+                setSnackbarState(true);
+                setSeverity("success");
+                setSnackbarText("SQL credentials saved successfully!");
+            }).catch((error) => {
+                setSnackbarState(true);
+                setSeverity("error");
+                setSnackbarText(
+                    error.response.data.message || "An error occurred while saving SQL credentials!"
+                );
+            });
+        });
+    };
+
     const checkEmailVerificationAndFetchWebhookDetails = async () => {
         if (auth.currentUser.emailVerified === false) {
             auth.currentUser.reload().then(() => {
@@ -152,6 +210,7 @@ function WebhookManagement() {
                     return; */
                 } else {
                     fetchWebhooks(true);
+                    fetchSQLIntegration(true);
                 }
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -161,8 +220,53 @@ function WebhookManagement() {
             });
         } else {
             fetchWebhooks();
+            fetchSQLIntegration();
         }
     }
+
+    const fetchSQLIntegration = async (refreshToken = false) => {
+        auth.currentUser.getIdToken(refreshToken).then((token) => {
+            try {
+                axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-sql-integration`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }).then((response) => {
+                    if (response.data.code === 0) {
+                        /* setSnackbarText(response.data.message);
+                        setSeverity("info");
+                        setSnackbarState(true); */
+                        setIsActive(false);
+                        return;
+                    }
+
+                    console.log(response.data.subscription);
+
+                    setIsActive(true);
+
+                    const { db_host, db_user, db_password, db_name, db_port } = response.data.subscription;
+
+                    setDbHost(db_host || "");
+                    setDbName(db_name || "");
+                    setDbPassword(db_password || "");
+                    setDbUser(db_user || "");
+                    setDbPort(db_port || "");
+                }).catch((error) => {
+                    setSnackbarText(
+                        error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
+                    );
+                    setSeverity("error");
+                    setSnackbarState(true);
+                });
+            } catch (error) {
+                setSnackbarText("Failed to load webhook config!");
+                setSeverity("error");
+                setSnackbarState(true);
+            } finally {
+                setLoading(false);
+            }
+        });
+    };
 
     const fetchWebhooks = async (refreshToken = false) => {
         auth.currentUser.getIdToken(refreshToken).then((token) => {
@@ -179,6 +283,8 @@ function WebhookManagement() {
                         setIsActive(false);
                         return;
                     }
+
+                    console.log(response.data.subscription);
 
                     setIsActive(true);
 
@@ -225,7 +331,7 @@ function WebhookManagement() {
         <>
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
-                <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
                         {isActive ? (
                             <>
@@ -296,6 +402,175 @@ function WebhookManagement() {
                             <div className="space-y-4">
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                                     Webhooks Inactive
+                                </h1>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    It seems you haven&apos;t subscribed to any plans yet.
+                                </p>
+                                <button
+                                    onClick={handleRedirect}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Choose a Plan
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    {/* SQL Integration Card (No fixed height, only grows as needed) */}
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
+                        {isActive ? (
+                            <>
+                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                    SQL Integration
+                                </h2>
+                                <div className="space-y-6">
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="url"
+                                                value={dbHost}
+                                                onChange={(e) => setDbHost(e.target.value)}
+                                                placeholder="your-instance-name.region.cloudsql.com"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="Enter the MySQL DB Hostname"
+                                    />
+
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="text"
+                                                value={dbUser}
+                                                onChange={(e) => setDbUser(e.target.value)}
+                                                placeholder="username"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="Enter your MySQL DB Username"
+                                    />
+
+                                    <InfoRow
+                                        input={
+                                            <div className="relative">
+                                                <input
+                                                    type={showPassword ? "text" : "password"} // Conditionally set type
+                                                    value={dbPassword}
+                                                    onChange={(e) => setDbPassword(e.target.value)}
+                                                    placeholder="password"
+                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                />
+                                                {/* Toggle button for showing/hiding password */}
+                                                <button
+                                                    type="button"
+                                                    onClick={togglePasswordVisibility}
+                                                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                                >
+                                                    {showPassword ? (
+                                                        <FaEyeSlash className="text-gray-500" />
+                                                    ) : (
+                                                        <FaEye className="text-gray-500" />
+                                                    )}
+                                                </button>
+                                            </div>
+                                        }
+                                        hint="Enter your MySQL DB Password"
+                                    />
+
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="text"
+                                                value={dbPort}
+                                                onChange={(e) => setDbPort(e.target.value)}
+                                                placeholder="port"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="Enter your MySQL DB Port"
+                                    />
+
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="text"
+                                                value={dbName}
+                                                onChange={(e) => setDbName(e.target.value)}
+                                                placeholder="database"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="Enter your MySQL DB Database"
+                                    />
+
+                                    <button
+                                        onClick={saveDbCredentials}
+                                        className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                    >
+                                        Save and Activate SQL Integration
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="space-y-4">
+                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                                    Webhooks Inactive
+                                </h1>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    It seems you haven&apos;t subscribed to any plans yet.
+                                </p>
+                                <button
+                                    onClick={handleRedirect}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Choose a Plan
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* SQL Integration Card (No fixed height, only grows as needed) */}
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden">
+                        {isActive ? (
+                            <>
+                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                    Features
+                                </h2>
+                                <div className="space-y-6">
+
+                                    {/* In-Memory Data Storing Checkbox with clickable text */}
+                                    <div className="space-y-2">
+                                        <div className="flex flex-col gap-4">
+                                            {Object.entries(features).map(([key, value]) => (
+                                                <label
+                                                    key={key}
+                                                    className="flex items-center space-x-2 cursor-pointer"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedWebhooks.has(key)}
+                                                        onChange={() => handleWebhookToggle(key)}
+                                                        className="text-yellow-400 focus:ring-yellow-400"
+                                                    />
+                                                    <span className="text-xs font-bold text-gray-300">
+                                                        {key} {/* Displaying the key in capital letters with underscores */}
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={saveWebhooks}
+                                        className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                    >
+                                        Activate Features
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="space-y-4">
+                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                                    Webhooks & Integrations Inactive
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-400">
                                     It seems you haven&apos;t subscribed to any plans yet.
