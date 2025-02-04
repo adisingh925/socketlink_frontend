@@ -7,7 +7,7 @@ import { FaSpinner } from 'react-icons/fa';
 async function fetchRegions() {
     const response = await fetch("https://api.digitalocean.com/v2/regions", {
         headers: {
-            Authorization: `Bearer dop_v1_dd073bfcad81e17ee65e5c34d0d2ae3b139fd10e6ec6071634f578f0a035def1`,
+            Authorization: `Bearer dop_v1_cecd9893e313950498189919f239e9e5187fd2e6c4e42d724c65ebfa1ae896ac`,
         },
     });
     const data = await response.json();

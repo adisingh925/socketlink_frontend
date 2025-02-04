@@ -293,7 +293,7 @@ function SelectWebSocketPlan() {
                                                 />
                                                 <p>
                                                     <strong>Max Message Size :</strong>{" "}
-                                                    {"Upto " + (plan.msg_size_allowed_in_bytes / 1024).toLocaleString() + " KB"}
+                                                    {"Upto " + 10 + " KB"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">

@@ -26,51 +26,77 @@ function WebhookManagement() {
     const [dbPassword, setDbPassword] = useState("");
     const [dbName, setDbName] = useState("");
     const [dbPort, setDbPort] = useState("");
+    const [dbCommitBatchSize, setDbCommitBatchSize] = useState(-1);
+    const [isSQLIntegrationEnabled, setIsSQLIntegrationEnabled] = useState(false);
 
-    const [isInMemory, setIsInMemory] = useState(false);
+    const [isIntegrationOn, setIsIntegrationOn] = useState(false);
+
+    const handleIntegrationToggle = () => {
+        setIsIntegrationOn(!isIntegrationOn);
+    };
 
     const Webhooks = {
         /** Connection-related events */
-        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0, // 1 (binary 00000001)
+        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0,            // 1
 
         /** Message-related events */
-        ON_MESSAGE_PUBLIC_ROOM: 1 << 1,        // 2 (binary 00000010)
-        ON_MESSAGE_PRIVATE_ROOM: 1 << 2,       // 4 (binary 00000100)
-        ON_MESSAGE_PRIVATE_STATE_ROOM: 1 << 3, // 8 (binary 00001000)
-        ON_MESSAGE_PUBLIC_STATE_ROOM: 1 << 4,  // 16 (binary 00010000)
+        ON_MESSAGE_PUBLIC_ROOM: 1 << 1,                    // 2
+        ON_MESSAGE_PRIVATE_ROOM: 1 << 2,                   // 4
+        ON_MESSAGE_PUBLIC_STATE_ROOM: 1 << 3,              // 8
+        ON_MESSAGE_PRIVATE_STATE_ROOM: 1 << 4,             // 16
+        ON_MESSAGE_PUBLIC_CACHE_ROOM: 1 << 5,              // 32
+        ON_MESSAGE_PRIVATE_CACHE_ROOM: 1 << 6,             // 64
+        ON_MESSAGE_PUBLIC_STATE_CACHE_ROOM: 1 << 7,        // 128
+        ON_MESSAGE_PRIVATE_STATE_CACHE_ROOM: 1 << 8,       // 256
 
         /** Common webhooks */
-        ON_RATE_LIMIT_EXCEEDED: 1 << 5,            // 32 (binary 00100000)
-        ON_RATE_LIMIT_LIFTED: 1 << 6,              // 64 (binary 01000000)
-        ON_MESSAGE_DROPPED: 1 << 7,               // 128 (binary 10000000)
-        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1 << 8, // 256 (binary 100000000)
-        ON_MESSAGE_SIZE_EXCEEDED: 1 << 9,         // 512 (binary 1000000000)
-        ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 10,  // 1024 (binary 10000000000)
-        ON_VERIFICATION_REQUEST: 1 << 11,          // 2048 (binary 100000000000)
+        ON_RATE_LIMIT_EXCEEDED: 1 << 9,                    // 512
+        ON_RATE_LIMIT_LIFTED: 1 << 10,                     // 1024
+        ON_MESSAGE_DROPPED: 1 << 11,                       // 2048
+        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1 << 12, // 4096
+        ON_MESSAGE_SIZE_EXCEEDED: 1 << 13,                 // 8192
+        ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 14,          // 16384
+        ON_VERIFICATION_REQUEST: 1 << 15,                  // 32768
 
         /** Connection open events */
-        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1 << 12,        // 4096 (binary 10000000000000)
-        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1 << 13,       // 8192 (binary 100000000000000)
-        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1 << 14, // 16384 (binary 1000000000000000)
-        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1 << 15,  // 32768 (binary 10000000000000000)
+        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1 << 16,           // 65536
+        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1 << 17,          // 131072
+        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1 << 18,     // 262144
+        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1 << 19,    // 524288
+        ON_CONNECTION_OPEN_PUBLIC_CACHE_ROOM: 1 << 20,     // 1048576
+        ON_CONNECTION_OPEN_PRIVATE_CACHE_ROOM: 1 << 21,    // 2097152
+        ON_CONNECTION_OPEN_PUBLIC_STATE_CACHE_ROOM: 1 << 22, // 4194304
+        ON_CONNECTION_OPEN_PRIVATE_STATE_CACHE_ROOM: 1 << 23, // 8388608
 
         /** Connection close events */
-        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1 << 16,        // 65536 (binary 100000000000000000)
-        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1 << 17,       // 131072 (binary 1000000000000000000)
-        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1 << 18, // 262144 (binary 10000000000000000000)
-        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1 << 19,  // 524288 (binary 100000000000000000000)
+        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1 << 24,          // 16777216
+        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1 << 25,         // 33554432
+        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1 << 26,    // 67108864
+        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1 << 27,   // 134217728
+        ON_CONNECTION_CLOSE_PUBLIC_CACHE_ROOM: 1 << 28,    // 268435456
+        ON_CONNECTION_CLOSE_PRIVATE_CACHE_ROOM: 1 << 29,   // 536870912
+        ON_CONNECTION_CLOSE_PUBLIC_STATE_CACHE_ROOM: 1 << 30, // 1073741824
+        ON_CONNECTION_CLOSE_PRIVATE_STATE_CACHE_ROOM: 1 << 31, // 2147483648
 
-        /** Room occupied events */
-        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1 << 20,        // 1048576 (binary 1000000000000000000000)
-        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1 << 21,       // 2097152 (binary 10000000000000000000000)
-        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1 << 22, // 4194304 (binary 100000000000000000000000)
-        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1 << 23,  // 8388608 (binary 1000000000000000000000000)
+        /** Room occupancy events */
+        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1 << 32,             // 4294967296
+        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1 << 33,            // 8589934592
+        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1 << 34,       // 17179869184
+        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1 << 35,      // 34359738368
+        ON_ROOM_OCCUPIED_PUBLIC_CACHE_ROOM: 1 << 36,       // 68719476736
+        ON_ROOM_OCCUPIED_PRIVATE_CACHE_ROOM: 1 << 37,      // 137438953472
+        ON_ROOM_OCCUPIED_PUBLIC_STATE_CACHE_ROOM: 1 << 38, // 274877906944
+        ON_ROOM_OCCUPIED_PRIVATE_STATE_CACHE_ROOM: 1 << 39, // 549755813888
 
-        /** Room vacated events */
-        ON_ROOM_VACATED_PUBLIC_ROOM: 1 << 24,        // 16777216 (binary 10000000000000000000000000)
-        ON_ROOM_VACATED_PRIVATE_ROOM: 1 << 25,       // 33554432 (binary 100000000000000000000000000)
-        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1 << 26, // 67108864 (binary 1000000000000000000000000000)
-        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1 << 27   // 134217728 (binary 10000000000000000000000000000)
+        /** Room vacancy events */
+        ON_ROOM_VACATED_PUBLIC_ROOM: 1 << 40,              // 1099511627776
+        ON_ROOM_VACATED_PRIVATE_ROOM: 1 << 41,             // 2199023255552
+        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1 << 42,        // 4398046511104
+        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1 << 43,       // 8796093022208
+        ON_ROOM_VACATED_PUBLIC_CACHE_ROOM: 1 << 44,        // 17592186044416
+        ON_ROOM_VACATED_PRIVATE_CACHE_ROOM: 1 << 45,       // 35184372088832
+        ON_ROOM_VACATED_PUBLIC_STATE_CACHE_ROOM: 1 << 46,  // 70368744177664
+        ON_ROOM_VACATED_PRIVATE_STATE_CACHE_ROOM: 1 << 47  // 140737488355328
     };
 
     const features = {
@@ -180,6 +206,7 @@ function WebhookManagement() {
                     db_password: dbPassword,
                     db_name: dbName,
                     db_port: dbPort,
+                    db_commit_batch_size: dbCommitBatchSize,
                 },
                 {
                     headers: {
@@ -244,13 +271,15 @@ function WebhookManagement() {
 
                     setIsActive(true);
 
-                    const { db_host, db_user, db_password, db_name, db_port } = response.data.subscription;
+                    const { db_host, db_user, db_password, db_name, db_port, is_sql_integration_enabled, db_commit_batch_size } = response.data.subscription;
 
                     setDbHost(db_host || "");
                     setDbName(db_name || "");
                     setDbPassword(db_password || "");
                     setDbUser(db_user || "");
                     setDbPort(db_port || "");
+                    setDbCommitBatchSize(db_commit_batch_size || -1);
+                    setIsSQLIntegrationEnabled(is_sql_integration_enabled || false);
                 }).catch((error) => {
                     setSnackbarText(
                         error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
@@ -415,6 +444,7 @@ function WebhookManagement() {
                             </div>
                         )}
                     </div>
+
                     {/* SQL Integration Card (No fixed height, only grows as needed) */}
                     <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                         {isActive ? (
@@ -428,6 +458,7 @@ function WebhookManagement() {
                                             <input
                                                 type="url"
                                                 value={dbHost}
+                                                required
                                                 onChange={(e) => setDbHost(e.target.value)}
                                                 placeholder="your-instance-name.region.cloudsql.com"
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -441,6 +472,7 @@ function WebhookManagement() {
                                             <input
                                                 type="text"
                                                 value={dbUser}
+                                                required
                                                 onChange={(e) => setDbUser(e.target.value)}
                                                 placeholder="username"
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -455,6 +487,7 @@ function WebhookManagement() {
                                                 <input
                                                     type={showPassword ? "text" : "password"} // Conditionally set type
                                                     value={dbPassword}
+                                                    required
                                                     onChange={(e) => setDbPassword(e.target.value)}
                                                     placeholder="password"
                                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -479,21 +512,29 @@ function WebhookManagement() {
                                     <InfoRow
                                         input={
                                             <input
-                                                type="text"
+                                                type="number"
+                                                required
                                                 value={dbPort}
                                                 onChange={(e) => setDbPort(e.target.value)}
                                                 placeholder="port"
+                                                onKeyDown={(e) => {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
+                                                        e.preventDefault();
+                                                    }
+                                                }}
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             />
                                         }
                                         hint="Enter your MySQL DB Port"
                                     />
 
+
                                     <InfoRow
                                         input={
                                             <input
                                                 type="text"
                                                 value={dbName}
+                                                required
                                                 onChange={(e) => setDbName(e.target.value)}
                                                 placeholder="database"
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -501,6 +542,52 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your MySQL DB Database"
                                     />
+
+                                    <InfoRow
+                                        input={
+                                            <input
+                                                type="number"
+                                                value={dbCommitBatchSize}
+                                                required
+                                                min="1"
+                                                max="5000"
+                                                onChange={(e) => {
+                                                    const value = parseInt(e.target.value, 10);
+                                                    if (value >= 1 && value <= 5000) {
+                                                        setDbCommitBatchSize(value);
+                                                    } else if (e.target.value === '') {
+                                                        setDbCommitBatchSize('');
+                                                    }
+                                                }}
+                                                onKeyDown={(e) => {
+                                                    if (["e", "E", "+", "-"].includes(e.key)) {
+                                                        e.preventDefault();
+                                                    }
+                                                }}
+                                                placeholder="database"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            />
+                                        }
+                                        hint="MySQL commit batch size (1 to 5000)"
+                                    />
+
+                                    <div className="flex items-center space-x-2">
+                                        <label className="relative inline-flex items-center cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={isIntegrationOn}
+                                                onChange={handleIntegrationToggle}
+                                            />
+                                            <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-blue-500 transition-all duration-300"></div>
+                                            <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 peer-checked:translate-x-5"></div>
+                                        </label>
+                                        <span
+                                            className={`font-bold ${isIntegrationOn ? 'text-blue-500' : 'text-red-500'}`}
+                                        >
+                                            {isIntegrationOn ? "Integration ON" : "Integration OFF"}
+                                        </span>
+                                    </div>
 
                                     <button
                                         onClick={saveDbCredentials}
@@ -514,63 +601,6 @@ function WebhookManagement() {
                             <div className="space-y-4">
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                                     MYSQL Integration Inactive
-                                </h1>
-                                <p className="text-gray-600 dark:text-gray-400">
-                                    It seems you haven&apos;t subscribed to any plans yet.
-                                </p>
-                                <button
-                                    onClick={handleRedirect}
-                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                                >
-                                    Choose a Plan
-                                </button>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-y-auto self-start">
-                        {isActive ? (
-                            <>
-                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
-                                    Features
-                                </h2>
-                                <div className="space-y-6">
-
-                                    {/* In-Memory Data Storing Checkbox with clickable text */}
-                                    <div className="space-y-2">
-                                        <div className="flex flex-col gap-4">
-                                            {Object.entries(features).map(([key, value]) => (
-                                                <label
-                                                    key={key}
-                                                    className="flex items-center space-x-2 cursor-pointer"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={selectedWebhooks.has(key)}
-                                                        onChange={() => handleWebhookToggle(key)}
-                                                        className="text-yellow-400 focus:ring-yellow-400"
-                                                    />
-                                                    <span className="text-xs font-bold text-gray-300">
-                                                        {key} {/* Displaying the key in capital letters with underscores */}
-                                                    </span>
-                                                </label>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        onClick={saveWebhooks}
-                                        className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                                    >
-                                        Activate Features
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <div className="space-y-4">
-                                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                    Features Inactive
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-400">
                                     It seems you haven&apos;t subscribed to any plans yet.
