@@ -29,10 +29,37 @@ function WebhookManagement() {
     const [dbCommitBatchSize, setDbCommitBatchSize] = useState(-1);
     const [isSQLIntegrationEnabled, setIsSQLIntegrationEnabled] = useState(false);
 
-    const [isIntegrationOn, setIsIntegrationOn] = useState(false);
+    const handleSQLIntegrationToggle = () => {
+        setIsSQLIntegrationEnabled(!isSQLIntegrationEnabled);
 
-    const handleIntegrationToggle = () => {
-        setIsIntegrationOn(!isIntegrationOn);
+        auth.currentUser.getIdToken().then((token) => {
+            axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-sql-integration`,
+                {
+                    is_sql_integration_enabled: !isSQLIntegrationEnabled,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            ).then(() => {
+                if (isSQLIntegrationEnabled) {
+                    setSnackbarState(true);
+                    setSeverity("success");
+                    setSnackbarText("SQL Integration Disabled!");
+                } else {
+                    setSnackbarState(true);
+                    setSeverity("success");
+                    setSnackbarText("SQL Integration Enabled!");
+                }
+            }).catch((error) => {
+                setSnackbarState(true);
+                setSeverity("error");
+                setSnackbarText(
+                    error?.response?.data?.message || "An error occurred while saving SQL credentials!"
+                );
+            });
+        });
     };
 
     const Webhooks = {
@@ -584,16 +611,16 @@ function WebhookManagement() {
                                             <input
                                                 type="checkbox"
                                                 className="sr-only peer"
-                                                checked={isIntegrationOn}
-                                                onChange={handleIntegrationToggle}
+                                                checked={isSQLIntegrationEnabled}
+                                                onChange={handleSQLIntegrationToggle}
                                             />
                                             <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-blue-500 transition-all duration-300"></div>
                                             <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 peer-checked:translate-x-5"></div>
                                         </label>
                                         <span
-                                            className={`font-bold ${isIntegrationOn ? 'text-blue-500' : 'text-red-500'}`}
+                                            className={`font-bold ${isSQLIntegrationEnabled ? 'text-blue-500' : 'text-red-500'}`}
                                         >
-                                            {isIntegrationOn ? "Integration ON" : "Integration OFF"}
+                                            {isSQLIntegrationEnabled ? "Integration ON" : "Integration OFF"}
                                         </span>
                                     </div>
 
