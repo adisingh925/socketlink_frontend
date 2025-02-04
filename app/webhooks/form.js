@@ -221,7 +221,7 @@ function WebhookManagement() {
                 setSnackbarState(true);
                 setSeverity("error");
                 setSnackbarText(
-                    error.response.data.message || "An error occurred while saving SQL credentials!"
+                    error?.response?.data?.message || "An error occurred while saving SQL credentials!"
                 );
             });
         });
@@ -515,19 +515,27 @@ function WebhookManagement() {
                                                 type="number"
                                                 required
                                                 value={dbPort}
-                                                onChange={(e) => setDbPort(e.target.value)}
-                                                placeholder="port"
+                                                min="0"
+                                                max="65535"
+                                                onChange={(e) => {
+                                                    const value = parseInt(e.target.value, 10);
+                                                    if (value >= 0 && value < 65536) {
+                                                        setDbPort(value);
+                                                    } else if (e.target.value === '') {
+                                                        setDbPort('');
+                                                    }
+                                                }}
                                                 onKeyDown={(e) => {
                                                     if (["e", "E", "+", "-"].includes(e.key)) {
                                                         e.preventDefault();
                                                     }
                                                 }}
+                                                placeholder="port"
                                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             />
                                         }
-                                        hint="Enter your MySQL DB Port"
+                                        hint="Enter your MySQL DB Port (0 - 65535)"
                                     />
-
 
                                     <InfoRow
                                         input={
