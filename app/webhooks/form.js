@@ -383,13 +383,14 @@ function WebhookManagement() {
             <div className="flex flex-col dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900">
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start flex flex-col">
+                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 flex flex-col h-[670px]">
                         {isActive ? (
                             <>
-                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                <h2 className="grow text-3xl font-extrabold text-center text-yellow-400 glow">
                                     Webhook Management
                                 </h2>
-                                <div className="space-y-6 flex-grow">
+
+                                <div className="grow">
                                     {/* Webhook URL */}
                                     <InfoRow
                                         input={
@@ -403,7 +404,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter the URL of the webhook"
                                     />
+                                </div>
 
+                                <div className="grow">
                                     {/* Webhook Secret */}
                                     <InfoRow
                                         input={
@@ -417,50 +420,52 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your webhook secret for authentication"
                                     />
+                                </div>
 
-                                    {/* Webhook Selection (Dropdown) */}
-                                    <div className="space-y-2">
-                                        <label className="block text-sm font-bold text-gray-300">Select Webhooks</label>
-                                        <div className="relative">
-                                            <div className="bg-white border border-gray-300 rounded-2xl shadow-sm p-4 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-                                                <div className="bg-white rounded-2xl shadow-sm pr-3.5 dark:bg-gray-800 dark:border-gray-600 dark:text-white max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
-                [&::-webkit-scrollbar-track]:rounded-full
-                [&::-webkit-scrollbar-track]:bg-gray-100
-                [&::-webkit-scrollbar-thumb]:rounded-full
-                [&::-webkit-scrollbar-thumb]:bg-gray-300
-                dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-                dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-                                                    {Object.entries(Webhooks).map(([key, value]) => (
-                                                        <label
-                                                            key={key}
-                                                            className="flex items-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md px-2 py-1 mb-1 cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                value={key}
-                                                                checked={selectedWebhooks.has(key)}
-                                                                onChange={() => {
-                                                                    const updatedSelection = new Set(selectedWebhooks);
-                                                                    if (updatedSelection.has(key)) {
-                                                                        updatedSelection.delete(key);
-                                                                    } else {
-                                                                        updatedSelection.add(key);
-                                                                    }
-                                                                    setSelectedWebhooks(updatedSelection);
-                                                                }}
-                                                                className="mr-2"
-                                                            />
-                                                            <span className="text-xs">{key.toUpperCase().replace(/_/g, " ")}</span>
-                                                        </label>
-                                                    ))}
-                                                </div>
+                                {/* Webhook Selection (Dropdown) */}
+                                <div className="grow">
+                                    <label className="block text-sm font-bold text-gray-300">Select Webhooks</label>
+                                    <div className="relative">
+                                        <div className="bg-white border border-gray-300 rounded-2xl shadow-sm p-4 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+                                            <div className="bg-white rounded-2xl shadow-sm pr-3.5 dark:bg-gray-800 dark:border-gray-600 dark:text-white max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
+                            [&::-webkit-scrollbar-track]:rounded-full
+                            [&::-webkit-scrollbar-track]:bg-gray-100
+                            [&::-webkit-scrollbar-thumb]:rounded-full
+                            [&::-webkit-scrollbar-thumb]:bg-gray-300
+                            dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+                            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+                                                {Object.entries(Webhooks).map(([key, value]) => (
+                                                    <label
+                                                        key={key}
+                                                        className="flex items-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md px-2 py-1 cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            value={key}
+                                                            checked={selectedWebhooks.has(key)}
+                                                            onChange={() => {
+                                                                const updatedSelection = new Set(selectedWebhooks);
+                                                                if (updatedSelection.has(key)) {
+                                                                    updatedSelection.delete(key);
+                                                                } else {
+                                                                    updatedSelection.add(key);
+                                                                }
+                                                                setSelectedWebhooks(updatedSelection);
+                                                            }}
+                                                            className="mr-2"
+                                                        />
+                                                        <span className="text-xs">{key.toUpperCase().replace(/_/g, " ")}</span>
+                                                    </label>
+                                                ))}
                                             </div>
                                         </div>
-
-                                        <p className="text-xs text-gray-400">Select the required webhooks.</p>
                                     </div>
 
-                                    {/* Save Button */}
+                                    <p className="mt-2 text-xs text-gray-400">Select the required webhooks</p>
+                                </div>
+
+                                {/* Save Button */}
+                                <div className="flex-shrink-0">
                                     <button
                                         onClick={saveWebhooks}
                                         className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
@@ -470,7 +475,7 @@ function WebhookManagement() {
                                 </div>
                             </>
                         ) : (
-                            <div className="space-y-4 flex-grow">
+                            <div className="flex flex-col flex-grow justify-between">
                                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">Webhooks Inactive</h1>
                                 <p className="text-gray-600 dark:text-gray-400">It seems you haven&apos;t subscribed to any plans yet.</p>
                                 <button
@@ -483,15 +488,16 @@ function WebhookManagement() {
                         )}
                     </div>
 
-
                     {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
+                    <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start h-[670px]">
                         {isActive ? (
                             <>
-                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                <h2 className="grow text-3xl font-extrabold text-center text-yellow-400 glow">
                                     SQL Integration
                                 </h2>
-                                <div className="space-y-6">
+                                {/* <div className="space-y-6"> */}
+                                <div className="grow">
+
                                     <InfoRow
                                         input={
                                             <input
@@ -505,7 +511,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter the MySQL DB Hostname"
                                     />
+                                </div>
 
+                                <div className="grow">
                                     <InfoRow
                                         input={
                                             <input
@@ -519,6 +527,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your MySQL DB Username"
                                     />
+                                </div>
+
+                                <div className="grow">
 
                                     <InfoRow
                                         input={
@@ -547,6 +558,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your MySQL DB Password"
                                     />
+                                </div>
+
+                                <div className="grow">
 
                                     <InfoRow
                                         input={
@@ -575,6 +589,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your MySQL DB Port (0 - 65535)"
                                     />
+                                </div>
+
+                                <div className="grow">
 
                                     <InfoRow
                                         input={
@@ -589,6 +606,9 @@ function WebhookManagement() {
                                         }
                                         hint="Enter your MySQL DB Database"
                                     />
+                                </div>
+
+                                <div className="grow">
 
                                     <InfoRow
                                         input={
@@ -617,32 +637,33 @@ function WebhookManagement() {
                                         }
                                         hint="MySQL commit batch size (1 to 5000)"
                                     />
-
-                                    <div className="flex items-center space-x-2">
-                                        <label className="relative inline-flex items-center cursor-pointer">
-                                            <input
-                                                type="checkbox"
-                                                className="sr-only peer"
-                                                checked={isSQLIntegrationEnabled}
-                                                onChange={handleSQLIntegrationToggle}
-                                            />
-                                            <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 transition-all duration-300"></div>
-                                            <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 peer-checked:translate-x-5"></div>
-                                        </label>
-                                        <span
-                                            className={`font-bold ${isSQLIntegrationEnabled ? 'text-blue-500' : 'text-red-500'}`}
-                                        >
-                                            {isSQLIntegrationEnabled ? "Active" : "Inactive"}
-                                        </span>
-                                    </div>
-
-                                    <button
-                                        onClick={saveDbCredentials}
-                                        className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                                    >
-                                        Save Credentials
-                                    </button>
                                 </div>
+
+                                <div className="grow items-center space-x-2">
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            className="sr-only peer"
+                                            checked={isSQLIntegrationEnabled}
+                                            onChange={handleSQLIntegrationToggle}
+                                        />
+                                        <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 transition-all duration-300"></div>
+                                        <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 peer-checked:translate-x-5"></div>
+                                    </label>
+                                    <span
+                                        className={`font-bold ${isSQLIntegrationEnabled ? 'text-blue-500' : 'text-red-500'}`}
+                                    >
+                                        {isSQLIntegrationEnabled ? "Active" : "Inactive"}
+                                    </span>
+                                </div>
+
+                                <button
+                                    onClick={saveDbCredentials}
+                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                >
+                                    Save Credentials
+                                </button>
+                                {/* </div> */}
                             </>
                         ) : (
                             <div className="space-y-4">
