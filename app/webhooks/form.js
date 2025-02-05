@@ -491,7 +491,7 @@ function WebhookManagement() {
                     {isActive ? (
                         <>
                             <h2 className="grow mb-3 text-3xl font-extrabold text-center text-yellow-400 glow">
-                                SQL Integration
+                                SQL
                             </h2>
                             <div className="grow">
 
@@ -684,7 +684,7 @@ function WebhookManagement() {
                     {isActive ? (
                         <>
                             <h2 className="grow mb-3 text-3xl font-extrabold text-center text-yellow-400 glow">
-                                Server Configuration
+                                Server
                             </h2>
 
                             <div className="grow">
