@@ -383,14 +383,14 @@ function WebhookManagement() {
         <>
             <FloatingNavigationBar />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900 justify-items-center">
-                <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 flex flex-col h-[700px]">
+                <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 flex flex-col self-start">
                     {isActive ? (
                         <>
-                            <h2 className="grow text-3xl font-extrabold text-center mb-3 text-yellow-400 glow">
+                            <h2 className="grow text-3xl font-extrabold text-center mb-5 text-yellow-400 glow">
                                 Webhooks
                             </h2>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 {/* Webhook URL */}
                                 <InfoRow
                                     input={
@@ -406,7 +406,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 {/* Webhook Secret */}
                                 <InfoRow
                                     input={
@@ -423,8 +423,7 @@ function WebhookManagement() {
                             </div>
 
                             {/* Webhook Selection (Dropdown) */}
-                            <div className="grow">
-                                <label className="block text-sm font-bold text-gray-300">Select Webhooks</label>
+                            <div className="grow mb-3">
                                 <div className="relative">
                                     <div className="bg-white border border-gray-300 rounded-2xl shadow-sm p-4 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
                                         <div className="bg-white rounded-2xl shadow-sm pr-3.5 dark:bg-gray-800 dark:border-gray-600 dark:text-white max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
@@ -487,13 +486,13 @@ function WebhookManagement() {
                 </div>
 
                 {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden h-[700px]">
+                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                     {isActive ? (
                         <>
-                            <h2 className="grow mb-3 text-3xl font-extrabold text-center text-yellow-400 glow">
-                                SQL
+                            <h2 className="grow mb-5 text-3xl font-extrabold text-center text-yellow-400 glow">
+                                SQL Integration
                             </h2>
-                            <div className="grow">
+                            <div className="grow mb-3">
 
                                 <InfoRow
                                     input={
@@ -510,7 +509,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
@@ -526,8 +525,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
-
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <div className="relative">
@@ -557,8 +555,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
-
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
@@ -588,7 +585,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
@@ -604,7 +601,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
@@ -634,7 +631,7 @@ function WebhookManagement() {
                                 />
                             </div>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 <div className="flex items-center space-x-2">
                                     <label className="relative inline-flex items-center cursor-pointer">
                                         <input
@@ -680,27 +677,44 @@ function WebhookManagement() {
                 </div>
 
                 {/** server configs */}
-                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden h-[240px]">
+                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                     {isActive ? (
                         <>
-                            <h2 className="grow mb-3 text-3xl font-extrabold text-center text-yellow-400 glow">
-                                Server
+                            <h2 className="grow mb-5 text-3xl font-extrabold text-center text-yellow-400 glow">
+                                Server Configuration
                             </h2>
 
-                            <div className="grow">
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
                                             type="number"
                                             value={idleTimeout}
                                             required
-                                            min="0" 
+                                            min="0"
                                             onChange={(e) => setIdleTimeout(e.target.value)}
                                             placeholder="30"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
                                     hint="Idle timeout in seconds"
+                                />
+                            </div>
+
+                            <div className="grow mb-3">
+                                <InfoRow
+                                    input={
+                                        <input
+                                            type="number"
+                                            value={idleTimeout}
+                                            required
+                                            min="0"
+                                            onChange={(e) => setIdleTimeout(e.target.value)}
+                                            placeholder="30"
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        />
+                                    }
+                                    hint="Max lifetime in seconds"
                                 />
                             </div>
 
