@@ -472,7 +472,8 @@ function WebhookManagement() {
                             </button>
                         </>
                     ) : (
-                        <div className="flex flex-col flex-grow justify-between">
+
+                        <div className="space-y-4">
                             <h1 className="text-xl font-bold text-gray-900 dark:text-white">Webhooks Inactive</h1>
                             <p className="text-gray-600 dark:text-gray-400">It seems you haven&apos;t subscribed to any plans yet.</p>
                             <button
