@@ -63,69 +63,69 @@ function WebhookManagement() {
         });
     };
 
-    const Webhooks = {
+    const Webhooks = Object.freeze({
         /** Connection-related events */
-        ON_CONNECTION_UPGRADE_REJECTED: 1 << 0,            // 1
+        ON_CONNECTION_UPGRADE_REJECTED: 1n << 0n,
 
         /** Message-related events */
-        ON_MESSAGE_PUBLIC_ROOM: 1 << 1,                    // 2
-        ON_MESSAGE_PRIVATE_ROOM: 1 << 2,                   // 4
-        ON_MESSAGE_PUBLIC_STATE_ROOM: 1 << 3,              // 8
-        ON_MESSAGE_PRIVATE_STATE_ROOM: 1 << 4,             // 16
-        ON_MESSAGE_PUBLIC_CACHE_ROOM: 1 << 5,              // 32
-        ON_MESSAGE_PRIVATE_CACHE_ROOM: 1 << 6,             // 64
-        ON_MESSAGE_PUBLIC_STATE_CACHE_ROOM: 1 << 7,        // 128
-        ON_MESSAGE_PRIVATE_STATE_CACHE_ROOM: 1 << 8,       // 256
+        ON_MESSAGE_PUBLIC_ROOM: 1n << 1n,
+        ON_MESSAGE_PRIVATE_ROOM: 1n << 2n,
+        ON_MESSAGE_PUBLIC_STATE_ROOM: 1n << 3n,
+        ON_MESSAGE_PRIVATE_STATE_ROOM: 1n << 4n,
+        ON_MESSAGE_PUBLIC_CACHE_ROOM: 1n << 5n,
+        ON_MESSAGE_PRIVATE_CACHE_ROOM: 1n << 6n,
+        ON_MESSAGE_PUBLIC_STATE_CACHE_ROOM: 1n << 7n,
+        ON_MESSAGE_PRIVATE_STATE_CACHE_ROOM: 1n << 8n,
 
         /** Common webhooks */
-        ON_RATE_LIMIT_EXCEEDED: 1 << 9,                    // 512
-        ON_RATE_LIMIT_LIFTED: 1 << 10,                     // 1024
-        ON_MESSAGE_DROPPED: 1 << 11,                       // 2048
-        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1 << 12, // 4096
-        ON_MESSAGE_SIZE_EXCEEDED: 1 << 13,                 // 8192
-        ON_MAX_CONNECTION_LIMIT_REACHED: 1 << 14,          // 16384
-        ON_VERIFICATION_REQUEST: 1 << 15,                  // 32768
+        ON_RATE_LIMIT_EXCEEDED: 1n << 9n,
+        ON_RATE_LIMIT_LIFTED: 1n << 10n,
+        ON_MESSAGE_DROPPED: 1n << 11n,
+        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1n << 12n,
+        ON_MESSAGE_SIZE_EXCEEDED: 1n << 13n,
+        ON_MAX_CONNECTION_LIMIT_REACHED: 1n << 14n,
+        ON_VERIFICATION_REQUEST: 1n << 15n,
 
         /** Connection open events */
-        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1 << 16,           // 65536
-        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1 << 17,          // 131072
-        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1 << 18,     // 262144
-        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1 << 19,    // 524288
-        ON_CONNECTION_OPEN_PUBLIC_CACHE_ROOM: 1 << 20,     // 1048576
-        ON_CONNECTION_OPEN_PRIVATE_CACHE_ROOM: 1 << 21,    // 2097152
-        ON_CONNECTION_OPEN_PUBLIC_STATE_CACHE_ROOM: 1 << 22, // 4194304
-        ON_CONNECTION_OPEN_PRIVATE_STATE_CACHE_ROOM: 1 << 23, // 8388608
+        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1n << 16n,
+        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1n << 17n,
+        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1n << 18n,
+        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1n << 19n,
+        ON_CONNECTION_OPEN_PUBLIC_CACHE_ROOM: 1n << 20n,
+        ON_CONNECTION_OPEN_PRIVATE_CACHE_ROOM: 1n << 21n,
+        ON_CONNECTION_OPEN_PUBLIC_STATE_CACHE_ROOM: 1n << 22n,
+        ON_CONNECTION_OPEN_PRIVATE_STATE_CACHE_ROOM: 1n << 23n,
 
         /** Connection close events */
-        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1 << 24,          // 16777216
-        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1 << 25,         // 33554432
-        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1 << 26,    // 67108864
-        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1 << 27,   // 134217728
-        ON_CONNECTION_CLOSE_PUBLIC_CACHE_ROOM: 1 << 28,    // 268435456
-        ON_CONNECTION_CLOSE_PRIVATE_CACHE_ROOM: 1 << 29,   // 536870912
-        ON_CONNECTION_CLOSE_PUBLIC_STATE_CACHE_ROOM: 1 << 30, // 1073741824
-        ON_CONNECTION_CLOSE_PRIVATE_STATE_CACHE_ROOM: 1 << 31, // 2147483648
+        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1n << 24n,
+        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1n << 25n,
+        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1n << 26n,
+        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1n << 27n,
+        ON_CONNECTION_CLOSE_PUBLIC_CACHE_ROOM: 1n << 28n,
+        ON_CONNECTION_CLOSE_PRIVATE_CACHE_ROOM: 1n << 29n,
+        ON_CONNECTION_CLOSE_PUBLIC_STATE_CACHE_ROOM: 1n << 30n,
+        ON_CONNECTION_CLOSE_PRIVATE_STATE_CACHE_ROOM: 1n << 31n,
 
         /** Room occupancy events */
-        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1 << 32,             // 4294967296
-        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1 << 33,            // 8589934592
-        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1 << 34,       // 17179869184
-        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1 << 35,      // 34359738368
-        ON_ROOM_OCCUPIED_PUBLIC_CACHE_ROOM: 1 << 36,       // 68719476736
-        ON_ROOM_OCCUPIED_PRIVATE_CACHE_ROOM: 1 << 37,      // 137438953472
-        ON_ROOM_OCCUPIED_PUBLIC_STATE_CACHE_ROOM: 1 << 38, // 274877906944
-        ON_ROOM_OCCUPIED_PRIVATE_STATE_CACHE_ROOM: 1 << 39, // 549755813888
+        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1n << 32n,
+        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1n << 33n,
+        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1n << 34n,
+        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1n << 35n,
+        ON_ROOM_OCCUPIED_PUBLIC_CACHE_ROOM: 1n << 36n,
+        ON_ROOM_OCCUPIED_PRIVATE_CACHE_ROOM: 1n << 37n,
+        ON_ROOM_OCCUPIED_PUBLIC_STATE_CACHE_ROOM: 1n << 38n,
+        ON_ROOM_OCCUPIED_PRIVATE_STATE_CACHE_ROOM: 1n << 39n,
 
         /** Room vacancy events */
-        ON_ROOM_VACATED_PUBLIC_ROOM: 1 << 40,              // 1099511627776
-        ON_ROOM_VACATED_PRIVATE_ROOM: 1 << 41,             // 2199023255552
-        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1 << 42,        // 4398046511104
-        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1 << 43,       // 8796093022208
-        ON_ROOM_VACATED_PUBLIC_CACHE_ROOM: 1 << 44,        // 17592186044416
-        ON_ROOM_VACATED_PRIVATE_CACHE_ROOM: 1 << 45,       // 35184372088832
-        ON_ROOM_VACATED_PUBLIC_STATE_CACHE_ROOM: 1 << 46,  // 70368744177664
-        ON_ROOM_VACATED_PRIVATE_STATE_CACHE_ROOM: 1 << 47  // 140737488355328
-    };
+        ON_ROOM_VACATED_PUBLIC_ROOM: 1n << 40n,
+        ON_ROOM_VACATED_PRIVATE_ROOM: 1n << 41n,
+        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1n << 42n,
+        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1n << 43n,
+        ON_ROOM_VACATED_PUBLIC_CACHE_ROOM: 1n << 44n,
+        ON_ROOM_VACATED_PRIVATE_CACHE_ROOM: 1n << 45n,
+        ON_ROOM_VACATED_PUBLIC_STATE_CACHE_ROOM: 1n << 46n,
+        ON_ROOM_VACATED_PRIVATE_STATE_CACHE_ROOM: 1n << 47n
+    });
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -148,14 +148,12 @@ function WebhookManagement() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    // Function to toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     function createWebhookBitmask(selectedWebhooks) {
-        let bitmask = 0;
-
+        let bitmask = 0n;
         selectedWebhooks.forEach((webhook) => {
             if (Webhooks[webhook] !== undefined) {
                 bitmask |= Webhooks[webhook];
@@ -164,18 +162,6 @@ function WebhookManagement() {
 
         return bitmask;
     }
-
-    const handleWebhookToggle = (id) => {
-        setSelectedWebhooks((prev) => {
-            const updated = new Set(prev);
-            if (updated.has(id)) {
-                updated.delete(id);
-            } else {
-                updated.add(id);
-            }
-            return updated;
-        });
-    };
 
     const saveWebhooks = () => {
         if (!webhookUrl) {
@@ -192,7 +178,7 @@ function WebhookManagement() {
                 {
                     webhook_url: webhookUrl,
                     webhook_secret: webhookSecret,
-                    webhooks: webhookBitmask,
+                    webhooks: webhookBitmask.toString(),
                 },
                 {
                     headers: {
@@ -207,7 +193,7 @@ function WebhookManagement() {
                 setSnackbarState(true);
                 setSeverity("error");
                 setSnackbarText(
-                    error.response.data.message || "An error occurred while saving webhooks!"
+                    error?.response?.data?.message || "An error occurred while saving webhooks!"
                 );
             });
         });
@@ -290,8 +276,6 @@ function WebhookManagement() {
                         return;
                     }
 
-                    console.log(response.data.subscription);
-
                     setIsActive(true);
 
                     const { db_host, db_user, db_password, db_name, db_port, is_sql_integration_enabled, db_commit_batch_size } = response.data.subscription;
@@ -321,53 +305,45 @@ function WebhookManagement() {
     };
 
     const fetchWebhooks = async (refreshToken = false) => {
-        auth.currentUser.getIdToken(refreshToken).then((token) => {
-            try {
-                axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-webhooks`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }).then((response) => {
-                    if (response.data.code === 0) {
-                        /* setSnackbarText(response.data.message);
-                        setSeverity("info");
-                        setSnackbarState(true); */
-                        setIsActive(false);
-                        return;
-                    }
+        try {
+            const token = await auth.currentUser.getIdToken(refreshToken);
 
-                    console.log(response.data.subscription);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-webhooks`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
 
-                    setIsActive(true);
-
-                    const { webhook_url, webhook_secret, webhooks } = response.data.subscription;
-
-                    setWebhookUrl(webhook_url || "");
-                    setWebhookSecret(webhook_secret || "");
-
-                    const selected = new Set();
-                    Object.entries(Webhooks).forEach(([key, value]) => {
-                        if (webhooks & value) {
-                            selected.add(key);
-                        }
-                    });
-                    setSelectedWebhooks(selected);
-                }).catch((error) => {
-                    setSnackbarText(
-                        error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
-                    );
-                    setSeverity("error");
-                    setSnackbarState(true);
-                });
-            } catch (error) {
-                setSnackbarText("Failed to load webhook config!");
-                setSeverity("error");
-                setSnackbarState(true);
-            } finally {
-                setLoading(false);
+            if (response.data.code === 0) {
+                /* setSnackbarText(response.data.message);
+                setSeverity("info");
+                setSnackbarState(true); */
+                setIsActive(false);
+                return;
             }
-        });
+
+            setIsActive(true);
+
+            const { webhook_url, webhook_secret, webhooks } = response.data.subscription;
+
+            setWebhookUrl(webhook_url || "");
+            setWebhookSecret(webhook_secret || "");
+
+            const selected = new Set();
+            Object.entries(Webhooks).forEach(([key, value]) => {
+                if ((BigInt(webhooks) & BigInt(value)) !== 0n) {
+                    selected.add(key);
+                }
+            });
+
+            setSelectedWebhooks(selected);
+        } catch (error) {
+            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching webhooks!");
+            setSeverity("error");
+            setSnackbarState(true);
+        } finally {
+            setLoading(false);
+        }
     };
+
 
     if (loading) {
         return (
@@ -382,10 +358,11 @@ function WebhookManagement() {
     return (
         <>
             <FloatingNavigationBar />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900 justify-items-center">
-                <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 flex flex-col self-start">
-                    {isActive ? (
-                        <>
+            {isActive ? (
+                <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900 justify-items-center">
+
+                        <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 flex flex-col self-start">
                             <h2 className="grow text-3xl font-extrabold text-center mb-5 text-yellow-400 glow">
                                 Webhooks
                             </h2>
@@ -413,12 +390,17 @@ function WebhookManagement() {
                                         <input
                                             type="text"
                                             value={webhookSecret}
-                                            onChange={(e) => setWebhookSecret(e.target.value)}
+                                            onChange={(e) => {
+                                                if (e.target.value.length <= 128) {
+                                                    setWebhookSecret(e.target.value);
+                                                }
+                                            }}
                                             placeholder="Enter your webhook secret"
+                                            maxLength={128}
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Enter your webhook secret for authentication"
+                                    hint="Enter your webhook secret for authentication (max 128 bytes)"
                                 />
                             </div>
 
@@ -470,31 +452,15 @@ function WebhookManagement() {
                             >
                                 Save Webhooks
                             </button>
-                        </>
-                    ) : (
-
-                        <div className="space-y-4">
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Webhooks Inactive</h1>
-                            <p className="text-gray-600 dark:text-gray-400">It seems you haven&apos;t subscribed to any plans yet.</p>
-                            <button
-                                onClick={handleRedirect}
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
-                                Choose a Plan
-                            </button>
                         </div>
-                    )}
-                </div>
 
-                {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
-                    {isActive ? (
-                        <>
+                        {/* SQL Integration Card (No fixed height, only grows as needed) */}
+                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                             <h2 className="grow mb-5 text-3xl font-extrabold text-center text-yellow-400 glow">
                                 SQL Integration
                             </h2>
-                            <div className="grow mb-3">
 
+                            <div className="grow mb-3">
                                 <InfoRow
                                     input={
                                         <input
@@ -624,7 +590,7 @@ function WebhookManagement() {
                                                     e.preventDefault();
                                                 }
                                             }}
-                                            placeholder="database"
+                                            placeholder="1000"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
@@ -658,29 +624,10 @@ function WebhookManagement() {
                             >
                                 Save Credentials
                             </button>
-                        </>
-                    ) : (
-                        <div className="space-y-4">
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                MYSQL Integration Inactive
-                            </h1>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                It seems you haven&apos;t subscribed to any plans yet.
-                            </p>
-                            <button
-                                onClick={handleRedirect}
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
-                                Choose a Plan
-                            </button>
                         </div>
-                    )}
-                </div>
 
-                {/** server configs */}
-                <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
-                    {isActive ? (
-                        <>
+                        {/** server configs */}
+                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden self-start">
                             <h2 className="grow mb-5 text-3xl font-extrabold text-center text-yellow-400 glow">
                                 Server Configuration
                             </h2>
@@ -725,25 +672,28 @@ function WebhookManagement() {
                             >
                                 Save Configuration
                             </button>
-                        </>
-                    ) : (
-                        <div className="space-y-4">
-                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                                MYSQL Integration Inactive
-                            </h1>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                It seems you haven&apos;t subscribed to any plans yet.
-                            </p>
-                            <button
-                                onClick={handleRedirect}
-                                className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
-                            >
-                                Choose a Plan
-                            </button>
                         </div>
-                    )}
+
+                    </div>
+                </>
+            ) : (
+                <div className="flex min-h-screen justify-center items-center">
+                    <div className="space-y-4 p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden max-w-lg w-full">
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                            Configurations Inactive
+                        </h1>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            It seems you haven&apos;t subscribed to any plans yet.
+                        </p>
+                        <button
+                            onClick={handleRedirect}
+                            className="w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
+                        >
+                            Choose a Plan
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Snackbar */}
             <Toast
