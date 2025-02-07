@@ -28,15 +28,19 @@ function WebhookManagement() {
     const [dbPort, setDbPort] = useState("");
     const [dbCommitBatchSize, setDbCommitBatchSize] = useState(-1);
     const [isSQLIntegrationEnabled, setIsSQLIntegrationEnabled] = useState(false);
+
+    /** server configuration */
     const [idleTimeout, setIdleTimeout] = useState(0);
+    const [maxLifetime, setMaxLifetime] = useState(0);
 
     const handleSQLIntegrationToggle = () => {
+        const newSQLIntegrationState = !isSQLIntegrationEnabled;
         setIsSQLIntegrationEnabled(!isSQLIntegrationEnabled);
 
         auth.currentUser.getIdToken().then((token) => {
             axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-sql-integration`,
                 {
-                    is_sql_integration_enabled: !isSQLIntegrationEnabled,
+                    is_sql_integration_enabled: newSQLIntegrationState,
                 },
                 {
                     headers: {
@@ -44,20 +48,21 @@ function WebhookManagement() {
                     },
                 }
             ).then(() => {
-                if (isSQLIntegrationEnabled) {
-                    setSnackbarState(true);
-                    setSeverity("success");
-                    setSnackbarText("SQL Integration Disabled!");
-                } else {
+                if (newSQLIntegrationState) {
                     setSnackbarState(true);
                     setSeverity("success");
                     setSnackbarText("SQL Integration Enabled!");
+                } else {
+                    setSnackbarState(true);
+                    setSeverity("success");
+                    setSnackbarText("SQL Integration Disabled!");
                 }
             }).catch((error) => {
+                setIsSQLIntegrationEnabled(!newSQLIntegrationState);
                 setSnackbarState(true);
                 setSeverity("error");
                 setSnackbarText(
-                    error?.response?.data?.message || "An error occurred while saving SQL credentials!"
+                    error?.response?.data?.message || `An error occurred while ${newSQLIntegrationState ? "enabling" : "disabling"} MySQL integration!`
                 );
             });
         });
@@ -280,6 +285,8 @@ function WebhookManagement() {
 
                     const { db_host, db_user, db_password, db_name, db_port, is_sql_integration_enabled, db_commit_batch_size } = response.data.subscription;
 
+                    console.log(is_sql_integration_enabled);
+
                     setDbHost(db_host || "");
                     setDbName(db_name || "");
                     setDbPassword(db_password || "");
@@ -328,11 +335,13 @@ function WebhookManagement() {
             setWebhookSecret(webhook_secret || "");
 
             const selected = new Set();
-            Object.entries(Webhooks).forEach(([key, value]) => {
-                if ((BigInt(webhooks) & BigInt(value)) !== 0n) {
-                    selected.add(key);
-                }
-            });
+            if (webhooks !== null) {  
+                Object.entries(Webhooks).forEach(([key, value]) => {
+                    if ((BigInt(webhooks) & BigInt(value)) !== 0n) {
+                        selected.add(key);
+                    }
+                });
+            }
 
             setSelectedWebhooks(selected);
         } catch (error) {
@@ -640,12 +649,13 @@ function WebhookManagement() {
                                             value={idleTimeout}
                                             required
                                             min="0"
-                                            onChange={(e) => setIdleTimeout(e.target.value)}
+                                            max="960"
+                                            onChange={(e) => setIdleTimeout(Math.min(960, Number(e.target.value)))}
                                             placeholder="30"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Idle timeout in seconds"
+                                    hint="Idle timeout in seconds (max 960, 0 to disable)"
                                 />
                             </div>
 
@@ -657,12 +667,13 @@ function WebhookManagement() {
                                             value={idleTimeout}
                                             required
                                             min="0"
-                                            onChange={(e) => setIdleTimeout(e.target.value)}
+                                            max="240"
+                                            onChange={(e) => setIdleTimeout(Math.min(240, Number(e.target.value)))}
                                             placeholder="30"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Max lifetime in seconds"
+                                    hint="Max lifetime in minutes (max 240, 0 to disable)"
                                 />
                             </div>
 
@@ -678,7 +689,7 @@ function WebhookManagement() {
                 </>
             ) : (
                 <div className="flex min-h-screen justify-center items-center">
-                    <div className="space-y-4 p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden max-w-lg w-full">
+                    <div className="space-y-4 p-4 sm:p-8 mt-20 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden max-w-lg w-full">
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                             Configurations Inactive
                         </h1>
