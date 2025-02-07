@@ -335,7 +335,7 @@ function WebhookManagement() {
             setWebhookSecret(webhook_secret || "");
 
             const selected = new Set();
-            if (webhooks !== null) {  
+            if (webhooks !== null) {
                 Object.entries(Webhooks).forEach(([key, value]) => {
                     if ((BigInt(webhooks) & BigInt(value)) !== 0n) {
                         selected.add(key);
@@ -650,12 +650,24 @@ function WebhookManagement() {
                                             required
                                             min="0"
                                             max="960"
-                                            onChange={(e) => setIdleTimeout(Math.min(960, Number(e.target.value)))}
-                                            placeholder="30"
+                                            onChange={(e) => {
+                                                const value = parseInt(e.target.value, 10);
+                                                if (value == 0 || (value <= 960 && value >= 8)) {
+                                                    setIdleTimeout(value);
+                                                } else if (e.target.value === '') {
+                                                    setIdleTimeout('');
+                                                }
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (["e", "E", "+", "-"].includes(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            placeholder="0"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Idle timeout in seconds (max 960, 0 to disable)"
+                                    hint="Idle timeout in seconds (0 to disable, otherwise 8-960)"
                                 />
                             </div>
 
@@ -664,12 +676,24 @@ function WebhookManagement() {
                                     input={
                                         <input
                                             type="number"
-                                            value={idleTimeout}
+                                            value={maxLifetime}
                                             required
                                             min="0"
                                             max="240"
-                                            onChange={(e) => setIdleTimeout(Math.min(240, Number(e.target.value)))}
-                                            placeholder="30"
+                                            onChange={(e) => {
+                                                const value = parseInt(e.target.value, 10);
+                                                if (value >= 0 && value <= 240) {
+                                                    setMaxLifetime(value);
+                                                } else if (e.target.value === '') {
+                                                    setMaxLifetime('');
+                                                }
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (["e", "E", "+", "-"].includes(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            placeholder="0"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
