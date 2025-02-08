@@ -712,7 +712,7 @@ function WebhookManagement() {
                     </div>
                 </>
             ) : (
-                <div className="flex min-h-screen justify-center items-center">
+                <div className="flex h-[100dvh] justify-center items-center px-6">
                     <div className="space-y-4 p-4 sm:p-8 mt-20 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20 overflow-hidden max-w-lg w-full">
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                             Configurations Inactive
