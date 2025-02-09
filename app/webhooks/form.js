@@ -204,6 +204,39 @@ function WebhookManagement() {
         });
     };
 
+    const saveServerConfigs = () => {
+        if (!idleTimeout || !maxLifetime) {
+            setSnackbarText("Please fill all server configuration fields!");
+            setSeverity("error");
+            setSnackbarState(true);
+            return;
+        }
+
+        auth.currentUser.getIdToken().then((token) => {
+            axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-server-config`,
+                {
+                    idle_timeout_in_seconds: idleTimeout,
+                    max_lifetime_in_minutes: maxLifetime,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            ).then(() => {
+                setSnackbarState(true);
+                setSeverity("success");
+                setSnackbarText("Server configurations saved successfully!");
+            }).catch((error) => {
+                setSnackbarState(true);
+                setSeverity("error");
+                setSnackbarText(
+                    error?.response?.data?.message || "An error occurred while saving server configurations!"
+                );
+            });
+        });
+    }
+
     const saveDbCredentials = () => {
         if (!dbHost || !dbUser || !dbPassword || !dbName || !dbPort) {
             setSnackbarText("Please fill all database fields!");
@@ -252,6 +285,7 @@ function WebhookManagement() {
                 } else {
                     fetchWebhooks(true);
                     fetchSQLIntegration(true);
+                    fetchServerConfig(true);
                 }
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -262,6 +296,7 @@ function WebhookManagement() {
         } else {
             fetchWebhooks();
             fetchSQLIntegration();
+            fetchServerConfig();
         }
     }
 
@@ -309,6 +344,37 @@ function WebhookManagement() {
                 setLoading(false);
             }
         });
+    };
+
+    const fetchServerConfig = async (refreshToken = false) => {
+        try {
+            const token = await auth.currentUser.getIdToken(refreshToken);
+
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-server-config`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (response.data.code === 0) {
+                /* setSnackbarText(response.data.message);
+                setSeverity("info");
+                setSnackbarState(true); */
+                setIsActive(false);
+                return;
+            }
+
+            setIsActive(true);
+
+            const { idle_timeout_in_seconds, max_lifetime_in_minutes } = response.data.subscription;
+
+            setIdleTimeout(idle_timeout_in_seconds || 60);
+            setMaxLifetime(max_lifetime_in_minutes || 0);
+        } catch (error) {
+            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching server configurations!");
+            setSeverity("error");
+            setSnackbarState(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const fetchWebhooks = async (refreshToken = false) => {
@@ -667,7 +733,7 @@ function WebhookManagement() {
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Idle timeout in seconds (0 to disable, otherwise 8-960)"
+                                    hint="Idle timeout in seconds (0 to disable, otherwise 8 - 960)"
                                 />
                             </div>
 
@@ -697,12 +763,12 @@ function WebhookManagement() {
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         />
                                     }
-                                    hint="Max lifetime in minutes (max 240, 0 to disable)"
+                                    hint="Max lifetime in minutes (0 to disable, max 240)"
                                 />
                             </div>
 
                             <button
-                                onClick={saveDbCredentials}
+                                onClick={saveServerConfigs}
                                 className="w-full mt-3 text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-transform duration-150 dark:bg-blue-600 dark:hover:bg-blue-700"
                             >
                                 Save Configuration
