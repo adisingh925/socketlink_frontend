@@ -205,12 +205,12 @@ function WebhookManagement() {
     };
 
     const saveServerConfigs = () => {
-        if (!idleTimeout || !maxLifetime) {
+        if (idleTimeout == null || maxLifetime == null) { 
             setSnackbarText("Please fill all server configuration fields!");
             setSeverity("error");
             setSnackbarState(true);
             return;
-        }
+        }        
 
         auth.currentUser.getIdToken().then((token) => {
             axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-server-config`,
