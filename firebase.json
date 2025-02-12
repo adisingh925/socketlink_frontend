@@ -58,6 +58,10 @@
       {
         "source": "/webhooks",
         "destination": "/webhooks.html"
+      },
+      {
+        "source": "/docs",
+        "destination": "/docs.html"
       }
     ],
     "headers": [
