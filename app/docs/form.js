@@ -18,17 +18,18 @@ export default function Docs() {
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
             {/* Sidebar */}
-            <aside className={`w-64 bg-gray-800 p-10 pt-24 transition-transform ${isSidebarOpen ? "translate-x-0 z-50" : "-translate-x-64"} md:translate-x-0 fixed md:relative h-full shadow-md`}>
+            <aside className={`w-64 bg-[#1a1a1a] p-10 pt-24 transition-transform ${isSidebarOpen ? "translate-x-0 z-50" : "-translate-x-64"} md:translate-x-0 fixed md:relative h-full shadow-md`}>
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-lg font-semibold">Documentation</h2>
                 </div>
                 <nav>
                     <ul className="space-y-5">
-                        {sections.map((section) => (
+                        {sections.map((section, index) => (
                             <li key={section.id}>
                                 <a href={`#${section.id}`} className="block text-gray-300 hover:text-white">
                                     {section.title}
                                 </a>
+                                {index !== sections.length - 1 && <hr className="border-gray-700 my-4" />}
                             </li>
                         ))}
                     </ul>
@@ -37,10 +38,10 @@ export default function Docs() {
 
             {/* Sidebar Toggle Button */}
             <button
-                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-md md:hidden transition-all ${isSidebarOpen ? "left-[17rem]" : "left-4"}`}
+                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 ${isSidebarOpen ? "left-[17rem]" : "left-4"}`}
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
-                {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
+                {isSidebarOpen ? <FiChevronLeft size={20} /> : <FiChevronRight size={20} />}
             </button>
 
             {/* Main Content */}
@@ -48,10 +49,11 @@ export default function Docs() {
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[10rem]">
                     <div className="max-w-3xl mx-auto">
-                        {sections.map((section) => (
+                        {sections.map((section, index) => (
                             <section key={section.id} id={section.id} className="mb-14">
                                 <h2 className="text-2xl font-bold text-gray-300 mb-8">{section.title}</h2>
-                                <p className="text-gray-400">Content for {section.title} goes here...</p>
+                                <p className="text-gray-400 mb-6">Content for {section.title} goes here...</p>
+                                {index !== sections.length - 1 && <hr className="border-gray-700 my-8" />}
                             </section>
                         ))}
                     </div>
