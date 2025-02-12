@@ -47,7 +47,7 @@ export default function Docs() {
             {/* Main Content */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 pt-[10rem]">
+                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-3xl mx-auto">
                         {sections.map((section, index) => (
                             <section key={section.id} id={section.id} className="mb-14">
