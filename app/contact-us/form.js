@@ -29,7 +29,7 @@ function ContactUs() {
         });
     }, [router]);
 
-    const checkEmailVerificationAndSendQuery = async () => {
+    const checkEmailVerificationAndSendQuery = async (query) => {
         if (auth.currentUser.emailVerified === false) {
             auth.currentUser.reload().then(() => {
                 if (auth.currentUser.emailVerified === false) {
@@ -38,7 +38,7 @@ function ContactUs() {
                     setSnackbarState(true);
                     return;
                 } else {
-                    sendQuery(true);
+                    sendQuery(query, true);
                 }
             }).catch((error) => {
                 setSnackbarText(error.message);
@@ -47,7 +47,7 @@ function ContactUs() {
                 return;
             });
         } else {
-            sendQuery();
+            sendQuery(query);
         }
     }
 
