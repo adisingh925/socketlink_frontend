@@ -14,11 +14,13 @@ const CodeSnippet = ({ snippets }) => {
     return (
         <div className="bg-gray-800 rounded-lg shadow-lg mb-8 border border-gray-700">
             {/* Tabs for languages */}
-            <div className="flex space-x-4 border-b border-gray-700 px-4 py-2">
+            {/* Tabs for languages */}
+            <div className="flex overflow-x-auto space-x-4 border-b border-gray-700 px-4 py-2 scrollbar-hide">
                 {Object.keys(snippets).map((lang) => (
                     <button
                         key={lang}
-                        className={`text-sm font-medium px-3 py-1 rounded ${activeLanguage === lang ? "bg-gray-700 text-white" : "text-gray-400 hover:text-white"}`}
+                        className={`text-sm font-medium px-3 py-1 whitespace-nowrap rounded ${activeLanguage === lang ? "bg-gray-700 text-white" : "text-gray-400 hover:text-white"
+                            }`}
                         onClick={() => setActiveLanguage(lang)}
                     >
                         {lang}
@@ -44,7 +46,10 @@ const CodeSnippet = ({ snippets }) => {
                             padding: '1rem',
                             borderRadius: '0.5rem',
                             margin: 0,
-                            minHeight: '100%'
+                            minHeight: '100%',
+                        }}
+                        codeTagProps={{
+                            style: { fontSize: '14px' } // Adjust the font size here
                         }}
                     >
                         {snippets[activeLanguage]}
