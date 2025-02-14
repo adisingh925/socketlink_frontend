@@ -30,15 +30,15 @@ const CodeSnippet = ({ snippets }) => {
 
             {/* Fixed Layout with Scroll */}
             <div className="relative" style={{ height: '300px' }}>
-                <button
+                {/* <button
                     onClick={handleCopy}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 mr-1"
                 >
                     <FiCopy size={18} />
-                </button>
+                </button> */}
 
                 {/* Scrollable Area */}
-                <div className="bg-gray-900 rounded-b-lg" style={{ height: '100%', overflowY: 'auto' }}>
+                <div className="p-2 bg-gray-900 rounded-b-lg" style={{ height: '100%', overflowY: 'auto' }}>
                     <SyntaxHighlighter
                         language={activeLanguage.toLowerCase()}
                         style={oneDark}
@@ -49,7 +49,7 @@ const CodeSnippet = ({ snippets }) => {
                             minHeight: '100%',
                         }}
                         codeTagProps={{
-                            style: { fontSize: '14px' } // Adjust the font size here
+                            style: { fontSize: '14px' }
                         }}
                     >
                         {snippets[activeLanguage]}
