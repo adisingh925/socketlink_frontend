@@ -3,6 +3,7 @@
 import { useState } from "react";
 import NavigationBar from "../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import Image from "next/image";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -47,9 +48,11 @@ export default function Docs() {
                     page and buy a subscription suitable for your requirement.
                 </p>
 
-                <img
+                <Image
                     src="/images/pricing.png"
                     alt="Pricing Page Preview"
+                    width={800}
+                    height={400}
                     className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
                 />
 
@@ -65,9 +68,11 @@ export default function Docs() {
                     page, where you will be able to see the plan that you have chosen.
                 </p>
 
-                <img
+                <Image
                     src="/images/my-plans.png"
                     alt="Pricing Page Preview"
+                    width={800}
+                    height={400}
                     className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
                 />
 
