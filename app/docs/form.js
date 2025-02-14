@@ -33,19 +33,19 @@ export default function Docs() {
         </section>
     );
 
-    const GettingStarted = () => (
+    const PurchasingGuide = () => (
         <section id="getting-started" className="mb-14">
-            <h2 className="text-2xl font-bold text-gray-300 mb-8">Getting Started</h2>
+            <h2 className="text-2xl font-bold text-gray-300 mb-8">Purchasing Guide</h2>
             <div className="space-y-8">
                 <p className="text-gray-400">
-                    Step 1 : Go to our{" "}
+                    <b>Step 1 :</b> Go to our{" "}
                     <a
                         href="/pricing"
                         className="text-blue-400 hover:underline"
                     >
                         Pricing
                     </a>{" "}
-                    page and buy a subscription suitable for your requirement.
+                    page and select the plan suitable for your requirement.
                 </p>
 
                 <Image
@@ -57,7 +57,19 @@ export default function Docs() {
                 />
 
                 <p className="text-gray-400">
-                    Step 2 : After choosing the suitable plan and upon completion of the payment,
+                    <b>Step 2 :</b> You will be asked to choose the region in which you want to setup your plan, It is advised to choose the region closest to your users for low latency.
+                </p>
+
+                <Image
+                    src="/images/choose-plan-region.png"
+                    alt="Choose Plan Region Preview"
+                    width={800}
+                    height={400}
+                    className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
+                />
+
+                <p className="text-gray-400">
+                    <b>Step 3 :</b> After choosing the suitable plan and upon completion of the payment,
                     you will be automatically redirected to the{" "}
                     <a
                         href="/my-plans"
@@ -77,7 +89,7 @@ export default function Docs() {
                 />
 
                 <p className="text-gray-400">
-                    Step 3 : It will take a few minutes to get your plan ready and as soon as it will become ready the <b>Account Status</b> will become <b>Active</b>.
+                    <b>Step 4 :</b> It will take a few minutes to get your plan ready and as soon as it will become ready the <b>Account Status</b> will become <b>Active</b>.
                 </p>
             </div>
         </section>
@@ -131,8 +143,8 @@ export default function Docs() {
         switch (activeSection) {
             case "overview":
                 return <Overview />;
-            case "getting-started":
-                return <GettingStarted />;
+            case "purchasing-guide":
+                return <PurchasingGuide />;
             case "features":
                 return <Features />;
             case "api":
@@ -152,8 +164,8 @@ export default function Docs() {
                     <ul className="space-y-5">
                         {[
                             { id: "overview", title: "Overview" },
+                            { id: "purchasing-guide", title: "Purchasing Guide" },
                             { id: "getting-started", title: "Getting Started" },
-                            { id: "features", title: "Features" },
                             { id: "api", title: "API Reference" },
                             { id: "faq", title: "FAQ" },
                         ].map((item, index) => (
