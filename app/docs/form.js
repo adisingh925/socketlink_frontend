@@ -4,12 +4,12 @@ import { useState } from "react";
 import NavigationBar from "../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Image from "next/image";
+import CodeSnippet from "../components/codeSnippet";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("overview");
 
-    // Individual layouts for each section
     const Overview = () => (
         <section id="overview" className="mb-14">
             <h2 className="text-2xl font-bold text-gray-300 mb-8">Overview</h2>
@@ -18,7 +18,7 @@ export default function Docs() {
                 This guide will help you understand the core concepts, features, and how to integrate real-time communication into your applications using our platform.
                 <br /><br />
                 🚀 <strong>What is socketlink.io?</strong><br /><br />
-                <em>socketlink.io</em> is a powerful real-time communication platform built for developers. It offers fast, scalable, and secure WebSocket connections, enabling instant messaging, live updates, and interactive experiences.
+                <em>socketlink.io</em> is a powerful real-time communication platform built for developers. It offers super fast, highly scalable, and secure WebSocket connections, enabling instant messaging, live updates, and interactive experiences.
                 <br /><br />
                 📚 <strong>What You Will Find Here :</strong><br /><br />
                 - <strong>Getting Started :</strong> Learn how to set up a WebSocket server and connect clients.<br />
@@ -95,6 +95,222 @@ export default function Docs() {
         </section>
     );
 
+    const GettingStarted = () => (
+        <section id="getting-started" className="mb-14">
+            <h2 className="text-3xl font-bold text-gray-300 mb-4">Getting Started</h2>
+            <h3 className="text-xl font-semibold text-gray-400 mb-6">Connecting to the Socketlink servers</h3>
+            <div className="space-y-8">
+                <p className="text-gray-400">
+                    <b>Step 1 :</b> Use any websocket library of your choice to connect to our servers, Below are some of the examples in different languages.
+                </p>
+
+                <CodeSnippet
+                    snippets={{
+                        JavaScript: `
+/** 
+ * WebSocket Connection using Node.js and ws library 
+ * Install: npm install ws 
+ */
+
+const WebSocket = require('ws');
+
+/** WebSocket server URL */
+const serverUrl = 'wss://your-websocket-server-url';
+
+/** WebSocket headers */
+const headers = {
+  'api-key': 'sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0',
+  'uid': 'user_unique_id' /** Unique identifier for the user */
+};
+
+/** Create WebSocket connection */
+const socket = new WebSocket(serverUrl, { headers });
+
+/** Handle WebSocket open event */
+socket.on('open', () => {
+  console.log('Connected to WebSocket server');
+  socket.send(JSON.stringify({
+    action: 'subscribe',
+    channel: 'updates'
+  }));
+});
+
+/** Handle WebSocket message event */
+socket.on('message', (data) => {
+  console.log('Received:', data);
+});
+
+/** Handle WebSocket error event */
+socket.on('error', (error) => {
+  console.error('WebSocket error:', error);
+});
+
+/** Handle WebSocket close event */
+socket.on('close', () => {
+  console.log('Connection closed');
+});
+    `,
+                        Python: `
+"""
+WebSocket Connection using Python and websocket-client
+Install: pip install websocket-client
+"""
+
+import websocket
+import json
+
+# WebSocket server URL
+server_url = "wss://your-websocket-server-url"
+
+# Define WebSocket event handlers
+def on_message(ws, message):
+    """Handle incoming messages from the server"""
+    print("Received:", message)
+
+def on_open(ws):
+    """Handle WebSocket connection open event"""
+    print("Connected to WebSocket server")
+    ws.send(json.dumps({
+        "action": "subscribe",
+        "channel": "updates"
+    }))
+
+# Set WebSocket headers
+headers = {
+    "api-key": "sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0",
+    "uid": "user_unique_id"  # Unique identifier for the user
+}
+
+# Create WebSocket connection
+ws = websocket.WebSocketApp(
+    server_url, 
+    header=headers, 
+    on_message=on_message, 
+    on_open=on_open
+)
+
+# Run WebSocket forever
+ws.run_forever()
+    `,
+                        cURL: `
+/**
+ * WebSocket Connection using cURL
+ * Note: WebSocket over cURL may be limited to initial handshake 
+ */
+
+curl \\
+  -H "api-key: sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0" \\
+  -H "uid: user_unique_id" \\
+  --include \\
+  --no-buffer \\
+  "wss://your-websocket-server-url"
+    `,
+                        Go: `
+/**
+ * WebSocket Connection using Go and Gorilla WebSocket library
+ * Install: go get github.com/gorilla/websocket
+ */
+
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"github.com/gorilla/websocket"
+)
+
+/** Main function */
+func main() {
+	/** Set WebSocket headers */
+	headers := http.Header{}
+	headers.Set("api-key", "sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0")
+	headers.Set("uid", "user_unique_id")
+
+	/** WebSocket server URL */
+	serverURL := "wss://your-websocket-server-url"
+
+	/** Create WebSocket connection */
+	conn, _, err := websocket.DefaultDialer.Dial(serverURL, headers)
+	if err != nil {
+		log.Fatal("Error connecting to WebSocket server:", err)
+	}
+	defer conn.Close()
+
+	fmt.Println("Connected to WebSocket server")
+
+	/** Send a subscription message */
+	if err := conn.WriteJSON(map[string]string{
+		"action":  "subscribe",
+		"channel": "updates",
+	}); err != nil {
+		log.Println("Write error:", err)
+		return
+	}
+
+	/** Read messages in a loop */
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			log.Println("Read error:", err)
+			break
+		}
+		fmt.Println("Received:", string(message))
+	}
+}
+    `,
+                        Ruby: `
+=begin
+WebSocket Connection using Ruby and websocket-client-simple
+Install: gem install websocket-client-simple
+=end
+
+require 'websocket-client-simple'
+require 'json'
+
+# WebSocket server URL
+server_url = 'wss://your-websocket-server-url'
+
+# Create WebSocket connection with headers
+ws = WebSocket::Client::Simple.connect server_url, headers: {
+  'api-key' => 'sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0',
+  'uid' => 'user_unique_id'
+}
+
+# Handle WebSocket open event
+ws.on :open do
+  puts "Connected to WebSocket server"
+  ws.send({
+    action: "subscribe",
+    channel: "updates"
+  }.to_json)
+end
+
+# Handle WebSocket message event
+ws.on :message do |msg|
+  puts "Received: #{msg.data}"
+end
+
+# Handle WebSocket error event
+ws.on :error do |e|
+  puts "Error: #{e.message}"
+end
+
+# Handle WebSocket close event
+ws.on :close do
+  puts "Connection closed"
+end
+
+# Keep the connection alive
+loop { sleep 1 }
+    `
+                    }}
+                />
+            </div>
+        </section>
+    );
+
+
     const Features = () => (
         <section id="features" className="mb-14">
             <h2 className="text-2xl font-bold text-gray-300 mb-8">Features</h2>
@@ -145,6 +361,8 @@ export default function Docs() {
                 return <Overview />;
             case "purchasing-guide":
                 return <PurchasingGuide />;
+            case "getting-started":
+                return <GettingStarted />;
             case "features":
                 return <Features />;
             case "api":
@@ -186,7 +404,7 @@ export default function Docs() {
 
             {/* Sidebar Toggle Button (Mobile) */}
             <button
-                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 ${isSidebarOpen ? "left-[17rem]" : "left-4"
+                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isSidebarOpen ? "left-[17rem]" : "left-4"
                     }`}
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
