@@ -97,12 +97,39 @@ export default function Docs() {
 
     const GettingStarted = () => (
         <section id="getting-started" className="mb-14">
-            <h2 className="text-3xl font-bold text-gray-300 mb-4">Getting Started</h2>
-            <h3 className="text-xl font-semibold text-gray-400 mb-6">Connecting to the Socketlink servers</h3>
+            <h2 className="text-3xl font-bold text-gray-300 mb-4">Connecting to the Socketlink servers</h2>
             <div className="space-y-8">
-                <p className="text-gray-400">
-                    <b>Step 1 :</b> Use any websocket library of your choice to connect to our servers, Below are some of the examples in different languages.
-                </p>
+                <div className="space-y-4">
+                    <p className="text-gray-400">
+                        <b>Step 1 :</b> Use any WebSocket library of your choice to connect to our servers. Below are some examples using some popular libraries in different languages.
+                    </p>
+
+                    <div className="flex items-start space-x-3 bg-blue-50 border border-blue-400 shadow-md p-4 rounded-lg">
+                        <svg
+                            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M21 12a9 9 0 10-18 0 9 9 0 0018 0z"
+                            />
+                        </svg>
+                        <div>
+                            <p className="font-bold text-blue-600">Required Headers for WebSocket Connection</p>
+                            <p className="mt-2 text-sm text-gray-700">
+                                <ul className="list-disc list-inside ml-2 mt-2">
+                                    <li><code>api-key</code> : Add your <b>Client API Key</b> in this header.</li>
+                                    <li><code>uid</code> : Add an ID that uniquely defines the connection or the user, Cannot be reused.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 <CodeSnippet
                     snippets={{
@@ -119,7 +146,7 @@ const serverUrl = 'wss://your-websocket-server-url';
 
 /** WebSocket headers */
 const headers = {
-  'api-key': 'sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0',
+  'api-key': 'client_api_key',
   'uid': 'user_unique_id' /** Unique identifier for the user */
 };
 
@@ -129,10 +156,6 @@ const socket = new WebSocket(serverUrl, { headers });
 /** Handle WebSocket open event */
 socket.on('open', () => {
   console.log('Connected to WebSocket server');
-  socket.send(JSON.stringify({
-    action: 'subscribe',
-    channel: 'updates'
-  }));
 });
 
 /** Handle WebSocket message event */
@@ -157,7 +180,6 @@ Install: pip install websocket-client
 """
 
 import websocket
-import json
 
 # WebSocket server URL
 server_url = "wss://your-websocket-server-url"
@@ -170,14 +192,10 @@ def on_message(ws, message):
 def on_open(ws):
     """Handle WebSocket connection open event"""
     print("Connected to WebSocket server")
-    ws.send(json.dumps({
-        "action": "subscribe",
-        "channel": "updates"
-    }))
 
 # Set WebSocket headers
 headers = {
-    "api-key": "sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0",
+    "api-key": "client_api_key",
     "uid": "user_unique_id"  # Unique identifier for the user
 }
 
@@ -198,11 +216,11 @@ ws.run_forever()
  * Note: WebSocket over cURL may be limited to initial handshake 
  */
 
-curl \\
-  -H "api-key: sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0" \\
-  -H "uid: user_unique_id" \\
-  --include \\
-  --no-buffer \\
+curl \
+  -H "api-key: client_api_key" \
+  -H "uid: user_unique_id" \
+  --include \
+  --no-buffer \
   "wss://your-websocket-server-url"
     `,
                         Go: `
@@ -224,7 +242,7 @@ import (
 func main() {
 	/** Set WebSocket headers */
 	headers := http.Header{}
-	headers.Set("api-key", "sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0")
+	headers.Set("api-key", "client_api_key")
 	headers.Set("uid", "user_unique_id")
 
 	/** WebSocket server URL */
@@ -238,15 +256,6 @@ func main() {
 	defer conn.Close()
 
 	fmt.Println("Connected to WebSocket server")
-
-	/** Send a subscription message */
-	if err := conn.WriteJSON(map[string]string{
-		"action":  "subscribe",
-		"channel": "updates",
-	}); err != nil {
-		log.Println("Write error:", err)
-		return
-	}
 
 	/** Read messages in a loop */
 	for {
@@ -266,24 +275,19 @@ Install: gem install websocket-client-simple
 =end
 
 require 'websocket-client-simple'
-require 'json'
 
 # WebSocket server URL
 server_url = 'wss://your-websocket-server-url'
 
 # Create WebSocket connection with headers
 ws = WebSocket::Client::Simple.connect server_url, headers: {
-  'api-key' => 'sl_adc60e5ebc151da4760811b228d76e1537d581450d40b1399ddd51eabe7560c0',
+  'api-key' => 'client_api_key',
   'uid' => 'user_unique_id'
 }
 
 # Handle WebSocket open event
 ws.on :open do
   puts "Connected to WebSocket server"
-  ws.send({
-    action: "subscribe",
-    channel: "updates"
-  }.to_json)
 end
 
 # Handle WebSocket message event
@@ -306,6 +310,10 @@ loop { sleep 1 }
     `
                     }}
                 />
+
+                <p className="text-gray-400">
+                    This is all you need to do to connect to our servers, It is advised to perform this part when your application starts.
+                </p>
             </div>
         </section>
     );
@@ -355,14 +363,47 @@ loop { sleep 1 }
         </section>
     );
 
+    const Rooms = () => (
+        <section id="rooms" className="mb-14">
+            <h2 className="text-2xl font-bold text-gray-300 mb-8">Room Types</h2>
+            <div className="space-y-8 text-gray-400 mb-6">
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-400 mb-6">Public Rooms</h3>
+                    {/* <span className="font-mono text-green-400">Prefix: pub-</span><br /> */}
+                    Anyone can join and participate in the public rooms.
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-400 mb-6">Private Rooms</h3>
+                    {/* <span className="font-mono text-green-400">Prefix: priv-</span><br /> */}
+                    Restricted access rooms that require a verification from the <strong>Admin Server</strong>, Admin needs to enable <strong>ON_VERIFICATION_REQUEST</strong> webhook in order to use private rooms.
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-400 mb-6">State Rooms</h3>
+                    {/* <span className="font-mono text-green-400">Prefix: pub-state-</span><br /> */}
+                    State rooms are useful when you want to want eveyone in the room to be aware of who is joining or leaving the room.
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-400 mb-6">Cache Rooms</h3>
+                    {/* <span className="font-mono text-green-400">Prefix: priv-state-</span><br /> */}
+                    These rooms are useful when you want to retrieve last 10 messages that were sent in the room.
+                </div>
+            </div>
+        </section>
+    );
+
     const renderSection = () => {
         switch (activeSection) {
-            case "overview":
+            case "Introduction":
                 return <Overview />;
-            case "purchasing-guide":
+            case "How to Purchase":
                 return <PurchasingGuide />;
-            case "getting-started":
+            case "Connecting to the Socketlink servers":
                 return <GettingStarted />;
+            case "Room Types":
+                return <Rooms />;
             case "features":
                 return <Features />;
             case "api":
@@ -377,25 +418,57 @@ loop { sleep 1 }
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
             {/* Sidebar */}
-            <aside className={`w-64 bg-[#1a1a1a] p-10 pt-32 transition-transform ${isSidebarOpen ? "translate-x-0 z-50" : "-translate-x-64"} md:translate-x-0 fixed md:relative h-full shadow-md`}>
+            <aside className={`w-64 bg-[#1a1a1a] p-10 pt-32 transition-transform ${isSidebarOpen ? "translate-x-0 z-50" : "-translate-x-64"} md:translate-x-0 fixed md:relative h-full shadow-md overflow-y-auto`}>
                 <nav>
                     <ul className="space-y-5">
                         {[
-                            { id: "overview", title: "Overview" },
-                            { id: "purchasing-guide", title: "Purchasing Guide" },
-                            { id: "getting-started", title: "Getting Started" },
-                            { id: "api", title: "API Reference" },
-                            { id: "faq", title: "FAQ" },
+                            {
+                                id: "overview",
+                                title: "Overview",
+                                subcategories: ["Introduction", "Features", "Benefits"]
+                            },
+                            {
+                                id: "purchasing-guide",
+                                title: "Purchasing Guide",
+                                subcategories: ["How to Purchase", "Payment Options", "Refund Policy"]
+                            },
+                            {
+                                id: "getting-started",
+                                title: "Getting Started",
+                                subcategories: ["Connecting to the Socketlink servers", "Subscribing to a room", "Sending Messages", "Receiving Messages"]
+                            },
+                            {
+                                id: "rooms",
+                                title: "Rooms",
+                                subcategories: ["Room Types", "Public Rooms", "Private Rooms", "State Rooms", "Cache Rooms"]
+                            },
+                            {
+                                id: "api",
+                                title: "API Reference",
+                                subcategories: ["Authentication", "Endpoints", "Rate Limiting"]
+                            },
+                            {
+                                id: "faq",
+                                title: "FAQ",
+                                subcategories: ["General Questions", "Technical Questions", "Billing Questions"]
+                            }
                         ].map((item, index) => (
                             <li key={item.id}>
-                                <button
-                                    onClick={() => setActiveSection(item.id)}
-                                    className={`block w-full text-left text-gray-300 hover:text-white transition-colors ${activeSection === item.id ? "font-bold text-white" : ""
-                                        }`}
-                                >
+                                <div className="mb-2 text-gray-300 font-bold">
                                     {item.title}
-                                </button>
-                                {index !== 4 && <hr className="border-gray-700 my-4" />}
+                                </div>
+                                <ul className="pl-4 space-y-2 text-sm">
+                                    {item.subcategories.map((sub) => (
+                                        <li
+                                            key={sub}
+                                            className={`cursor-pointer ${activeSection === sub ? "text-white font-bold" : "text-gray-500 hover:text-gray-300"}`}
+                                            onClick={() => setActiveSection(sub)}
+                                        >
+                                            {sub}
+                                        </li>
+                                    ))}
+                                </ul>
+                                {index !== 5 && <hr className="border-gray-700 my-4" />}
                             </li>
                         ))}
                     </ul>
