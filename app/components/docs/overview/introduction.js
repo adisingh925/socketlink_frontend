@@ -1,6 +1,6 @@
 const Introduction = () => (
     <section id="overview" className="mb-14">
-        <h2 className="text-2xl font-bold text-gray-300 mb-8">Overview</h2>
+        <h2 className="text-2xl font-bold text-gray-300 mb-8">Introduction</h2>
         <p className="text-gray-400 mb-6">
             <strong>Welcome to the documentation for <em>socketlink.io</em>!</strong> <br /><br />
             This guide will help you understand the core concepts, features, and how to integrate real-time communication into your applications using our platform.

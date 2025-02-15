@@ -7,6 +7,7 @@ import HowToPurchase from "../components/docs/purchasingGuide/how-to-purchase";
 import ConnectingToTheSocketlinkServers from "../components/docs/gettingStarted/connecting-to-the-socketlink-servers";
 import RoomTypes from "../components/docs/rooms/room-types";
 import Introduction from "../components/docs/overview/introduction";
+import ClientEndpoints from "../components/docs/apiReference/client-endpoints";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,21 +23,6 @@ export default function Docs() {
                 - Typing Indicators and Presence Tracking<br />
                 - Secure WebSocket Connections<br />
                 - Event Broadcasting
-            </p>
-        </section>
-    );
-
-    const APIReference = () => (
-        <section id="api" className="mb-14">
-            <h2 className="text-2xl font-bold text-gray-300 mb-8">API Reference</h2>
-            <p className="text-gray-400 mb-6">
-                Detailed documentation on how to use our API endpoints effectively.<br /><br />
-                <strong>WebSocket Events:</strong><br />
-                - <code>connect</code>: Triggered when a client connects.<br />
-                - <code>message</code>: Triggered when a message is sent.<br />
-                - <code>disconnect</code>: Triggered when a client disconnects.<br /><br />
-                <strong>Message Format:</strong><br />
-                <code>{"{ event: 'message', data: 'Hello, world!' }"}</code>
             </p>
         </section>
     );
@@ -68,8 +54,8 @@ export default function Docs() {
                 return <RoomTypes />;
             case "features":
                 return <Features />;
-            case "api":
-                return <APIReference />;
+            case "Client Endpoints":
+                return <ClientEndpoints />;
             case "faq":
                 return <FAQ />;
             default:
