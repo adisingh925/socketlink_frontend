@@ -16,13 +16,14 @@ const AdminEndpoints = () => {
 
     const metricsResponses = {
         '200': {
-            "connections": 0,
-            "messages_sent": 0,
-            "average_payload_size": 0.000000,
-            "total_payload_sent": 1848562260,
-            "total_rejected_requests": 16,
-            "average_latency": 0.000000,
-            "dropped_messages": 0,
+            connections: 0,
+            messages_sent: 0,
+            average_payload_size: 0.000000,
+            total_payload_sent: 1848562260,
+            total_rejected_requests: 16,
+            average_latency: 0.000000,
+            dropped_messages: 0,
+            code: 7598,
             color: 'green-400'
         },
         '400': {
@@ -162,6 +163,13 @@ const AdminEndpoints = () => {
                             <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${metricsResponses[metricsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
+                                        connections: metricsResponses[metricsResponsesTab].connections,
+                                        messages_sent: metricsResponses[metricsResponsesTab].messages_sent,
+                                        average_payload_size: metricsResponses[metricsResponsesTab].average_payload_size,
+                                        total_payload_sent: metricsResponses[metricsResponsesTab].total_payload_sent,
+                                        total_rejected_requests: metricsResponses[metricsResponsesTab].total_rejected_requests,
+                                        average_latency: metricsResponses[metricsResponsesTab].average_latency,
+                                        dropped_messages: metricsResponses[metricsResponsesTab].dropped_messages,
                                         message: metricsResponses[metricsResponsesTab].message,
                                         code: metricsResponses[metricsResponsesTab].code,
                                         ...(metricsResponses[metricsResponsesTab].roomId && { roomId: metricsResponses[metricsResponsesTab].roomId })
