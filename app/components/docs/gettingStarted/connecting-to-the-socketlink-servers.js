@@ -231,7 +231,7 @@ loop { sleep 1 }
                     <div className="p-4 bg-yellow-800/20 border border-yellow-400 rounded-lg">
                         <strong className="text-yellow-300">400 - Bad Request</strong>
                         <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
-                            <li><code>uid</code> length must be between 1 and 160 characters.</li>
+                            <li><code>uid</code> length must be between 1 and 4096 characters.</li>
                         </ul>
                     </div>
 
