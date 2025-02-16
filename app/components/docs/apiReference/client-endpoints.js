@@ -6,38 +6,33 @@ const ClientEndpoints = () => {
     const responses = {
         '200': {
             status: 'success',
-            message: 'Room subscription updated successfully',
-            roomId: 'abc123',
-            description: 'This response indicates that the room subscription was successful.',
+            message: 'Successfully updated the room for the uid!',
+            code: 7481,
             color: 'green-400'
         },
         '400': {
-            status: 'error',
-            message: 'Invalid request body',
-            description: 'Occurs when required fields are missing or have invalid types.',
+            message: 'some error message',
+            code: "some code",
             color: 'yellow-400'
         },
         '401': {
-            status: 'error',
-            message: 'Invalid or missing authorization token',
-            description: 'Occurs when the Authorization header is missing or invalid.',
+            message: 'Unauthorized access. Invalid API key!',
+            code: 3203,
             color: 'red-400'
         },
         '403': {
-            status: 'error',
-            message: 'You do not have permission to access this room',
-            description: 'Occurs when the user is authenticated but lacks access to the requested room.',
+            message: 'some error message',
+            code: "some code",
             color: 'orange-400'
         },
         '404': {
-            status: 'error',
-            message: 'Room not found',
-            description: 'Occurs when the specified room ID does not exist.',
+            message: 'some error message',
+            code: "some code",
             color: 'pink-400'
         },
         '500': {
-            status: 'error',
-            message: 'An unexpected error occurred. Please try again later',
+            message: 'Internal server error!',
+            code: 5000,
             description: 'Occurs when an unexpected server error happens.',
             color: 'red-500'
         }
@@ -52,7 +47,31 @@ const ClientEndpoints = () => {
             </p>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Subscribe to a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Subscribe to a room / Change the current room</h2>
+
+                <p className="text-gray-300 mb-6">
+                    If the specified room does not exist, it will be created automatically. If the room already exists, the user will join it. If the user is already in a different room, they will be disconnected from the current room and connected to the new one.
+                </p>
+
+                <div className="flex items-center space-x-3 bg-blue-50 border border-blue-400 shadow-md p-4 rounded-lg mb-6">
+                    <svg
+                        className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M21 12a9 9 0 10-18 0 9 9 0 0018 0z"
+                        />
+                    </svg>
+                    <div>
+                        <p className="font-bold text-blue-600 items-center">Currently we only support joining one room at a time!</p>
+                    </div>
+                </div>
 
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
@@ -70,7 +89,7 @@ const ClientEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            Authorization: Bearer &lt;token&gt;
+                            api-key: CLIENT_API_KEY
                         </pre>
                     </div>
 
@@ -79,13 +98,17 @@ const ClientEndpoints = () => {
                         <strong className="text-yellow-300">Body</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
-                            &nbsp;&nbsp;&quot;recipient&quot;: &quot;user123&quot;,<br />
-                            &nbsp;&nbsp;&quot;message&quot;: &quot;Hello!&quot;<br />
+                            &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
+                            &nbsp;&nbsp;&quot;rid&quot;: &quot;pub-test-0&quot;<br />
                             &#125;
                         </pre>
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>uid :</code> Unique identifier for the user, Same UID which was used for connecting to the socketlink servers.</li>
+                            <li><code>rid :</code> Room ID to which the user should be connected.</li>
+                        </ul>
                     </div>
 
-                    {/* Response Tabs */}
                     {/* Response Tabs */}
                     <div className="space-y-4 mt-6">
                         <h3 className="text-purple-300 text-lg font-semibold mb-2">Responses</h3>
@@ -110,8 +133,8 @@ const ClientEndpoints = () => {
                             <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${responses[activeTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
-                                        status: responses[activeTab].status,
                                         message: responses[activeTab].message,
+                                        code: responses[activeTab].code,
                                         ...(responses[activeTab].roomId && { roomId: responses[activeTab].roomId })
                                     },
                                     null,
