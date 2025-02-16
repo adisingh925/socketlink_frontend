@@ -8,6 +8,7 @@ import ConnectingToTheSocketlinkServers from "../components/docs/gettingStarted/
 import RoomTypes from "../components/docs/rooms/room-types";
 import Introduction from "../components/docs/overview/introduction";
 import ClientEndpoints from "../components/docs/apiReference/client-endpoints";
+import AdminEndpoints from "../components/docs/apiReference/admin-endpoints";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -56,6 +57,8 @@ export default function Docs() {
                 return <Features />;
             case "Client Endpoints":
                 return <ClientEndpoints />;
+            case "Admin Endpoints":
+                return <AdminEndpoints />;
             case "faq":
                 return <FAQ />;
             default:
