@@ -810,6 +810,7 @@ const AdminEndpoints = () => {
                         </pre>
                         {/* Body Key Descriptions */}
                         <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Insert all the rids you want to send the message to.</li>
                             <li><code>message :</code> Insert the message that you want to send to the given rooms.</li>
                         </ul>
                     </div>
@@ -893,7 +894,95 @@ const AdminEndpoints = () => {
                         </pre>
                         {/* Body Key Descriptions */}
                         <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>uid :</code> Insert all the uids you want to send the message to.</li>
                             <li><code>message :</code> Insert the message that you want to send to the given connections.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(connectionBroadcastResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${connectionBroadcast === code
+                                        ? `bg-${connectionBroadcastResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setConnectionBroadcast(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${connectionBroadcastResponse[connectionBroadcast].color}`}>{connectionBroadcast} Response</strong>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: connectionBroadcastResponse[connectionBroadcast].message,
+                                        code: connectionBroadcastResponse[connectionBroadcast].code,
+                                        ...(connectionBroadcastResponse[connectionBroadcast].roomId && { roomId: connectionBroadcastResponse[connectionBroadcast].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[connectionBroadcast].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Ban the user globally or in a room</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will ban the user globally or in the provided rooms.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/connections/broadcast
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            [<br />
+                            &nbsp;&nbsp;&#123;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;rid&quot;: &quot;global&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;uid&quot;: [<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test2&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test3&quot;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;]<br />
+                            &nbsp;&nbsp;&#125;<br />
+                            ]
+                        </pre>
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Insert the rid where you want to block the provided uids.</li>
+                            <li><code>uid :</code> Insert all the uids you want to block in a given room.</li>
                         </ul>
                     </div>
 
