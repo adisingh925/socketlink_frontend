@@ -7,32 +7,26 @@ const ClientEndpoints = () => {
         '200': {
             status: 'success',
             message: 'Successfully updated the room for the uid!',
-            code: 7481,
             color: 'green-400'
         },
         '400': {
             message: 'some error message',
-            code: "some code",
             color: 'yellow-400'
         },
         '401': {
             message: 'Unauthorized access. Invalid API key!',
-            code: 3203,
             color: 'red-400'
         },
         '403': {
             message: 'some error message',
-            code: "some code",
             color: 'orange-400'
         },
         '404': {
             message: 'some error message',
-            code: "some code",
             color: 'pink-400'
         },
         '500': {
             message: 'Internal server error!',
-            code: 5000,
             description: 'Occurs when an unexpected server error happens.',
             color: 'red-500'
         }
@@ -69,7 +63,7 @@ const ClientEndpoints = () => {
                         />
                     </svg>
                     <div>
-                        <p className="font-bold text-blue-600 items-center">Currently we only support joining one room at a time!</p>
+                        <p className="font-bold text-blue-600 items-center">Currently we only support joining one room per uid at a time!</p>
                     </div>
                 </div>
 
