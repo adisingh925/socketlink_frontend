@@ -289,7 +289,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${pingResponses[pingResponsesTab].color}`}>{pingResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${pingResponses[pingResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${pingResponses[pingResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {"Pong!"}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{pingResponses[pingResponsesTab].description}</p>
@@ -345,7 +345,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${metricsResponses[metricsResponsesTab].color}`}>{metricsResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${metricsResponses[metricsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${metricsResponses[metricsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         connections: metricsResponses[metricsResponsesTab].connections,
@@ -416,7 +416,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${syncResponse[syncResponsesTab].color}`}>{syncResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${syncResponse[syncResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${syncResponse[syncResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: syncResponse[syncResponsesTab].message,
@@ -480,7 +480,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomResponse[roomsResponsesTab].color}`}>{roomsResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomResponse[roomsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomResponse[roomsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomResponse[roomsResponsesTab].message,
@@ -562,7 +562,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomMembersResponse[roomsMembersResponsesTab].message,
@@ -644,7 +644,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomMembersResponse[roomsMembersResponsesTab].message,
@@ -723,7 +723,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${broadcastResponse[broadcast].color}`}>{broadcast} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: broadcastResponse[broadcast].message,
@@ -802,7 +802,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${broadcastResponse[broadcast].color}`}>{broadcast} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: broadcastResponse[broadcast].message,
@@ -886,7 +886,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomBroadcastResponse[roomBroadcast].color}`}>{roomBroadcast} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomBroadcastResponse[roomBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomBroadcastResponse[roomBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomBroadcastResponse[roomBroadcast].message,
@@ -970,7 +970,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${connectionBroadcastResponse[connectionBroadcast].color}`}>{connectionBroadcast} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: connectionBroadcastResponse[connectionBroadcast].message,
@@ -1057,7 +1057,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${banUserResponse[banUser].color}`}>{banUser} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${banUserResponse[banUser].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${banUserResponse[banUser].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: banUserResponse[banUser].message,
@@ -1144,7 +1144,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${unbanUserResponse[unbanUser].color}`}>{unbanUser} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${unbanUserResponse[unbanUser].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${unbanUserResponse[unbanUser].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: unbanUserResponse[unbanUser].message,
