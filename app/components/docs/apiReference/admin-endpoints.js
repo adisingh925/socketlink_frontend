@@ -9,6 +9,8 @@ const AdminEndpoints = () => {
     const [broadcast, setBroadcast] = useState('200');
     const [roomBroadcast, setRoomBroadcast] = useState('200');
     const [connectionBroadcast, setConnectionBroadcast] = useState('200');
+    const [banUser, setBanUser] = useState('200');
+    const [unbanUser, setUnbanUser] = useState('200');
 
     const pingResponses = {
         '200': {
@@ -170,7 +172,55 @@ const AdminEndpoints = () => {
 
     const connectionBroadcastResponse = {
         '200': {
-            message: "Successfully broadcasted the message to the given connection!",
+            message: "Successfully broadcasted the message to the given connections!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const banUserResponse = {
+        '200': {
+            message: "Given members are successfully banned from the given rooms!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const unbanUserResponse = {
+        '200': {
+            message: "Members are successfully unbanned from the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -951,7 +1001,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/connections/broadcast
+                            http://localhost:9002/api/v1/rooms/ban
                         </pre>
                     </h4>
 
@@ -981,8 +1031,8 @@ const AdminEndpoints = () => {
                         </pre>
                         {/* Body Key Descriptions */}
                         <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                            <li><code>rid :</code> Insert the rid where you want to block the provided uids.</li>
-                            <li><code>uid :</code> Insert all the uids you want to block in a given room.</li>
+                            <li><code>rid :</code> Insert the rid where you want to ban the provided uids.</li>
+                            <li><code>uid :</code> Insert all the uids you want to ban in a given room.</li>
                         </ul>
                     </div>
 
@@ -990,14 +1040,14 @@ const AdminEndpoints = () => {
                     <div className="space-y-4 mt-6">
                         <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
                         <div className="flex flex-wrap gap-2 mb-4">
-                            {Object.keys(connectionBroadcastResponse).map((code) => (
+                            {Object.keys(banUserResponse).map((code) => (
                                 <button
                                     key={code}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${connectionBroadcast === code
-                                        ? `bg-${connectionBroadcastResponse[code].color} border border-white`
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${banUser === code
+                                        ? `bg-${banUserResponse[code].color} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
-                                    onClick={() => setConnectionBroadcast(code)}
+                                    onClick={() => setBanUser(code)}
                                 >
                                     {code}
                                 </button>
@@ -1006,19 +1056,106 @@ const AdminEndpoints = () => {
 
                         {/* Display Active Response */}
                         <div>
-                            <strong className={`text-${connectionBroadcastResponse[connectionBroadcast].color}`}>{connectionBroadcast} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <strong className={`text-${banUserResponse[banUser].color}`}>{banUser} Response</strong>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${banUserResponse[banUser].color} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
-                                        message: connectionBroadcastResponse[connectionBroadcast].message,
-                                        code: connectionBroadcastResponse[connectionBroadcast].code,
-                                        ...(connectionBroadcastResponse[connectionBroadcast].roomId && { roomId: connectionBroadcastResponse[connectionBroadcast].roomId })
+                                        message: banUserResponse[banUser].message,
+                                        code: banUserResponse[banUser].code,
+                                        ...(banUserResponse[banUser].roomId && { roomId: banUserResponse[banUser].roomId })
                                     },
                                     null,
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[connectionBroadcast].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[banUser].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Unban the user globally or in a room</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will unban the user globally or in the provided rooms.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/rooms/unban
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            [<br />
+                            &nbsp;&nbsp;&#123;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;rid&quot;: &quot;global&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;uid&quot;: [<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test2&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;test3&quot;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;]<br />
+                            &nbsp;&nbsp;&#125;<br />
+                            ]
+                        </pre>
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Insert the rid where you want to unban the provided uids.</li>
+                            <li><code>uid :</code> Insert all the uids you want to unban in a given room.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(unbanUserResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${unbanUser === code
+                                        ? `bg-${unbanUserResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setUnbanUser(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${unbanUserResponse[unbanUser].color}`}>{unbanUser} Response</strong>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${unbanUserResponse[unbanUser].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: unbanUserResponse[unbanUser].message,
+                                        code: unbanUserResponse[unbanUser].code,
+                                        ...(unbanUserResponse[unbanUser].roomId && { roomId: unbanUserResponse[unbanUser].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[unbanUser].description}</p>
                         </div>
                     </div>
                 </div>
