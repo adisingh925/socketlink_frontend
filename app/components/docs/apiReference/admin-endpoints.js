@@ -7,6 +7,8 @@ const AdminEndpoints = () => {
     const [roomsResponsesTab, setRoomsResponsesTab] = useState('200');
     const [roomsMembersResponsesTab, setRoomsMembersResponsesTab] = useState('200');
     const [broadcast, setBroadcast] = useState('200');
+    const [roomBroadcast, setRoomBroadcast] = useState('200');
+    const [connectionBroadcast, setConnectionBroadcast] = useState('200');
 
     const pingResponses = {
         '200': {
@@ -32,7 +34,7 @@ const AdminEndpoints = () => {
             color: 'yellow-400'
         },
         '401': {
-            message: 'Unauthorized access. Invalid API key!',
+            message: 'Unauthorized access, Invalid API key!',
             color: 'red-400'
         },
         '403': {
@@ -60,7 +62,7 @@ const AdminEndpoints = () => {
             color: 'yellow-400'
         },
         '401': {
-            message: 'Unauthorized access. Invalid API key!',
+            message: 'Unauthorized access, Invalid API key!',
             color: 'red-400'
         },
         '403': {
@@ -84,7 +86,7 @@ const AdminEndpoints = () => {
             color: 'green-400'
         },
         '401': {
-            message: 'Unauthorized access. Invalid API key!',
+            message: 'Unauthorized access, Invalid API key!',
             color: 'red-400'
         },
         '500': {
@@ -104,7 +106,7 @@ const AdminEndpoints = () => {
             color: 'yellow-400'
         },
         '401': {
-            message: 'Unauthorized access. Invalid API key!',
+            message: 'Unauthorized access, Invalid API key!',
             color: 'red-400'
         },
         '404': {
@@ -128,7 +130,55 @@ const AdminEndpoints = () => {
             color: 'yellow-400'
         },
         '401': {
-            message: 'Unauthorized access. Invalid API key!',
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const roomBroadcastResponse = {
+        '200': {
+            message: "Successfully broadcasted the message to the given room!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const connectionBroadcastResponse = {
+        '200': {
+            message: "Successfully broadcasted the message to the given connection!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
             color: 'red-400'
         },
         '404': {
@@ -714,6 +764,172 @@ const AdminEndpoints = () => {
                                 )}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[broadcast].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Send a message to everyone connected in a room</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will send message to all the members of the room.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/rooms/broadcast
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            &#123;<br />
+                            &nbsp;&nbsp;&quot;rid&quot;: [<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-3&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-2&quot;<br />
+                            &nbsp;&nbsp;],<br />
+                            &nbsp;&nbsp;&quot;message&quot;: &quot;this is for 3 and 2&quot;<br />
+                            &#125;
+                        </pre>
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>message :</code> Insert the message that you want to send to the given rooms.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(roomBroadcastResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomBroadcast === code
+                                        ? `bg-${roomBroadcastResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setRoomBroadcast(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${roomBroadcastResponse[roomBroadcast].color}`}>{roomBroadcast} Response</strong>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomBroadcastResponse[roomBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: roomBroadcastResponse[roomBroadcast].message,
+                                        code: roomBroadcastResponse[roomBroadcast].code,
+                                        ...(roomBroadcastResponse[roomBroadcast].roomId && { roomId: roomBroadcastResponse[roomBroadcast].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[roomBroadcast].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Send a message to a particular connection</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will send message to given connections.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/connections/broadcast
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            &#123;<br />
+                            &nbsp;&nbsp;&quot;uid&quot;: [<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;test&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;test2&quot;<br />
+                            &nbsp;&nbsp;],<br />
+                            &nbsp;&nbsp;&quot;message&quot;: &quot;this is for test and test2&quot;<br />
+                            &#125;
+                        </pre>
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>message :</code> Insert the message that you want to send to the given connections.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(connectionBroadcastResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${connectionBroadcast === code
+                                        ? `bg-${connectionBroadcastResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setConnectionBroadcast(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${connectionBroadcastResponse[connectionBroadcast].color}`}>{connectionBroadcast} Response</strong>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: connectionBroadcastResponse[connectionBroadcast].message,
+                                        code: connectionBroadcastResponse[connectionBroadcast].code,
+                                        ...(connectionBroadcastResponse[connectionBroadcast].roomId && { roomId: connectionBroadcastResponse[connectionBroadcast].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[connectionBroadcast].description}</p>
                         </div>
                     </div>
                 </div>
