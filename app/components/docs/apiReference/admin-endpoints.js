@@ -11,6 +11,11 @@ const AdminEndpoints = () => {
     const [connectionBroadcast, setConnectionBroadcast] = useState('200');
     const [banUser, setBanUser] = useState('200');
     const [unbanUser, setUnbanUser] = useState('200');
+    const [enableMessaging, setEnableMessaging] = useState('200');
+    const [disableMessaging, setDisableMessaging] = useState('200');
+    const [disableRoomMessaging, setDisableRoomMessaging] = useState('200');
+    const [enableRoomMessaging, setEnableRoomMessaging] = useState('200');
+    const [bannedUsersResponsesTab, setBannedUsersResponsesTab] = useState('200');
 
     const pingResponses = {
         '200': {
@@ -221,6 +226,126 @@ const AdminEndpoints = () => {
     const unbanUserResponse = {
         '200': {
             message: "Members are successfully unbanned from the given rooms!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const enableMessagingResponse = {
+        '200': {
+            message: "Messaging successfully enabled for everyone!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const disableMessagingResponse = {
+        '200': {
+            message: "Messaging successfully disabled for everyone!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const disableRoomMessagingResponse = {
+        '200': {
+            message: "Messaging successfully disabled for the given members in the given rooms!!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const enableRoomMessagingResponse = {
+        '200': {
+            message: "Messaging successfully enabled for the given members in the given rooms!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Invalid JSON format!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
+
+    const bannedUsersResponse = {
+        '200': {
+            message: "Messaging successfully disabled for the members of the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -1156,6 +1281,385 @@ const AdminEndpoints = () => {
                                 )}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[unbanUser].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">13. Enable messaging for everyone</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will enable the messaging for everyone on the server.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/server/messaging/enable
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(enableMessagingResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${enableMessaging === code
+                                        ? `bg-${enableMessagingResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setEnableMessaging(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${enableMessagingResponse[enableMessaging].color}`}>{enableMessaging} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${enableMessagingResponse[enableMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: enableMessagingResponse[enableMessaging].message,
+                                        code: enableMessagingResponse[enableMessaging].code,
+                                        ...(enableMessagingResponse[enableMessaging].roomId && { roomId: enableMessagingResponse[enableMessaging].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[enableMessaging].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">14. Disable messaging for everyone</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will disable the messaging for everyone on the server.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/server/messaging/disable
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(disableMessagingResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${disableMessaging === code
+                                        ? `bg-${disableMessagingResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setDisableMessaging(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${disableMessagingResponse[disableMessaging].color}`}>{disableMessaging} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${disableMessagingResponse[disableMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: disableMessagingResponse[disableMessaging].message,
+                                        code: disableMessagingResponse[disableMessaging].code,
+                                        ...(disableMessagingResponse[disableMessaging].roomId && { roomId: disableMessagingResponse[disableMessaging].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[disableMessaging].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Disable the messaging for selected uids in selected rooms</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will prevent the given users from sending the messages in the given rooms.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/rooms/messaging/disable
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
+                            {JSON.stringify(
+                                [
+                                    {
+                                        rid: "global",
+                                        uid: ["test", "test2", "test3"]
+                                    },
+                                    {
+                                        rid: "pub-state-cache-test-2",
+                                        uid: ["test", "test2"]
+                                    }
+                                ],
+                                null,
+                                2
+                            )}
+                        </pre>
+
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Insert the rid where you want to stop the message sending.</li>
+                            <li><code>uid :</code> Insert all the uids that you want to prevent sending messages to the corresponding rid.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(disableRoomMessagingResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${disableRoomMessaging === code
+                                        ? `bg-${disableRoomMessagingResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setDisableRoomMessaging(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${disableRoomMessagingResponse[disableRoomMessaging].color}`}>{disableRoomMessaging} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${disableRoomMessagingResponse[disableRoomMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: disableRoomMessagingResponse[disableRoomMessaging].message,
+                                        code: disableRoomMessagingResponse[disableRoomMessaging].code,
+                                        ...(disableRoomMessagingResponse[disableRoomMessaging].roomId && { roomId: disableRoomMessagingResponse[disableRoomMessaging].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[disableRoomMessaging].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Enable the messaging for selected uids in selected rooms</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will allow the given users from sending the messages in the given rooms.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            POST
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/rooms/messaging/enable
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Request Body */}
+                    <div className="space-y-4">
+                        <strong className="text-yellow-300">Body</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
+                            {JSON.stringify(
+                                [
+                                    {
+                                        rid: "global",
+                                        uid: ["test", "test2", "test3"]
+                                    },
+                                    {
+                                        rid: "pub-state-cache-test-2",
+                                        uid: ["test", "test2"]
+                                    }
+                                ],
+                                null,
+                                2
+                            )}
+                        </pre>
+
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Insert the rid where you want to enable the message sending and was previously disabled</li>
+                            <li><code>uid :</code> Insert all the uids that you want to allow sending messages to the corresponding rid, where it was previously disabled</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(enableRoomMessagingResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${enableRoomMessaging === code
+                                        ? `bg-${enableRoomMessagingResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setEnableRoomMessaging(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${enableRoomMessagingResponse[enableRoomMessaging].color}`}>{enableRoomMessaging} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${enableRoomMessagingResponse[enableRoomMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: enableRoomMessagingResponse[enableRoomMessaging].message,
+                                        code: enableRoomMessagingResponse[enableRoomMessaging].code,
+                                        ...(enableRoomMessagingResponse[enableRoomMessaging].roomId && { roomId: enableRoomMessagingResponse[enableRoomMessaging].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[enableRoomMessaging].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Get all the banned users across different rooms on the server</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will return a json object containing all the banned users across different rooms on the server.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/connections/banned
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            Content-Type: application/json<br />
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(bannedUsersResponse).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${bannedUsersResponsesTab === code
+                                        ? `bg-${bannedUsersResponse[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setBannedUsersResponsesTab(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${bannedUsersResponse[bannedUsersResponsesTab].color}`}>{bannedUsersResponsesTab} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${bannedUsersResponse[bannedUsersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: bannedUsersResponse[bannedUsersResponsesTab].message,
+                                        code: bannedUsersResponse[bannedUsersResponsesTab].code,
+                                        ...(bannedUsersResponse[bannedUsersResponsesTab].roomId && { roomId: bannedUsersResponse[bannedUsersResponsesTab].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[bannedUsersResponsesTab].description}</p>
                         </div>
                     </div>
                 </div>
