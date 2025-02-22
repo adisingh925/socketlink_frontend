@@ -1641,7 +1641,7 @@ const AdminEndpoints = () => {
 
                         {/* Body Key Descriptions */}
                         <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                            <li><code>limit :</code> Max number of latest messages you want to fetch, can't be more than 10</li>
+                            <li><code>limit :</code> Max number of latest messages you want to fetch, can&apos;t be more than 10</li>
                             <li><code>uid :</code> Use the offset if you want to fetch more previous messages.</li>
                         </ul>
                     </div>
