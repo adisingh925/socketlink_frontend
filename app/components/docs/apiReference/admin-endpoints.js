@@ -461,7 +461,7 @@ const AdminEndpoints = () => {
                 Detailed documentation on how to use our API endpoints effectively.
             </p>
 
-            <div className="mb-6">
+            <div id="test_the_server" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Test if server is running</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -509,7 +509,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="fetch_resources" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">2. Fetch usage metrics</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -580,7 +580,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="sync_mysql" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">3. Sync MySQL buffers</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -644,7 +644,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="fetch_all_rooms" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">4. Fetch all the rooms and their members</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -710,7 +710,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="fetch_member_in_given_room" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">5. Fetch all the members for the given rooms</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -794,7 +794,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="send_message_to_everyone" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">6. Send a message to everyone connected on the server</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -873,7 +873,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="send_message_to_everyone_in_room" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected in a room</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -957,7 +957,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="send_message_to_connection" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to a particular connection</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1041,7 +1041,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="ban_the_user" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Ban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1128,7 +1128,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="unban_the_user" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Unban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1215,7 +1215,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="enable_messaging_for_everyone" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Enable messaging for everyone</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1280,7 +1280,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="disable_messaging_for_everyone" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Disable messaging for everyone</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1345,7 +1345,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="disable_messaging_in_rooms" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">13. Disable the messaging for selected uids in selected rooms</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1437,7 +1437,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="enable_messaging_in_rooms" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">14. Enable the messaging for selected uids in selected rooms</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1529,7 +1529,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="fetch_the_banned_users" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Get all the banned users across different rooms on the server</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1594,7 +1594,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="fetch_messages" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">16. Fetch the messages for the cache rooms</h2>
 
                 <p className="text-gray-300 mb-6">
@@ -1684,7 +1684,7 @@ const AdminEndpoints = () => {
                 </div>
             </div>
 
-            <div className="mb-6">
+            <div id="truncate_database" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">17. Truncate the cache rooms database</h2>
 
                 <p className="text-gray-300 mb-6">
