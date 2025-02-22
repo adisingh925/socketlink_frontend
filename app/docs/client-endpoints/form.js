@@ -47,7 +47,7 @@ export default function Docs() {
                                 id: "getting-started",
                                 title: "Getting Started",
                                 subcategories: [
-                                    { name: "Connecting to the Socketlink servers", path: "/docs/connecting" },
+                                    { name: "Connecting to the Socketlink servers", path: "/docs/connecting-to-the-socketlink-servers" },
                                     { name: "Subscribing to a room", path: "/docs/subscribing" },
                                     { name: "Sending Messages", path: "/docs/sending-messages" },
                                     { name: "Receiving Messages", path: "/docs/receiving-messages" }

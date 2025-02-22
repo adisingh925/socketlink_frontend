@@ -74,6 +74,10 @@
       {
         "source": "/docs/client-endpoints",
         "destination": "/docs/client-endpoints.html"
+      },
+      {
+        "source": "/docs/connecting-to-the-socketlink-servers",
+        "destination": "/docs/connecting-to-the-socketlink-servers.html"
       }
     ],
     "headers": [

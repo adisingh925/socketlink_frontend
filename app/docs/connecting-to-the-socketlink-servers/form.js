@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useRouter } from "next/navigation";
-import AdminEndpoints from "@/app/components/docs/apiReference/admin-endpoints";
+import ConnectingToTheSocketlinkServers from "@/app/components/docs/gettingStarted/connecting-to-the-socketlink-servers";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -12,8 +12,8 @@ export default function Docs() {
     const router = useRouter();
 
     useEffect(() => {
-        setActiveSection("Admin Endpoints");
-        document.title = "Docs | Admin Endpoints";
+        setActiveSection("Connecting to the Socketlink servers");
+        document.title = "Docs | Connecting to the Socketlink servers";
     }, []);
 
     return (
@@ -121,7 +121,7 @@ export default function Docs() {
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-3xl mx-auto">
-                        <AdminEndpoints />
+                        <ConnectingToTheSocketlinkServers />
                     </div>
                 </main>
             </div>
