@@ -1651,7 +1651,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">17. Fetch the messages for the cache rooms</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">16. Fetch the messages for the cache rooms</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will fetch the messages for the cache room which the user is connected to.
@@ -1741,7 +1741,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">18. Truncate the cache rooms database</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">17. Truncate the cache rooms database</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will delete all the messages from the cache rooms database, It should only be used when all the space is filled up.

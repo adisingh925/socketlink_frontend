@@ -3,6 +3,24 @@ import { useState } from 'react';
 const ClientEndpoints = () => {
     const [activeTab, setActiveTab] = useState('200');
 
+    const colorClasses = {
+        'green-400': 'border-green-800',
+        'yellow-400': 'border-yellow-800',
+        'red-400': 'border-red-800',
+        'orange-400': 'border-orange-800',
+        'pink-400': 'border-pink-800',
+        'red-500': 'border-red-800',
+    };
+
+    const bgColorClasses = {
+        'green-400': 'bg-green-800',
+        'yellow-400': 'bg-yellow-800',
+        'red-400': 'bg-red-800',
+        'orange-400': 'bg-orange-800',
+        'pink-400': 'bg-pink-800',
+        'red-500': 'bg-red-800',
+    };
+
     const responses = {
         '200': {
             status: 'success',
@@ -111,7 +129,7 @@ const ClientEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${activeTab === code
-                                        ? `bg-${responses[code].color} border border-white`
+                                        ? `${bgColorClasses[responses[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setActiveTab(code)}
@@ -124,7 +142,7 @@ const ClientEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${responses[activeTab].color}`}>{activeTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${responses[activeTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[responses[activeTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: responses[activeTab].message,
