@@ -193,7 +193,7 @@ const AdminEndpoints = () => {
 
     const broadcastResponse = {
         '200': {
-            message: "Successfully broadcasted the message to the given room!",
+            message: "Successfully broadcasted the message to everyone on the server!",
             color: 'green-400'
         },
         '400': {
@@ -592,7 +592,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${syncResponsesTab === code
-                                        ? `bg-${syncResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[syncResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setSyncResponsesTab(code)}
@@ -605,7 +605,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${syncResponse[syncResponsesTab].color}`}>{syncResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${syncResponse[syncResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[syncResponse[syncResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: syncResponse[syncResponsesTab].message,
@@ -656,7 +656,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomsResponsesTab === code
-                                        ? `bg-${roomResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[roomResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setRoomsResponsesTab(code)}
@@ -669,7 +669,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomResponse[roomsResponsesTab].color}`}>{roomsResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomResponse[roomsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomResponse[roomsResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomResponse[roomsResponsesTab].message,
@@ -738,7 +738,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomsMembersResponsesTab === code
-                                        ? `bg-${roomMembersResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[roomMembersResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setRoomsMembersResponsesTab(code)}
@@ -751,7 +751,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomMembersResponse[roomsMembersResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomMembersResponse[roomsMembersResponsesTab].message,
@@ -820,7 +820,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomsMembersResponsesTab === code
-                                        ? `bg-${roomMembersResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[roomMembersResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setRoomsMembersResponsesTab(code)}
@@ -833,7 +833,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomMembersResponse[roomsMembersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomMembersResponse[roomsMembersResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomMembersResponse[roomsMembersResponsesTab].message,
@@ -854,7 +854,7 @@ const AdminEndpoints = () => {
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected on the server</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will fetch all the members present in the given rooms.
+                    This will send the given message to everyone connected to the server.
                 </p>
 
                 {/* Endpoint URL */}
@@ -899,7 +899,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${broadcast === code
-                                        ? `bg-${broadcastResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[broadcastResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setBroadcast(code)}
@@ -912,7 +912,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${broadcastResponse[broadcast].color}`}>{broadcast} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[broadcastResponse[broadcast].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: broadcastResponse[broadcast].message,
@@ -923,93 +923,14 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[broadcast].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{broadcastResponse[broadcast].description}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to everyone connected in a room.</h2>
-
-                <p className="text-gray-300 mb-6">
-                    This will send message to all the members of the room.
-                </p>
-
-                {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
-                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
-                            POST
-                        </span>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/broadcast
-                        </pre>
-                    </h4>
-
-                    {/* Headers */}
-                    <div className="space-y-4">
-                        <strong className="text-blue-300">Headers</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
-                        </pre>
-                    </div>
-
-                    {/* Request Body */}
-                    <div className="space-y-4">
-                        <strong className="text-yellow-300">Body</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            &#123;<br />
-                            &nbsp;&nbsp;&quot;message&quot;: &quot;hello friends!&quot;<br />
-                            &#125;
-                        </pre>
-                        {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                            <li><code>message :</code> Insert the message that you want to send to a room on the server.</li>
-                        </ul>
-                    </div>
-
-                    {/* Response Tabs */}
-                    <div className="space-y-4 mt-6">
-                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {Object.keys(broadcastResponse).map((code) => (
-                                <button
-                                    key={code}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${broadcast === code
-                                        ? `bg-${broadcastResponse[code].color} border border-white`
-                                        : 'bg-gray-700 hover:bg-gray-600'
-                                        }`}
-                                    onClick={() => setBroadcast(code)}
-                                >
-                                    {code}
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Display Active Response */}
-                        <div>
-                            <strong className={`text-${broadcastResponse[broadcast].color}`}>{broadcast} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${broadcastResponse[broadcast].color} overflow-x-auto whitespace-pre-wrap`}>
-                                {JSON.stringify(
-                                    {
-                                        message: broadcastResponse[broadcast].message,
-                                        code: broadcastResponse[broadcast].code,
-                                        ...(broadcastResponse[broadcast].roomId && { roomId: broadcastResponse[broadcast].roomId })
-                                    },
-                                    null,
-                                    2
-                                )}
-                            </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[broadcast].description}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Send a message to everyone connected in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to everyone connected in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will send message to all the members of the room.
@@ -1062,7 +983,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomBroadcast === code
-                                        ? `bg-${roomBroadcastResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[roomBroadcastResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setRoomBroadcast(code)}
@@ -1075,7 +996,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${roomBroadcastResponse[roomBroadcast].color}`}>{roomBroadcast} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${roomBroadcastResponse[roomBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomBroadcastResponse[roomBroadcast].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: roomBroadcastResponse[roomBroadcast].message,
@@ -1086,14 +1007,14 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[roomBroadcast].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{roomBroadcastResponse[roomBroadcast].description}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Send a message to a particular connection</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Send a message to a particular connection</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will send message to given connections.
@@ -1146,7 +1067,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${connectionBroadcast === code
-                                        ? `bg-${connectionBroadcastResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[connectionBroadcastResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setConnectionBroadcast(code)}
@@ -1159,7 +1080,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${connectionBroadcastResponse[connectionBroadcast].color}`}>{connectionBroadcast} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${connectionBroadcastResponse[connectionBroadcast].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[connectionBroadcastResponse[connectionBroadcast].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: connectionBroadcastResponse[connectionBroadcast].message,
@@ -1170,14 +1091,14 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[connectionBroadcast].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{connectionBroadcastResponse[connectionBroadcast].description}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Ban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Ban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will ban the user globally or in the provided rooms.
@@ -1233,7 +1154,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${banUser === code
-                                        ? `bg-${banUserResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[banUserResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setBanUser(code)}
@@ -1246,7 +1167,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${banUserResponse[banUser].color}`}>{banUser} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${banUserResponse[banUser].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[banUserResponse[banUser].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: banUserResponse[banUser].message,
@@ -1257,14 +1178,14 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[banUser].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{banUserResponse[banUser].description}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Unban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Unban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will unban the user globally or in the provided rooms.
@@ -1320,7 +1241,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${unbanUser === code
-                                        ? `bg-${unbanUserResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[unbanUserResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setUnbanUser(code)}
@@ -1333,7 +1254,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${unbanUserResponse[unbanUser].color}`}>{unbanUser} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${unbanUserResponse[unbanUser].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[unbanUserResponse[unbanUser].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: unbanUserResponse[unbanUser].message,
@@ -1344,14 +1265,14 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[unbanUser].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{unbanUserResponse[unbanUser].description}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">13. Enable messaging for everyone</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Enable messaging for everyone</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will enable the messaging for everyone on the server.
@@ -1385,7 +1306,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${enableMessaging === code
-                                        ? `bg-${enableMessagingResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[enableMessagingResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setEnableMessaging(code)}
@@ -1398,7 +1319,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${enableMessagingResponse[enableMessaging].color}`}>{enableMessaging} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${enableMessagingResponse[enableMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[enableMessagingResponse[enableMessaging].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: enableMessagingResponse[enableMessaging].message,
@@ -1409,7 +1330,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[enableMessaging].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{enableMessagingResponse[enableMessaging].description}</p>
                         </div>
                     </div>
                 </div>
@@ -1450,7 +1371,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${disableMessaging === code
-                                        ? `bg-${disableMessagingResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[disableMessagingResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setDisableMessaging(code)}
@@ -1463,7 +1384,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${disableMessagingResponse[disableMessaging].color}`}>{disableMessaging} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${disableMessagingResponse[disableMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[disableMessagingResponse[disableMessaging].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: disableMessagingResponse[disableMessaging].message,
@@ -1474,7 +1395,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[disableMessaging].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{disableMessagingResponse[disableMessaging].description}</p>
                         </div>
                     </div>
                 </div>
@@ -1542,7 +1463,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${disableRoomMessaging === code
-                                        ? `bg-${disableRoomMessagingResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[disableRoomMessagingResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setDisableRoomMessaging(code)}
@@ -1555,7 +1476,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${disableRoomMessagingResponse[disableRoomMessaging].color}`}>{disableRoomMessaging} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${disableRoomMessagingResponse[disableRoomMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[disableRoomMessagingResponse[disableRoomMessaging].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: disableRoomMessagingResponse[disableRoomMessaging].message,
@@ -1566,7 +1487,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[disableRoomMessaging].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{disableRoomMessagingResponse[disableRoomMessaging].description}</p>
                         </div>
                     </div>
                 </div>
@@ -1634,7 +1555,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${enableRoomMessaging === code
-                                        ? `bg-${enableRoomMessagingResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[enableRoomMessagingResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setEnableRoomMessaging(code)}
@@ -1647,7 +1568,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${enableRoomMessagingResponse[enableRoomMessaging].color}`}>{enableRoomMessaging} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${enableRoomMessagingResponse[enableRoomMessaging].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[enableRoomMessagingResponse[enableRoomMessaging].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: enableRoomMessagingResponse[enableRoomMessaging].message,
@@ -1658,7 +1579,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[enableRoomMessaging].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{enableRoomMessagingResponse[enableRoomMessaging].description}</p>
                         </div>
                     </div>
                 </div>
@@ -1699,7 +1620,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${bannedUsersResponsesTab === code
-                                        ? `bg-${bannedUsersResponse[code].color} border border-white`
+                                        ? `${bgColorClasses[bannedUsersResponse[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setBannedUsersResponsesTab(code)}
@@ -1712,7 +1633,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${bannedUsersResponse[bannedUsersResponsesTab].color}`}>{bannedUsersResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${bannedUsersResponse[bannedUsersResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[bannedUsersResponse[bannedUsersResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: bannedUsersResponse[bannedUsersResponsesTab].message,
@@ -1723,7 +1644,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[bannedUsersResponsesTab].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{bannedUsersResponse[bannedUsersResponsesTab].description}</p>
                         </div>
                     </div>
                 </div>
@@ -1789,7 +1710,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${cacheResponsesTab === code
-                                        ? `bg-${cacheResponses[code].color} border border-white`
+                                        ? `${bgColorClasses[cacheResponses[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setCacheResponsesTab(code)}
@@ -1802,7 +1723,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${cacheResponses[cacheResponsesTab].color}`}>{cacheResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${cacheResponses[cacheResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[cacheResponses[cacheResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: cacheResponses[cacheResponsesTab].message,
@@ -1853,7 +1774,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${truncateDataResponsesTab === code
-                                        ? `bg-${truncateResponses[code].color} border border-white`
+                                        ? `${bgColorClasses[truncateResponses[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setTruncateDataResponsesTab(code)}
@@ -1866,7 +1787,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${truncateResponses[truncateDataResponsesTab].color}`}>{truncateDataResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${truncateResponses[truncateDataResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[truncateResponses[truncateDataResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: truncateResponses[truncateDataResponsesTab].message,
@@ -1877,7 +1798,7 @@ const AdminEndpoints = () => {
                                     2
                                 )}
                             </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[truncateDataResponsesTab].description}</p>
+                            <p className="text-gray-400 text-sm mt-2">{truncateResponses[truncateDataResponsesTab].description}</p>
                         </div>
                     </div>
                 </div>
