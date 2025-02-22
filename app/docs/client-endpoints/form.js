@@ -8,6 +8,7 @@ import ClientEndpoints from "@/app/components/docs/apiReference/client-endpoints
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isRightDrawerOpen, setIsRightDrawerOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("overview");
     const router = useRouter();
 
@@ -16,9 +17,17 @@ export default function Docs() {
         document.title = "Docs | Client Endpoints";
     }, []);
 
+    const goToSection = (id) => {
+        router.push(`#${id}`);
+    };
+
+    const scrollToSection = (id) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
-            {/* Sidebar */}
+            {/* Left Sidebar */}
             <aside className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
                   ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64"} md:translate-x-0 fixed md:relative 
                   h-full shadow-md rounded-r-lg overflow-y-auto border-r border-gray-700`}>
@@ -107,10 +116,9 @@ export default function Docs() {
                 </nav>
             </aside>
 
-            {/* Sidebar Toggle Button (Mobile) */}
+            {/* Left Sidebar Toggle Button (Mobile) */}
             <button
-                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isSidebarOpen ? "left-[17rem]" : "left-4"
-                    }`}
+                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isSidebarOpen ? "left-[17rem]" : "left-4"}`}
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
                 {isSidebarOpen ? <FiChevronLeft size={20} /> : <FiChevronRight size={20} />}
@@ -125,6 +133,54 @@ export default function Docs() {
                     </div>
                 </main>
             </div>
+
+            {/* Right Sidebar */}
+            <aside className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
+                  ${isRightDrawerOpen ? "translate-x-0 z-50 shadow-lg" : "translate-x-64"} md:translate-x-0 fixed md:relative 
+                  h-full shadow-md rounded-l-lg overflow-y-auto border-l border-gray-700 right-0 top-0`}>
+                <nav>
+                    <ul className="space-y-6">
+                        {[
+                            {
+                                id: "overview",
+                                title: "Table of Contents",
+                                subcategories: [
+                                    { name: "Subscribe to a room", id: "subscribe_to_room" }
+                                ]
+                            }
+                        ].map((item, index) => (
+                            <li key={item.id}>
+                                <div className="text-gray-300 font-semibold text-lg mb-2 uppercase tracking-wide">
+                                    {item.title}
+                                </div>
+                                <ul className="pl-4 space-y-3 text-sm">
+                                    {item.subcategories.map((sub) => (
+                                        <li
+                                            key={sub.name}
+                                            className={`cursor-pointer transition-colors duration-200 ease-in-out px-2 py-1 rounded-lg 
+                                                ${activeSection === sub.name
+                                                    ? "text-white font-bold bg-gray-700/50"
+                                                    : "text-gray-400 hover:text-white hover:bg-gray-700/40"}`}
+                                            onClick={() => scrollToSection(sub.id)}
+                                        >
+                                            {sub.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                                {index !== 5 && <hr className="border-gray-600 my-5" />}
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </aside>
+
+            {/* Right Sidebar Toggle Button (Mobile) */}
+            <button
+                className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isRightDrawerOpen ? "right-[17rem]" : "right-4"}`}
+                onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+            >
+                {isRightDrawerOpen ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
+            </button>
         </div>
     );
 }

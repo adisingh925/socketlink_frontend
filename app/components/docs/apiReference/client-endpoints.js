@@ -58,7 +58,7 @@ const ClientEndpoints = () => {
                 Detailed documentation on how to use our API endpoints effectively.
             </p>
 
-            <div className="mb-6">
+            <div id="subscribe_to_room" className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Subscribe to a room / Change the current room</h2>
 
                 <p className="text-gray-300 mb-6">
