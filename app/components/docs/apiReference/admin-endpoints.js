@@ -17,6 +17,23 @@ const AdminEndpoints = () => {
     const [enableRoomMessaging, setEnableRoomMessaging] = useState('200');
     const [bannedUsersResponsesTab, setBannedUsersResponsesTab] = useState('200');
     const [cacheResponsesTab, setCacheResponsesTab] = useState('200');
+    const [truncateDataResponsesTab, setTruncateDataResponsesTab] = useState('200');
+
+    const truncateResponses = {
+        '200': {
+            message: "Database truncated successfully!",
+            color: 'green-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
 
     const cacheResponses = {
         '200': {
@@ -418,7 +435,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/ping
+                            https://test.socketlink.io/api/v1/ping
                         </pre>
                     </h4>
 
@@ -466,7 +483,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/metrics
+                            https://test.socketlink.io/api/v1/metrics
                         </pre>
                     </h4>
 
@@ -537,7 +554,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/mysql/sync
+                            https://test.socketlink.io/api/v1/mysql/sync
                         </pre>
                     </h4>
 
@@ -601,7 +618,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/rooms
+                            https://test.socketlink.io/api/v1/rooms
                         </pre>
                     </h4>
 
@@ -661,7 +678,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -743,7 +760,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -825,7 +842,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -904,7 +921,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -983,7 +1000,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1067,7 +1084,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1151,7 +1168,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1238,7 +1255,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1455,7 +1472,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1547,7 +1564,7 @@ const AdminEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
@@ -1779,6 +1796,70 @@ const AdminEndpoints = () => {
                                 )}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{cacheResponses[cacheResponsesTab].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">18. Truncate the cache rooms database</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will delete all the messages from the cache rooms database, It should only be used when all the space is filled up.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            DEL
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9001/api/v1/database
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(truncateResponses).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${truncateDataResponsesTab === code
+                                        ? `bg-${truncateResponses[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setTruncateDataResponsesTab(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${truncateResponses[truncateDataResponsesTab].color}`}>{truncateDataResponsesTab} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${truncateResponses[truncateDataResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: truncateResponses[truncateDataResponsesTab].message,
+                                        code: truncateResponses[truncateDataResponsesTab].code,
+                                        ...(truncateResponses[truncateDataResponsesTab].roomId && { roomId: truncateResponses[truncateDataResponsesTab].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[truncateDataResponsesTab].description}</p>
                         </div>
                     </div>
                 </div>
