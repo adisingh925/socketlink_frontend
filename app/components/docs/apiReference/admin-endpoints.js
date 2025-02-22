@@ -16,6 +16,35 @@ const AdminEndpoints = () => {
     const [disableRoomMessaging, setDisableRoomMessaging] = useState('200');
     const [enableRoomMessaging, setEnableRoomMessaging] = useState('200');
     const [bannedUsersResponsesTab, setBannedUsersResponsesTab] = useState('200');
+    const [cacheResponsesTab, setCacheResponsesTab] = useState('200');
+
+    const cacheResponses = {
+        '200': {
+            message: "Messaging successfully disabled for the members of the given rooms!",
+            color: 'green-400'
+        },
+        '400': {
+            message: 'Limit cannot be greater than 10!',
+            color: 'yellow-400'
+        },
+        '401': {
+            message: 'Unauthorized access, Invalid API key!',
+            color: 'red-400'
+        },
+        '403': {
+            message: 'Access denied!',
+            color: 'orange-400'
+        },
+        '404': {
+            message: 'some error message',
+            color: 'pink-400'
+        },
+        '500': {
+            message: 'Internal server error!',
+            description: 'Occurs when an unexpected server error happens.',
+            color: 'red-500'
+        }
+    }
 
     const pingResponses = {
         '200': {
@@ -1660,6 +1689,96 @@ const AdminEndpoints = () => {
                                 )}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[bannedUsersResponsesTab].description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">17. Fetch the messages for the cache rooms</h2>
+
+                <p className="text-gray-300 mb-6">
+                    This will fetch the messages for the cache room which the user is connected to.
+                </p>
+
+                {/* Endpoint URL */}
+                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
+                        </span>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            http://localhost:9002/api/v1/messages/room
+                        </pre>
+                    </h4>
+
+                    {/* Headers */}
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Headers</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            api-key: ADMIN_API_KEY
+                        </pre>
+                    </div>
+
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Path Parameters</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            rid
+                        </pre>
+
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>rid :</code> Replace the rid with the one you are connected to.</li>
+                        </ul>
+                    </div>
+
+                    <div className="space-y-4">
+                        <strong className="text-blue-300">Query Parameters</strong>
+                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                            limit: 10<br />
+                            offset: 0<br />
+                        </pre>
+
+                        {/* Body Key Descriptions */}
+                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                            <li><code>limit :</code> Max number of latest messages you want to fetch, can't be more than 10</li>
+                            <li><code>uid :</code> Use the offset if you want to fetch more previous messages.</li>
+                        </ul>
+                    </div>
+
+                    {/* Response Tabs */}
+                    <div className="space-y-4 mt-6">
+                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {Object.keys(cacheResponses).map((code) => (
+                                <button
+                                    key={code}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${cacheResponsesTab === code
+                                        ? `bg-${cacheResponses[code].color} border border-white`
+                                        : 'bg-gray-700 hover:bg-gray-600'
+                                        }`}
+                                    onClick={() => setCacheResponsesTab(code)}
+                                >
+                                    {code}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Display Active Response */}
+                        <div>
+                            <strong className={`text-${cacheResponses[cacheResponsesTab].color}`}>{cacheResponsesTab} Response</strong>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${cacheResponses[cacheResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                                {JSON.stringify(
+                                    {
+                                        message: cacheResponses[cacheResponsesTab].message,
+                                        code: cacheResponses[cacheResponsesTab].code,
+                                        ...(cacheResponses[cacheResponsesTab].roomId && { roomId: cacheResponses[cacheResponsesTab].roomId })
+                                    },
+                                    null,
+                                    2
+                                )}
+                            </pre>
+                            <p className="text-gray-400 text-sm mt-2">{cacheResponses[cacheResponsesTab].description}</p>
                         </div>
                     </div>
                 </div>
