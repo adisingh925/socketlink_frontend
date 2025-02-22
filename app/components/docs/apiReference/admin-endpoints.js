@@ -19,6 +19,24 @@ const AdminEndpoints = () => {
     const [cacheResponsesTab, setCacheResponsesTab] = useState('200');
     const [truncateDataResponsesTab, setTruncateDataResponsesTab] = useState('200');
 
+    const colorClasses = {
+        'green-400': 'border-green-800',
+        'yellow-400': 'border-yellow-800',
+        'red-400': 'border-red-800',
+        'orange-400': 'border-orange-800',
+        'pink-400': 'border-pink-800',
+        'red-500': 'border-red-800',
+    };
+
+    const bgColorClasses = {
+        'green-400': 'bg-green-800',
+        'yellow-400': 'bg-yellow-800',
+        'red-400': 'bg-red-800',
+        'orange-400': 'bg-orange-800',
+        'pink-400': 'bg-pink-800',
+        'red-500': 'bg-red-800',
+    };
+
     const truncateResponses = {
         '200': {
             message: "Database truncated successfully!",
@@ -447,7 +465,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${pingResponsesTab === code
-                                        ? `bg-${pingResponses[code].color} border border-white`
+                                        ? `${bgColorClasses[pingResponses[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setPingResponsesTab(code)}
@@ -460,7 +478,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${pingResponses[pingResponsesTab].color}`}>{pingResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${pingResponses[pingResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[pingResponses[pingResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {"Pong!"}
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{pingResponses[pingResponsesTab].description}</p>
@@ -503,7 +521,7 @@ const AdminEndpoints = () => {
                                 <button
                                     key={code}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${metricsResponsesTab === code
-                                        ? `bg-${metricsResponses[code].color} border border-white`
+                                        ? `${bgColorClasses[metricsResponses[code].color]} border border-white`
                                         : 'bg-gray-700 hover:bg-gray-600'
                                         }`}
                                     onClick={() => setMetricsResponsesTab(code)}
@@ -516,7 +534,7 @@ const AdminEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${metricsResponses[metricsResponsesTab].color}`}>{metricsResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${metricsResponses[metricsResponsesTab].color} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[metricsResponses[metricsResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         connections: metricsResponses[metricsResponsesTab].connections,
