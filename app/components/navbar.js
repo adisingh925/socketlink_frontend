@@ -146,7 +146,7 @@ export default function FloatingNavigationBar() {
                                         Pricing
                                     </Link>
                                     <Link
-                                        href="/docs"
+                                        href="/docs/introduction"
                                         className={classNames(
                                             isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
                                             "rounded-md px-3 py-2 text-sm font-medium"
@@ -168,7 +168,7 @@ export default function FloatingNavigationBar() {
                                             Pricing
                                         </Link>
                                         <Link
-                                            href="/docs"
+                                            href="/docs/introduction"
                                             className={classNames(
                                                 isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
@@ -345,7 +345,7 @@ export default function FloatingNavigationBar() {
                                 Pricing
                             </Link>
                             <Link
-                                href="/docs"
+                                href="/docs/introduction"
                                 className={classNames(
                                     isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                     "block rounded-md px-3 py-2 text-base font-medium"
@@ -362,7 +362,7 @@ export default function FloatingNavigationBar() {
                             )}>
                                 Pricing
                             </Link>
-                            <Link href="/docs" className={classNames(
+                            <Link href="/docs/introduction" className={classNames(
                                 isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
