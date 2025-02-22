@@ -154,7 +154,16 @@ const AdminEndpoints = () => {
     const roomResponse = {
         '200': {
             message: "MySQL data synced successfully!",
-            color: 'green-400'
+            color: 'green-400',
+            data: [
+                {
+                    rid: "pub-state-cache-test-0",
+                    uid: [
+                        "c901c777-31ff-4e5c-afb2-f67d9bf75059",
+                        "cf38a9e4-d873-43a2-8bef-b9c40c8284f2"
+                    ]
+                }
+            ]
         },
         '401': {
             message: 'Unauthorized access, Invalid API key!',
@@ -170,7 +179,20 @@ const AdminEndpoints = () => {
     const roomMembersResponse = {
         '200': {
             message: "MySQL data synced successfully!",
-            color: 'green-400'
+            color: 'green-400',
+            data: [
+                {
+                    rid: "pub-state-cache-test-0",
+                    uid: [
+                        "c901c777-31ff-4e5c-afb2-f67d9bf75059",
+                        "cf38a9e4-d873-43a2-8bef-b9c40c8284f2"
+                    ]
+                },
+                {
+                    rid: "pub-state-cache-test-3",
+                    uid: []
+                }
+            ]
         },
         '400': {
             message: 'Invalid JSON format!',
@@ -189,7 +211,7 @@ const AdminEndpoints = () => {
             description: 'Occurs when an unexpected server error happens.',
             color: 'red-500'
         }
-    }
+    };
 
     const broadcastResponse = {
         '200': {
@@ -217,7 +239,7 @@ const AdminEndpoints = () => {
 
     const roomBroadcastResponse = {
         '200': {
-            message: "Successfully broadcasted the message to the given room!",
+            message: "Successfully broadcasted the message to the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -265,7 +287,7 @@ const AdminEndpoints = () => {
 
     const banUserResponse = {
         '200': {
-            message: "Given members are successfully banned from the given rooms!",
+            message: "Given users are successfully banned from the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -289,7 +311,7 @@ const AdminEndpoints = () => {
 
     const unbanUserResponse = {
         '200': {
-            message: "Members are successfully unbanned from the given rooms!",
+            message: "Given users are successfully unbanned from the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -361,7 +383,7 @@ const AdminEndpoints = () => {
 
     const disableRoomMessagingResponse = {
         '200': {
-            message: "Messaging successfully disabled for the given members in the given rooms!!",
+            message: "Messaging successfully disabled for the given members in the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -671,11 +693,13 @@ const AdminEndpoints = () => {
                             <strong className={`text-${roomResponse[roomsResponsesTab].color}`}>{roomsResponsesTab} Response</strong>
                             <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomResponse[roomsResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
-                                    {
-                                        message: roomResponse[roomsResponsesTab].message,
-                                        code: roomResponse[roomsResponsesTab].code,
-                                        ...(roomResponse[roomsResponsesTab].roomId && { roomId: roomResponse[roomsResponsesTab].roomId })
-                                    },
+                                    roomResponse[roomsResponsesTab].data
+                                        ? roomResponse[roomsResponsesTab].data
+                                        : {
+                                            message: roomResponse[roomsResponsesTab].message,
+                                            code: roomResponse[roomsResponsesTab].code,
+                                            ...(roomResponse[roomsResponsesTab].roomId && { roomId: roomResponse[roomsResponsesTab].roomId })
+                                        },
                                     null,
                                     2
                                 )}
@@ -719,7 +743,7 @@ const AdminEndpoints = () => {
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
                             &nbsp;&nbsp;&quot;rid&quot;: [<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-2&quot;,<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-0&quot;,<br />
                             &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-3&quot;<br />
                             &nbsp;&nbsp;]<br />
                             &#125;
@@ -753,11 +777,13 @@ const AdminEndpoints = () => {
                             <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
                             <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomMembersResponse[roomsMembersResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
-                                    {
-                                        message: roomMembersResponse[roomsMembersResponsesTab].message,
-                                        code: roomMembersResponse[roomsMembersResponsesTab].code,
-                                        ...(roomMembersResponse[roomsMembersResponsesTab].roomId && { roomId: roomMembersResponse[roomsMembersResponsesTab].roomId })
-                                    },
+                                    roomMembersResponse[roomsMembersResponsesTab].data
+                                        ? roomMembersResponse[roomsMembersResponsesTab].data
+                                        : {
+                                            message: roomMembersResponse[roomsMembersResponsesTab].message,
+                                            code: roomMembersResponse[roomsMembersResponsesTab].code,
+                                            ...(roomMembersResponse[roomsMembersResponsesTab].roomId && { roomId: roomMembersResponse[roomsMembersResponsesTab].roomId })
+                                        },
                                     null,
                                     2
                                 )}
@@ -769,89 +795,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">6. Fetch all the members in a room.</h2>
-
-                <p className="text-gray-300 mb-6">
-                    This will fetch all the members present in the given rooms.
-                </p>
-
-                {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
-                    <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
-                            POST
-                        </span>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/connections
-                        </pre>
-                    </h4>
-
-                    {/* Headers */}
-                    <div className="space-y-4">
-                        <strong className="text-blue-300">Headers</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
-                        </pre>
-                    </div>
-
-                    {/* Request Body */}
-                    <div className="space-y-4">
-                        <strong className="text-yellow-300">Body</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            &#123;<br />
-                            &nbsp;&nbsp;&quot;rid&quot;: [<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-2&quot;,<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&quot;pub-state-cache-test-3&quot;<br />
-                            &nbsp;&nbsp;]<br />
-                            &#125;
-                        </pre>
-                        {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                            <li><code>rid :</code> Room ID for which you want to fetch the members.</li>
-                        </ul>
-                    </div>
-
-                    {/* Response Tabs */}
-                    <div className="space-y-4 mt-6">
-                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Response</h3>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {Object.keys(roomMembersResponse).map((code) => (
-                                <button
-                                    key={code}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium text-gray-200 transition-colors ${roomsMembersResponsesTab === code
-                                        ? `${bgColorClasses[roomMembersResponse[code].color]} border border-white`
-                                        : 'bg-gray-700 hover:bg-gray-600'
-                                        }`}
-                                    onClick={() => setRoomsMembersResponsesTab(code)}
-                                >
-                                    {code}
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Display Active Response */}
-                        <div>
-                            <strong className={`text-${roomMembersResponse[roomsMembersResponsesTab].color}`}>{roomsMembersResponsesTab} Response</strong>
-                            <pre className={`mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[roomMembersResponse[roomsMembersResponsesTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
-                                {JSON.stringify(
-                                    {
-                                        message: roomMembersResponse[roomsMembersResponsesTab].message,
-                                        code: roomMembersResponse[roomsMembersResponsesTab].code,
-                                        ...(roomMembersResponse[roomsMembersResponsesTab].roomId && { roomId: roomMembersResponse[roomsMembersResponsesTab].roomId })
-                                    },
-                                    null,
-                                    2
-                                )}
-                            </pre>
-                            <p className="text-gray-400 text-sm mt-2">{roomMembersResponse[roomsMembersResponsesTab].description}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected on the server</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">6. Send a message to everyone connected on the server</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will send the given message to everyone connected to the server.
@@ -930,7 +874,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to everyone connected in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will send message to all the members of the room.
@@ -1014,7 +958,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Send a message to a particular connection</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to a particular connection</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will send message to given connections.
@@ -1098,7 +1042,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Ban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Ban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will ban the user globally or in the provided rooms.
@@ -1185,7 +1129,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Unban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Unban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will unban the user globally or in the provided rooms.
@@ -1272,7 +1216,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Enable messaging for everyone</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Enable messaging for everyone</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will enable the messaging for everyone on the server.
@@ -1337,7 +1281,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">14. Disable messaging for everyone</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Disable messaging for everyone</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will disable the messaging for everyone on the server.
@@ -1402,7 +1346,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Disable the messaging for selected uids in selected rooms</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">13. Disable the messaging for selected uids in selected rooms</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will prevent the given users from sending the messages in the given rooms.
@@ -1494,7 +1438,7 @@ const AdminEndpoints = () => {
             </div>
 
             <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Enable the messaging for selected uids in selected rooms</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">14. Enable the messaging for selected uids in selected rooms</h2>
 
                 <p className="text-gray-300 mb-6">
                     This will allow the given users from sending the messages in the given rooms.
