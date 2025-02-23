@@ -12,13 +12,13 @@ export default function Docs() {
 
     const adminEvents = {
         'Broadcast': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is triggered when some message is broadcasted the the admin.',
             color: 'white',
             data: 'YOUR_MESSAGE',
             source: 'admin'
         },
         'You Have Been Banned': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is triggered when the admin bans a user from the server, It is sent to the user who has been banned.',
             color: 'white',
             data: 'YOU_HAVE_BEEN_BANNED',
             source: 'server'

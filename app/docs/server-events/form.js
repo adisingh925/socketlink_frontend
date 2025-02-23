@@ -12,72 +12,48 @@ export default function Docs() {
 
     const events = {
         'Rate Limit Exceeded': {
-            description: 'This event is fired when a user sends too many requests in a short period of time, triggering the rate limiting mechanism.',
+            description: 'This event is fired when the user sends data very fast and the server is not able to deliver it.',
             color: 'white',
             data: 'YOU_ARE_RATE_LIMITED',
             source: 'server'
         },
         'Rate Limit Lifted': {
-            description: 'This event occurs when an invalid API key is provided while attempting to authenticate with the WebSocket server.',
+            description: 'This event occurs when the accumulated buffer for the user is cleared and the user can send the data again.',
             color: 'white',
             data: 'RATE_LIMIT_LIFTED',
             source: 'server'
         },
         'Monthly Data Transfer Limit Exhausted': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is triggered when the monthly data transfer limit is exhausted for the current plan.',
             color: 'white',
             data: 'MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED',
             source: 'server'
         },
         'Messaging Disabled': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event happens when the messaging is disabled for the user, either in a room or globally.',
             color: 'white',
             data: 'MESSAGING_DISABLED',
             source: 'server'
         },
         'Connected To Room': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is being sent to the user who has been successfully connected to a new room.',
             color: 'white',
             data: 'CONNECTED_TO_ROOM',
             source: 'server'
         },
         'Someone Joined The Room': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is only triggered in state rooms when someone joins the room, it is sent to everyone else in the room except the user who joined.',
             color: 'white',
             data: 'SOMEONE_JOINED_THE_ROOM',
             source: 'server'
         },
         'Someone Left The Room': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event is only triggered in state rooms when someone leaves the room, it is sent to everyone else in the room except the user who left.',
             color: 'white',
             data: 'SOMEONE_LEFT_THE_ROOM',
             source: 'server'
         },
     };
-
-    const adminEvents = {
-        'Broadcast': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
-            color: 'white',
-            data: 'YOUR_MESSAGE',
-            source: 'admin'
-        },
-        'You Have Been Banned': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
-            color: 'white',
-            data: 'YOU_HAVE_BEEN_BANNED',
-            source: 'server'
-        },
-    }
-
-    const userEvents = {
-        'Message': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
-            color: 'white',
-            data: 'YOUR_MESSAGE',
-            source: 'user'
-        },
-    }
 
     useEffect(() => {
         setActiveSection("Server Events");
@@ -224,38 +200,6 @@ export default function Docs() {
                                             }, null, 2)}
                                         </pre>
                                         <p className="text-gray-400 text-sm mt-2">{events[event].description}</p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="space-y-6 mt-6">
-                                <h3 className="text-purple-300 text-lg font-semibold mb-2">Admin Events</h3>
-                                {Object.keys(adminEvents).map((event) => (
-                                    <div key={event} className="mb-6">
-                                        <strong className={`text-${adminEvents[event].color}`}>{event}</strong>
-                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${adminEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
-                                            {JSON.stringify({
-                                                data: adminEvents[event].data,
-                                                source: adminEvents[event].source
-                                            }, null, 2)}
-                                        </pre>
-                                        <p className="text-gray-400 text-sm mt-2">{adminEvents[event].description}</p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="space-y-6 mt-6">
-                                <h3 className="text-purple-300 text-lg font-semibold mb-2">User Events</h3>
-                                {Object.keys(userEvents).map((event) => (
-                                    <div key={event} className="mb-6">
-                                        <strong className={`text-${userEvents[event].color}`}>{event}</strong>
-                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${userEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
-                                            {JSON.stringify({
-                                                data: userEvents[event].data,
-                                                source: userEvents[event].source
-                                            }, null, 2)}
-                                        </pre>
-                                        <p className="text-gray-400 text-sm mt-2">{userEvents[event].description}</p>
                                     </div>
                                 ))}
                             </div>

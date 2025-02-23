@@ -12,7 +12,7 @@ export default function Docs() {
 
     const userEvents = {
         'Message': {
-            description: 'This event is triggered when the server encounters an unexpected error.',
+            description: 'This event fires when a user sends a message to a room.',
             color: 'white',
             data: 'YOUR_MESSAGE',
             source: 'user'
