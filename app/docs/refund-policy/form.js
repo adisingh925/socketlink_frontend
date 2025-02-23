@@ -136,43 +136,46 @@ export default function Docs() {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
-                    <div className="max-w-3xl mx-auto">
-                        <section id="refund-policy" className="mb-16 p-6 bg-gray-900 border-2 border-white/20 rounded-2xl shadow-lg">
-                            <h2 className="text-3xl font-extrabold text-white mb-6">🔄 Refund Policy</h2>
+                <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
+                    <div className="max-w-4xl mx-auto">
+                        <section id="refund-policy" className="mb-16">
+                            <h2 className="text-3xl font-bold text-white mb-10">🔄 Refund Policy</h2>
 
-                            <p className="text-gray-300 text-lg mb-6">
+                            <p className="text-lg text-gray-300 mb-10">
                                 <strong>We strive to ensure a smooth experience for our users.</strong>
                                 <br /><br />
                                 Below are the terms and conditions regarding refunds for payments made through our platform.
                             </p>
 
-                            {/* Important Refund Notice */}
-                            <div className="mb-6 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-2xl shadow-md">
+                            {/* Important Notice */}
+                            <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
                                 <h3 className="text-lg font-semibold text-yellow-400">⚠️ Important Notice</h3>
                                 <p className="text-gray-300 mt-2">
                                     Refunds are only applicable under specific conditions and will be processed based on our policy guidelines. Please review the details below before making a request.
                                 </p>
                             </div>
 
-                            <div className="mb-6 p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
-                                <h3 className="text-xl font-bold text-blue-400">📌 Refund Eligibility</h3>
-                                <ul className="text-gray-300 mt-2 space-y-2 list-disc list-inside">
+                            {/* Refund Eligibility */}
+                            <div className="mb-10">
+                                <h3 className="text-xl font-bold text-blue-400 mb-3">📌 Refund Eligibility</h3>
+                                <ul className="text-gray-300 space-y-3 list-disc list-inside">
                                     <li>Refund requests must be made within <strong>7 days</strong> of the transaction date.</li>
-                                    <li>Refunds are applicable only for failed transactions where the amount was deducted but the service was not delivered.</li>
-                                    <li>No refunds will be issued for successfully processed payments where services have been utilized.</li>
+                                    <li>Applicable only for failed transactions where the amount was deducted but the service was not delivered.</li>
+                                    <li>No refunds for successfully processed payments where services have been utilized.</li>
                                     <li>All refund requests will be reviewed, and approval will be subject to verification.</li>
                                 </ul>
                             </div>
 
-                            <div className="mb-6 p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
-                                <h3 className="text-xl font-bold text-blue-400">⏳ Refund Processing Time</h3>
-                                <p className="text-gray-300 mt-2">
+                            {/* Refund Processing Time */}
+                            <div className="mb-10">
+                                <h3 className="text-xl font-bold text-blue-400 mb-3">⏳ Refund Processing Time</h3>
+                                <p className="text-gray-300">
                                     Approved refunds will be processed within <strong>5-10 business days</strong>. The amount will be credited to the original payment method used for the transaction.
                                 </p>
                             </div>
 
-                            <div className="p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
+                            {/* Need Assistance? */}
+                            <div className="p-4 bg-gray-800/80 rounded-xl">
                                 <h3 className="text-xl font-bold text-yellow-400">💡 Need Assistance?</h3>
                                 <p className="text-gray-300 mt-2">
                                     If you have any concerns or need help with a refund request, please contact our 24/7 support team.

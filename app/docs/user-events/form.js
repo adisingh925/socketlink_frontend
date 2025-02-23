@@ -145,7 +145,7 @@ export default function Docs() {
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
-                    <div className="max-w-3xl mx-auto">
+                    <div className="max-w-4xl mx-auto">
                         <section id="api" className="mb-14">
                             <h2 className="text-2xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
                             <p className="text-gray-300 mb-6">

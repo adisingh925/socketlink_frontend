@@ -136,40 +136,42 @@ export default function Docs() {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
-                    <div className="max-w-3xl mx-auto">
-                        <section id="payment-options" className="mb-16 p-6 bg-gray-900 border-2 border-white/20 rounded-2xl shadow-lg">
-                            <h2 className="text-3xl font-extrabold text-white mb-6">💳 Payment Options</h2>
+                <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
+                    <div className="max-w-4xl mx-auto">
+                        <section id="payment-options" className="mb-16">
+                            <h2 className="text-3xl font-bold text-white mb-10">💳 Payment Options</h2>
 
-                            <p className="text-gray-300 text-lg mb-6">
+                            <p className="text-lg text-gray-300 mb-10">
                                 <strong>We’ve integrated <em className="text-blue-400">Razorpay</em> as our global payment gateway.</strong>
                                 <br /><br />
-                                You can securely complete transactions using various payment methods supported by Razorpay worldwide.
+                                Securely complete transactions using various payment methods supported worldwide.
                             </p>
 
-                            {/* Important Security Notice */}
-                            <div className="mb-6 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-2xl shadow-md">
+                            {/* Security Notice */}
+                            <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
                                 <h3 className="text-lg font-semibold text-yellow-400">⚠️ Security First</h3>
                                 <p className="text-gray-300 mt-2">
-                                    All payments are securely processed via Razorpay, ensuring encryption, fraud prevention measures, and compliance with international security standards.
+                                    All payments are securely processed via Razorpay, ensuring encryption, fraud prevention, and compliance with international security standards.
                                 </p>
                             </div>
 
-                            <div className="mb-6 p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
-                                <h3 className="text-xl font-bold text-blue-400">✅ Supported Payment Methods</h3>
-                                <ul className="text-gray-300 mt-2 space-y-2 list-disc list-inside">
-                                    <li><strong>Credit & Debit Cards -</strong> Visa, MasterCard, American Express, Rupay, Maestro, and more.</li>
-                                    <li><strong>UPI -</strong> Google Pay, PhonePe, Paytm, and other UPI apps (India).</li>
-                                    <li><strong>Net Banking -</strong> Supports major banks globally.</li>
-                                    <li><strong>Wallets -</strong> Paytm, Mobikwik, FreeCharge, and other digital wallets.</li>
-                                    <li><strong>International Payments -</strong> Accepts payments from global customers via credit / debit cards and international banking options.</li>
+                            {/* Supported Payment Methods */}
+                            <div className="mb-10">
+                                <h3 className="text-xl font-bold text-blue-400 mb-3">✅ Supported Payment Methods</h3>
+                                <ul className="text-gray-300 space-y-3 list-disc list-inside">
+                                    <li><strong>Credit & Debit Cards –</strong> Visa, MasterCard, AmEx, Rupay, Maestro, etc.</li>
+                                    <li><strong>UPI –</strong> Google Pay, PhonePe, Paytm, etc. (India).</li>
+                                    <li><strong>Net Banking –</strong> Supports major banks globally.</li>
+                                    <li><strong>Wallets –</strong> Paytm, Mobikwik, FreeCharge, and more.</li>
+                                    <li><strong>International Payments –</strong> Accepts credit/debit cards & banking worldwide.</li>
                                 </ul>
                             </div>
 
-                            <div className="p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
+                            {/* Need Help Section */}
+                            <div className="p-4 bg-gray-800/80 rounded-xl">
                                 <h3 className="text-xl font-bold text-yellow-400">💡 Need Help?</h3>
                                 <p className="text-gray-300 mt-2">
-                                    If you face any issues with payments, feel free to contact our 24/7 global support team.
+                                    If you face any issues with payments, contact our 24/7 global support team.
                                 </p>
                             </div>
                         </section>

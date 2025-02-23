@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import Introduction from "../../components/docs/overview/introduction";
 import { useRouter } from "next/navigation";
 
 export default function Docs() {
@@ -137,72 +136,72 @@ export default function Docs() {
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 mb-10 pt-[7rem] text-gray-200">
-      <div className="max-w-3xl mx-auto">
-        <h3 className="text-3xl font-bold text-white mb-10">Key Features</h3>
+                    <div className="max-w-3xl mx-auto">
+                        <h3 className="text-3xl font-bold text-white mb-10">Key Features</h3>
 
-        <ul className="space-y-12">
-          <li>
-            <h4 className="text-xl font-semibold text-blue-400 mb-3">Ultra-Fast WebSocket Connections</h4>
-            <p className="text-gray-400">Low-latency, high-speed communication with optimized WebSockets.</p>
-          </li>
+                        <ul className="space-y-12">
+                            <li>
+                                <h4 className="text-xl font-semibold text-blue-400 mb-3">Ultra-Fast WebSocket Connections</h4>
+                                <p className="text-gray-400">Low-latency, high-speed communication with optimized WebSockets.</p>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-green-400 mb-3">Scalable Architecture</h4>
-            <p className="text-gray-400">Handles thousands of concurrent connections effortlessly.</p>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-green-400 mb-3">Scalable Architecture</h4>
+                                <p className="text-gray-400">Handles thousands of concurrent connections effortlessly.</p>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-red-400 mb-3">Secure WebSocket Connections</h4>
-            <ul className="ml-5 space-y-3 text-gray-400">
-              <li>🔑 <strong>Strong Authentication</strong> – Only trusted clients can connect.</li>
-              <li>🔐 <strong>Perfect Forward Secrecy</strong> – Ensures long-term confidentiality.</li>
-              <li>🛡️ <strong>Quantum-Resistant Strength</strong> – Secure against emerging threats.</li>
-              <li>⚡ <strong>Efficient Performance</strong> – Optimized for low-latency handshakes.</li>
-              <li>🛑 <strong>Protection Against MITM Attacks</strong> – Prevents unauthorized interception.</li>
-              <li>📜 <strong>Data Integrity</strong> – Ensures messages aren’t altered in transit.</li>
-            </ul>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-red-400 mb-3">Secure WebSocket Connections</h4>
+                                <ul className="ml-5 space-y-3 text-gray-400">
+                                    <li>🔑 <strong>Strong Authentication</strong> – Only trusted clients can connect.</li>
+                                    <li>🔐 <strong>Perfect Forward Secrecy</strong> – Ensures long-term confidentiality.</li>
+                                    <li>🛡️ <strong>Quantum-Resistant Strength</strong> – Secure against emerging threats.</li>
+                                    <li>⚡ <strong>Efficient Performance</strong> – Optimized for low-latency handshakes.</li>
+                                    <li>🛑 <strong>Protection Against MITM Attacks</strong> – Prevents unauthorized interception.</li>
+                                    <li>📜 <strong>Data Integrity</strong> – Ensures messages aren’t altered in transit.</li>
+                                </ul>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-yellow-400 mb-3">Room & Channel Management</h4>
-            <ul className="ml-5 space-y-3 text-gray-400">
-              <li>🟢 <strong>State Rooms</strong> – Tracks user activity in real-time.</li>
-              <li>🗂️ <strong>Cache Channels</strong> – Temporarily stores messages for new users.</li>
-              <li>🔐 <strong>Private Channels</strong> – Authenticate users before granting access.</li>
-              <li>🌍 <strong>Public Channels</strong> – Open access with a valid client API key.</li>
-            </ul>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-yellow-400 mb-3">Room & Channel Management</h4>
+                                <ul className="ml-5 space-y-3 text-gray-400">
+                                    <li>🟢 <strong>State Rooms</strong> – Tracks user activity in real-time.</li>
+                                    <li>🗂️ <strong>Cache Channels</strong> – Temporarily stores messages for new users.</li>
+                                    <li>🔐 <strong>Private Channels</strong> – Authenticate users before granting access.</li>
+                                    <li>🌍 <strong>Public Channels</strong> – Open access with a valid client API key.</li>
+                                </ul>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-purple-400 mb-3">Real-Time Monitoring & Analytics</h4>
-            <ul className="ml-5 space-y-3 text-gray-400">
-              <li>💬 <strong>Total Messages Transferred</strong></li>
-              <li>👥 <strong>Total Connected Users</strong></li>
-              <li>📦 <strong>Average Payload Size</strong></li>
-              <li>📡 <strong>Total Payload Sent</strong></li>
-              <li>🚫 <strong>Unauthorized Request Rejections</strong></li>
-              <li>⏳ <strong>Average Message Latency</strong></li>
-              <li>❌ <strong>Total Messages Dropped</strong></li>
-            </ul>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-purple-400 mb-3">Real-Time Monitoring & Analytics</h4>
+                                <ul className="ml-5 space-y-3 text-gray-400">
+                                    <li>💬 <strong>Total Messages Transferred</strong></li>
+                                    <li>👥 <strong>Total Connected Users</strong></li>
+                                    <li>📦 <strong>Average Payload Size</strong></li>
+                                    <li>📡 <strong>Total Payload Sent</strong></li>
+                                    <li>🚫 <strong>Unauthorized Request Rejections</strong></li>
+                                    <li>⏳ <strong>Average Message Latency</strong></li>
+                                    <li>❌ <strong>Total Messages Dropped</strong></li>
+                                </ul>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-pink-400 mb-3">High Availability & Auto Scaling</h4>
-            <p className="text-gray-400">Infrastructure automatically scales with demand, ensuring 99.99% uptime.</p>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-pink-400 mb-3">High Availability & Auto Scaling</h4>
+                                <p className="text-gray-400">Infrastructure automatically scales with demand, ensuring 99.99% uptime.</p>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-cyan-400 mb-3">Event Broadcasting</h4>
-            <p className="text-gray-400">Broadcast events to multiple clients for real-time notifications.</p>
-          </li>
+                            <li>
+                                <h4 className="text-xl font-semibold text-cyan-400 mb-3">Event Broadcasting</h4>
+                                <p className="text-gray-400">Broadcast events to multiple clients for real-time notifications.</p>
+                            </li>
 
-          <li>
-            <h4 className="text-xl font-semibold text-indigo-400 mb-3">No Vendor Lock-in</h4>
-            <p className="text-gray-400">Pure WebSocket-based solution with no client-side SDKs.</p>
-          </li>
-        </ul>
-      </div>
-    </main>
+                            <li>
+                                <h4 className="text-xl font-semibold text-indigo-400 mb-3">No Vendor Lock-in</h4>
+                                <p className="text-gray-400">Pure WebSocket-based solution with no client-side SDKs.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </main>
             </div>
         </div>
     );
