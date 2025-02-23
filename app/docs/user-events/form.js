@@ -3,18 +3,25 @@
 import { useEffect, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import Introduction from "../../components/docs/overview/introduction";
 import { useRouter } from "next/navigation";
-import HowToPurchase from "@/app/components/docs/purchasingGuide/how-to-purchase";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("overview");
     const router = useRouter();
 
+    const userEvents = {
+        'Message': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            source: 'user'
+        },
+    }
+
     useEffect(() => {
-        setActiveSection("How to Purchase");
-        document.title = "Docs | How to Purchase";
+        setActiveSection("User Events");
+        document.title = "Docs | User Events";
     }, []);
 
     return (
@@ -139,7 +146,28 @@ export default function Docs() {
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-3xl mx-auto">
-                        <HowToPurchase />
+                        <section id="api" className="mb-14">
+                            <h2 className="text-2xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
+                            <p className="text-gray-300 mb-6">
+                                The following WebSocket messages are emitted by the server during different events :
+                            </p>
+
+                            <div className="space-y-6 mt-6">
+                                <h3 className="text-purple-300 text-lg font-semibold mb-2">User Events</h3>
+                                {Object.keys(userEvents).map((event) => (
+                                    <div key={event} className="mb-6">
+                                        <strong className={`text-${userEvents[event].color}`}>{event}</strong>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${userEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                            {JSON.stringify({
+                                                data: userEvents[event].data,
+                                                source: userEvents[event].source
+                                            }, null, 2)}
+                                        </pre>
+                                        <p className="text-gray-400 text-sm mt-2">{userEvents[event].description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
                     </div>
                 </main>
             </div>

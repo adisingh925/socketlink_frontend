@@ -3,18 +3,85 @@
 import { useEffect, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import Introduction from "../../components/docs/overview/introduction";
 import { useRouter } from "next/navigation";
-import HowToPurchase from "@/app/components/docs/purchasingGuide/how-to-purchase";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("overview");
     const router = useRouter();
 
+    const events = {
+        'Rate Limit Exceeded': {
+            description: 'This event is fired when a user sends too many requests in a short period of time, triggering the rate limiting mechanism.',
+            color: 'white',
+            data: 'YOU_ARE_RATE_LIMITED',
+            source: 'server'
+        },
+        'Rate Limit Lifted': {
+            description: 'This event occurs when an invalid API key is provided while attempting to authenticate with the WebSocket server.',
+            color: 'white',
+            data: 'RATE_LIMIT_LIFTED',
+            source: 'server'
+        },
+        'Monthly Data Transfer Limit Exhausted': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED',
+            source: 'server'
+        },
+        'Messaging Disabled': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'MESSAGING_DISABLED',
+            source: 'server'
+        },
+        'Connected To Room': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'CONNECTED_TO_ROOM',
+            source: 'server'
+        },
+        'Someone Joined The Room': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'SOMEONE_JOINED_THE_ROOM',
+            source: 'server'
+        },
+        'Someone Left The Room': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'SOMEONE_LEFT_THE_ROOM',
+            source: 'server'
+        },
+    };
+
+    const adminEvents = {
+        'Broadcast': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            source: 'admin'
+        },
+        'You Have Been Banned': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'YOU_HAVE_BEEN_BANNED',
+            source: 'server'
+        },
+    }
+
+    const userEvents = {
+        'Message': {
+            description: 'This event is triggered when the server encounters an unexpected error.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            source: 'user'
+        },
+    }
+
     useEffect(() => {
-        setActiveSection("How to Purchase");
-        document.title = "Docs | How to Purchase";
+        setActiveSection("Server Events");
+        document.title = "Docs | Server Events";
     }, []);
 
     return (
@@ -139,7 +206,60 @@ export default function Docs() {
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-3xl mx-auto">
-                        <HowToPurchase />
+                        <section id="api" className="mb-14">
+                            <h2 className="text-2xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
+                            <p className="text-gray-300 mb-6">
+                                The following WebSocket messages are emitted by the server during different events :
+                            </p>
+
+                            <div className="space-y-6 mt-6">
+                                <h3 className="text-purple-300 text-lg font-semibold mb-2">Server Events</h3>
+                                {Object.keys(events).map((event) => (
+                                    <div key={event} className="mb-6">
+                                        <strong className={`text-${events[event].color}`}>{event}</strong>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${events[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                            {JSON.stringify({
+                                                data: events[event].data,
+                                                source: events[event].source
+                                            }, null, 2)}
+                                        </pre>
+                                        <p className="text-gray-400 text-sm mt-2">{events[event].description}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-6 mt-6">
+                                <h3 className="text-purple-300 text-lg font-semibold mb-2">Admin Events</h3>
+                                {Object.keys(adminEvents).map((event) => (
+                                    <div key={event} className="mb-6">
+                                        <strong className={`text-${adminEvents[event].color}`}>{event}</strong>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${adminEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                            {JSON.stringify({
+                                                data: adminEvents[event].data,
+                                                source: adminEvents[event].source
+                                            }, null, 2)}
+                                        </pre>
+                                        <p className="text-gray-400 text-sm mt-2">{adminEvents[event].description}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-6 mt-6">
+                                <h3 className="text-purple-300 text-lg font-semibold mb-2">User Events</h3>
+                                {Object.keys(userEvents).map((event) => (
+                                    <div key={event} className="mb-6">
+                                        <strong className={`text-${userEvents[event].color}`}>{event}</strong>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${userEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                            {JSON.stringify({
+                                                data: userEvents[event].data,
+                                                source: userEvents[event].source
+                                            }, null, 2)}
+                                        </pre>
+                                        <p className="text-gray-400 text-sm mt-2">{userEvents[event].description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
                     </div>
                 </main>
             </div>

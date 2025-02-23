@@ -63,6 +63,23 @@ export default function Docs() {
                                 ]
                             },
                             {
+                                id: "websocket-events",
+                                title: "Websocket Events",
+                                subcategories: [
+                                    { name: "Server Events", path: "/docs/server-events" },
+                                    { name: "Admin Events", path: "/docs/admin-events" },
+                                    { name: "User Events", path: "/docs/user-events" },
+                                ]
+                            },
+                            {
+                                id: "integrations",
+                                title: "Integrations",
+                                subcategories: [
+                                    { name: "Webhooks", path: "/docs/webhooks" },
+                                    { name: "MySQL", path: "/docs/mysql-integration" },
+                                ]
+                            },
+                            {
                                 id: "rooms",
                                 title: "Rooms",
                                 subcategories: [
@@ -109,7 +126,7 @@ export default function Docs() {
                                         </li>
                                     ))}
                                 </ul>
-                                {index !== 5 && <hr className="border-gray-600 my-5" />}
+                                {index !== 7 && <hr className="border-gray-600 my-5" />}
                             </li>
                         ))}
                     </ul>
