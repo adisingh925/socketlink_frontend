@@ -29,10 +29,10 @@ const Introduction = () => (
         <div className="mb-6 p-4 bg-gray-800 border-2 border-white/20 rounded-2xl">
             <h3 className="text-xl font-bold text-green-400">📚 What You’ll Learn</h3>
             <ul className="text-gray-300 mt-2 space-y-2 list-disc list-inside">
-                <li><strong>Getting Started:</strong> Set up a WebSocket server and connect clients effortlessly.</li>
-                <li><strong>Features:</strong> Explore advanced functionalities like rooms, event broadcasting, presence tracking, and more.</li>
-                <li><strong>API Reference:</strong> Understand WebSocket events and message formats in detail.</li>
-                <li><strong>FAQ:</strong> Get answers to common questions and best practices.</li>
+                <li><strong>Getting Started -</strong> Set up a WebSocket server and connect clients effortlessly.</li>
+                <li><strong>Features -</strong> Explore advanced functionalities like rooms, event broadcasting, presence tracking, and more.</li>
+                <li><strong>API Reference -</strong> Understand WebSocket events and message formats in detail.</li>
+                <li><strong>FAQ -</strong> Get answers to common questions and best practices.</li>
             </ul>
         </div>
 
