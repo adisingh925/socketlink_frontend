@@ -78,6 +78,30 @@
       {
         "source": "/docs/connecting-to-the-socketlink-servers",
         "destination": "/docs/connecting-to-the-socketlink-servers.html"
+      },
+      {
+        "source": "/docs/featured",
+        "destination": "/docs/features.html"
+      },
+      {
+        "source": "/docs/payment-options",
+        "destination": "/docs/payment-options.html"
+      },
+      {
+        "source": "/docs/refund-policy",
+        "destination": "/docs/refund-policy.html"
+      },
+      {
+        "source": "/docs/server-events",
+        "destination": "/docs/server-events.html"
+      },
+      {
+        "source": "/docs/admin-events",
+        "destination": "/docs/admin-events.html"
+      },
+      {
+        "source": "/docs/user-events",
+        "destination": "/docs/user-events.html"
       }
     ],
     "headers": [
