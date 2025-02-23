@@ -119,7 +119,7 @@ export default function Docs() {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
+                <main className="flex-grow md:px-16 px-8 mb-10 pt-[7rem]">
                     <div className="max-w-3xl mx-auto">
                         <h3 className="text-2xl font-bold text-blue-400 mb-4">✨ Key Features</h3>
 
@@ -142,8 +142,8 @@ export default function Docs() {
 
                             {/* Feature 3 */}
                             <div className="p-6 bg-gray-800 border-2 border-white/20 rounded-2xl shadow-md">
-                                <h4 className="text-xl font-bold text-red-400 mb-3">🔒 Secure WebSocket Connections</h4>
-                                <p className="text-gray-300 text-lg">
+                                <h4 className="text-lg font-bold text-red-400 mb-3">🔒 Secure WebSocket Connections</h4>
+                                <p className="text-gray-300">
                                     We use <strong>secp384r1 (P-384) Elliptic Curve Certificates</strong> to establish highly secure WebSocket connections,
                                     ensuring top-tier protection for real-time communication.
                                 </p>
@@ -183,8 +183,8 @@ export default function Docs() {
 
                             {/* Feature 4 */}
                             <div className="p-6 bg-gray-800 border-2 border-white/20 rounded-2xl shadow-md">
-                                <h4 className="text-xl font-bold text-purple-400 mb-3">📡 Room & Channel Management</h4>
-                                <p className="text-gray-300 text-lg">
+                                <h4 className="text-lg font-bold text-purple-400 mb-3">📡 Room & Channel Management</h4>
+                                <p className="text-gray-300">
                                     Easily create and manage <strong>private</strong> or <strong>public</strong> rooms, track participants,
                                     and optimize real-time collaboration with advanced channel management features.
                                 </p>
@@ -219,8 +219,8 @@ export default function Docs() {
 
                             {/* Feature 5 */}
                             <div className="p-6 bg-gray-800 border-2 border-white/20 rounded-2xl shadow-md">
-                                <h4 className="text-xl font-bold text-blue-400 mb-3">📊 Real-Time Monitoring & Analytics</h4>
-                                <p className="text-gray-300 text-lg">
+                                <h4 className="text-lg font-bold text-blue-400 mb-3">📊 Real-Time Monitoring & Analytics</h4>
+                                <p className="text-gray-300">
                                     Monitor live user activity, track system performance, and gain insights into real-time network operations
                                     with detailed analytics.
                                 </p>
@@ -290,7 +290,6 @@ export default function Docs() {
                             </div>
                         </div>
                     </div>
-
                 </main>
             </div>
         </div>
