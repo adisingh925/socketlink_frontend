@@ -44,6 +44,7 @@ export default function Docs() {
 
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
+            
             {/* Sidebar */}
             <aside ref={sidebarRef} className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
                   ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64"} md:translate-x-0 fixed md:relative 
