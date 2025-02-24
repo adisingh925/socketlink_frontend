@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Introduction from "../../components/docs/overview/introduction";
@@ -10,16 +10,34 @@ export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("overview");
     const router = useRouter();
+    const sidebarRef = useRef(null);
 
     useEffect(() => {
         setActiveSection("Refund Policy");
         document.title = "Docs | Refund Policy";
     }, []);
 
+    // Close sidebar when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setIsSidebarOpen(false);
+            }
+        }
+
+        if (isSidebarOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isSidebarOpen]);
+
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
             {/* Sidebar */}
-            <aside className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
+            <aside ref={sidebarRef} className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
                   ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64"} md:translate-x-0 fixed md:relative 
                   h-full shadow-md rounded-r-lg overflow-y-auto border-r border-gray-700`}>
                 <nav>
