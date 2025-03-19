@@ -231,7 +231,7 @@ export default function FloatingNavigationBar() {
                             </button> */}
                             <Menu as="div" className="relative ml-3">
                                 <div>
-                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm transition-all duration-200 ease-in-out hover:opacity-80 active:opacity-70 active:scale-95">
                                         <span className="sr-only">Open user menu</span>
                                         <Image
                                             alt=""
