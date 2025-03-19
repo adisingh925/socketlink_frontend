@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Toast from "../components/toast";
 import { auth } from "../components/firebase"; // Adjust the path as necessary
-import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, getMultiFactorResolver, TotpMultiFactorGenerator } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, browserSessionPersistence, setPersistence } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
 import NavigationBar from "../components/navbar";
 
@@ -55,6 +55,9 @@ function Signup() {
         }
 
         try {
+            /** persistence disabled */
+            await setPersistence(auth, browserSessionPersistence);
+
             const result = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
             await sendEmailVerification(result.user);
             router.push("/login");
@@ -72,6 +75,9 @@ function Signup() {
         const provider = new GoogleAuthProvider();
 
         try {
+            /** persistence disabled */
+            await setPersistence(auth, browserSessionPersistence);
+            
             await signInWithPopup(auth, provider);
         } catch (error) {
             if (error.code === "auth/multi-factor-auth-required") {
