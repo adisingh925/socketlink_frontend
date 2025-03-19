@@ -8,7 +8,6 @@ import { auth } from "../components/firebase"; // Adjust the path as necessary
 import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, getMultiFactorResolver, TotpMultiFactorGenerator } from 'firebase/auth';
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon
 import NavigationBar from "../components/navbar";
-import Mfa from "../components/inputTotpDialog";
 
 function Signup() {
     const router = useRouter();
@@ -18,8 +17,6 @@ function Signup() {
     const [emailPasswordLoading, setEmailPasswordLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
     const authError = useRef(null);
 
     const [credentials, setCredentials] = useState({
@@ -51,36 +48,32 @@ function Signup() {
         setEmailPasswordLoading(true);
 
         if (credentials.password !== credentials.retypePassword) {
-            setEmailPasswordLoading(false);
-            setSeverity("error");
-            setSnackbarText("Passwords do not match.");
             setSnackbarState(true);
-            return;
+            setSnackbarText("Passwords do not match.");
+            setSeverity("error");
+            return resetLoading();
         }
 
-        const { email, password } = credentials;
-
-        createUserWithEmailAndPassword(auth, email, password).then((result) => {
-            const user = result.user;
-            sendEmailVerification(user);
+        try {
+            const result = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
+            await sendEmailVerification(result.user);
             router.push("/login");
-        }).catch((error) => {
-            setSeverity("error");
-            setSnackbarText(error.message);
+        } catch (error) {
             setSnackbarState(true);
-        }).finally(() => {
+            setSnackbarText(error.message);
+            setSeverity("error");
+        } finally {
             resetLoading();
-        });
+        }
     };
 
     const handleGoogleSignup = async () => {
         setGoogleLoading(true);
-
         const provider = new GoogleAuthProvider();
 
-        signInWithPopup(auth, provider).then((_result) => {
-            setGoogleLoading(false);
-        }).catch((error) => {
+        try {
+            await signInWithPopup(auth, provider);
+        } catch (error) {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
                 setIsOpen(true);
@@ -88,37 +81,9 @@ function Signup() {
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
-                resetLoading();
             }
-        })
-    };
-
-    const handleMFASubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const mfaResolver = getMultiFactorResolver(auth, authError.current);
-            const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(
-                mfaResolver.hints[0].uid,
-                code
-            );
-
-            mfaResolver.resolveSignIn(multiFactorAssertion).then((_userCredential) => {
-                setSeverity("success");
-                setSnackbarText("MFA verification successful!");
-                setSnackbarState(true);
-            }).catch((error) => {
-                setSeverity("error");
-                setSnackbarText(error.message);
-                setSnackbarState(true);
-            }).finally(() => {
-                closeDialog();
-            });
-        } catch (error) {
-            setSeverity("error");
-            setSnackbarText(error.message);
-            setSnackbarState(true);
-            closeDialog();
+        } finally {
+            setGoogleLoading(false);
         }
     };
 
@@ -269,8 +234,6 @@ function Signup() {
             </div>
 
             <Toast message={snackbarText} severity={severity} setSnackbarState={setSnackbarState} snackbarState={snackbarState} />
-
-            <Mfa handleSubmit={handleMFASubmit} code={code} setCode={setCode} isOpen={isOpen} setIsOpen={setIsOpen} closeDialog={closeDialog} />
         </>
     );
 }

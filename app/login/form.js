@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { auth } from "../components/firebase"; 
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getMultiFactorResolver, TotpMultiFactorGenerator } from 'firebase/auth';
-import { FcGoogle } from "react-icons/fc"; 
+import { auth } from "../components/firebase";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getMultiFactorResolver, TotpMultiFactorGenerator, setPersistence, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
+import { FcGoogle } from "react-icons/fc";
 import Toast from "../components/toast";
 import NavigationBar from "../components/navbar";
 import Mfa from "../components/inputTotpDialog";
@@ -18,17 +18,18 @@ function Login() {
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [code, setCode] = useState('');
-    const [isOpen, setIsOpen] = useState(false); 
+    const [isOpen, setIsOpen] = useState(false);
     const authError = useRef(null);
+    const [rememberMe, setRememberMe] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                router.push("/"); 
+                router.push("/");
             } else {
-                setLoading(false); 
+                setLoading(false);
             }
         });
     }, [router]);
@@ -41,29 +42,15 @@ function Login() {
         e.preventDefault();
         setEmailPasswordLoading(true);
 
-        signInWithEmailAndPassword(auth, credentials.email, credentials.password).then((_result) => {
+        try {
+            await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+
+            await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+
             setEmailPasswordLoading(false);
-        }).catch((error) => {
-            if (error.code === "auth/multi-factor-auth-required") {
-                authError.current = error;
-                setIsOpen(true); 
-            } else {
-                setSeverity("error");
-                setSnackbarText(error.message);
-                setSnackbarState(true);
-                resetLoading();
-            }
-        })
-    };
+        } catch (error) {
+            setEmailPasswordLoading(false);
 
-    const handleGoogleLogin = async () => {
-        setGoogleLoading(true);
-
-        const provider = new GoogleAuthProvider();
-
-        signInWithPopup(auth, provider).then((_result) => {
-            setGoogleLoading(false);
-        }).catch((error) => {
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
                 setIsOpen(true);
@@ -71,39 +58,58 @@ function Login() {
                 setSeverity("error");
                 setSnackbarText(error.message);
                 setSnackbarState(true);
-                resetLoading();
             }
-        })
+        }
     };
+
+    const handleGoogleLogin = async () => {
+        try {
+            setGoogleLoading(true);
+    
+            const provider = new GoogleAuthProvider();
+            
+            await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+            
+            const result = await signInWithPopup(auth, provider);
+            
+            setGoogleLoading(false);
+        } catch (error) {
+            setGoogleLoading(false); // Ensure loading state is reset
+    
+            if (error.code === "auth/multi-factor-auth-required") {
+                authError.current = error;
+                setIsOpen(true);
+            } else {
+                setSeverity("error");
+                setSnackbarText(error.message);
+                setSnackbarState(true);
+            }
+        }
+    };    
 
     const handleMFASubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             const mfaResolver = getMultiFactorResolver(auth, authError.current);
             const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(
                 mfaResolver.hints[0].uid,
                 code
             );
-
-            mfaResolver.resolveSignIn(multiFactorAssertion).then((_userCredential) => {
-                setSeverity("success");
-                setSnackbarText("MFA verification successful!");
-                setSnackbarState(true);
-            }).catch((error) => {
-                setSeverity("error");
-                setSnackbarText(error.message);
-                setSnackbarState(true);
-            }).finally(() => {
-                closeDialog();
-            });
+    
+            await mfaResolver.resolveSignIn(multiFactorAssertion);
+    
+            setSeverity("success");
+            setSnackbarText("MFA verification successful!");
+            setSnackbarState(true);
         } catch (error) {
             setSeverity("error");
             setSnackbarText(error.message);
             setSnackbarState(true);
-            closeDialog();
+        } finally {
+            closeDialog(); 
         }
-    };
+    };    
 
     const resetLoading = () => {
         setEmailPasswordLoading(false);
@@ -184,6 +190,8 @@ function Login() {
                                                 id="remember"
                                                 aria-describedby="remember"
                                                 type="checkbox"
+                                                checked={rememberMe}
+                                                onChange={(e) => setRememberMe(e.target.checked)}
                                                 className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                                             />
                                         </div>
