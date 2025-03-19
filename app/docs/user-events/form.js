@@ -25,7 +25,6 @@ export default function Docs() {
         document.title = "Docs | User Events";
     }, []);
 
-    // Close sidebar when clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
             if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
