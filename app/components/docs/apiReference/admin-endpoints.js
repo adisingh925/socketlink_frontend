@@ -55,7 +55,7 @@ const AdminEndpoints = () => {
 
     const cacheResponses = {
         '200': {
-            message: "Messaging successfully disabled for the members of the given rooms!",
+            message: "Messaging successfully disabled for the users of the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -383,7 +383,7 @@ const AdminEndpoints = () => {
 
     const disableRoomMessagingResponse = {
         '200': {
-            message: "Messaging successfully disabled for the given members in the given rooms!",
+            message: "Messaging successfully disabled for the given users in the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -407,7 +407,7 @@ const AdminEndpoints = () => {
 
     const enableRoomMessagingResponse = {
         '200': {
-            message: "Messaging successfully enabled for the given members in the given rooms!",
+            message: "Messaging successfully enabled for the given users in the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -431,7 +431,7 @@ const AdminEndpoints = () => {
 
     const bannedUsersResponse = {
         '200': {
-            message: "Messaging successfully disabled for the members of the given rooms!",
+            message: "Messaging successfully disabled for the users of the given rooms!",
             color: 'green-400'
         },
         '400': {
@@ -645,10 +645,10 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_all_rooms" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">4. Fetch all the rooms and their members</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">4. Fetch all the rooms and their users</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will give all the rooms that are present and all the members present in each of the rooms.
+                    This will give all the rooms that are present and all the users present in each of the rooms.
                 </p>
 
                 {/* Endpoint URL */}
@@ -658,7 +658,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://test.socketlink.io/api/v1/rooms
+                            https://test.socketlink.io/api/v1/rooms/users/all
                         </pre>
                     </h4>
 
@@ -711,10 +711,10 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_member_in_given_room" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">5. Fetch all the members for the given rooms</h2>
+                <h2 className="text-2xl font-bold text-gray-300 mb-8">5. Fetch all the users for the given rooms</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will fetch all the members present in the given rooms.
+                    This will fetch all the users present in the given rooms.
                 </p>
 
                 {/* Endpoint URL */}
@@ -724,7 +724,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/connections
+                            https://test.socketlink.io/api/v1/rooms/users
                         </pre>
                     </h4>
 
@@ -750,7 +750,7 @@ const AdminEndpoints = () => {
                         </pre>
                         {/* Body Key Descriptions */}
                         <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                            <li><code>rid :</code> Room ID for which you want to fetch the members.</li>
+                            <li><code>rid :</code> Room ID for which you want to fetch the users.</li>
                         </ul>
                     </div>
 
@@ -808,7 +808,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/broadcast
+                            https://test.socketlink.io/api/v1/broadcast
                         </pre>
                     </h4>
 
@@ -877,7 +877,7 @@ const AdminEndpoints = () => {
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected in a room</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will send message to all the members of the room.
+                    This will send message to all the users of the room.
                 </p>
 
                 {/* Endpoint URL */}
@@ -887,7 +887,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/broadcast
+                            https://test.socketlink.io/api/v1/rooms/broadcast
                         </pre>
                     </h4>
 
@@ -961,7 +961,7 @@ const AdminEndpoints = () => {
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to a particular connection</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will send message to given connections.
+                    This will send message to given users.
                 </p>
 
                 {/* Endpoint URL */}
@@ -971,7 +971,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/connections/broadcast
+                            https://test.socketlink.io/api/v1/connections/broadcast
                         </pre>
                     </h4>
 
@@ -1045,8 +1045,28 @@ const AdminEndpoints = () => {
                 <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Ban the user globally or in a room</h2>
 
                 <p className="text-gray-300 mb-6">
-                    This will ban the user globally or in the provided rooms.
+                    This will ban the user globally or in multiple rooms.
                 </p>
+
+                <div className="flex items-center space-x-3 bg-blue-50 border border-blue-400 shadow-md p-4 rounded-lg mb-6">
+                    <svg
+                        className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M21 12a9 9 0 10-18 0 9 9 0 0018 0z"
+                        />
+                    </svg>
+                    <div>
+                        <p className="font-bold text-blue-600 items-center">If a user is banned globally he won't be able to connect to the server until he is unbanned. If the user is banned from some rooms, He will simply be unsubscribed from those rooms with a websocket message.</p>
+                    </div>
+                </div>
 
                 {/* Endpoint URL */}
                 <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
@@ -1055,7 +1075,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/ban
+                            https://test.socketlink.io/api/v1/rooms/users/ban
                         </pre>
                     </h4>
 
@@ -1142,7 +1162,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/unban
+                            https://test.socketlink.io/api/v1/rooms/users/unban
                         </pre>
                     </h4>
 
@@ -1229,7 +1249,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/server/messaging/enable
+                            https://test.socketlink.io/api/v1/server/messaging/enable
                         </pre>
                     </h4>
 
@@ -1294,7 +1314,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/server/messaging/disable
+                            https://test.socketlink.io/api/v1/server/messaging/disable
                         </pre>
                     </h4>
 
@@ -1359,7 +1379,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/messaging/disable
+                            https://test.socketlink.io/api/v1/rooms/messaging/disable
                         </pre>
                     </h4>
 
@@ -1451,7 +1471,7 @@ const AdminEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/rooms/messaging/enable
+                            https://test.socketlink.io/api/v1/rooms/messaging/enable
                         </pre>
                     </h4>
 
@@ -1543,7 +1563,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/connections/banned
+                            https://test.socketlink.io/api/v1/users/banned
                         </pre>
                     </h4>
 
@@ -1608,7 +1628,7 @@ const AdminEndpoints = () => {
                             GET
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9002/api/v1/messages/room
+                            https://test.socketlink.io/api/v1/messages/room
                         </pre>
                     </h4>
 
@@ -1698,7 +1718,7 @@ const AdminEndpoints = () => {
                             DEL
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            http://localhost:9001/api/v1/database
+                            https://test.socketlink.io/api/v1/database
                         </pre>
                     </h4>
 
