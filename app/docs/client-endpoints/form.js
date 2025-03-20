@@ -180,7 +180,8 @@ export default function Docs() {
                                 id: "overview",
                                 title: "Table of Contents",
                                 subcategories: [
-                                    { name: "Subscribe to a room", id: "subscribe_to_room" }
+                                    { name: "Subscribe to a room", id: "subscribe_to_room" },
+                                    { name: "Unsubscribe from a room", id: "unsubscribe_from_room" }
                                 ]
                             }
                         ].map((item, index) => (
