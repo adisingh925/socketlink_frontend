@@ -1064,7 +1064,9 @@ const AdminEndpoints = () => {
                         />
                     </svg>
                     <div>
-                        <p className="font-bold text-blue-600 items-center">If a user is banned globally he won't be able to connect to the server until he is unbanned. If the user is banned from some rooms, He will simply be unsubscribed from those rooms with a websocket message.</p>
+                        <p className="font-bold text-blue-600 items-center">
+                            If a user is banned globally, he won&apos;t be able to connect to the server until he is unbanned. If the user is banned from some rooms, he will simply be unsubscribed from those rooms with a WebSocket message.
+                        </p>
                     </div>
                 </div>
 
