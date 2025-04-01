@@ -455,7 +455,7 @@ const AdminEndpoints = () => {
 
     return (
         <section id="api" className="mb-14 space-y-10">
-            <h2 className="text-2xl font-bold text-gray-300 mb-8">Admin Endpoints</h2>
+            <h2 className="text-3xl font-bold text-gray-300 mb-8">Admin Endpoints</h2>
 
             <p className="text-gray-300 mb-6">
                 Detailed documentation on how to use our API endpoints effectively.
