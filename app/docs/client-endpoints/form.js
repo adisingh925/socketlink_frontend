@@ -22,7 +22,6 @@ export default function Docs() {
         router.push(`#${id}`);
     };
 
-    // Close sidebar when clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
             if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
