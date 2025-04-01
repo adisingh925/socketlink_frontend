@@ -177,6 +177,31 @@ export default function Docs() {
                                     </ul>
                                 </div>
                             </div>
+
+                            <div className="flex items-center space-x-3 bg-blue-50 border border-blue-400 shadow-md p-4 rounded-lg mb-6">
+                                <svg
+                                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M21 12a9 9 0 10-18 0 9 9 0 0018 0z"
+                                    />
+                                </svg>
+                                <div>
+                                    <p className="font-bold text-black items-center">
+                                        In order to send a message to a room, you need to subscribe to it first.
+                                        <a href="/docs/client-endpoints" className="text-blue-500 hover:text-blue-700">
+                                            &nbsp;Learn how to subscribe to a room.
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </main>
