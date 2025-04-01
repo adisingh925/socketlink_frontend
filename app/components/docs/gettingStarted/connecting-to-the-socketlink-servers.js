@@ -2,7 +2,7 @@ import CodeSnippet from "../../codeSnippet";
 
 const ConnectingToTheSocketlinkServers = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-3xl font-bold text-gray-300 mb-4">Connecting to the Socketlink servers</h2>
+        <h2 className="text-3xl font-bold text-gray-300 mb-8">Connecting to the Socketlink servers</h2>
         <div className="space-y-8">
             {/* Step 1 */}
             <div className="space-y-4">
