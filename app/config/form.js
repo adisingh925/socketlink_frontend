@@ -76,10 +76,10 @@ function WebhookManagement() {
         ON_VERIFICATION_REQUEST: 1n << 2n,
 
         /** Connection open events */
-        ON_CONNECTION_OPEN: 1n << 3n,
+        ON_SUBSCRIBE: 1n << 3n,
 
         /** Connection close events */
-        ON_CONNECTION_CLOSE: 1n << 4n,
+        ON_UNSUBSCRIBE: 1n << 4n,
 
         /** Room occupancy events */
         ON_ROOM_OCCUPIED: 1n << 5n,

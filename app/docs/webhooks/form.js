@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import Introduction from "../../components/docs/overview/introduction";
 import { useRouter } from "next/navigation";
 
 export default function Docs() {
@@ -154,8 +153,15 @@ export default function Docs() {
                                 This article describes how you can use the different webhooks.
                             </p>
 
+                            <code className="text-blue-300">Webhook Url :</code>
+                            &nbsp;Insert the url where you want to receive the webhook events.<br />
+                            <code className="text-blue-300">Webhook Secret :</code>
+                            &nbsp;Insert the secret key to secure the webhook events, An <code>HMAC-SHA256</code> will be created using this secret and included on the header in the field <code>X-HMAC-Signature</code><br />
+
+                            <h2 className="text-2xl font-bold text-gray-300 mb-8 mt-8">Events</h2>
+
                             {/* Webhooks List */}
-                            <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                            <div className="bg-gray-900 rounded-lg mt-4 space-y-4">
                                 <ul className="text-gray-300 space-y-8">
                                     <li>
                                         <code className="text-blue-300">ON_MESSAGE :</code>
