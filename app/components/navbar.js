@@ -92,13 +92,13 @@ export default function FloatingNavigationBar() {
                                         My Plans
                                     </Link>
                                     <Link
-                                        href="/webhooks"
+                                        href="/config"
                                         className={classNames(
-                                            isActive("/webhooks") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/config") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
-                                        Webhooks
+                                        Config
                                     </Link>
                                     <Link
                                         href="/billing"
@@ -291,13 +291,13 @@ export default function FloatingNavigationBar() {
                                 My Plans
                             </Link>
                             <Link
-                                href="/webhooks"
+                                href="/config"
                                 className={classNames(
-                                    isActive("/webhooks") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/config") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
-                                Webhooks
+                                Config
                             </Link>
                             <Link
                                 href="/billing"
