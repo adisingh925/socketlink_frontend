@@ -24,12 +24,6 @@ export default function Docs() {
             data: 'RATE_LIMIT_LIFTED',
             source: 'server'
         },
-        'Monthly Data Transfer Limit Exhausted': {
-            description: 'This event is triggered when the monthly data transfer limit is exhausted for the current plan.',
-            color: 'white',
-            data: 'MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED',
-            source: 'server'
-        },
         'Messaging Disabled': {
             description: 'This event happens when the messaging is disabled for the user, either in a room or globally.',
             color: 'white',
@@ -201,10 +195,6 @@ export default function Docs() {
                                 title: "Rooms",
                                 subcategories: [
                                     { name: "Room Types", path: "/docs/room-types" },
-                                    { name: "Public Rooms", path: "/docs/public-rooms" },
-                                    { name: "Private Rooms", path: "/docs/private-rooms" },
-                                    { name: "State Rooms", path: "/docs/state-rooms" },
-                                    { name: "Cache Rooms", path: "/docs/cache-rooms" }
                                 ]
                             },
                             {

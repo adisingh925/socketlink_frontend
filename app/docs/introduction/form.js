@@ -92,10 +92,6 @@ export default function Docs() {
                                 title: "Rooms",
                                 subcategories: [
                                     { name: "Room Types", path: "/docs/room-types" },
-                                    { name: "Public Rooms", path: "/docs/public-rooms" },
-                                    { name: "Private Rooms", path: "/docs/private-rooms" },
-                                    { name: "State Rooms", path: "/docs/state-rooms" },
-                                    { name: "Cache Rooms", path: "/docs/cache-rooms" },
                                 ],
                             },
                             {
