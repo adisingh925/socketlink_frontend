@@ -69,67 +69,23 @@ function WebhookManagement() {
     };
 
     const Webhooks = Object.freeze({
-        /** Connection-related events */
-        ON_CONNECTION_UPGRADE_REJECTED: 1n << 0n,
-
         /** Message-related events */
-        ON_MESSAGE_PUBLIC_ROOM: 1n << 1n,
-        ON_MESSAGE_PRIVATE_ROOM: 1n << 2n,
-        ON_MESSAGE_PUBLIC_STATE_ROOM: 1n << 3n,
-        ON_MESSAGE_PRIVATE_STATE_ROOM: 1n << 4n,
-        ON_MESSAGE_PUBLIC_CACHE_ROOM: 1n << 5n,
-        ON_MESSAGE_PRIVATE_CACHE_ROOM: 1n << 6n,
-        ON_MESSAGE_PUBLIC_STATE_CACHE_ROOM: 1n << 7n,
-        ON_MESSAGE_PRIVATE_STATE_CACHE_ROOM: 1n << 8n,
+        ON_MESSAGE: 1n << 1n,
 
-        /** Common webhooks */
-        ON_RATE_LIMIT_EXCEEDED: 1n << 9n,
-        ON_RATE_LIMIT_LIFTED: 1n << 10n,
-        ON_MESSAGE_DROPPED: 1n << 11n,
-        ON_MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED: 1n << 12n,
-        ON_MESSAGE_SIZE_EXCEEDED: 1n << 13n,
-        ON_MAX_CONNECTION_LIMIT_REACHED: 1n << 14n,
-        ON_VERIFICATION_REQUEST: 1n << 15n,
+        /** Connection verification events */
+        ON_VERIFICATION_REQUEST: 1n << 2n,
 
         /** Connection open events */
-        ON_CONNECTION_OPEN_PUBLIC_ROOM: 1n << 16n,
-        ON_CONNECTION_OPEN_PRIVATE_ROOM: 1n << 17n,
-        ON_CONNECTION_OPEN_PUBLIC_STATE_ROOM: 1n << 18n,
-        ON_CONNECTION_OPEN_PRIVATE_STATE_ROOM: 1n << 19n,
-        ON_CONNECTION_OPEN_PUBLIC_CACHE_ROOM: 1n << 20n,
-        ON_CONNECTION_OPEN_PRIVATE_CACHE_ROOM: 1n << 21n,
-        ON_CONNECTION_OPEN_PUBLIC_STATE_CACHE_ROOM: 1n << 22n,
-        ON_CONNECTION_OPEN_PRIVATE_STATE_CACHE_ROOM: 1n << 23n,
+        ON_CONNECTION_OPEN: 1n << 3n,
 
         /** Connection close events */
-        ON_CONNECTION_CLOSE_PUBLIC_ROOM: 1n << 24n,
-        ON_CONNECTION_CLOSE_PRIVATE_ROOM: 1n << 25n,
-        ON_CONNECTION_CLOSE_PUBLIC_STATE_ROOM: 1n << 26n,
-        ON_CONNECTION_CLOSE_PRIVATE_STATE_ROOM: 1n << 27n,
-        ON_CONNECTION_CLOSE_PUBLIC_CACHE_ROOM: 1n << 28n,
-        ON_CONNECTION_CLOSE_PRIVATE_CACHE_ROOM: 1n << 29n,
-        ON_CONNECTION_CLOSE_PUBLIC_STATE_CACHE_ROOM: 1n << 30n,
-        ON_CONNECTION_CLOSE_PRIVATE_STATE_CACHE_ROOM: 1n << 31n,
+        ON_CONNECTION_CLOSE: 1n << 4n,
 
         /** Room occupancy events */
-        ON_ROOM_OCCUPIED_PUBLIC_ROOM: 1n << 32n,
-        ON_ROOM_OCCUPIED_PRIVATE_ROOM: 1n << 33n,
-        ON_ROOM_OCCUPIED_PUBLIC_STATE_ROOM: 1n << 34n,
-        ON_ROOM_OCCUPIED_PRIVATE_STATE_ROOM: 1n << 35n,
-        ON_ROOM_OCCUPIED_PUBLIC_CACHE_ROOM: 1n << 36n,
-        ON_ROOM_OCCUPIED_PRIVATE_CACHE_ROOM: 1n << 37n,
-        ON_ROOM_OCCUPIED_PUBLIC_STATE_CACHE_ROOM: 1n << 38n,
-        ON_ROOM_OCCUPIED_PRIVATE_STATE_CACHE_ROOM: 1n << 39n,
+        ON_ROOM_OCCUPIED: 1n << 5n,
 
         /** Room vacancy events */
-        ON_ROOM_VACATED_PUBLIC_ROOM: 1n << 40n,
-        ON_ROOM_VACATED_PRIVATE_ROOM: 1n << 41n,
-        ON_ROOM_VACATED_PUBLIC_STATE_ROOM: 1n << 42n,
-        ON_ROOM_VACATED_PRIVATE_STATE_ROOM: 1n << 43n,
-        ON_ROOM_VACATED_PUBLIC_CACHE_ROOM: 1n << 44n,
-        ON_ROOM_VACATED_PRIVATE_CACHE_ROOM: 1n << 45n,
-        ON_ROOM_VACATED_PUBLIC_STATE_CACHE_ROOM: 1n << 46n,
-        ON_ROOM_VACATED_PRIVATE_STATE_CACHE_ROOM: 1n << 47n
+        ON_ROOM_VACATED: 1n << 6n
     });
 
     useEffect(() => {
@@ -718,7 +674,7 @@ function WebhookManagement() {
                                             max="960"
                                             onChange={(e) => {
                                                 const value = parseInt(e.target.value, 10);
-                                                if (value == 0 || (value <= 960 && value >= 8)) {
+                                                if (value >= 0 && value <= 960) {
                                                     setIdleTimeout(value);
                                                 } else if (e.target.value === '') {
                                                     setIdleTimeout('');
