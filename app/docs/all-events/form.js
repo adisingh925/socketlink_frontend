@@ -11,20 +11,123 @@ export default function Docs() {
     const router = useRouter();
     const sidebarRef = useRef(null);
 
-    const adminEvents = {
-        'Broadcast': {
-            description: 'This event is triggered when some message is broadcasted the the admin.',
+    const events = {
+        'Rate Limit Exceeded': {
+            description: 'This event is fired when the user sends data very fast and the server is not able to deliver it.',
+            color: 'white',
+            data: 'YOU_ARE_RATE_LIMITED',
+            source: 'server'
+        },
+        'Rate Limit Lifted': {
+            description: 'This event occurs when the accumulated buffer for the user is cleared and the user can send the data again.',
+            color: 'white',
+            data: 'RATE_LIMIT_LIFTED',
+            source: 'server'
+        },
+        'Monthly Data Transfer Limit Exhausted': {
+            description: 'This event is triggered when the monthly data transfer limit is exhausted for the current plan.',
+            color: 'white',
+            data: 'MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED',
+            source: 'server'
+        },
+        'Messaging Disabled': {
+            description: 'This event happens when the messaging is disabled for the user, either in a room or globally.',
+            color: 'white',
+            data: 'MESSAGING_DISABLED',
+            source: 'server'
+        },
+        'Connected To Room': {
+            description: 'This event is being sent to the user who has been successfully connected to a new room.',
+            color: 'white',
+            data: 'CONNECTED_TO_ROOM',
+            source: 'server',
+            rid: 'ROOM_ID'
+        },
+        'Someone Joined The Room': {
+            description: 'This event is only triggered in state rooms when someone joins the room, it is sent to everyone else in the room except the user who joined.',
+            color: 'white',
+            data: 'SOMEONE_JOINED_THE_ROOM',
+            uid: 'USER_ID',
+            source: 'server',
+            rid: 'ROOM_ID'
+        },
+        'Someone Left The Room': {
+            description: 'This event is only triggered in state rooms when someone leaves the room, it is sent to everyone else in the room except the user who left.',
+            color: 'white',
+            data: 'SOMEONE_LEFT_THE_ROOM',
+            uid: 'USER_ID',
+            source: 'server',
+            rid: 'ROOM_ID'
+        },
+        'Global Broadcast': {
+            description: 'This event is triggered when some message is broadcasted by the admin to all the users connected to the server.',
             color: 'white',
             data: 'YOUR_MESSAGE',
+            source: 'admin'
+        },
+        'Room Broadcast': {
+            description: 'This event is triggered when some message is broadcasted by the admin to all the users connected to a room.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            rid: 'ROOM_ID',
+            source: 'admin'
+        },
+        'User Broadcast': {
+            description: 'This event is triggered when some message is broadcasted by the admin to some selected users.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            uid: 'USER_ID',
             source: 'admin'
         },
         'You Have Been Banned': {
             description: 'This event is triggered when the admin bans a user from the server, It is sent to the user who has been banned.',
             color: 'white',
             data: 'YOU_HAVE_BEEN_BANNED',
+            source: 'admin'
+        },
+        'Message Received': {
+            description: 'This event is received by all the members of the room when a user sends a message to the room.',
+            color: 'white',
+            data: 'YOUR_MESSAGE',
+            source: 'user',
+            rid: 'ROOM_ID'
+        },
+        'Invalid Json': {
+            description: 'This event fires when the message json is invalid.',
+            color: 'white',
+            data: 'INVALID_JSON',
             source: 'server'
         },
-    }
+        'Message Dropped': {
+            description: 'This event fires when the most recent message gets dropped by the server.',
+            color: 'white',
+            data: 'MESSAGE_DROPPED',
+            source: 'server'
+        },
+        'Messaging Disabled': {
+            description: 'This event fires when a user tries to send a message but the messaging is disabled on the server.',
+            color: 'white',
+            data: 'MESSAGING_DISABLED',
+            source: 'server'
+        },
+        'No Subscription Found': {
+            description: 'This event fires when a user tries to send a message to a room but he is not subscribed to any room.',
+            color: 'white',
+            data: 'NO_SUBSCRIPTION_FOUND',
+            source: 'server'
+        },
+        'No Subscription Found': {
+            description: 'This event fires when a user tries to send a message to a room but he is not subscribed to that room.',
+            color: 'white',
+            data: 'NO_SUBSCRIPTION_FOUND',
+            source: 'server'
+        },
+    };
+
+    useEffect(() => {
+        setActiveSection("All Events");
+        document.title = "Docs | All Events";
+    }, []);
 
     // Close sidebar when clicking outside
     useEffect(() => {
@@ -42,11 +145,6 @@ export default function Docs() {
 
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isSidebarOpen]);
-
-    useEffect(() => {
-        setActiveSection("Admin Events");
-        document.title = "Docs | Admin Events";
-    }, []);
 
     return (
         <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
@@ -80,18 +178,14 @@ export default function Docs() {
                                 title: "Getting Started",
                                 subcategories: [
                                     { name: "Connecting to the Socketlink servers", path: "/docs/connecting-to-the-socketlink-servers" },
-                                    { name: "Subscribing to a room", path: "/docs/subscribing" },
                                     { name: "Sending Messages", path: "/docs/sending-messages" },
-                                    { name: "Receiving Messages", path: "/docs/receiving-messages" }
                                 ]
                             },
                             {
                                 id: "websocket-events",
                                 title: "Websocket Events",
                                 subcategories: [
-                                    { name: "Server Events", path: "/docs/server-events" },
-                                    { name: "Admin Events", path: "/docs/admin-events" },
-                                    { name: "User Events", path: "/docs/user-events" },
+                                    { name: "All Events", path: "/docs/all-events" },
                                 ]
                             },
                             {
@@ -173,21 +267,23 @@ export default function Docs() {
                         <section id="api" className="mb-14">
                             <h2 className="text-2xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
                             <p className="text-gray-300 mb-6">
-                                The following WebSocket messages are emitted by the server during different events :
+                                The following websocket messages are emitted by the server during various events.
                             </p>
 
                             <div className="space-y-6 mt-6">
-                                <h3 className="text-purple-300 text-lg font-semibold mb-2">Admin Events</h3>
-                                {Object.keys(adminEvents).map((event) => (
+                                {Object.keys(events).map((event) => (
                                     <div key={event} className="mb-6">
-                                        <strong className={`text-${adminEvents[event].color}`}>{event}</strong>
-                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${adminEvents[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                        <strong className={`text-${events[event].color}`}>{event}</strong>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${events[event].color} overflow-x-auto whitespace-pre-wrap`}>
                                             {JSON.stringify({
-                                                data: adminEvents[event].data,
-                                                source: adminEvents[event].source
+                                                data: events[event].data,
+                                                ...(events[event].uid && { uid: events[event].uid }),
+                                                source: events[event].source,
+                                                ...(events[event].rid && { rid: events[event].rid })
                                             }, null, 2)}
+
                                         </pre>
-                                        <p className="text-gray-400 text-sm mt-2">{adminEvents[event].description}</p>
+                                        <p className="text-gray-400 text-sm mt-2">{events[event].description}</p>
                                     </div>
                                 ))}
                             </div>

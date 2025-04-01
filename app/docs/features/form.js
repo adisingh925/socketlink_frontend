@@ -65,18 +65,14 @@ export default function Docs() {
                                 title: "Getting Started",
                                 subcategories: [
                                     { name: "Connecting to the Socketlink servers", path: "/docs/connecting-to-the-socketlink-servers" },
-                                    { name: "Subscribing to a room", path: "/docs/subscribing" },
                                     { name: "Sending Messages", path: "/docs/sending-messages" },
-                                    { name: "Receiving Messages", path: "/docs/receiving-messages" }
                                 ]
                             },
                             {
                                 id: "websocket-events",
                                 title: "Websocket Events",
                                 subcategories: [
-                                    { name: "Server Events", path: "/docs/server-events" },
-                                    { name: "Admin Events", path: "/docs/admin-events" },
-                                    { name: "User Events", path: "/docs/user-events" },
+                                    { name: "All Events", path: "/docs/all-events" },
                                 ]
                             },
                             {

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import Introduction from "../../components/docs/overview/introduction";
 import { useRouter } from "next/navigation";
 
 export default function Docs() {
@@ -11,54 +12,9 @@ export default function Docs() {
     const router = useRouter();
     const sidebarRef = useRef(null);
 
-    const events = {
-        'Rate Limit Exceeded': {
-            description: 'This event is fired when the user sends data very fast and the server is not able to deliver it.',
-            color: 'white',
-            data: 'YOU_ARE_RATE_LIMITED',
-            source: 'server'
-        },
-        'Rate Limit Lifted': {
-            description: 'This event occurs when the accumulated buffer for the user is cleared and the user can send the data again.',
-            color: 'white',
-            data: 'RATE_LIMIT_LIFTED',
-            source: 'server'
-        },
-        'Monthly Data Transfer Limit Exhausted': {
-            description: 'This event is triggered when the monthly data transfer limit is exhausted for the current plan.',
-            color: 'white',
-            data: 'MONTHLY_DATA_TRANSFER_LIMIT_EXHAUSTED',
-            source: 'server'
-        },
-        'Messaging Disabled': {
-            description: 'This event happens when the messaging is disabled for the user, either in a room or globally.',
-            color: 'white',
-            data: 'MESSAGING_DISABLED',
-            source: 'server'
-        },
-        'Connected To Room': {
-            description: 'This event is being sent to the user who has been successfully connected to a new room.',
-            color: 'white',
-            data: 'CONNECTED_TO_ROOM',
-            source: 'server'
-        },
-        'Someone Joined The Room': {
-            description: 'This event is only triggered in state rooms when someone joins the room, it is sent to everyone else in the room except the user who joined.',
-            color: 'white',
-            data: 'SOMEONE_JOINED_THE_ROOM',
-            source: 'server'
-        },
-        'Someone Left The Room': {
-            description: 'This event is only triggered in state rooms when someone leaves the room, it is sent to everyone else in the room except the user who left.',
-            color: 'white',
-            data: 'SOMEONE_LEFT_THE_ROOM',
-            source: 'server'
-        },
-    };
-
     useEffect(() => {
-        setActiveSection("Server Events");
-        document.title = "Docs | Server Events";
+        setActiveSection("Sending Messages");
+        document.title = "Docs | Sending Messages";
     }, []);
 
     // Close sidebar when clicking outside
@@ -110,18 +66,14 @@ export default function Docs() {
                                 title: "Getting Started",
                                 subcategories: [
                                     { name: "Connecting to the Socketlink servers", path: "/docs/connecting-to-the-socketlink-servers" },
-                                    { name: "Subscribing to a room", path: "/docs/subscribing" },
                                     { name: "Sending Messages", path: "/docs/sending-messages" },
-                                    { name: "Receiving Messages", path: "/docs/receiving-messages" }
                                 ]
                             },
                             {
                                 id: "websocket-events",
                                 title: "Websocket Events",
                                 subcategories: [
-                                    { name: "Server Events", path: "/docs/server-events" },
-                                    { name: "Admin Events", path: "/docs/admin-events" },
-                                    { name: "User Events", path: "/docs/user-events" },
+                                    { name: "All Events", path: "/docs/all-events" },
                                 ]
                             },
                             {
@@ -198,28 +150,37 @@ export default function Docs() {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
+                <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
                     <div className="max-w-4xl mx-auto">
-                        <section id="api" className="mb-14">
-                            <h2 className="text-2xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
+                        <section id="disable_messaging_for_everyone" className="mb-16">
+                            <h2 className="text-3xl font-bold text-white mb-10">Sending Messages</h2>
+
                             <p className="text-gray-300 mb-6">
-                                The following WebSocket messages are emitted by the server during different events :
+                                This article describes the format that should be used for sending the websocket messages.
                             </p>
 
-                            <div className="space-y-6 mt-6">
-                                <h3 className="text-purple-300 text-lg font-semibold mb-2">Server Events</h3>
-                                {Object.keys(events).map((event) => (
-                                    <div key={event} className="mb-6">
-                                        <strong className={`text-${events[event].color}`}>{event}</strong>
-                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${events[event].color} overflow-x-auto whitespace-pre-wrap`}>
-                                            {JSON.stringify({
-                                                data: events[event].data,
-                                                source: events[event].source
-                                            }, null, 2)}
-                                        </pre>
-                                        <p className="text-gray-400 text-sm mt-2">{events[event].description}</p>
-                                    </div>
-                                ))}
+                            <p className="text-gray-300 mb-6">
+                                You simply need to send the message in the given format using the send function of your respective websocket library.
+                            </p>
+
+                            {/* Endpoint URL */}
+                            <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+
+                                {/* Headers */}
+                                <div className="space-y-4">
+                                    <strong className="text-blue-300">Message Format</strong>
+                                    <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
+                                        {JSON.stringify({
+                                            message: "YOUR_MESSAGE",
+                                            rid: "ROOM_ID"
+                                        }, null, 2)}
+                                    </pre>
+
+                                    <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                                        <li><code>message :</code> The message that you want to send.</li>
+                                        <li><code>rid :</code> The room in which you want to send the given message.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </section>
                     </div>
