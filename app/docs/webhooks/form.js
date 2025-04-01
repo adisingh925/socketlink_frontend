@@ -75,8 +75,8 @@ export default function Docs() {
                                 ]
                             },
                             {
-                                id: "integrations",
-                                title: "Integrations",
+                                id: "configuration",
+                                title: "Configuration",
                                 subcategories: [
                                     { name: "Webhooks", path: "/docs/webhooks" },
                                     { name: "MySQL", path: "/docs/mysql-integration" },

@@ -92,13 +92,13 @@ export default function FloatingNavigationBar() {
                                         My Plans
                                     </Link>
                                     <Link
-                                        href="/config"
+                                        href="/configuration"
                                         className={classNames(
-                                            isActive("/config") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/configuration") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
-                                        Config
+                                        Configuration
                                     </Link>
                                     <Link
                                         href="/billing"
@@ -291,13 +291,13 @@ export default function FloatingNavigationBar() {
                                 My Plans
                             </Link>
                             <Link
-                                href="/config"
+                                href="/configuration"
                                 className={classNames(
-                                    isActive("/config") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/configuration") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
-                                Config
+                                Configuration
                             </Link>
                             <Link
                                 href="/billing"
