@@ -147,28 +147,42 @@ export default function Docs() {
                 <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
                     <div className="max-w-4xl mx-auto">
                         <section id="disable_messaging_for_everyone" className="mb-16">
-                            <h2 className="text-2xl font-bold text-gray-300 mb-8">MySQL</h2>
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8">MySQL</h2>
 
                             <p className="text-gray-300 mb-6">
                                 This article describes how you can use the MySQL integration.
                             </p>
 
-                            <code className="text-blue-300">MySQL Hostname :</code>
-                            &nbsp;Insert the DB url and make sure the socketlink server IP is whitelisted.<br />
-                            <code className="text-blue-300">MySQL DB Username :</code>
-                            &nbsp;Insert the DB name that you want to use for integration.<br />
-                            <code className="text-blue-300">MySQL DB Password :</code>
-                            &nbsp;Insert the DB password.<br />
-                            <code className="text-blue-300">MySQL DB Port :</code>
-                            &nbsp;Insert the DB Port.<br />
-                            <code className="text-blue-300">MySQL Commit Batch Size :</code>
-                            &nbsp;Insert the batch size i.e the number of messages you want to insert in one go, You should keep it higher if the frequency of the messages are higher.<br />
+                            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+                                <ul className="space-y-4 text-gray-300">
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">MySQL Hostname:</code>
+                                        <span className="ml-2">Insert the DB URL and ensure the Socketlink server IP is whitelisted.</span>
+                                    </li>
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Username:</code>
+                                        <span className="ml-2">Insert the database username for integration.</span>
+                                    </li>
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Password:</code>
+                                        <span className="ml-2">Insert the database password.</span>
+                                    </li>
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Port:</code>
+                                        <span className="ml-2">Insert the database port number.</span>
+                                    </li>
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">MySQL Commit Batch Size:</code>
+                                        <span className="ml-2">Set the batch size for message insertion. A higher value is recommended for high-frequency messaging.</span>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <p className="text-gray-300 mt-6">
                                 Press the save credentials button to save the credentials.
                             </p>
 
-                            <h2 className="text-2xl font-bold text-gray-300 mb-8 mt-8">Enabling/Disabling the MySQL Integration</h2>
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8 mt-8">Enabling/Disabling the MySQL Integration</h2>
 
                             <p className="text-gray-300 mt-4">
                                 Use the toggle to enable and disable the MySQL integration.
