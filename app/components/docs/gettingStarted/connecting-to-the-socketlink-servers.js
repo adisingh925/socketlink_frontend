@@ -29,8 +29,8 @@ const ConnectingToTheSocketlinkServers = () => (
                     <div>
                         <p className="font-bold text-blue-600">Required Headers for WebSocket Connection</p>
                         <ul className="list-disc list-inside ml-2 mt-2 text-sm text-gray-700">
-                            <li><code>api-key</code>: Your <b>Client API Key</b>.</li>
-                            <li><code>uid</code>: Unique ID for the connection/user (cannot be reused).</li>
+                            <li><code>api-key</code> : Your <b>Client API Key</b>.</li>
+                            <li><code>uid</code> : Unique ID for the connection/user (cannot be reused).</li>
                         </ul>
                     </div>
                 </div>

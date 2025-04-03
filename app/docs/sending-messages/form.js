@@ -148,7 +148,7 @@ export default function Docs() {
                 <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
                     <div className="max-w-4xl mx-auto">
                         <section id="disable_messaging_for_everyone" className="mb-16">
-                            <h2 className="text-3xl font-bold text-white mb-8">Sending Messages</h2>
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8">Sending Messages</h2>
 
                             <p className="text-gray-300 mb-6">
                                 This article describes the format that should be used for sending the websocket messages.
