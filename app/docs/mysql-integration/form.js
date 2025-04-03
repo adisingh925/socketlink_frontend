@@ -156,23 +156,23 @@ export default function Docs() {
                             <div className="bg-gray-800 p-6 rounded-lg shadow-md">
                                 <ul className="space-y-4 text-gray-300">
                                     <li>
-                                        <code className="text-blue-400 font-semibold">MySQL Hostname:</code>
+                                        <code className="text-blue-400 font-semibold">MySQL Hostname :</code>
                                         <span className="ml-2">Insert the DB URL and ensure the Socketlink server IP is whitelisted.</span>
                                     </li>
                                     <li>
-                                        <code className="text-blue-400 font-semibold">MySQL DB Username:</code>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Username :</code>
                                         <span className="ml-2">Insert the database username for integration.</span>
                                     </li>
                                     <li>
-                                        <code className="text-blue-400 font-semibold">MySQL DB Password:</code>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Password :</code>
                                         <span className="ml-2">Insert the database password.</span>
                                     </li>
                                     <li>
-                                        <code className="text-blue-400 font-semibold">MySQL DB Port:</code>
+                                        <code className="text-blue-400 font-semibold">MySQL DB Port :</code>
                                         <span className="ml-2">Insert the database port number.</span>
                                     </li>
                                     <li>
-                                        <code className="text-blue-400 font-semibold">MySQL Commit Batch Size:</code>
+                                        <code className="text-blue-400 font-semibold">MySQL Commit Batch Size :</code>
                                         <span className="ml-2">Set the batch size for message insertion. A higher value is recommended for high-frequency messaging.</span>
                                     </li>
                                 </ul>

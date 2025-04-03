@@ -153,137 +153,194 @@ export default function Docs() {
                                 This article describes how you can use the different webhooks.
                             </p>
 
-                            <code className="text-blue-300">Webhook Url :</code>
-                            &nbsp;Insert the url where you want to receive the webhook events.<br />
-                            <code className="text-blue-300">Webhook Secret :</code>
-                            &nbsp;Insert the secret key to secure the webhook events, An <code>HMAC-SHA256</code> will be created using this secret and included on the header in the field <code>X-HMAC-Signature</code><br />
+                            <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+                                <ul className="space-y-4 text-gray-300">
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">Webhook URL :</code>
+                                        <span className="ml-2">Enter the URL where you want to receive webhook events.</span>
+                                    </li>
+                                    <li>
+                                        <code className="text-blue-400 font-semibold">Webhook Secret :</code>
+                                        <span className="ml-2">
+                                            Provide a secret key to secure webhook events. An <code className="text-gray-200 bg-gray-700 px-1 rounded-md">HMAC-SHA256</code> signature will be created using this secret and included in the header under {" "}
+                                            <code className="text-gray-200 bg-gray-700 px-1 rounded-md">X-HMAC-Signature</code>.
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
 
-                            <h2 className="text-2xl font-bold text-gray-300 mb-8 mt-8">Events</h2>
+
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8 mt-8">Events</h2>
 
                             {/* Webhooks List */}
                             <div className="bg-gray-900 rounded-lg mt-4 space-y-4">
                                 <ul className="text-gray-300 space-y-8">
-                                    <li>
-                                        <code className="text-blue-300">ON_MESSAGE :</code>
-                                        &nbsp;Triggered when a user sends a message in a room.
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_MESSAGE:</code>
+                                        <span className="ml-2 text-gray-300">Triggered when a user sends a message in a room.</span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_MESSAGE",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID",
-                                                    message: "Hello, this is a test message!"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_MESSAGE",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID",
+                                                        message: "Hello, this is a test message!"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
-                                                <li><code>message :</code> The message sent on the room.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID of the sender.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID where the message was sent.</li>
+                                                <li><code className="text-blue-300">message:</code> The actual message sent in the room.</li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li>
-                                        <code className="text-blue-300">ON_VERIFICATION_REQUEST :</code>
-                                        &nbsp;Triggered when a user attempts to join a private room, A request is sent to the webhook server to verify wether the user is allowed in the given private room or not.
+
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_VERIFICATION_REQUEST:</code>
+                                        <span className="ml-2 text-gray-300">
+                                            Triggered when a user attempts to join a private room. A request is sent to the webhook server to verify whether the user is allowed in the given private room.
+                                        </span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_VERIFICATION_REQUEST",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_VERIFICATION_REQUEST",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID attempting to join.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID the user is trying to access.</li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li>
-                                        <code className="text-blue-300">ON_SUBSCRIBE :</code>
-                                        &nbsp;Triggered when a user subscribes to a room.
+
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_SUBSCRIBE:</code>
+                                        <span className="ml-2 text-gray-300">
+                                            Triggered when a user subscribes to a room.
+                                        </span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_SUBSCRIBE",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID",
-                                                    connections_in_room: "ROOM_CONNECTION_COUNT"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_SUBSCRIBE",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID",
+                                                        connections_in_room: "ROOM_CONNECTION_COUNT"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
-                                                <li><code>connections_in_room :</code> total number of users connected to the room.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID subscribing to the room.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID the user subscribed to.</li>
+                                                <li><code className="text-blue-300">connections_in_room:</code> The total number of users currently connected to the room.</li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li>
-                                        <code className="text-blue-300">ON_UNSUBSCRIBE :</code>
-                                        &nbsp;Triggered when a user unsubscribes from a room.
+
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_UNSUBSCRIBE:</code>
+                                        <span className="ml-2 text-gray-300">
+                                            Triggered when a user unsubscribes from a room.
+                                        </span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_UNSUBSCRIBE",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID",
-                                                    connections_in_room: "ROOM_CONNECTION_COUNT"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_UNSUBSCRIBE",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID",
+                                                        connections_in_room: "ROOM_CONNECTION_COUNT"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
-                                                <li><code>connections_in_room :</code> total number of users connected to the room.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID unsubscribing from the room.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID the user unsubscribed from.</li>
+                                                <li><code className="text-blue-300">connections_in_room:</code> The total number of users currently connected to the room.</li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li>
-                                        <code className="text-blue-300">ON_ROOM_OCCUPIED :</code>
-                                        &nbsp;Triggered when a room becomes occupied.
+
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_ROOM_OCCUPIED:</code>
+                                        <span className="ml-2 text-gray-300">
+                                            Triggered when a room becomes occupied.
+                                        </span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_ROOM_OCCUPIED",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_ROOM_OCCUPIED",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID that caused the room to become occupied.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID that is now occupied.</li>
                                             </ul>
                                         </div>
                                     </li>
-                                    <li>
-                                        <code className="text-blue-300">ON_ROOM_VACATED :</code>
-                                        &nbsp;Triggered when the last user leaves a chat room.
+
+                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                        <code className="text-blue-300 font-semibold">ON_ROOM_VACATED:</code>
+                                        <span className="ml-2 text-gray-300">
+                                            Triggered when the last user leaves a chat room.
+                                        </span>
+
                                         <div className="mt-4">
-                                            <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
-                                                {JSON.stringify({
-                                                    event: "ON_ROOM_VACATED",
-                                                    uid: "USER_ID",
-                                                    rid: "ROOM_ID"
-                                                }, null, 2)}
+                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                                {JSON.stringify(
+                                                    {
+                                                        event: "ON_ROOM_VACATED",
+                                                        uid: "USER_ID",
+                                                        rid: "ROOM_ID"
+                                                    },
+                                                    null,
+                                                    2
+                                                )}
                                             </pre>
 
-                                            <ul className="text-gray-300 text-sm mt-2 space-y-1">
-                                                <li><code>event :</code> The event which triggered the webhook.</li>
-                                                <li><code>uid :</code> The uid from wich the message is sent.</li>
-                                                <li><code>rid :</code> The room in which the message is sent.</li>
+                                            <ul className="text-gray-300 text-sm mt-3 space-y-1">
+                                                <li><code className="text-blue-300">event:</code> The event that triggered the webhook.</li>
+                                                <li><code className="text-blue-300">uid:</code> The user ID of the last user who left.</li>
+                                                <li><code className="text-blue-300">rid:</code> The room ID that became vacant.</li>
                                             </ul>
                                         </div>
                                     </li>
+
                                 </ul>
                             </div>
                         </section>
