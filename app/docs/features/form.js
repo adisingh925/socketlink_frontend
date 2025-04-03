@@ -145,24 +145,35 @@ export default function Docs() {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow overflow-y-auto">
                 <NavigationBar />
-                <main className="flex-grow md:px-16 px-8 mb-10 pt-[7rem] text-gray-200">
-                    <div className="max-w-3xl mx-auto">
+                <main className="flex-grow md:px-16 px-8 pt-[7rem]">
+                    <div className="max-w-4xl mx-auto">
                         <h3 className="text-3xl font-bold text-white mb-10">Key Features</h3>
 
-                        <ul className="space-y-12">
+                        {/* Overview */}
+                        <div className="mb-10">
+                            <p className="text-lg">
+                                Socketlink is a powerful WebSocket-based communication solution designed for speed, security, and scalability. Whether you're building a chat application, real-time notifications, or live streaming services, Socketlink ensures seamless performance and reliability.
+                            </p>
+                        </div>
+
+                        <ul className="space-y-12 mb-6">
                             <li>
-                                <h4 className="text-xl font-semibold text-blue-400 mb-3">Ultra-Fast WebSocket Connections</h4>
-                                <p className="text-gray-400">Low-latency, high-speed communication with optimized WebSockets.</p>
+                                <h4 className="text-xl font-bold text-green-400">Ultra-Fast WebSocket Connections</h4>
+                                <p className="mt-2 space-y-3 list-disc list-inside text-gray-300">
+                                    <li>Low-latency, high-speed communication with optimized WebSockets.</li>
+                                </p>
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-green-400 mb-3">Scalable Architecture</h4>
-                                <p className="text-gray-400">Handles thousands of concurrent connections effortlessly.</p>
+                                <h4 className="text-xl font-bold text-green-400">Scalable Architecture</h4>
+                                <p className="mt-2 space-y-3 list-disc list-inside text-gray-300">
+                                    <li>Handles thousands of concurrent connections effortlessly.</li>
+                                </p>
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-red-400 mb-3">Secure WebSocket Connections</h4>
-                                <ul className="ml-5 space-y-3 text-gray-400">
+                                <h4 className="text-xl font-bold text-red-400">Secure WebSocket Connections</h4>
+                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
                                     <li>🔑 <strong>Strong Authentication</strong> – Only trusted clients can connect.</li>
                                     <li>🔐 <strong>Perfect Forward Secrecy</strong> – Ensures long-term confidentiality.</li>
                                     <li>🛡️ <strong>Quantum-Resistant Strength</strong> – Secure against emerging threats.</li>
@@ -173,8 +184,8 @@ export default function Docs() {
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-yellow-400 mb-3">Room & Channel Management</h4>
-                                <ul className="ml-5 space-y-3 text-gray-400">
+                                <h4 className="text-xl font-bold text-yellow-400">Room & Channel Management</h4>
+                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
                                     <li>🟢 <strong>State Rooms</strong> – Tracks user activity in real-time.</li>
                                     <li>🗂️ <strong>Cache Channels</strong> – Temporarily stores messages for new users.</li>
                                     <li>🔐 <strong>Private Channels</strong> – Authenticate users before granting access.</li>
@@ -183,8 +194,8 @@ export default function Docs() {
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-purple-400 mb-3">Real-Time Monitoring & Analytics</h4>
-                                <ul className="ml-5 space-y-3 text-gray-400">
+                                <h4 className="text-xl font-bold text-purple-400">Real-Time Monitoring & Analytics</h4>
+                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
                                     <li>💬 <strong>Total Messages Transferred</strong></li>
                                     <li>👥 <strong>Total Connected Users</strong></li>
                                     <li>📦 <strong>Average Payload Size</strong></li>
@@ -196,18 +207,24 @@ export default function Docs() {
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-pink-400 mb-3">High Availability & Auto Scaling</h4>
-                                <p className="text-gray-400">Infrastructure automatically scales with demand, ensuring 99.99% uptime.</p>
+                                <h4 className="text-xl font-bold text-pink-400">High Availability & Auto Scaling</h4>
+                                <p className="mt-2 space-y-3 list-disc list-inside text-gray-300">
+                                    <li>Infrastructure automatically scales with demand, ensuring 99.99% uptime.</li>
+                                </p>
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-cyan-400 mb-3">Event Broadcasting</h4>
-                                <p className="text-gray-400">Broadcast events to multiple clients for real-time notifications.</p>
+                                <h4 className="text-xl font-bold text-cyan-400">Event Broadcasting</h4>
+                                <p className="mt-2 space-y-3 list-disc list-inside text-gray-300">
+                                    <li>Broadcast events to multiple clients for real-time notifications.</li>
+                                </p>
                             </li>
 
                             <li>
-                                <h4 className="text-xl font-semibold text-indigo-400 mb-3">No Vendor Lock-in</h4>
-                                <p className="text-gray-400">Pure WebSocket-based solution with no client-side SDKs.</p>
+                                <h4 className="text-xl font-bold text-indigo-400">No Vendor Lock-in</h4>
+                                <p className="mt-2 space-y-3 list-disc list-inside text-gray-300">
+                                    <li>Pure WebSocket-based solution with no client-side SDKs.</li>
+                                </p>
                             </li>
                         </ul>
                     </div>
