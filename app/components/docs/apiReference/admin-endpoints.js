@@ -454,7 +454,7 @@ const AdminEndpoints = () => {
     }
 
     return (
-        <section id="api" className="mb-14 space-y-10">
+        <section id="api" className="mb-14">
             <h2 className="text-3xl font-bold text-gray-300 mb-8">Admin Endpoints</h2>
 
             <p className="text-gray-300 mb-6">
