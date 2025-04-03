@@ -147,119 +147,126 @@ export default function Docs() {
                 <NavigationBar />
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-4xl mx-auto">
-                        <h3 className="text-3xl font-bold text-white mb-10">Key Features</h3>
+                        <h3 className="text-3xl font-bold text-gray-300 mb-8">Key Features</h3>
 
                         {/* Overview */}
                         <div className="mb-10">
-                            <p className="text-lg">
+                            <p className="text-gray-300 mb-6">
                                 Socketlink is a powerful WebSocket-based communication solution designed for speed, security, and scalability. Whether you're building a chat application, real-time notifications, or live streaming services, Socketlink ensures seamless performance and reliability.
                             </p>
                         </div>
 
-                        <ul className="space-y-12 mb-6">
-                            <li>
+                        <ul className="space-y-8 mb-6">
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-green-400">Ultra-Fast WebSocket Connections</h4>
                                 <p className="mt-2 text-gray-300">
-                                    Socketlink uses optimized WebSocket technology to deliver lightning-fast, bidirectional communication. It minimizes latency and maximizes throughput, ensuring real-time data exchange between clients and servers without unnecessary overhead.
+                                    Socketlink leverages optimized WebSocket technology to provide ultra-fast, bidirectional communication. By minimizing latency and maximizing throughput, it enables real-time data exchange between clients and servers with minimal overhead.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>Low-latency, high-speed communication with optimized WebSockets.</li>
-                                    <li>Eliminates polling delays by maintaining a persistent connection.</li>
-                                    <li>Seamless data streaming for chats, notifications, and live updates.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li><span className="text-green-300 font-medium">Low-latency, high-speed communication</span> with optimized WebSockets.</li>
+                                    <li><span className="text-green-300 font-medium">No polling delays</span>, thanks to a persistent connection.</li>
+                                    <li><span className="text-green-300 font-medium">Seamless data streaming</span> for chats, notifications, and live updates.</li>
                                 </ul>
                             </li>
 
-                            <li>
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-green-400">Scalable Architecture</h4>
                                 <p className="mt-2 text-gray-300">
-                                    Designed to support thousands of concurrent users effortlessly, Socketlink provides an efficient and distributed WebSocket infrastructure that auto-scales based on demand.
+                                    Engineered to handle thousands of concurrent users seamlessly, Socketlink offers a robust, distributed WebSocket infrastructure that auto-scales to meet demand.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>Handles massive spikes in traffic without degrading performance.</li>
-                                    <li>Load balancing ensures stability even during peak usage.</li>
-                                    <li>Optimized connection management prevents resource exhaustion.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li><span className="text-green-300 font-medium">Handles massive traffic spikes</span> without degrading performance.</li>
+                                    <li><span className="text-green-300 font-medium">Load balancing</span> ensures stability even during peak usage.</li>
+                                    <li><span className="text-green-300 font-medium">Optimized connection management</span> prevents resource exhaustion.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-red-400">Secure WebSocket Connections</h4>
                                 <p className="mt-2 text-gray-300">
-                                    Security is a top priority in WebSocket communication. Socketlink implements cutting-edge security protocols to prevent unauthorized access and data interception.
+                                    Security is a top priority in WebSocket communication. Socketlink implements advanced security protocols to prevent unauthorized access and data interception.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>🔑 <strong>Strong Authentication</strong> – Only trusted clients can connect.</li>
-                                    <li>🔐 <strong>Perfect Forward Secrecy</strong> – Ensures long-term confidentiality.</li>
-                                    <li>🛡️ <strong>Quantum-Resistant Strength</strong> – Secure against emerging threats.</li>
-                                    <li>⚡ <strong>Efficient Performance</strong> – Optimized for low-latency handshakes.</li>
-                                    <li>🛑 <strong>Protection Against MITM Attacks</strong> – Prevents unauthorized interception.</li>
-                                    <li>📜 <strong>Data Integrity</strong> – Ensures messages aren’t altered in transit.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>🔑 <span className="text-red-300 font-medium">Strong Authentication</span> – Only trusted clients can connect.</li>
+                                    <li>🔐 <span className="text-red-300 font-medium">Perfect Forward Secrecy</span> – Ensures long-term confidentiality.</li>
+                                    <li>🛡️ <span className="text-red-300 font-medium">Quantum-Resistant Strength</span> – Secure against emerging threats.</li>
+                                    <li>⚡ <span className="text-red-300 font-medium">Efficient Performance</span> – Optimized for low-latency handshakes.</li>
+                                    <li>🛑 <span className="text-red-300 font-medium">Protection Against MITM Attacks</span> – Prevents unauthorized interception.</li>
+                                    <li>📜 <span className="text-red-300 font-medium">Data Integrity</span> – Ensures messages aren’t altered in transit.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-yellow-400">Room & Channel Management</h4>
                                 <p className="mt-2 text-gray-300">
-                                    Socketlink offers powerful room and channel management capabilities, allowing developers to create structured communication environments tailored to their needs.
+                                    Socketlink offers powerful room and channel management capabilities, enabling developers to create structured communication environments tailored to their needs.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>🟢 <strong>State Rooms</strong> – Tracks user activity in real-time.</li>
-                                    <li>🗂️ <strong>Cache Channels</strong> – Temporarily stores messages for new users.</li>
-                                    <li>🔐 <strong>Private Channels</strong> – Authenticate users before granting access.</li>
-                                    <li>🌍 <strong>Public Channels</strong> – Open access with a valid client API key.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>🟢 <span className="text-yellow-300 font-medium">State Rooms</span> – Tracks user activity in real-time.</li>
+                                    <li>🗂️ <span className="text-yellow-300 font-medium">Cache Channels</span> – Temporarily stores messages for new users.</li>
+                                    <li>🔐 <span className="text-yellow-300 font-medium">Private Channels</span> – Authenticate users before granting access.</li>
+                                    <li>🌍 <span className="text-yellow-300 font-medium">Public Channels</span> – Open access with a valid client API key.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-purple-400">Real-Time Monitoring & Analytics</h4>
                                 <p className="mt-2 text-gray-300">
                                     Gain complete visibility into your WebSocket traffic with real-time analytics. Socketlink provides detailed insights into connection health, traffic volume, and user interactions.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>💬 <strong>Total Messages Transferred</strong> – View the total number of messages exchanged.</li>
-                                    <li>👥 <strong>Total Connected Users</strong> – Monitor active users in real time.</li>
-                                    <li>📦 <strong>Average Payload Size</strong> – Analyze the efficiency of message transmission.</li>
-                                    <li>📡 <strong>Total Payload Sent</strong> – Track bandwidth usage.</li>
-                                    <li>🚫 <strong>Unauthorized Request Rejections</strong> – Detect suspicious access attempts.</li>
-                                    <li>⏳ <strong>Average Message Latency</strong> – Optimize communication speed.</li>
-                                    <li>❌ <strong>Total Messages Dropped</strong> – Identify transmission issues.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>💬 <span className="text-purple-300 font-medium">Total Messages Transferred</span> – View the total number of messages exchanged.</li>
+                                    <li>👥 <span className="text-purple-300 font-medium">Total Connected Users</span> – Monitor active users in real time.</li>
+                                    <li>📦 <span className="text-purple-300 font-medium">Average Payload Size</span> – Analyze the efficiency of message transmission.</li>
+                                    <li>📡 <span className="text-purple-300 font-medium">Total Payload Sent</span> – Track bandwidth usage.</li>
+                                    <li>🚫 <span className="text-purple-300 font-medium">Unauthorized Request Rejections</span> – Detect suspicious access attempts.</li>
+                                    <li>⏳ <span className="text-purple-300 font-medium">Average Message Latency</span> – Optimize communication speed.</li>
+                                    <li>❌ <span className="text-purple-300 font-medium">Total Messages Dropped</span> – Identify transmission issues.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-pink-400">High Availability & Auto Scaling</h4>
                                 <p className="mt-2 text-gray-300">
                                     Socketlink automatically scales up or down based on traffic demand, ensuring consistent performance and reliability without requiring manual intervention.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>Infrastructure automatically scales with demand, ensuring 99.99% uptime.</li>
-                                    <li>Redundant failover mechanisms prevent service disruptions.</li>
-                                    <li>Distributed architecture ensures reliability across multiple regions.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>⚡ <span className="text-pink-300 font-medium">Auto-Scaling Infrastructure</span> – Dynamically adjusts resources for 99.99% uptime.</li>
+                                    <li>🛑 <span className="text-pink-300 font-medium">Failover Mechanisms</span> – Prevents service disruptions with automatic redundancy.</li>
+                                    <li>🌍 <span className="text-pink-300 font-medium">Distributed Architecture</span> – Ensures reliability across multiple regions.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-cyan-400">Event Broadcasting</h4>
                                 <p className="mt-2 text-gray-300">
-                                    Instantly broadcast messages to multiple clients using Socketlink’s efficient event-driven architecture. Ideal for notifications, stock updates, live scores, and more.
+                                    Instantly broadcast messages to multiple clients using Socketlink’s efficient event-driven architecture. Perfect for notifications, stock updates, live scores, and more.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>Broadcast events to multiple clients for real-time notifications.</li>
-                                    <li>Efficient message distribution using pub/sub channels.</li>
-                                    <li>Supports targeted broadcasts for personalized experiences.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>📡 <span className="text-cyan-300 font-medium">Real-Time Notifications</span> – Instantly deliver updates to multiple clients.</li>
+                                    <li>🔄 <span className="text-cyan-300 font-medium">Efficient Pub/Sub System</span> – Uses optimized channels for message distribution.</li>
+                                    <li>🎯 <span className="text-cyan-300 font-medium">Targeted Broadcasts</span> – Send personalized messages to specific users or groups.</li>
                                 </ul>
                             </li>
 
-                            <li>
+
+                            <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                                 <h4 className="text-xl font-bold text-indigo-400">No Vendor Lock-in</h4>
                                 <p className="mt-2 text-gray-300">
                                     Socketlink provides a fully open WebSocket solution with no proprietary SDKs, allowing developers to use any frontend or backend framework without restrictions.
                                 </p>
-                                <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
-                                    <li>Pure WebSocket-based solution with no client-side SDKs.</li>
-                                    <li>Compatible with any programming language and framework.</li>
-                                    <li>Freedom to deploy on any cloud provider or on-premises setup.</li>
+                                <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
+                                    <li>🚀 <span className="text-indigo-300 font-medium">Pure WebSocket Solution</span> – No client-side SDKs required.</li>
+                                    <li>🌍 <span className="text-indigo-300 font-medium">Universal Compatibility</span> – Works with any language or framework.</li>
+                                    <li>☁️ <span className="text-indigo-300 font-medium">Flexible Deployment</span> – Run on any cloud provider or on-premises setup.</li>
                                 </ul>
                             </li>
+
                         </ul>
                     </div>
                 </main>

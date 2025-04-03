@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const HowToPurchase = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-2xl font-bold text-gray-300 mb-8">Purchasing Guide</h2>
+        <h2 className="text-3xl font-bold text-gray-300 mb-8">Purchasing Guide</h2>
         <div className="space-y-8">
             <p className="text-gray-400">
                 <b>Step 1 :</b> Go to our{" "}

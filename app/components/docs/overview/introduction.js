@@ -1,6 +1,6 @@
 const Introduction = () => (
     <section id="overview" className="mb-16 text-white">
-        <h2 className="text-3xl font-extrabold mb-10">🚀 Introduction</h2>
+        <h2 className="text-3xl font-bold text-gray-300 mb-8">🚀 Introduction</h2>
 
         {/* Overview */}
         <div className="mb-10">

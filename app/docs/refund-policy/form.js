@@ -149,7 +149,7 @@ export default function Docs() {
                 <main className="flex-grow md:px-16 px-8 pt-[7rem] text-gray-200">
                     <div className="max-w-4xl mx-auto">
                         <section id="refund-policy" className="mb-16">
-                            <h2 className="text-3xl font-bold text-white mb-10">🔄 Refund Policy</h2>
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8">🔄 Refund Policy</h2>
 
                             <p className="text-lg text-gray-300 mb-10">
                                 <strong>We strive to ensure a smooth experience for our users.</strong>
