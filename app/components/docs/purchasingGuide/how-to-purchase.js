@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const HowToPurchase = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-3xl font-bold text-gray-300 mb-8">Purchasing Guide</h2>
+        <h2 className="text-3xl font-bold text-gray-300 mb-8">🛒 Purchasing Guide</h2>
         <div className="space-y-8">
-            <p className="text-gray-400">
+            <p className="text-gray-300">
                 <b>Step 1 :</b> Go to our{" "}
                 <a
                     href="/pricing"
@@ -23,7 +23,7 @@ const HowToPurchase = () => (
                 className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
             />
 
-            <p className="text-gray-400">
+            <p className="text-gray-300">
                 <b>Step 2 :</b> You will be asked to choose the region in which you want to setup your plan, It is advised to choose the region closest to your users for low latency.
             </p>
 
@@ -35,7 +35,7 @@ const HowToPurchase = () => (
                 className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
             />
 
-            <p className="text-gray-400">
+            <p className="text-gray-300">
                 <b>Step 3 :</b> After choosing the suitable plan and upon completion of the payment,
                 you will be automatically redirected to the{" "}
                 <a
@@ -55,7 +55,7 @@ const HowToPurchase = () => (
                 className="w-full max-w-5xl rounded-2xl border-2 border-gray-600 shadow-lg"
             />
 
-            <p className="text-gray-400">
+            <p className="text-gray-300">
                 <b>Step 4 :</b> It will take a few minutes to get your plan ready and as soon as it will become ready the <b>Account Status</b> will become <b>Active</b>.
             </p>
         </div>

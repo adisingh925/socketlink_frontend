@@ -49,7 +49,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" }
                                 ]
                             },
                             {
@@ -151,7 +150,7 @@ export default function Docs() {
                         <section id="refund-policy" className="mb-16">
                             <h2 className="text-3xl font-bold text-gray-300 mb-8">🔄 Refund Policy</h2>
 
-                            <p className="text-lg text-gray-300 mb-10">
+                            <p className=" text-gray-300 mb-10">
                                 <strong>We strive to ensure a smooth experience for our users.</strong>
                                 <br /><br />
                                 Below are the terms and conditions regarding refunds for payments made through our platform.

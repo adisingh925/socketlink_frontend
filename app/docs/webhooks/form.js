@@ -47,7 +47,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" }
                                 ]
                             },
                             {
@@ -153,7 +152,7 @@ export default function Docs() {
                                 This article describes how you can use the different webhooks.
                             </p>
 
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+                            <div className="bg-gray-800 p-6 rounded-2xl shadow-md border-2 border-white/20">
                                 <ul className="space-y-4 text-gray-300">
                                     <li>
                                         <code className="text-blue-400 font-semibold">Webhook URL :</code>
@@ -173,14 +172,14 @@ export default function Docs() {
                             <h2 className="text-3xl font-bold text-gray-300 mb-8 mt-8">Events</h2>
 
                             {/* Webhooks List */}
-                            <div className="bg-gray-900 rounded-lg mt-4 space-y-4">
+                            <div className="bg-gray-900 rounded-2xl mt-4 space-y-4">
                                 <ul className="text-gray-300 space-y-8">
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_MESSAGE:</code>
                                         <span className="ml-2 text-gray-300">Triggered when a user sends a message in a room.</span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_MESSAGE",
@@ -202,14 +201,14 @@ export default function Docs() {
                                         </div>
                                     </li>
 
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_VERIFICATION_REQUEST:</code>
                                         <span className="ml-2 text-gray-300">
                                             Triggered when a user attempts to join a private room. A request is sent to the webhook server to verify whether the user is allowed in the given private room.
                                         </span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_VERIFICATION_REQUEST",
@@ -229,14 +228,14 @@ export default function Docs() {
                                         </div>
                                     </li>
 
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_SUBSCRIBE:</code>
                                         <span className="ml-2 text-gray-300">
                                             Triggered when a user subscribes to a room.
                                         </span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_SUBSCRIBE",
@@ -258,14 +257,14 @@ export default function Docs() {
                                         </div>
                                     </li>
 
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_UNSUBSCRIBE:</code>
                                         <span className="ml-2 text-gray-300">
                                             Triggered when a user unsubscribes from a room.
                                         </span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_UNSUBSCRIBE",
@@ -287,14 +286,14 @@ export default function Docs() {
                                         </div>
                                     </li>
 
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_ROOM_OCCUPIED:</code>
                                         <span className="ml-2 text-gray-300">
                                             Triggered when a room becomes occupied.
                                         </span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_ROOM_OCCUPIED",
@@ -314,14 +313,14 @@ export default function Docs() {
                                         </div>
                                     </li>
 
-                                    <li className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                    <li className="bg-gray-800 p-4 rounded-2xl border-2 border-white/20">
                                         <code className="text-blue-300 font-semibold">ON_ROOM_VACATED:</code>
                                         <span className="ml-2 text-gray-300">
                                             Triggered when the last user leaves a chat room.
                                         </span>
 
                                         <div className="mt-4">
-                                            <pre className="bg-gray-900 p-3 rounded-lg text-sm text-gray-200 border border-gray-700 overflow-x-auto whitespace-pre-wrap">
+                                            <pre className="bg-gray-900 p-3 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
                                                 {JSON.stringify(
                                                     {
                                                         event: "ON_ROOM_VACATED",

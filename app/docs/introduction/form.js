@@ -52,7 +52,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" },
                                 ],
                             },
                             {

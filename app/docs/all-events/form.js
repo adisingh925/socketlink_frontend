@@ -155,7 +155,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" }
                                 ]
                             },
                             {
@@ -255,7 +254,7 @@ export default function Docs() {
                 <main className="flex-grow md:px-16 px-8 pt-[7rem]">
                     <div className="max-w-4xl mx-auto">
                         <section id="api" className="mb-14">
-                            <h2 className="text-3xl font-bold text-gray-300 mb-8">WebSocket Events</h2>
+                            <h2 className="text-3xl font-bold text-gray-300 mb-8">📡 WebSocket Events</h2>
                             <p className="text-gray-300 mb-6">
                                 The following websocket messages are emitted by the server during various events.
                             </p>

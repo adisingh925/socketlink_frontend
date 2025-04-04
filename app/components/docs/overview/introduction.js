@@ -4,7 +4,7 @@ const Introduction = () => (
 
         {/* Overview */}
         <div className="mb-10">
-            <p className="text-lg">
+            <p className="text-gray-300">
                 <strong>Welcome to the official documentation for <em className="text-blue-400">socketlink.io</em>!</strong>
                 <br /><br />
                 This guide will help you understand the core concepts, key features, and how to integrate real-time communication into your applications using our platform.

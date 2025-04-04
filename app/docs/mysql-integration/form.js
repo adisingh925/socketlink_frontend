@@ -47,7 +47,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" }
                                 ]
                             },
                             {
@@ -153,7 +152,7 @@ export default function Docs() {
                                 This article describes how you can use the MySQL integration.
                             </p>
 
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="bg-gray-800 p-6 rounded-2xl shadow-md border-2 border-white/20">
                                 <ul className="space-y-4 text-gray-300">
                                     <li>
                                         <code className="text-blue-400 font-semibold">MySQL Hostname :</code>

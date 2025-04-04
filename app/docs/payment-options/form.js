@@ -49,7 +49,6 @@ export default function Docs() {
                                 subcategories: [
                                     { name: "Introduction", path: "/docs/introduction" },
                                     { name: "Features", path: "/docs/features" },
-                                    { name: "Benefits", path: "/docs/benefits" }
                                 ]
                             },
                             {
@@ -151,7 +150,7 @@ export default function Docs() {
                         <section id="payment-options" className="mb-16">
                             <h2 className="text-3xl font-bold text-gray-300 mb-8">💳 Payment Options</h2>
 
-                            <p className="text-lg text-gray-300 mb-10">
+                            <p className=" text-gray-300 mb-10">
                                 <strong>We’ve integrated <em className="text-blue-400">Razorpay</em> as our global payment gateway.</strong>
                                 <br /><br />
                                 Securely complete transactions using various payment methods supported worldwide.

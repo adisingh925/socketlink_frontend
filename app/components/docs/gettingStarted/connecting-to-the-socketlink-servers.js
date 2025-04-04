@@ -2,11 +2,11 @@ import CodeSnippet from "../../codeSnippet";
 
 const ConnectingToTheSocketlinkServers = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-3xl font-bold text-gray-300 mb-8">Connecting to the Socketlink servers</h2>
+        <h2 className="text-3xl font-bold text-gray-300 mb-8">🌐 Connecting to the Socketlink servers</h2>
         <div className="space-y-8">
             {/* Step 1 */}
-            <div className="space-y-4">
-                <p className="text-gray-400">
+            <div className="space-y-10">
+                <p className="text-gray-300">
                     <b>Step 1 :</b> Use any WebSocket library of your choice to connect to our servers. Below are some examples using popular libraries in different languages.
                 </p>
 
@@ -28,18 +28,22 @@ const ConnectingToTheSocketlinkServers = () => (
                     </svg>
                     <div>
                         <p className="font-bold text-blue-600">Required Headers for WebSocket Connection</p>
-                        <ul className="list-disc list-inside ml-2 mt-2 text-sm text-gray-700">
-                            <li><code>api-key</code> : Your <b>Client API Key</b>.</li>
-                            <li><code>uid</code> : Unique ID for the connection/user (cannot be reused).</li>
+                        <ul className="list-disc list-inside ml-4 mt-3 space-y-2 text-sm text-gray-800">
+                            <li>
+                                <code className="bg-gray-100 text-green-700 px-1 py-0.5 rounded">api-key</code> — Your <span className="font-semibold text-black">Client API Key</span>.
+                            </li>
+                            <li>
+                                <code className="bg-gray-100 text-green-700 px-1 py-0.5 rounded">uid</code> — Unique ID for the connection/user <span className="italic text-gray-600">(cannot be reused)</span>.
+                            </li>
                         </ul>
+
                     </div>
                 </div>
-            </div>
 
-            {/* Code Snippets */}
-            <CodeSnippet
-                snippets={{
-                    JavaScript: `
+                {/* Code Snippets */}
+                <CodeSnippet
+                    snippets={{
+                        JavaScript: `
 /** 
 * WebSocket Connection using Node.js and ws library 
 * Install: npm install ws 
@@ -79,7 +83,7 @@ socket.on('close', () => {
     console.log('Connection closed');
 });
 `,
-                    Python: `
+                        Python: `
 """
 WebSocket Connection using Python and websocket-client
 Install: pip install websocket-client
@@ -116,7 +120,7 @@ ws = websocket.WebSocketApp(
 # Run WebSocket forever
 ws.run_forever()
 `,
-                    cURL: `
+                        cURL: `
 /**
 * WebSocket Connection using cURL
 * Note: WebSocket over cURL may be limited to initial handshake 
@@ -129,7 +133,7 @@ curl \
 --no-buffer \
 "wss://your-websocket-server-url"
 `,
-                    Go: `
+                        Go: `
 /**
 * WebSocket Connection using Go and Gorilla WebSocket library
 * Install: go get github.com/gorilla/websocket
@@ -174,7 +178,7 @@ func main() {
     }
 }
 `,
-                    Ruby: `
+                        Ruby: `
 =begin
 WebSocket Connection using Ruby and websocket-client-simple
 Install: gem install websocket-client-simple
@@ -214,11 +218,14 @@ end
 # Keep the connection alive
 loop { sleep 1 }
 `
-                }}
-            />
+                    }}
+                />
+            </div>
+
+
 
             {/* Connection Advice */}
-            <p className="text-gray-400">
+            <p className="text-gray-300">
                 This is all you need to do to connect to our servers. It is recommended to establish the connection when your application starts.
             </p>
 
