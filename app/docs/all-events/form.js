@@ -263,7 +263,7 @@ export default function Docs() {
                                 {Object.keys(events).map((event) => (
                                     <div key={event} className="mb-6">
                                         <strong className={`text-${events[event].color}`}>{event}</strong>
-                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-${events[event].color} overflow-x-auto whitespace-pre-wrap`}>
+                                        <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap`}>
                                             {JSON.stringify({
                                                 data: events[event].data,
                                                 ...(events[event].uid && { uid: events[event].uid }),

@@ -153,7 +153,7 @@ export default function Docs() {
                                 This article describes the different types of rooms which can be used for different purposes.
                             </p>
 
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                            <div className="bg-gray-800 p-6 rounded-2xl border-2 border-white/20">
                                 <h3 className="text-2xl font-semibold text-blue-400 mb-4">🔒 Private Room</h3>
 
                                 <p className="text-gray-300 mb-3">
@@ -166,14 +166,13 @@ export default function Docs() {
                                     To enable a private room, You need to enable the <span className="text-yellow-300 font-bold">ON VERIFICATION REQUEST</span> webhook.
                                 </p>
 
-                                <div className="bg-gray-700 p-4 rounded-lg mt-4">
-                                    <p className="text-lg text-yellow-300 font-semibold">✅ Prefix Symbol : <code className="text-blue-300 text-xl">pri-</code></p>
+                                <div className="bg-gray-700 p-4 rounded-2xl mt-4 border-2 border-white/20">
                                     <p className="text-gray-300 mt-1">Use this prefix before the room name to indicate a private room, i.e. <code className="text-blue-300">pri-test-room</code></p>
                                 </div>
                             </div>
 
                             {/* Public Room */}
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+                            <div className="bg-gray-800 p-6 rounded-2xl shadow-lg mt-6 border-2 border-white/20">
                                 <h3 className="text-2xl font-semibold text-green-400 mb-4">🌍 Public Room</h3>
 
                                 <p className="text-gray-300 mb-3">
@@ -185,14 +184,13 @@ export default function Docs() {
                                     Public rooms do not require authentication, and any user can enter freely using the <span className="text-yellow-300 font-bold">Client API Key</span>.
                                 </p>
 
-                                <div className="bg-gray-700 p-4 rounded-lg mt-4">
-                                    <p className="text-lg text-yellow-300 font-semibold">✅ Prefix Symbol : <code className="text-green-300 text-xl">pub-</code></p>
+                                <div className="bg-gray-700 p-4 rounded-2xl mt-4 border-2 border-white/20">
                                     <p className="text-gray-300 mt-1">Use this prefix before the room name to indicate a public room, i.e. <code className="text-green-300">pub-general-room</code>.</p>
                                 </div>
                             </div>
 
                             {/* Cache Room */}
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+                            <div className="bg-gray-800 p-6 rounded-2xl shadow-lg mt-6 border-2 border-white/20">
                                 <h3 className="text-2xl font-semibold text-purple-400 mb-4">🗄️ Cache Room</h3>
 
                                 <p className="text-gray-300 mb-3">
@@ -214,10 +212,8 @@ export default function Docs() {
                                     <span className="text-blue-400 font-semibold">Public Cache Rooms</span> allow open participation with only the latest message stored.
                                 </p>
 
-                                <div className="bg-gray-700 p-4 rounded-lg mt-4">
-                                    <p className="text-lg text-yellow-300 font-semibold">✅ Prefix Symbol :
-                                        <code className="text-purple-300 text-xl"> cache-</code>
-                                    </p>
+                                <div className="bg-gray-700 p-4 rounded-2xl mt-4 border-2 border-white/20">
+                                    
                                     <p className="text-gray-300 mt-1">
                                         Use this prefix before the room name to indicate a cache room, i.e.
                                         <code className="text-purple-300"> cache-temp-room</code>.
@@ -229,7 +225,7 @@ export default function Docs() {
                             </div>
 
                             {/* State Room */}
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+                            <div className="bg-gray-800 p-6 rounded-2xl shadow-lg mt-6 border-2 border-white/20">
                                 <h3 className="text-2xl font-semibold text-orange-400 mb-4">📢 State Room</h3>
 
                                 <p className="text-gray-300 mb-3">
@@ -246,9 +242,8 @@ export default function Docs() {
                                     <span className="text-blue-400 font-semibold">pub-state-cache</span> : A public state room that also stores the last message.
                                 </p>
 
-                                <div className="bg-gray-700 p-4 rounded-lg mt-4">
-                                    <p className="text-lg text-yellow-300 font-semibold">✅ Prefix Symbols :</p>
-                                    <ul className="text-gray-300 text-lg">
+                                <div className="bg-gray-700 p-4 rounded-2xl mt-4 border-2 border-white/20">
+                                    <ul className="text-gray-300">
                                         <li>🔒 <code className="text-green-300">pri-state-</code> (Private State Room)</li>
                                         <li>🌍 <code className="text-blue-400">pub-state-</code> (Public State Room)</li>
                                         <li>🔒🗄️ <code className="text-purple-300">pri-state-cache-</code> (Private State Cache Room)</li>
