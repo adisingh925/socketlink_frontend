@@ -56,8 +56,8 @@
         "destination": "/billing.html"
       },
       {
-        "source": "/webhooks",
-        "destination": "/webhooks.html"
+        "source": "/configuration",
+        "destination": "/configuration.html"
       },
       {
         "source": "/docs",
@@ -80,7 +80,7 @@
         "destination": "/docs/connecting-to-the-socketlink-servers.html"
       },
       {
-        "source": "/docs/featured",
+        "source": "/docs/features",
         "destination": "/docs/features.html"
       },
       {
@@ -92,16 +92,28 @@
         "destination": "/docs/refund-policy.html"
       },
       {
-        "source": "/docs/server-events",
-        "destination": "/docs/server-events.html"
+        "source": "/docs/all-events",
+        "destination": "/docs/all-events.html"
       },
       {
-        "source": "/docs/admin-events",
-        "destination": "/docs/admin-events.html"
+        "source": "/docs/sending-messages",
+        "destination": "/docs/sending-messages.html"
       },
       {
-        "source": "/docs/user-events",
-        "destination": "/docs/user-events.html"
+        "source": "/docs/mysql-integration",
+        "destination": "/docs/mysql-integration.html"
+      },
+      {
+        "source": "/docs/webhooks",
+        "destination": "/docs/webhooks.html"
+      },
+      {
+        "source": "/docs/how-to-purchase",
+        "destination": "/docs/how-to-purchase.html"
+      },
+      {
+        "source": "/docs/room-types",
+        "destination": "/docs/room-types.html"
       }
     ],
     "headers": [
