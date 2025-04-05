@@ -122,7 +122,7 @@ const ClientEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/users/subscribe/room
+                            https://test.socketlink.io/api/v1/users/subscribe/room
                         </pre>
                     </h4>
 
@@ -223,7 +223,7 @@ const ClientEndpoints = () => {
                             POST
                         </span>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            https://adisingh925.socketlink.io/api/v1/users/unsubscribe/room
+                            https://test.socketlink.io/api/v1/users/unsubscribe/room
                         </pre>
                     </h4>
 
