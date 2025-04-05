@@ -34,21 +34,21 @@ function SubscribedPlans() {
     });
 
     useEffect(() => {
-        let intervalId;
+        // let intervalId;
 
         auth.onAuthStateChanged((user) => {
             if (user) {
                 setLoading(false);
                 checkEmailVerificationAndGetSubscriptionDetails();
-                intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
+                // intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
             } else {
-                clearInterval(intervalId);
+                // clearInterval(intervalId);
                 router.push("/login");
             }
         });
 
         return () => {
-            clearInterval(intervalId);
+            // clearInterval(intervalId);
         };
     }, [router]);
 

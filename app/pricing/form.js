@@ -33,19 +33,27 @@ function SelectWebSocketPlan() {
         const fetchPlans = async () => {
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
-                    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
-                        headers: {
-                            'Authorization': `Bearer ${await auth.currentUser.getIdToken()}`
-                        }
-                    }).then((response) => {
-                        setPlans(response.data);
-                    }).catch((error) => {
-                        setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching Plans!");
+                    try {
+                        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`, {
+                            headers: {
+                                'Authorization': `Bearer ${await auth.currentUser.getIdToken()}`
+                            }
+                        }).then((response) => {
+                            setPlans(response.data);
+                        }).catch((error) => {
+                            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching Plans!");
+                            setSeverity("error");
+                            setSnackbarState(true);
+                        }).finally(() => {
+                            setLoading(false);
+                        });
+                    } catch (error) {
+                        setLoading(false);
+
+                        setSnackbarText("An error occurred while fetching Plans!");
                         setSeverity("error");
                         setSnackbarState(true);
-                    }).finally(() => {
-                        setLoading(false);
-                    });
+                    }
                 } else {
                     axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`).then((response) => {
                         setPlans(response.data);

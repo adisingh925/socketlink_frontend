@@ -101,10 +101,18 @@ export default function Metrics() {
                     totalFailedWebhookCalls: [...prevStats.totalFailedWebhookCalls, { time: new Date().toLocaleTimeString(), value: total_failed_webhook_calls || 0 }],
                 }));
             }).catch((error) => {
-                /* setSnackbarText("Failed to fetch metrics. Please try again later.");
-                setSeverity("error");
-                setSnackbarState(true); */
+                if (error.response && error.response.status === 404) {
+                    /** Metrics not found */
+                } else {
+                    setSnackbarText("Failed to fetch metrics. Please try again later.");
+                    setSeverity("error");
+                    setSnackbarState(true);
+                }
             });
+        }).catch((error) => {
+            setSnackbarText(error.message);
+            setSeverity("error");
+            setSnackbarState(true);
         });
     }
 
@@ -208,61 +216,72 @@ export default function Metrics() {
     );
 }
 
-
-
 function MetricsChart({ title, data, color }) {
     const [hovered, setHovered] = useState(false);
     const interval = Math.ceil(data.length / 10);
 
     return (
-        <div className="bg-gray-900 rounded-xl shadow-md p-3 border-2 border-white/20">
+        <div className="bg-gray-800 rounded-2xl shadow-md p-3 border-2 border-white/20">
             <h2 className="text-md text-center text-white mb-3 font-semibold tracking-wide">
                 {title}
             </h2>
-            <ResponsiveContainer width="100%" height={250}>
-                <LineChart
-                    data={data}
-                    margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-                    <XAxis
-                        dataKey="time"
-                        interval={interval}
-                        tick={{ fill: '#ccc', fontSize: 12 }}
-                        dy={6}
-                        tickFormatter={(t) => moment(t, "HH:mm:ss").format('HH:mm')}
-                    />
-                    <YAxis
-                        tick={{ fill: '#ccc', fontSize: 12 }}
-                        tickFormatter={(v) =>
-                            v >= 1_000_000 ? `${(v / 1_000_000).toFixed(1)}M` :
-                            v >= 1_000 ? `${(v / 1_000).toFixed(1)}K` : v
-                        }
-                    />
-                    <Tooltip
-                        contentStyle={{ backgroundColor: '#1f1f1f', borderColor: '#444' }}
-                        labelStyle={{ color: '#eee' }}
-                        itemStyle={{ color: '#fff', fontSize: 12 }}
-                        formatter={(v) => new Intl.NumberFormat().format(v)}
-                    />
-                    <Legend
-                        verticalAlign="top"
-                        height={24}
-                        wrapperStyle={{ color: '#bbb', fontSize: 12 }}
-                    />
-                    <Line
-                        type="monotone"
-                        dataKey="value"
-                        stroke={color}
-                        strokeWidth={2}
-                        dot={hovered ? { stroke: color, strokeWidth: 2, r: 4 } : false}
-                        activeDot={{ r: 6 }}
-                    />
-                </LineChart>
-            </ResponsiveContainer>
+
+            {data.length === 0 ? (
+                <div className="flex items-center justify-center h-[250px] text-gray-400 text-sm">
+                    No data available
+                </div>
+            ) : (
+                <ResponsiveContainer width="100%" height={250}>
+                    <LineChart
+                        data={data}
+                        margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                        <XAxis
+                            dataKey="time"
+                            interval={interval}
+                            tick={{ fill: '#ccc', fontSize: 12 }}
+                            dy={6}
+                            tickFormatter={(t) =>
+                                moment(t, "HH:mm:ss").format('HH:mm')
+                            }
+                        />
+                        <YAxis
+                            tick={{ fill: '#ccc', fontSize: 12 }}
+                            tickFormatter={(v) =>
+                                v >= 1_000_000
+                                    ? `${(v / 1_000_000).toFixed(1)}M`
+                                    : v >= 1_000
+                                        ? `${(v / 1_000).toFixed(1)}K`
+                                        : v
+                            }
+                        />
+                        <Tooltip
+                            contentStyle={{ backgroundColor: '#1f1f1f', borderColor: '#444' }}
+                            labelStyle={{ color: '#eee' }}
+                            itemStyle={{ color: '#fff', fontSize: 12 }}
+                            formatter={(v) => new Intl.NumberFormat().format(v)}
+                        />
+                        <Legend
+                            verticalAlign="top"
+                            height={24}
+                            wrapperStyle={{ color: '#bbb', fontSize: 12 }}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey="value"
+                            stroke={color}
+                            strokeWidth={2}
+                            dot={hovered ? { stroke: color, strokeWidth: 2, r: 4 } : false}
+                            activeDot={{ r: 6 }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            )}
         </div>
     );
 }
+
 
