@@ -17,7 +17,7 @@ function ContactUs() {
 
     useEffect(() => {
         document.title = "Contact Us | Socketlink";
-      });
+    });
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
@@ -124,12 +124,21 @@ function ContactUs() {
                         <form onSubmit={handleSubmit} className="mt-8">
                             <textarea
                                 value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                className="w-full p-4 border-2 border-gray-300 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white"
+                                onChange={(e) => {
+                                    setQuery(e.target.value);
+                                    e.target.style.height = "auto"; 
+                                    e.target.style.height = e.target.scrollHeight + "px"; 
+                                }}
+                                onInput={(e) => {
+                                    e.target.style.height = "auto";
+                                    e.target.style.height = e.target.scrollHeight + "px";
+                                }}
+                                className="w-full min-h-[120px] p-4 border-2 border-gray-300 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-800 dark:text-white overflow-hidden resize-none transition-all"
                                 rows="4"
                                 maxLength={1000}
                                 placeholder="Write your query here..."
                             ></textarea>
+
                             <button
                                 type="submit"
                                 className="mt-4 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none"
