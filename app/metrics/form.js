@@ -20,9 +20,15 @@ export default function Metrics() {
         connectedUsers: [],
         averagePayloadSize: [],
         totalPayloadSent: [],
-        unauthorizedRequests: [],
         averageLatency: [],
-        droppedMessages: []
+        droppedMessages: [],
+        totalSuccessAPICalls: [],
+        totalFailedAPICalls: [],
+        totalFailedConnectionAttempts: [],
+        totalMySQLDBBatchWrites: [],
+        totalLocalDBWrites: [],
+        totalSuccessWebhookCalls: [],
+        totalFailedWebhookCalls: [],
     });
 
     useEffect(() => {
@@ -77,16 +83,22 @@ export default function Metrics() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                const { messages_sent, connections, total_payload_sent, total_rejected_requests, average_latency, dropped_messages } = response.data;
+                const { messages_sent, connections, total_payload_sent, average_latency, dropped_messages, total_failed_api_calls, total_success_api_calls, total_failed_connection_attempts, total_mysql_db_batch_writes, total_local_db_writes, total_success_webhook_calls, total_failed_webhook_calls } = response.data;
 
                 setStats((prevStats) => ({
                     messagesSent: [...prevStats.messagesSent, { time: new Date().toLocaleTimeString(), value: messages_sent || 0 }],
                     connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
-                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / messages_sent) || 0 }],
+                    averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: ((total_payload_sent / messages_sent) || 0) / 1024 }],
                     totalPayloadSent: [...prevStats.totalPayloadSent, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / (1024 * 1024)) || 0 }],
-                    unauthorizedRequests: [...prevStats.unauthorizedRequests, { time: new Date().toLocaleTimeString(), value: total_rejected_requests || 0 }],
                     averageLatency: [...prevStats.averageLatency, { time: new Date().toLocaleTimeString(), value: average_latency || 0 }],
                     droppedMessages: [...prevStats.droppedMessages, { time: new Date().toLocaleTimeString(), value: dropped_messages || 0 }],
+                    totalSuccessAPICalls: [...prevStats.totalSuccessAPICalls, { time: new Date().toLocaleTimeString(), value: total_success_api_calls || 0 }],
+                    totalFailedAPICalls: [...prevStats.totalFailedAPICalls, { time: new Date().toLocaleTimeString(), value: total_failed_api_calls || 0 }],
+                    totalFailedConnectionAttempts: [...prevStats.totalFailedConnectionAttempts, { time: new Date().toLocaleTimeString(), value: total_failed_connection_attempts || 0 }],
+                    totalMySQLDBBatchWrites: [...prevStats.totalMySQLDBBatchWrites, { time: new Date().toLocaleTimeString(), value: total_mysql_db_batch_writes || 0 }],
+                    totalLocalDBWrites: [...prevStats.totalLocalDBWrites, { time: new Date().toLocaleTimeString(), value: total_local_db_writes || 0 }],
+                    totalSuccessWebhookCalls: [...prevStats.totalSuccessWebhookCalls, { time: new Date().toLocaleTimeString(), value: total_success_webhook_calls || 0 }],
+                    totalFailedWebhookCalls: [...prevStats.totalFailedWebhookCalls, { time: new Date().toLocaleTimeString(), value: total_failed_webhook_calls || 0 }],
                 }));
             }).catch((error) => {
                 /* setSnackbarText("Failed to fetch metrics. Please try again later.");
@@ -121,41 +133,71 @@ export default function Metrics() {
                     </div>
 
                     {/* Charts Section */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
                         <MetricsChart
-                            title="Total Messages Sent"
+                            title="Connected Users"
+                            data={stats.connectedUsers}
+                            color="#10b981" // Emerald
+                        />
+                        <MetricsChart
+                            title="Total Messages Sent Over Websocket"
                             data={stats.messagesSent}
                             color="#4f46e5" // Indigo
                         />
                         <MetricsChart
-                            title="Connected Users"
-                            data={stats.connectedUsers}
-                            color="#10b981" // Green
-                        />
-                        <MetricsChart
-                            title="Dropped Messages"
+                            title="Dropped Websocket Messages"
                             data={stats.droppedMessages}
-                            color="#14b8a6" // Green
+                            color="#14b8a6" // Teal
                         />
                         <MetricsChart
-                            title="Average Latency (ms)"
+                            title="Average Latency for Message Transfer (ms)"
                             data={stats.averageLatency}
-                            color="#f97316" // Rose Red
+                            color="#f97316" // Orange
                         />
                         <MetricsChart
-                            title="Unauthorized Requests"
-                            data={stats.unauthorizedRequests}
-                            color="#f59e0b" // Amber
-                        />
-                        <MetricsChart
-                            title="Total Data Sent (MB)"
+                            title="Total Data Sent Over Websockets in MB"
                             data={stats.totalPayloadSent}
                             color="#ef4444" // Red
                         />
                         <MetricsChart
-                            title="Average Payload Size (KB)"
+                            title="Average Payload Size Sent Over Websockets in KB"
                             data={stats.averagePayloadSize}
                             color="#3b82f6" // Blue
+                        />
+                        <MetricsChart
+                            title="Total Success API Calls"
+                            data={stats.totalSuccessAPICalls}
+                            color="#8b5cf6" // Violet
+                        />
+                        <MetricsChart
+                            title="Total Failed API Calls"
+                            data={stats.totalFailedAPICalls}
+                            color="#f43f5e" // Rose
+                        />
+                        <MetricsChart
+                            title="Total MySQL Batch Writes"
+                            data={stats.totalMySQLDBBatchWrites}
+                            color="#10b981" // Emerald (reused subtly)
+                        />
+                        <MetricsChart
+                            title="Total Local DB Writes"
+                            data={stats.totalLocalDBWrites}
+                            color="#eab308" // Yellow
+                        />
+                        <MetricsChart
+                            title="Total Success Webhook Calls"
+                            data={stats.totalSuccessWebhookCalls}
+                            color="#06b6d4" // Cyan
+                        />
+                        <MetricsChart
+                            title="Total Failed Webhook Calls"
+                            data={stats.totalFailedWebhookCalls}
+                            color="#be123c" // Crimson
+                        />
+                        <MetricsChart
+                            title="Total Failed Connection Attempts"
+                            data={stats.totalFailedAPICalls}
+                            color="#7c3aed" // Purple
                         />
                     </div>
                 </div>
@@ -174,7 +216,7 @@ function MetricsChart({ title, data, color }) {
 
     return (
         <div className="bg-gray-800 rounded-2xl shadow-lg p-4 border-2 border-white/20">
-            <h2 className="text-2xl font-semibold text-center text-white mb-6 shadow-sm">
+            <h2 className="text-lg text-center text-white mb-6 shadow-sm">
                 {title}
             </h2>
             <ResponsiveContainer width="100%" height={300}>

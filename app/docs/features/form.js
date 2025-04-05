@@ -202,8 +202,8 @@ export default function Docs() {
                                     Socketlink offers powerful room and channel management capabilities, enabling developers to create structured communication environments tailored to their needs.
                                 </p>
                                 <ul className="mt-3 space-y-2 list-disc list-inside text-gray-300">
-                                    <li>🟢 <span className="text-yellow-300 font-medium">State Rooms</span> – Tracks user activity in real-time.</li>
-                                    <li>🗂️ <span className="text-yellow-300 font-medium">Cache Channels</span> – Temporarily stores messages for new users.</li>
+                                    <li>🟢 <span className="text-yellow-300 font-medium">State Rooms</span> – Tracks when a user joins or leaves a room and informs the other users.</li>
+                                    <li>🗂️ <span className="text-yellow-300 font-medium">Cache Channels</span> – Stores the last message sent on the room.</li>
                                     <li>🔐 <span className="text-yellow-300 font-medium">Private Channels</span> – Authenticate users before granting access.</li>
                                     <li>🌍 <span className="text-yellow-300 font-medium">Public Channels</span> – Open access with a valid client API key.</li>
                                 </ul>

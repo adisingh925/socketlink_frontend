@@ -36,7 +36,7 @@ const Introduction = () => (
             <ul className="mt-2 space-y-3 list-disc list-inside text-gray-300">
                 <li><strong>Getting Started -</strong> Set up a WebSocket server and connect clients effortlessly.</li>
                 <li><strong>Features -</strong> Explore advanced functionalities like rooms, event broadcasting, presence tracking, and more.</li>
-                <li><strong>API Reference -</strong> Understand WebSocket events and message formats in detail.</li>
+                <li><strong>API Reference -</strong> Understand the APIs and there usage in detail.</li>
                 <li><strong>FAQ -</strong> Get answers to common questions and best practices.</li>
             </ul>
         </div>
