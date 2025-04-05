@@ -208,64 +208,61 @@ export default function Metrics() {
     );
 }
 
+
+
 function MetricsChart({ title, data, color }) {
     const [hovered, setHovered] = useState(false);
-
-    // Calculate how many intervals should be displayed
     const interval = Math.ceil(data.length / 10);
 
     return (
-        <div className="bg-gray-800 rounded-2xl shadow-lg p-4 border-2 border-white/20">
-            <h2 className="text-lg text-center text-white mb-6 shadow-sm">
+        <div className="bg-gray-900 rounded-xl shadow-md p-3 border-2 border-white/20">
+            <h2 className="text-md text-center text-white mb-3 font-semibold tracking-wide">
                 {title}
             </h2>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
                 <LineChart
                     data={data}
-                    margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+                    margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                     <XAxis
                         dataKey="time"
-                        tick={{ fill: '#bbb' }}
-                        dy={10}
-                        tickFormatter={(timeStr) => moment(timeStr, "HH:mm:ss").format('HH:mm')}
-                        interval={interval} // Control the number of intervals shown
+                        interval={interval}
+                        tick={{ fill: '#ccc', fontSize: 12 }}
+                        dy={6}
+                        tickFormatter={(t) => moment(t, "HH:mm:ss").format('HH:mm')}
                     />
                     <YAxis
-                        tickFormatter={(value) => {
-                            if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-                            if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
-                            return value;
-                        }}
-                        tick={{ fill: '#bbb' }}
+                        tick={{ fill: '#ccc', fontSize: 12 }}
+                        tickFormatter={(v) =>
+                            v >= 1_000_000 ? `${(v / 1_000_000).toFixed(1)}M` :
+                            v >= 1_000 ? `${(v / 1_000).toFixed(1)}K` : v
+                        }
                     />
                     <Tooltip
-                        contentStyle={{ backgroundColor: '#222', borderColor: '#444' }}
-                        labelStyle={{ color: '#fff' }}
-                        itemStyle={{ color: '#fff' }}
-                        formatter={(value) => new Intl.NumberFormat().format(value)}
+                        contentStyle={{ backgroundColor: '#1f1f1f', borderColor: '#444' }}
+                        labelStyle={{ color: '#eee' }}
+                        itemStyle={{ color: '#fff', fontSize: 12 }}
+                        formatter={(v) => new Intl.NumberFormat().format(v)}
                     />
                     <Legend
-                        layout="horizontal"
-                        align="center"
-                        wrapperStyle={{
-                            color: '#bbb',
-                            paddingTop: '20px',
-                        }}
+                        verticalAlign="top"
+                        height={24}
+                        wrapperStyle={{ color: '#bbb', fontSize: 12 }}
                     />
                     <Line
                         type="monotone"
                         dataKey="value"
                         stroke={color}
-                        strokeWidth={3}
-                        dot={hovered ? { stroke: color, strokeWidth: 2, r: 5 } : false} // Show dots only when hovered
-                        activeDot={{ r: 8 }}
+                        strokeWidth={2}
+                        dot={hovered ? { stroke: color, strokeWidth: 2, r: 4 } : false}
+                        activeDot={{ r: 6 }}
                     />
                 </LineChart>
             </ResponsiveContainer>
         </div>
     );
 }
+
