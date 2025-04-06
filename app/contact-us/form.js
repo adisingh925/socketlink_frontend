@@ -72,12 +72,16 @@ function ContactUs() {
                     setQuery('');
                 }
             }).catch((error) => {
-                setSnackbarText('Failed to send query!');
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong, please try again later!"
+                );
                 setSeverity('error');
                 setSnackbarState(true);
             });
         }).catch((error) => {
-            setSnackbarText('Failed to send query!');
+            setSnackbarText(error.message);
             setSeverity('error');
             setSnackbarState(true);
         });
@@ -126,8 +130,8 @@ function ContactUs() {
                                 value={query}
                                 onChange={(e) => {
                                     setQuery(e.target.value);
-                                    e.target.style.height = "auto"; 
-                                    e.target.style.height = e.target.scrollHeight + "px"; 
+                                    e.target.style.height = "auto";
+                                    e.target.style.height = e.target.scrollHeight + "px";
                                 }}
                                 onInput={(e) => {
                                     e.target.style.height = "auto";

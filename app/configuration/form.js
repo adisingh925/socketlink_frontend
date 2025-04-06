@@ -154,19 +154,21 @@ function WebhookManagement() {
                 setSnackbarState(true);
                 setSeverity("error");
                 setSnackbarText(
-                    error?.response?.data?.message || "An error occurred while saving webhooks!"
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "An error occurred while saving webhooks!"
                 );
             });
         });
     };
 
     const saveServerConfigs = () => {
-        if (idleTimeout == null || maxLifetime == null) { 
+        if (idleTimeout == null || maxLifetime == null) {
             setSnackbarText("Please fill all server configuration fields!");
             setSeverity("error");
             setSnackbarState(true);
             return;
-        }        
+        }
 
         auth.currentUser.getIdToken().then((token) => {
             axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/update-server-config`,
@@ -187,7 +189,9 @@ function WebhookManagement() {
                 setSnackbarState(true);
                 setSeverity("error");
                 setSnackbarText(
-                    error?.response?.data?.message || "An error occurred while saving server configurations!"
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "An error occurred while saving server configurations!"
                 );
             });
         });
@@ -217,15 +221,17 @@ function WebhookManagement() {
                     },
                 }
             ).then(() => {
-                setSnackbarState(true);
                 setSeverity("success");
                 setSnackbarText("SQL credentials saved successfully!");
-            }).catch((error) => {
                 setSnackbarState(true);
+            }).catch((error) => {
                 setSeverity("error");
                 setSnackbarText(
-                    error?.response?.data?.message || "An error occurred while saving SQL credentials!"
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "An error occurred while saving SQL credentials!"
                 );
+                setSnackbarState(true);
             });
         });
     };
@@ -286,14 +292,20 @@ function WebhookManagement() {
                     setDbCommitBatchSize(db_commit_batch_size || -1);
                     setIsSQLIntegrationEnabled(is_sql_integration_enabled || false);
                 }).catch((error) => {
-                    setSnackbarText(
-                        error?.response?.data?.message ?? "An error occurred while fetching webhooks!"
-                    );
-                    setSeverity("error");
-                    setSnackbarState(true);
+                    if (error.response && error.response.status === 404) {
+                        /** SQL configs not found not found */
+                    } else {
+                        setSnackbarText(
+                            error?.response?.data?.message ||
+                            error?.message ||
+                            "An error occurred while fetching webhooks!"
+                        );
+                        setSeverity("error");
+                        setSnackbarState(true);
+                    }
                 });
             } catch (error) {
-                setSnackbarText("Failed to load webhook config!");
+                setSnackbarText("Something went wrong, please try again later!");
                 setSeverity("error");
                 setSnackbarState(true);
             } finally {
@@ -325,9 +337,17 @@ function WebhookManagement() {
             setIdleTimeout(idle_timeout_in_seconds || 60);
             setMaxLifetime(max_lifetime_in_minutes || 0);
         } catch (error) {
-            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching server configurations!");
-            setSeverity("error");
-            setSnackbarState(true);
+            if (error.response && error.response.status === 404) {
+                /** Server configs not found not found */
+            } else {
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "An error occurred while fetching server configurations!"
+                );
+                setSeverity("error");
+                setSnackbarState(true);
+            }
         } finally {
             setLoading(false);
         }
@@ -367,14 +387,21 @@ function WebhookManagement() {
 
             setSelectedWebhooks(selected);
         } catch (error) {
-            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching webhooks!");
-            setSeverity("error");
-            setSnackbarState(true);
+            if (error.response && error.response.status === 404) {
+                /** webhooks not found not found */
+            } else {
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "An error occurred while fetching webhooks!"
+                );
+                setSeverity("error");
+                setSnackbarState(true);
+            }
         } finally {
             setLoading(false);
         }
     };
-
 
     if (loading) {
         return (

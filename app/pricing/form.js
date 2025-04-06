@@ -41,7 +41,11 @@ function SelectWebSocketPlan() {
                         }).then((response) => {
                             setPlans(response.data);
                         }).catch((error) => {
-                            setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching Plans!");
+                            setSnackbarText(
+                                error?.response?.data?.message ||
+                                error?.message ||
+                                "An error occurred while fetching Plans!"
+                            );
                             setSeverity("error");
                             setSnackbarState(true);
                         }).finally(() => {
@@ -50,7 +54,7 @@ function SelectWebSocketPlan() {
                     } catch (error) {
                         setLoading(false);
 
-                        setSnackbarText("An error occurred while fetching Plans!");
+                        setSnackbarText("Something went wrong, please try again later!");
                         setSeverity("error");
                         setSnackbarState(true);
                     }
@@ -58,7 +62,11 @@ function SelectWebSocketPlan() {
                     axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/get-plans`).then((response) => {
                         setPlans(response.data);
                     }).catch((error) => {
-                        setSnackbarText(error.message);
+                        setSnackbarText(
+                            error?.response?.data?.message ||
+                            error?.message ||
+                            "An error occurred while fetching plans!"
+                        );
                         setSeverity("error");
                         setSnackbarState(true);
                     }).finally(() => {
@@ -173,8 +181,11 @@ function SelectWebSocketPlan() {
                     });
                 }
             }).catch((error) => {
-                console.error(error);
-                setSnackbarText(error.response.data.message);
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong, please try again later!"
+                );
                 setSeverity("error");
                 setSnackbarState(true);
             });

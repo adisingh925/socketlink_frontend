@@ -81,21 +81,21 @@ function SubscribedPlans() {
                     Authorization: `Bearer ${token}`,
                 },
             }).then((response) => {
-                if (response.data.code === 0) {
-                    /* setSnackbarText(response.data.message);
-                    setSeverity("info");
-                    setSnackbarState(true); */
-                    return;
-                }
-
                 setPlan(response.data.subscription);
             }).catch((error) => {
                 setPlan(null);
-                setSnackbarText(
-                    error?.response?.data?.message ?? "An error occurred while fetching subscription details!"
-                );
-                setSeverity("error");
-                setSnackbarState(true);
+
+                if (error.response && error.response.status === 404) {
+                    /** Metrics not found */
+                } else {
+                    setSnackbarText(
+                        error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong, please try again later!"
+                    );
+                    setSeverity("error");
+                    setSnackbarState(true);
+                }
             })
         });
     }
@@ -112,7 +112,11 @@ function SubscribedPlans() {
                 setSnackbarState(true);
                 getSubscriptionDetails();
             }).catch((error) => {
-                setSnackbarText(error.response.data.message);
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong, please try again later!"
+                );
                 setSeverity("error");
                 setSnackbarState(true);
             });

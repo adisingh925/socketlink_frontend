@@ -104,7 +104,11 @@ export default function Metrics() {
                 if (error.response && error.response.status === 404) {
                     /** Metrics not found */
                 } else {
-                    setSnackbarText("Failed to fetch metrics. Please try again later.");
+                    setSnackbarText(
+                        error?.response?.data?.message ||
+                        error?.message ||
+                        "An error occurred while fetching metrics!"
+                    );                    
                     setSeverity("error");
                     setSnackbarState(true);
                 }

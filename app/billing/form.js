@@ -83,9 +83,17 @@ function Billing() {
                     setOutstandingBalance(0);
                 }
             }).catch((error) => {
-                setSnackbarText(error?.response?.data?.message ?? "An error occurred while fetching billing details!");
-                setSeverity("error");
-                setSnackbarState(true);
+                if (error.response && error.response.status === 404) {
+                    /** Billing details not found not found */
+                } else {
+                    setSnackbarText(
+                        error?.response?.data?.message ||
+                        error?.message ||
+                        "An error occurred while fetching billing details!"
+                    );
+                    setSeverity("error");
+                    setSnackbarState(true);
+                }
             })
         });
     };
@@ -139,7 +147,11 @@ function Billing() {
                     });
                 }
             }).catch((error) => {
-                setSnackbarText(error.message);
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong, please try again later!"
+                );
                 setSeverity("error");
                 setSnackbarState(true);
             });
@@ -206,7 +218,11 @@ function Billing() {
                     });
                 }
             }).catch((error) => {
-                setSnackbarText(error.message);
+                setSnackbarText(
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong, please try again later!"
+                );
                 setSeverity("error");
                 setSnackbarState(true);
             });
