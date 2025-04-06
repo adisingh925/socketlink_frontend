@@ -264,7 +264,7 @@ function SelectWebSocketPlan() {
                                                 {plan.plan_name}
                                                 {plan.is_featured && (
                                                     <span className="text-xs font-semibold bg-yellow-500 text-gray-900 py-1 px-2 rounded-lg ml-2 align-middle">
-                                                        Free for 3 Days
+                                                        {"Free for " + plan.duration + " Days"}
                                                     </span>
                                                 )}
                                             </h3>
