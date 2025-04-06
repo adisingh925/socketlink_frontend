@@ -5,6 +5,7 @@ import { auth } from "../../components/firebase";
 import { confirmPasswordReset, applyActionCode } from 'firebase/auth';
 import Toast from "../../components/toast";
 import { useSearchParams } from "next/navigation";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 function UpdatePassword() {
     const searchParams = useSearchParams()
@@ -89,6 +90,10 @@ function UpdatePassword() {
 
     return (
         <>
+            <html lang="en">
+                <GoogleAnalytics gaId="G-SGP3J8PTY5" />
+            </html>
+
             {searchParams.get("mode") === "resetPassword" && <section className="bg-blue dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                     <div className="w-full p-6 bg-white rounded-2xl shadow md:mt-0 sm:max-w-md dark:bg-gray-800 sm:p-8 border-2 border-white/20">

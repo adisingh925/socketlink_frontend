@@ -8,6 +8,7 @@ import axios from "axios";
 import Toast from "../components/toast";
 import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 import moment from "moment/moment";
+import Script from "next/script";
 
 export default function Metrics() {
     const router = useRouter();
@@ -108,7 +109,7 @@ export default function Metrics() {
                         error?.response?.data?.message ||
                         error?.message ||
                         "An error occurred while fetching metrics!"
-                    );                    
+                    );
                     setSeverity("error");
                     setSnackbarState(true);
                 }
@@ -132,6 +133,17 @@ export default function Metrics() {
 
     return (
         <>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
+            <Script id="google-analytics" strategy="worker">
+                {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+        
+                gtag('config', 'G-SGP3J8PTY5');
+                `}
+            </Script>
+
             <div className="flex flex-col h-[100dvh] text-white dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20 dark:bg-gray-900">

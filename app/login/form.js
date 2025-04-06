@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import Toast from "../components/toast";
 import NavigationBar from "../components/navbar";
 import Mfa from "../components/inputTotpDialog";
+import Script from "next/script";
 
 function Login() {
     const router = useRouter();
@@ -65,17 +66,17 @@ function Login() {
     const handleGoogleLogin = async () => {
         try {
             setGoogleLoading(true);
-    
+
             const provider = new GoogleAuthProvider();
-            
+
             await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
-            
+
             const result = await signInWithPopup(auth, provider);
-            
+
             setGoogleLoading(false);
         } catch (error) {
             setGoogleLoading(false); // Ensure loading state is reset
-    
+
             if (error.code === "auth/multi-factor-auth-required") {
                 authError.current = error;
                 setIsOpen(true);
@@ -85,20 +86,20 @@ function Login() {
                 setSnackbarState(true);
             }
         }
-    };    
+    };
 
     const handleMFASubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const mfaResolver = getMultiFactorResolver(auth, authError.current);
             const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(
                 mfaResolver.hints[0].uid,
                 code
             );
-    
+
             await mfaResolver.resolveSignIn(multiFactorAssertion);
-    
+
             setSeverity("success");
             setSnackbarText("MFA verification successful!");
             setSnackbarState(true);
@@ -107,9 +108,9 @@ function Login() {
             setSnackbarText(error.message);
             setSnackbarState(true);
         } finally {
-            closeDialog(); 
+            closeDialog();
         }
-    };    
+    };
 
     const resetLoading = () => {
         setEmailPasswordLoading(false);
@@ -138,6 +139,17 @@ function Login() {
 
     return (
         <>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
+            <Script id="google-analytics" strategy="worker">
+                {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+        
+                gtag('config', 'G-SGP3J8PTY5');
+                `}
+            </Script>
+
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0 mt-20">
