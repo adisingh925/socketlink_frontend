@@ -6,7 +6,6 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import Toast from "../components/toast";
 import { useRouter } from "next/navigation";
 import NavigationBar from "../components/navbar";
-import Script from "next/script";
 
 function ForgotPassword() {
   const router = useRouter();
@@ -59,17 +58,6 @@ function ForgotPassword() {
 
   return (
     <>
-    <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
-    <Script id="google-analytics" strategy="worker">
-        {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-SGP3J8PTY5');
-        `}
-    </Script>
-
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <NavigationBar />
         <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">

@@ -5,7 +5,6 @@ import NavigationBar from "../../components/navbar";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import AdminEndpoints from "@/app/components/docs/apiReference/admin-endpoints";
-import Script from "next/script";
 
 export default function Docs() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -42,17 +41,6 @@ export default function Docs() {
 
     return (
         <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
-            <Script id="google-analytics" strategy="worker">
-                {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-        
-                gtag('config', 'G-SGP3J8PTY5');
-                `}
-            </Script>
-
             <div className="flex h-[100dvh] text-white dark:bg-gray-900 overflow-hidden">
 
                 {/* Left Sidebar */}

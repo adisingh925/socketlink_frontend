@@ -1,5 +1,6 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // Import Roboto using next/font
 const roboto = Roboto({
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       <body className={`${roboto.variable} antialiased`}>
         {children}
       </body>
+      <GoogleAnalytics gaId="G-SGP3J8PTY5" />
     </html>
   );
 }

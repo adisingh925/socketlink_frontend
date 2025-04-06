@@ -6,7 +6,6 @@ import Toast from "../components/toast";
 import FloatingNavigationBar from "../components/navbar";
 import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
-import Script from "next/script";
 
 function ContactUs() {
     const router = useRouter();
@@ -107,17 +106,6 @@ function ContactUs() {
 
     return (
         <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
-            <Script id="google-analytics" strategy="worker">
-                {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-        
-                gtag('config', 'G-SGP3J8PTY5');
-                `}
-            </Script>
-
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="isolate h-[100dvh] px-6 py-8 sm:py-8 lg:px-8 dark:text-white mt-20">

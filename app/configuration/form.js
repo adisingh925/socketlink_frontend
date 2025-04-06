@@ -7,7 +7,6 @@ import axios from "axios";
 import { auth } from "../components/firebase";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Script from "next/script";
 
 function WebhookManagement() {
     const router = useRouter();
@@ -416,17 +415,6 @@ function WebhookManagement() {
 
     return (
         <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-SGP3J8PTY5" strategy="afterInteractive" />
-            <Script id="google-analytics" strategy="worker">
-                {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-        
-                gtag('config', 'G-SGP3J8PTY5');
-                `}
-            </Script>
-
             <FloatingNavigationBar />
             {isActive ? (
                 <>
