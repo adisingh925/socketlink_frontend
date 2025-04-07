@@ -2,11 +2,11 @@ import CodeSnippet from "../../codeSnippet";
 
 const ConnectingToTheSocketlinkServers = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-3xl font-bold text-gray-300 mb-8">🌐 Connecting to the Socketlink servers</h2>
+        <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">🌐 Connecting to the Socketlink servers</h2>
         <div className="space-y-8">
             {/* Step 1 */}
             <div className="space-y-10">
-                <p className="text-gray-300">
+                <p className="dark:text-gray-300 text-gray-900">
                     <b>Step 1 :</b> Use any WebSocket library of your choice to connect to our servers. Below are some examples using popular libraries in different languages.
                 </p>
 
@@ -225,7 +225,7 @@ loop { sleep 1 }
 
 
             {/* Connection Advice */}
-            <p className="text-gray-300">
+            <p className="dark:text-gray-300 text-gray-900">
                 This is all you need to do to connect to our servers. It is recommended to establish the connection when your application starts.
             </p>
 
@@ -237,7 +237,7 @@ loop { sleep 1 }
                     {/* 400 */}
                     <div className="p-4 bg-yellow-800/20 border border-yellow-400 rounded-lg">
                         <strong className="text-yellow-300">400 - Bad Request</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> length must be between 1 and 4096 characters.</li>
                         </ul>
                     </div>
@@ -245,7 +245,7 @@ loop { sleep 1 }
                     {/* 401 */}
                     <div className="p-4 bg-red-800/20 border border-red-400 rounded-lg">
                         <strong className="text-red-300">401 - Unauthorized</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>api-key</code> is invalid.</li>
                         </ul>
                     </div>
@@ -253,7 +253,7 @@ loop { sleep 1 }
                     {/* 403 */}
                     <div className="p-4 bg-orange-800/20 border border-orange-400 rounded-lg">
                         <strong className="text-orange-300">403 - Forbidden</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> is globally banned by the admin.</li>
                         </ul>
                     </div>
@@ -261,7 +261,7 @@ loop { sleep 1 }
                     {/* 404 */}
                     <div className="p-4 bg-pink-800/20 border border-pink-400 rounded-lg">
                         <strong className="text-pink-300">409 Conflict</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> already exists.</li>
                         </ul>
                     </div>
@@ -269,7 +269,7 @@ loop { sleep 1 }
                     {/* 503 */}
                     <div className="p-4 bg-pink-800/20 border border-pink-400 rounded-lg">
                         <strong className="text-pink-300">503 Service Unavailable</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li>Max websocket connections limit reached, try again after sometime!</li>
                         </ul>
                     </div>
@@ -277,7 +277,7 @@ loop { sleep 1 }
                     {/* 500 */}
                     <div className="p-4 bg-red-900/20 border border-red-500 rounded-lg">
                         <strong className="text-red-500">500 - Internal Server Error</strong>
-                        <ul className="text-sm text-gray-300 mt-2 list-disc list-inside">
+                        <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li>Unexpected server issue.</li>
                             <li>Temporary outages or maintenance.</li>
                         </ul>

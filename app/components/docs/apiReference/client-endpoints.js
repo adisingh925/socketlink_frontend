@@ -82,16 +82,16 @@ const ClientEndpoints = () => {
 
     return (
         <section id="api" className="mb-14">
-            <h2 className="text-3xl font-bold text-gray-300 mb-8">Client Endpoints</h2>
+            <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">Client Endpoints</h2>
 
-            <p className="text-gray-300 mb-6">
+            <p className="dark:text-gray-300 text-gray-900 mb-6">
                 Detailed documentation on how to use our API endpoints effectively.
             </p>
 
             <div id="subscribe_to_room" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Subscribe to a room</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">1. Subscribe to a room</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     If the specified room does not exist, it will be created automatically. If the room already exists, the user will join it.
                 </p>
 
@@ -116,7 +116,7 @@ const ClientEndpoints = () => {
                 </div>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -128,7 +128,7 @@ const ClientEndpoints = () => {
 
                     {/* Headers */}
                     <div className="space-y-4">
-                        <strong className="text-blue-300">Headers</strong>
+                        <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
                             api-key: CLIENT_API_KEY
@@ -137,7 +137,7 @@ const ClientEndpoints = () => {
 
                     {/* Request Body */}
                     <div className="space-y-4">
-                        <strong className="text-yellow-300">Body</strong>
+                        <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
                             &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
@@ -145,7 +145,7 @@ const ClientEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>uid :</code> Unique identifier for the user, Same UID which was used for connecting to the socketlink servers.</li>
                             <li><code>rid :</code> Room ID to which the user should be connected.</li>
                         </ul>
@@ -153,7 +153,7 @@ const ClientEndpoints = () => {
 
                     {/* Response Tabs */}
                     <div className="space-y-4 mt-6">
-                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Responses</h3>
+                        <h3 className="dark:text-purple-300 text-purple-500 text-lg font-semibold mb-2">Responses</h3>
                         <div className="flex flex-wrap gap-2 mb-4">
                             {Object.keys(responses).map((code) => (
                                 <button
@@ -190,9 +190,9 @@ const ClientEndpoints = () => {
             </div>
 
             <div id="unsubscribe_from_room" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">2. Unsubscribe from a room</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">2. Unsubscribe from a room</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will unsubscribe the user from the given room.
                 </p>
 
@@ -217,7 +217,7 @@ const ClientEndpoints = () => {
                 </div>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -229,7 +229,7 @@ const ClientEndpoints = () => {
 
                     {/* Headers */}
                     <div className="space-y-4">
-                        <strong className="text-blue-300">Headers</strong>
+                        <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
                             api-key: CLIENT_API_KEY
@@ -238,7 +238,7 @@ const ClientEndpoints = () => {
 
                     {/* Request Body */}
                     <div className="space-y-4">
-                        <strong className="text-yellow-300">Body</strong>
+                        <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
                             &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
@@ -246,7 +246,7 @@ const ClientEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>uid :</code> Unique identifier for the user, Same UID which was used for connecting to the socketlink servers.</li>
                             <li><code>rid :</code> Room ID to which the user should be connected.</li>
                         </ul>
@@ -254,7 +254,7 @@ const ClientEndpoints = () => {
 
                     {/* Response Tabs */}
                     <div className="space-y-4 mt-6">
-                        <h3 className="text-purple-300 text-lg font-semibold mb-2">Responses</h3>
+                        <h3 className="dark:text-purple-300 text-purple-500 text-lg font-semibold mb-2">Responses</h3>
                         <div className="flex flex-wrap gap-2 mb-4">
                             {Object.keys(unsubscribeResponses).map((code) => (
                                 <button
