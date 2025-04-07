@@ -20,7 +20,7 @@ function PrivacyPolicy() {
           </h1>
           <div>
             <p className="text-xl font-bold mb-8">
-              This Privacy Policy describes how Picolon (&ldquo;we,&rdquo;
+              This Privacy Policy describes how Socketlink (&ldquo;we,&rdquo;
               &ldquo;our,&rdquo; or &ldquo;us&rdquo;) handles your information
               when you use our WebSocket service. We are committed to protecting
               your privacy and ensuring that your data is safe.

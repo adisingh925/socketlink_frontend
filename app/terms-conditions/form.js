@@ -44,7 +44,7 @@ function TermsAndConditions() {
 
             <h2 className="text-lg font-bold mt-4 mb-2">4. Intellectual Property</h2>
             <p>
-              All content, trademarks, and branding related to the Picolon service are the property of Picolon and are protected by intellectual property laws. You may not use or distribute our intellectual property without permission.
+              All content, trademarks, and branding related to the Socketlink service are the property of Socketlink and are protected by intellectual property laws. You may not use or distribute our intellectual property without permission.
             </p>
 
             <h2 className="text-lg font-bold mt-4 mb-2">5. Prohibited Uses</h2>

@@ -113,7 +113,7 @@ function Billing() {
                         order_id: response.data.order_id,
                         name: 'Socketlink',
                         description: "Custom Payment",
-                        image: 'https://picolon-bucket.s3.ap-south-1.amazonaws.com/picolon-full-image.webp',
+                        image: 'https://socketlink.io/images/socketlink.png',
                         handler: function (response) {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
@@ -184,7 +184,7 @@ function Billing() {
                         order_id: response.data.order_id,
                         name: 'Socketlink',
                         description: "Custom Payment",
-                        image: 'https://picolon-bucket.s3.ap-south-1.amazonaws.com/picolon-full-image.webp',
+                        image: 'https://socketlink.io/images/socketlink.png',
                         handler: function (response) {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");

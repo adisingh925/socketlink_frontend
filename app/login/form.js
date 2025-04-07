@@ -141,7 +141,7 @@ function Login() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0 mt-20">
-                    <div className="bg-white rounded-2xl shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 w-full max-w-md border-2 border-white/20">
+                    <div className="rounded-2xl shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 bg-gray-100 w-full max-w-md border-2 dark:border-white/20 border-gray/20">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Sign in to your account
@@ -208,7 +208,7 @@ function Login() {
 
                                 <button
                                     type="submit"
-                                    className="w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150"
+                                    className="w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 bg-blue-600 dark:hover:bg-blue-700 hover:bg-blue-700 transition-transform duration-150"
                                     disabled={emailPasswordLoading || googleLoading}
                                 >
                                     {emailPasswordLoading ? 'Signing in...' : 'Sign in'}

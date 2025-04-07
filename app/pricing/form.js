@@ -141,7 +141,7 @@ function SelectWebSocketPlan() {
                         order_id: response.data.order_id,
                         name: 'Socketlink',
                         description: response.data.plan_name,
-                        image: 'https://picolon-bucket.s3.ap-south-1.amazonaws.com/picolon-full-image.webp',
+                        image: 'https://socketlink.io/images/socketlink.png',
                         handler: function (response) {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
@@ -251,14 +251,14 @@ function SelectWebSocketPlan() {
                                     key={plan.plan_id}
                                     className={`w-[400px] max-w-lg h-[500px] flex-grow flex flex-col justify-between p-4 sm:p-8 m-2 rounded-2xl shadow-xl border-2 transition transform ${plan.is_featured
                                         ? "bg-indigo-700 border-indigo-400 text-white"
-                                        : "bg-gray-800 border-white/20 text-white"
+                                        : "dark:bg-gray-800 bg-gray-100 dark:border-white/20 border-gray/20"
                                         } sm:hover:scale-105`}
 
                                 >
                                     <div className="flex flex-col justify-between flex-1">
                                         <div className="flex items-center justify-between mb-4">
                                             <h3
-                                                className={`text-xl font-bold ${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                className={`text-xl font-bold ${plan.is_featured ? "text-yellow-300" : "dark:text-blue-400 text-blue-500"
                                                     }`}
                                             >
                                                 {plan.plan_name}
@@ -269,7 +269,7 @@ function SelectWebSocketPlan() {
                                                 )}
                                             </h3>
                                             <div
-                                                className={`flex items-center text-lg font-semibold ${plan.is_featured ? "text-yellow-300" : "text-blue-300"
+                                                className={`flex items-center text-lg font-semibold ${plan.is_featured ? "text-yellow-300" : "dark:text-blue-400 text-blue-500"
                                                     }`}
                                             >
                                                 <FiDollarSign /> {plan.price / 100 + " / month"}
@@ -279,20 +279,21 @@ function SelectWebSocketPlan() {
                                         <div className="text-gray-300 text-sm flex-1 flex flex-col justify-evenly">
                                             <div className="flex items-center">
                                                 <FiUsers
-                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "dark:text-blue-400 text-blue-500"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Max Connections :</strong>{" "}
                                                     {parseInt(plan.connections, 10).toLocaleString()}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">
                                                 <FiTrendingUp
-                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
-                                                        } mr-2`}
+                                                    className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"} mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Messages / Day :</strong> {"Unlimited"}{" "}
                                                 </p>
                                             </div>
@@ -301,7 +302,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-yellow-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Messages / Second :</strong> {"Upto 50,000 / second"}{" "}
                                                 </p>
                                             </div>
@@ -310,7 +312,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Max Message Size :</strong>{" "}
                                                     {"Upto " + 10 + " KB"}
                                                 </p>
@@ -320,7 +323,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Monthly Data Transfer :</strong>{" "}
                                                     {(plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024)).toLocaleString() + " TB"}
                                                 </p>
@@ -330,7 +334,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Data Storage :</strong>{" "}
                                                     {(plan.max_storage_allowed_in_gb).toLocaleString() + " GB"}
                                                 </p>
@@ -340,7 +345,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Max Rooms :</strong>{" "}
                                                     {"Unlimited"}
                                                 </p>
@@ -350,7 +356,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-blue-400"
                                                         } mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Max Members per Room :</strong>{" "}
                                                     {parseInt(plan.connections, 10).toLocaleString()}
                                                 </p>
@@ -360,7 +367,8 @@ function SelectWebSocketPlan() {
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"
                                                         } mr-2`}
                                                 />
-                                                <p className="flex items-center">
+                                                <p className={`flex items-center ${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>Custom Subdomain :</strong>{" "}
                                                     <FiCheck className="ml-2 text-green-500 text-xl font-bold" /> {/* Enlarged and bold */}
                                                 </p>
@@ -368,7 +376,8 @@ function SelectWebSocketPlan() {
                                             <div className="flex items-center">
                                                 <div className="flex items-center">
                                                     <FiClock className={`${plan.is_featured ? "text-yellow-300" : "text-orange-400"} mr-2`} />
-                                                    <p>
+                                                    <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                        }`}>
                                                         <strong>Support :</strong>
                                                         {plan.price <= 8000 ? " Standard Support (8hr SLA)" :
                                                             plan.price <= 12000 ? " Priority Support (24/7, 4hr SLA)" :
@@ -382,14 +391,16 @@ function SelectWebSocketPlan() {
                                                 <FiSliders
                                                     className={`${plan.is_featured ? "text-yellow-300" : "text-purple-400"} mr-2`}
                                                 />
-                                                <p>
+                                                <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                    }`}>
                                                     <strong>SLO :</strong> {"99.9% Uptime Guaranteed"}
                                                 </p>
                                             </div>
                                             <div>
                                                 {plan.price === 2900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
-                                                        <p>
+                                                        <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                            }`}>
                                                             <strong>Our most generous plan yet! Ideal for small businesses and startups.</strong>
                                                         </p>
                                                     </div>
@@ -397,14 +408,16 @@ function SelectWebSocketPlan() {
 
                                                 {plan.price === 4900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
-                                                        <p>
+                                                        <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                            }`}>
                                                             <strong>This plan is perfect for small to medium-sized businesses.</strong>
                                                         </p>
                                                     </div>
                                                 )}
                                                 {plan.price === 9900 && (
-                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
-                                                        <p>
+                                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4 ">
+                                                        <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                            }`}>
                                                             <strong>A great plan for medium to large businesses.</strong>
                                                         </p>
                                                     </div>
@@ -412,7 +425,8 @@ function SelectWebSocketPlan() {
 
                                                 {plan.price === 19900 && (
                                                     <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
-                                                        <p>
+                                                        <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
+                                                            }`}>
                                                             <strong>The best plan for large businesses and enterprises.</strong>
                                                         </p>
                                                     </div>

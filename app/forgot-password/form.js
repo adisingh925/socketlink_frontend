@@ -61,7 +61,7 @@ function ForgotPassword() {
       <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
         <NavigationBar />
         <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">
-          <div className="p-6 bg-white rounded-2xl shadow md:mt-0 sm:max-w-md dark:bg-gray-800 sm:p-8 w-full max-w-md border-2 border-white/20">
+          <div className="p-6 bg-gray-100 rounded-2xl shadow md:mt-0 sm:max-w-md dark:bg-gray-800 sm:p-8 w-full max-w-md border-2 dark:border-white/20 border-gray/20">
             <h1 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Forgot your password?
             </h1>
@@ -93,7 +93,7 @@ function ForgotPassword() {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150"
+                className="w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 bg-blue-600 dark:hover:bg-blue-700 hover:bg-blue-700 transition-transform duration-150"
               >
                 Send Password Reset Link
               </button>
