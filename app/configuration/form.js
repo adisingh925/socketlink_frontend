@@ -420,7 +420,7 @@ function WebhookManagement() {
                 <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 mt-20 dark:bg-gray-900 justify-items-center">
 
-                        <div className="w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl shadow-xl border-2 dark:border-white/20 border-gray-500/20 flex flex-col self-start">
+                        <div className="w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl border-2 dark:border-white/20 border-gray-500/20 flex flex-col self-start">
                             <h2 className="grow text-3xl font-extrabold text-center mb-5 dark:text-yellow-400 text-yellow-500 glow">
                                 Webhooks
                             </h2>
@@ -493,14 +493,14 @@ function WebhookManagement() {
                                                         }}
                                                         className="mr-2"
                                                     />
-                                                    <span className="text-xs text-gray-900">{key.toUpperCase().replace(/_/g, " ")}</span>
+                                                    <span className="text-xs text-gray-900 dark:text-white">{key.toUpperCase().replace(/_/g, " ")}</span>
                                                 </label>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
 
-                                <p className="mt-2 text-xs text-gray-400">Select the required webhooks</p>
+                                <p className="mt-2 text-xs dark:text-gray-400 text-gray-600">Select the required webhooks</p>
                             </div>
 
                             {/* Save Button */}
@@ -513,7 +513,7 @@ function WebhookManagement() {
                         </div>
 
                         {/* SQL Integration Card (No fixed height, only grows as needed) */}
-                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl shadow-xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden self-start">
+                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden self-start">
                             <h2 className="grow mb-5 text-3xl font-extrabold text-center dark:text-yellow-400 text-yellow-500 glow">
                                 SQL Integration
                             </h2>
@@ -685,7 +685,7 @@ function WebhookManagement() {
                         </div>
 
                         {/** server configs */}
-                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl shadow-xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden self-start">
+                        <div className="flex flex-col w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden self-start">
                             <h2 className="grow mb-5 text-3xl font-extrabold text-center dark:text-yellow-400 text-yellow-500 glow">
                                 Server Configuration
                             </h2>
@@ -762,7 +762,7 @@ function WebhookManagement() {
                 </>
             ) : (
                 <div className="flex h-[100dvh] justify-center items-center px-6">
-                    <div className="space-y-4 p-4 sm:p-8 mt-20 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl shadow-xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden max-w-lg w-full">
+                    <div className="space-y-4 p-4 sm:p-8 mt-20 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl border-2 dark:border-white/20 border-gray-500/20 overflow-hidden max-w-lg w-full">
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                             Configurations Inactive
                         </h1>
@@ -793,7 +793,7 @@ function WebhookManagement() {
 const InfoRow = ({ input, hint }) => (
     <div className="flex flex-col gap-2">
         <div className="flex-grow">{input}</div>
-        <span className="text-xs text-gray-400">{hint}</span>
+        <span className="text-xs dark:text-gray-400 text-gray-600">{hint}</span>
     </div>
 );
 

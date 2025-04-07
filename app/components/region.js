@@ -60,10 +60,10 @@ function RegionSelectionDialog({ isOpen, onClose, handleRegionSelection }) {
     return (
         isOpen && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-                <div className="relative p-4 sm:p-6 bg-gray-800 text-white rounded-lg w-full max-w-lg sm:max-w-3xl mx-4 sm:mx-6 pt-4 pb-4">
+                <div className="relative p-4 sm:p-6 dark:bg-gray-800 bg-gray-200 text-white rounded-lg w-full max-w-lg sm:max-w-3xl mx-4 sm:mx-6 pt-4 pb-4">
                     <button
                         onClick={onClose}
-                        className="absolute top-2 right-2 text-white text-2xl mr-3 mt-1"
+                        className="absolute top-2 right-2 dark:text-white text-gray-900 text-2xl mr-3 mt-1"
                     >
                         &times;
                     </button>
@@ -74,7 +74,7 @@ function RegionSelectionDialog({ isOpen, onClose, handleRegionSelection }) {
                             <span className="ml-2 text-blue-600">Loading regions...</span>
                         </div>
                     ) : (
-                        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[75vh] mt-10 sm:mt-10">
+                        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[75vh] mt-10 sm:mt-10 px-3">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 {regions
                                     .filter(region => region.available)
@@ -82,14 +82,23 @@ function RegionSelectionDialog({ isOpen, onClose, handleRegionSelection }) {
                                         <div
                                             key={region.slug}
                                             onClick={() => handleSelectRegion(region.slug)}
-                                            className={`p-3 sm:p-4 border rounded-lg cursor-pointer transition duration-200 ${selectedRegion === region.slug
+                                            className={`p-3 sm:p-4 rounded-lg cursor-pointer transition duration-200 border-2 dark:border-white/20 border-gray-500/20 ${selectedRegion === region.slug
                                                 ? "bg-blue-600 border-blue-500"
-                                                : "bg-gray-700 border-gray-600 hover:bg-gray-600"
+                                                : "dark:bg-gray-700 bg-gray-300 border-gray-600 dark:hover:bg-gray-600 hover:bg-gray-400"
                                                 }`}
                                         >
-                                            <h3 className="font-semibold text-sm sm:text-base">{region.name}</h3>
-                                            <p className="text-xs sm:text-sm text-gray-300">Slug: {region.slug}</p>
-                                            <p className="text-xs sm:text-sm text-gray-400">Available: {region.available ? "Yes" : "No"}</p>
+                                            <h3 className={`font-semibold text-sm sm:text-base  dark:text-white text-gray-900 ${selectedRegion === region.slug
+                                                ? "text-white"
+                                                : "dark:text-white text-gray-900"
+                                                }`}>{region.name}</h3>
+                                            <p className={`text-xs sm:text-sm ${selectedRegion === region.slug
+                                                ? "text-white"
+                                                : "dark:text-white text-gray-600"
+                                                }`}>Slug : {region.slug}</p>
+                                            <p className={`text-xs sm:text-sm ${selectedRegion === region.slug
+                                                ? "text-white"
+                                                : "dark:text-white text-gray-600"
+                                                }`}>Available : {region.available ? "Yes" : "No"}</p>
                                         </div>
                                     ))}
                             </div>

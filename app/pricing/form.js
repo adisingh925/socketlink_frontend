@@ -249,7 +249,7 @@ function SelectWebSocketPlan() {
                             {plans && plans.map((plan) => (
                                 <div
                                     key={plan.plan_id}
-                                    className={`w-[400px] max-w-lg h-[500px] flex-grow flex flex-col justify-between p-4 sm:p-8 m-2 rounded-2xl shadow-xl border-2 transition transform ${plan.is_featured
+                                    className={`w-[400px] max-w-lg h-[500px] flex-grow flex flex-col justify-between p-4 sm:p-8 m-2 rounded-2xl border-2 transition transform ${plan.is_featured
                                         ? "bg-indigo-700 border-indigo-400 text-white"
                                         : "dark:bg-gray-800 bg-gray-200 dark:border-white/20 border-gray-500/20"
                                         } sm:hover:scale-105`}
