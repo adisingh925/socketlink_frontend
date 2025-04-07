@@ -136,7 +136,7 @@ export default function Metrics() {
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow p-6 md:p-8 mt-20 dark:bg-gray-900">
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-wide">
+                        <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white text-gray-900 mb-3 tracking-wide">
                             Metrics
                         </h1>
                         <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto">
@@ -225,13 +225,13 @@ function MetricsChart({ title, data, color }) {
     const interval = Math.ceil(data.length / 10);
 
     return (
-        <div className="bg-gray-800 rounded-2xl shadow-md p-3 border-2 border-white/20">
-            <h2 className="text-md text-center text-white mb-3 font-semibold tracking-wide">
+        <div className="dark:bg-gray-800 bg-gray-200 rounded-2xl p-3 border-2 dark:border-white/20 border-gray-500/20">
+            <h2 className="text-md text-center dark:text-white text-gray-900 mb-3 font-semibold tracking-wide">
                 {title}
             </h2>
 
             {data.length === 0 ? (
-                <div className="flex items-center justify-center h-[250px] text-gray-400 text-sm">
+                <div className="flex items-center justify-center h-[250px] dark:text-gray-400 text-gray-900 text-sm">
                     No data available
                 </div>
             ) : (

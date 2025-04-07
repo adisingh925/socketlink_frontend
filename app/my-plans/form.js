@@ -160,43 +160,43 @@ function SubscribedPlans() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <FloatingNavigationBar />
                 <div className="flex items-center justify-center px-6 py-10 mt-20 flex-grow dark:bg-gray-900">
-                    <div className="w-full max-w-lg p-4 sm:p-8 bg-gray-800 text-white rounded-2xl shadow-xl border-2 border-white/20">
+                    <div className="w-full max-w-lg p-4 sm:p-8 dark:bg-gray-800 bg-gray-200 text-white rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
                         {plan ? (
                             <>
-                                <h2 className="text-3xl font-extrabold text-center text-yellow-400 mb-6 glow">
+                                <h2 className="text-3xl font-extrabold text-center dark:text-yellow-400 text-yellow-500 mb-6 glow">
                                     {plan.plan.plan_name} Plan
                                 </h2>
                                 <div className="space-y-3">
                                     <InfoRow icon={<FiDollarSign />} label="Price" value={
                                         plan.plan?.price !== null && plan.plan?.price !== undefined
                                             ? `$ ${plan.plan?.price / 100}`
-                                            : <span className="text-gray-500">Initializing</span>
-                                    } />
+                                            : <span>Initializing</span>
+                                    } valueColor="dark:text-white text-gray-900" />
                                     <InfoRow icon={<FiClock />} label="Plan Duration" value={
                                         plan.plan?.duration !== null && plan.plan?.duration !== undefined
                                             ? `${plan.plan?.duration} days`
-                                            : <span className="text-gray-500">Initializing</span>
-                                    } valueColor="text-white" />
+                                            : <span>Initializing</span>
+                                    } valueColor="dark:text-white text-gray-900" />
                                     <InfoRow icon={<FiUsers />} label="Max Connections" value={
                                         plan.plan?.connections !== null && plan.plan?.connections !== undefined
                                             ? plan.plan?.connections
-                                            : <span className="text-gray-500">Initializing</span>
-                                    } valueColor="text-white" />
-                                    <InfoRow icon={<FiZap />} label="Messages / Second" value="Upto 50,000 / second" valueColor="text-white" />
-                                    <InfoRow icon={<FiSend />} label="Monthly Data transfer" value={plan.plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024) + " TB"} valueColor="text-white" />
-                                    <InfoRow icon={<FiDatabase />} label="Data Storage" value={plan.plan.max_storage_allowed_in_gb + " GB"} valueColor="text-white" />
+                                            : <span>Initializing</span>
+                                    } valueColor="dark:text-white text-gray-900" />
+                                    <InfoRow icon={<FiZap />} label="Messages / Second" value="Upto 50,000 / second" valueColor="dark:text-white text-gray-900" />
+                                    <InfoRow icon={<FiSend />} label="Monthly Data transfer" value={plan.plan.max_monthly_payload_in_bytes / (1024 * 1024 * 1024 * 1024) + " TB"} valueColor="dark:text-white text-gray-900" />
+                                    <InfoRow icon={<FiDatabase />} label="Data Storage" value={plan.plan.max_storage_allowed_in_gb + " GB"} valueColor="dark:text-white text-gray-900" />
                                     <InfoRow
                                         icon={<FiTrendingUp />}
                                         label="Messages per Day"
                                         value={plan.plan.msg_per_day === undefined ? "Unlimited" : numberToWords(plan.plan.msg_per_day)}
-                                        valueColor="text-white"
+                                        valueColor="dark:text-white text-gray-900"
                                     />
-                                    <InfoRow icon={<FiMessageCircle />} label="Max Message Size" value={"Upto " + numberToWords(plan.msg_size_allowed_in_bytes / 1024) + "Kb"} valueColor="text-white" />
+                                    <InfoRow icon={<FiMessageCircle />} label="Max Message Size" value={"Upto " + numberToWords(plan.msg_size_allowed_in_bytes / 1024) + "Kb"} valueColor="dark:text-white text-gray-900" />
                                     <InfoRow icon={<FiGlobe />} label="Region" value={
                                         plan.region !== null && plan.region !== undefined
                                             ? `${plan.region}`
-                                            : <span className="text-gray-500">Initializing</span>
-                                    } valueColor="text-white" />
+                                            : <span>Initializing</span>
+                                    } valueColor="dark:text-white text-gray-900" />
                                     <InfoRow
                                         icon={<FiAlertCircle />}
                                         label="Account Status"
@@ -212,12 +212,12 @@ function SubscribedPlans() {
                                         }
                                     />
                                     <InfoRow
-                                        icon={<FiLink className="text-yellow-400" />}
+                                        icon={<FiLink className="dark:text-yellow-400 text-yellow-500" />}
                                         label="Connection URL"
                                         value={
                                             plan.subdomain ? (
                                                 <>
-                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                    <span className="font-semibold dark:text-yellow-400 text-yellow-500 truncate glow">
                                                         {`${plan.subdomain}.socketlink.io`.slice(0, 4)}••••••{`${plan.subdomain}.socketlink.io`.slice(-4)}
                                                     </span>
                                                     <button
@@ -256,12 +256,12 @@ function SubscribedPlans() {
                                         </>
                                     )}
                                     <InfoRow
-                                        icon={<FiKey className="text-yellow-400" />}
+                                        icon={<FiKey className="dark:text-yellow-400 text-yellow-500" />}
                                         label="Client API Key"
                                         value={
                                             plan.client_api_key ? (
                                                 <>
-                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                    <span className="font-semibold dark:text-yellow-400 text-yellow-500 truncate glow">
                                                         {plan.client_api_key.slice(0, 4)}••••••{plan.client_api_key.slice(-4)}
                                                     </span>
                                                     <button
@@ -278,12 +278,12 @@ function SubscribedPlans() {
                                         }
                                     />
                                     <InfoRow
-                                        icon={<FiKey className="text-yellow-400" />}
+                                        icon={<FiKey className="dark:text-yellow-400 text-yellow-500" />}
                                         label="Admin API Key"
                                         value={
                                             plan.admin_api_key ? (
                                                 <>
-                                                    <span className="font-semibold text-yellow-400 truncate glow">
+                                                    <span className="font-semibold dark:text-yellow-400 text-yellow-500 truncate glow">
                                                         {plan.admin_api_key.slice(0, 4)}••••••{plan.admin_api_key.slice(-4)}
                                                     </span>
                                                     <button
@@ -299,9 +299,9 @@ function SubscribedPlans() {
                                             )
                                         }
                                     />
-                                    <div className="mt-6 text-sm text-gray-300 text-center border-t border-gray-600 pt-4">
+                                    <div className="mt-6 text-sm dark:text-gray-300 text-gray-900 text-center border-t border-gray-600 pt-4">
                                         <p>
-                                            <strong className="text-yellow-400">Note :</strong> Our pay-per-minute billing ensures you only pay for what you use.
+                                            <strong className="dark:text-yellow-400 text-yellow-500">Note :</strong> Our pay-per-minute billing ensures you only pay for what you use.
                                             This is perfect for reducing costs and maximizing flexibility for your usage needs.
                                         </p>
                                     </div>
@@ -309,7 +309,7 @@ function SubscribedPlans() {
                                 <div className="mt-8 text-center">
                                     <div className="flex-1">
                                         <Link href="/pricing">
-                                            <button className="flex-1 w-full text-white bg-primary-600 hover:bg-primary-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150">
+                                            <button className="flex-1 w-full text-white bg-blue-600 hover:bg-blue-700 active:scale-95 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition-transform duration-150">
                                                 Change Plan
                                             </button>
                                         </Link>
@@ -351,7 +351,7 @@ function SubscribedPlans() {
 
 const InfoRow = ({ icon, label, value, valueColor = "text-white" }) => (
     <div className="flex items-center justify-between text-sm sm:text-base">
-        <span className="text-gray-400 flex items-center">
+        <span className="dark:text-gray-400 text-gray-900 flex items-center">
             {icon && <span className="mr-2 text-xl text-blue-500">{icon}</span>}
             {label} :
         </span>
