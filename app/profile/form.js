@@ -216,12 +216,12 @@ function Profile() {
             <div className="flex flex-col h-[100dvh] dark:bg-gray-900">
                 <NavigationBar />
                 <div className="flex flex-col items-center justify-center flex-grow px-6 py-8 lg:py-0">
-                    <div className="bg-white rounded-2xl shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 w-full max-w-md border-2 border-white/20">
+                    <div className="rounded-2xl shadow md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 bg-gray-200 w-full max-w-md border-2 dark:border-white/20 border-gray-500/20">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Profile Settings
                             </h1>
-                            <form className="space-y-4 md:space-y-6">
+                            <form className="space-y-4 md:space-y-2">
                                 <div>
                                     <label
                                         htmlFor="email"
