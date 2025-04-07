@@ -34,7 +34,7 @@ export default function FloatingNavigationBar() {
     const isActive = (path) => pathname === path;
 
     return (
-        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-8xl bg-gray-800 rounded-2xl shadow-lg">
+        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-8xl dark:bg-gray-800 bg-gray-200 rounded-2xl">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -67,7 +67,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/"
                                         className={classNames(
-                                            isActive("/") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -76,7 +76,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/metrics"
                                         className={classNames(
-                                            isActive("/metrics") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/metrics") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -85,7 +85,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/my-plans"
                                         className={classNames(
-                                            isActive("/my-plans") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/my-plans") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -94,7 +94,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/configuration"
                                         className={classNames(
-                                            isActive("/configuration") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/configuration") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -103,7 +103,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/billing"
                                         className={classNames(
-                                            isActive("/billing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/billing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -112,7 +112,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/terms-conditions"
                                         className={classNames(
-                                            isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -121,7 +121,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/privacy-policy"
                                         className={classNames(
-                                            isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/privacy-policy") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -130,7 +130,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/contact-us"
                                         className={classNames(
-                                            isActive("/contact-us") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/contact-us") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -139,7 +139,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/pricing"
                                         className={classNames(
-                                            isActive("/pricing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -148,7 +148,7 @@ export default function FloatingNavigationBar() {
                                     <Link
                                         href="/docs/introduction"
                                         className={classNames(
-                                            isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                            isActive("/docs") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                             "rounded-md px-3 py-2 text-sm font-medium"
                                         )}
                                     >
@@ -161,7 +161,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/pricing"
                                             className={classNames(
-                                                isActive("/pricing") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -170,7 +170,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/docs/introduction"
                                             className={classNames(
-                                                isActive("/docs") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                isActive("/docs") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -179,7 +179,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/terms-conditions"
                                             className={classNames(
-                                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -188,7 +188,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/privacy-policy"
                                             className={classNames(
-                                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-white hover:bg-gray-600",
+                                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -199,7 +199,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/login"
                                             className={classNames(
-                                                isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                                isActive("/login") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -208,7 +208,7 @@ export default function FloatingNavigationBar() {
                                         <Link
                                             href="/signup"
                                             className={classNames(
-                                                isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                                isActive("/signup") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                                 "rounded-md px-3 py-2 text-sm font-medium"
                                             )}
                                         >
@@ -266,7 +266,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/"
                                 className={classNames(
-                                    isActive("/") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium mt-5"
                                 )}
                             >
@@ -275,7 +275,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/metrics"
                                 className={classNames(
-                                    isActive("/metrics") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/metrics") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -284,7 +284,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/my-plans"
                                 className={classNames(
-                                    isActive("/my-plans") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/my-plans") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -293,7 +293,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/configuration"
                                 className={classNames(
-                                    isActive("/configuration") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/configuration") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -302,7 +302,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/billing"
                                 className={classNames(
-                                    isActive("/billing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/billing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -311,7 +311,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/terms-conditions"
                                 className={classNames(
-                                    isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -320,7 +320,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/privacy-policy"
                                 className={classNames(
-                                    isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/privacy-policy") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -329,7 +329,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/contact-us"
                                 className={classNames(
-                                    isActive("/contact-us") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/contact-us") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -338,7 +338,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/pricing"
                                 className={classNames(
-                                    isActive("/pricing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -347,7 +347,7 @@ export default function FloatingNavigationBar() {
                             <Link
                                 href="/docs/introduction"
                                 className={classNames(
-                                    isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                    isActive("/docs") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                     "block rounded-md px-3 py-2 text-base font-medium"
                                 )}
                             >
@@ -357,37 +357,37 @@ export default function FloatingNavigationBar() {
                     ) : (
                         <>
                             <Link href="/pricing" className={classNames(
-                                isActive("/pricing") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium mt-5"
                             )}>
                                 Pricing
                             </Link>
                             <Link href="/docs/introduction" className={classNames(
-                                isActive("/docs") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/docs") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Docs
                             </Link>
                             <Link href="/terms-conditions" className={classNames(
-                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Terms & Conditions
                             </Link>
                             <Link href="/privacy-policy" className={classNames(
-                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/privacy-policy") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Privacy Policy
                             </Link>
                             <Link href="/login" className={classNames(
-                                isActive("/login") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/login") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Login
                             </Link>
                             <Link href="/signup" className={classNames(
-                                isActive("/signup") ? "bg-gray-600 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                isActive("/signup") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Sign up
