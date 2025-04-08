@@ -121,7 +121,7 @@ const ClientEndpoints = () => {
                         <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             https://test.socketlink.io/api/v1/users/subscribe/room
                         </pre>
                     </h4>
@@ -129,7 +129,7 @@ const ClientEndpoints = () => {
                     {/* Headers */}
                     <div className="space-y-4">
                         <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
                             api-key: CLIENT_API_KEY
                         </pre>
@@ -138,7 +138,7 @@ const ClientEndpoints = () => {
                     {/* Request Body */}
                     <div className="space-y-4">
                         <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
                             &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
                             &nbsp;&nbsp;&quot;rid&quot;: &quot;pub-test-0&quot;<br />
@@ -172,7 +172,7 @@ const ClientEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${responses[activeTab].color}`}>{activeTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[responses[activeTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-2 dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 ${colorClasses[responses[activeTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: responses[activeTab].message,
@@ -222,7 +222,7 @@ const ClientEndpoints = () => {
                         <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
                         </span>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             https://test.socketlink.io/api/v1/users/unsubscribe/room
                         </pre>
                     </h4>
@@ -230,7 +230,7 @@ const ClientEndpoints = () => {
                     {/* Headers */}
                     <div className="space-y-4">
                         <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
                             api-key: CLIENT_API_KEY
                         </pre>
@@ -239,7 +239,7 @@ const ClientEndpoints = () => {
                     {/* Request Body */}
                     <div className="space-y-4">
                         <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
-                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
+                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             &#123;<br />
                             &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
                             &nbsp;&nbsp;&quot;rid&quot;: &quot;pub-test-0&quot;<br />
@@ -273,7 +273,7 @@ const ClientEndpoints = () => {
                         {/* Display Active Response */}
                         <div>
                             <strong className={`text-${unsubscribeResponses[activeUnsubscribeTab].color}`}>{activeUnsubscribeTab} Response</strong>
-                            <pre className={`mt-2 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 ${colorClasses[unsubscribeResponses[activeUnsubscribeTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
+                            <pre className={`mt-2 dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 ${colorClasses[unsubscribeResponses[activeUnsubscribeTab].color] || ''} overflow-x-auto whitespace-pre-wrap`}>
                                 {JSON.stringify(
                                     {
                                         message: unsubscribeResponses[activeUnsubscribeTab].message,

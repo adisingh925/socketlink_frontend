@@ -156,7 +156,7 @@ export default function Docs() {
 
                                 {/* Important Notice */}
                                 <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
-                                    <h3 className="text-lg font-semibold text-yellow-400">⚠️ Important Notice</h3>
+                                    <h3 className="text-lg font-semibold dark:text-yellow-400 text-yellow-500">⚠️ Important Notice</h3>
                                     <p className="dark:text-gray-300 text-gray-900 mt-2">
                                         Refunds are only applicable under specific conditions and will be processed based on our policy guidelines. Please review the details below before making a request.
                                     </p>
@@ -164,7 +164,7 @@ export default function Docs() {
 
                                 {/* Refund Eligibility */}
                                 <div className="mb-10">
-                                    <h3 className="text-xl font-bold text-blue-400 mb-3">📌 Refund Eligibility</h3>
+                                    <h3 className="text-xl font-bold dark:text-blue-400 text-blue-500 mb-3">📌 Refund Eligibility</h3>
                                     <ul className="dark:text-gray-300 text-gray-900 space-y-3 list-disc list-inside">
                                         <li>Refund requests must be made within <strong>7 days</strong> of the transaction date.</li>
                                         <li>Applicable only for failed transactions where the amount was deducted but the service was not delivered.</li>
@@ -175,7 +175,7 @@ export default function Docs() {
 
                                 {/* Refund Processing Time */}
                                 <div className="mb-10">
-                                    <h3 className="text-xl font-bold text-blue-400 mb-3">⏳ Refund Processing Time</h3>
+                                    <h3 className="text-xl font-bold dark:text-blue-400 text-blue-500 mb-3">⏳ Refund Processing Time</h3>
                                     <p className="dark:text-gray-300 text-gray-900">
                                         Approved refunds will be processed within <strong>5-10 business days</strong>. The amount will be credited to the original payment method used for the transaction.
                                     </p>

@@ -160,8 +160,8 @@ export default function Docs() {
 
                                     {/* Headers */}
                                     <div className="space-y-4">
-                                        <strong className="dark:text-blue-300 text-blue-500">Message Format</strong>
-                                        <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
+                                        <strong className="dark:text-blue-400 text-blue-500">Message Format</strong>
+                                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-pre-wrap">
                                             {JSON.stringify({
                                                 message: "YOUR_MESSAGE",
                                                 rid: "ROOM_ID"

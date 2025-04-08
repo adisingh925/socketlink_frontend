@@ -155,17 +155,17 @@ export default function Docs() {
                                     <h3 className="text-2xl font-semibold text-blue-400 mb-4">🔒 Private Room</h3>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        A <span className="text-yellow-300 font-bold">Private Room</span> is a restricted chat space where only invited users can join.
+                                        A <span className="dark:text-yellow-400 text-yellow-500 font-bold">Private Room</span> is a restricted chat space where only invited users can join.
                                         It ensures confidentiality and is ideal for secure discussions. Private rooms require authentication,
                                         and only authorized users can access them.
                                     </p>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        To enable a private room, You need to enable the <span className="text-yellow-300 font-bold">ON VERIFICATION REQUEST</span> webhook.
+                                        To enable a private room, You need to enable the <span className="dark:text-yellow-400 text-yellow-500 font-bold">ON VERIFICATION REQUEST</span> webhook.
                                     </p>
 
-                                    <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 border-white/20">
-                                        <p className="dark:text-gray-300 text-gray-900 mt-1">Use this prefix before the room name to indicate a private room, i.e. <code className="text-blue-300">pri-test-room</code></p>
+                                    <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 dark:border-white/20 border-gray-500/20">
+                                        <p className="dark:text-gray-300 text-gray-900 mt-1">Use this prefix before the room name to indicate a private room, i.e. <code className="dark:text-blue-400 text-blue-500">pri-test-room</code></p>
                                     </div>
                                 </div>
 
@@ -174,16 +174,16 @@ export default function Docs() {
                                     <h3 className="text-2xl font-semibold text-green-400 mb-4">🌍 Public Room</h3>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        A <span className="text-yellow-300 font-bold">Public Room</span> is an open chat space where anyone can join without restrictions.
+                                        A <span className="dark:text-yellow-400 text-yellow-500 font-bold">Public Room</span> is an open chat space where anyone can join without restrictions.
                                         It is ideal for general discussions, community engagement, and public conversations.
                                     </p>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        Public rooms do not require authentication, and any user can enter freely using the <span className="text-yellow-300 font-bold">Client API Key</span>.
+                                        Public rooms do not require authentication, and any user can enter freely using the <span className="dark:text-yellow-400 text-yellow-500 font-bold">Client API Key</span>.
                                     </p>
 
-                                    <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 border-white/20">
-                                        <p className="dark:text-gray-300 text-gray-900 mt-1">Use this prefix before the room name to indicate a public room, i.e. <code className="text-green-300">pub-general-room</code>.</p>
+                                    <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 dark:border-white/20 border-gray-500/20">
+                                        <p className="dark:text-gray-300 text-gray-900 mt-1">Use this prefix before the room name to indicate a public room, i.e. <code className="dark:text-green-400 text-green-500">pub-general-room</code>.</p>
                                     </div>
                                 </div>
 
@@ -192,32 +192,32 @@ export default function Docs() {
                                     <h3 className="text-2xl font-semibold text-purple-400 mb-4">🗄️ Cache Room</h3>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        A <span className="text-yellow-300 font-bold">Cache Room</span> is a temporary chat space that stores only the
-                                        <span className="text-white font-bold"> last sent message </span> in the room. This allows users to retrieve
+                                        A <span className="dark:text-yellow-400 text-yellow-500 font-bold">Cache Room</span> is a temporary chat space that stores only the
+                                        <span className="dark:text-white text-gray-900 font-bold"> last sent message </span> in the room. This allows users to retrieve
                                         the most recent message without storing older conversations.
                                     </p>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        The cached message can be accessed via the <span className="text-blue-300 font-semibold">API</span>, ensuring
+                                        The cached message can be accessed via the <span className="dark:text-blue-400 text-blue-500 font-semibold">API</span>, ensuring
                                         quick retrieval when needed. Once a new message is sent, the previous cached message is replaced.
                                     </p>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
                                         Cache rooms can also be used in combination with
-                                        <span className="text-green-300 font-semibold"> Private </span> and
-                                        <span className="text-blue-400 font-semibold"> Public </span> rooms, {" "}
-                                        <span className="text-green-300 font-semibold">Private Cache Rooms</span> restrict access while caching only the last message.{" "}
-                                        <span className="text-blue-400 font-semibold">Public Cache Rooms</span> allow open participation with only the latest message stored.
+                                        <span className="dark:text-green-400 text-green-500 font-semibold"> Private </span> and
+                                        <span className="dark:text-blue-400 text-blue-500 font-semibold"> Public </span> rooms, {" "}
+                                        <span className="dark:text-green-400 text-green-500 font-semibold">Private Cache Rooms</span> restrict access while caching only the last message.{" "}
+                                        <span className="dark:text-blue-400 text-blue-500 font-semibold">Public Cache Rooms</span> allow open participation with only the latest message stored.
                                     </p>
 
                                     <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 border-white/20">
 
                                         <p className="dark:text-gray-300 text-gray-900 mt-1">
                                             Use this prefix before the room name to indicate a cache room, i.e.
-                                            <code className="text-purple-300"> cache-temp-room</code>.
+                                            <code className="dark:text-purple-400 text-purple-500"> cache-temp-room</code>.
                                             To combine with other room types, use
-                                            <code className="text-green-300"> pri-cache-room</code> for private cache rooms or
-                                            <code className="text-blue-400"> pub-cache-room</code> for public cache rooms.
+                                            <code className="dark:text-green-400 text-green-500"> pri-cache-room</code> for private cache rooms or
+                                            <code className="dark:text-blue-400 text-green-500"> pub-cache-room</code> for public cache rooms.
                                         </p>
                                     </div>
                                 </div>
@@ -227,33 +227,33 @@ export default function Docs() {
                                     <h3 className="text-2xl font-semibold text-orange-400 mb-4">📢 State Room</h3>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
-                                        A <span className="text-yellow-300 font-bold">State Room</span> is a dynamic chat space where participants receive
-                                        <span className="text-white font-bold"> real-time notifications </span> when someone joins or leaves the room.
+                                        A <span className="dark:text-yellow-400 text-yellow-500 font-bold">State Room</span> is a dynamic chat space where participants receive
+                                        <span className="dark:text-white text-gray-900 font-bold"> real-time notifications </span> when someone joins or leaves the room.
                                         This feature enhances user engagement and awareness within the conversation.
                                     </p>
 
                                     <p className="dark:text-gray-300 text-gray-900 mb-3">
                                         State rooms can also include caching, {" "}
-                                        <span className="text-green-300 font-semibold">pri-state</span> : A private state room with restricted access and user join/leave notifications.{" "}
-                                        <span className="text-blue-400 font-semibold">pub-state</span> : A public state room open to everyone, with join/leave notifications.{" "}
-                                        <span className="text-purple-300 font-semibold">pri-state-cache</span> : A private state room that also stores the last message.{" "}
-                                        <span className="text-blue-400 font-semibold">pub-state-cache</span> : A public state room that also stores the last message.
+                                        <span className="dark:text-green-400 text-green-500 font-semibold">pri-state</span> : A private state room with restricted access and user join/leave notifications.{" "}
+                                        <span className="dark:text-blue-400 text-blue-500 font-semibold">pub-state</span> : A public state room open to everyone, with join/leave notifications.{" "}
+                                        <span className="dark:text-purple-400 text-purple-500 font-semibold">pri-state-cache</span> : A private state room that also stores the last message.{" "}
+                                        <span className="dark:text-blue-400 text-blue-500 font-semibold">pub-state-cache</span> : A public state room that also stores the last message.
                                     </p>
 
                                     <div className="dark:bg-gray-700 bg-gray-300 p-4 rounded-2xl mt-4 border-2 dark:border-white/20 border-gray-500/20">
                                         <ul className="dark:text-gray-300 text-gray-900">
-                                            <li>🔒 <code className="text-green-300">pri-state-</code> (Private State Room)</li>
-                                            <li>🌍 <code className="text-blue-400">pub-state-</code> (Public State Room)</li>
-                                            <li>🔒🗄️ <code className="text-purple-300">pri-state-cache-</code> (Private State Cache Room)</li>
-                                            <li>🌍🗄️ <code className="text-purple-300">pub-state-cache-</code> (Public State Cache Room)</li>
+                                            <li>🔒 <code className="dark:text-green-400 text-green-500">pri-state-</code> (Private State Room)</li>
+                                            <li>🌍 <code className="dark:text-blue-400 text-green-500">pub-state-</code> (Public State Room)</li>
+                                            <li>🔒🗄️ <code className="dark:text-purple-400 text-purple-500">pri-state-cache-</code> (Private State Cache Room)</li>
+                                            <li>🌍🗄️ <code className="dark:text-purple-400 text-purple-500">pub-state-cache-</code> (Public State Cache Room)</li>
                                         </ul>
 
                                         <p className="dark:text-gray-300 text-gray-900 mt-3">
                                             Use these prefixes before the room name to indicate the room type, i.e.{" "}
-                                            <code className="text-green-300">pri-state-team-chat</code>,{" "}
-                                            <code className="text-blue-400">pub-state-community-chat</code>,{" "}
-                                            <code className="text-purple-300">pri-state-cache-meeting</code>,{" "}
-                                            <code className="text-purple-300">pub-state-cache-announcement</code>
+                                            <code className="dark:text-green-400 text-green-500">pri-state-team-chat</code>,{" "}
+                                            <code className="dark:text-blue-400 text-blue-500">pub-state-community-chat</code>,{" "}
+                                            <code className="dark:text-purple-400 text-purple-500">pri-state-cache-meeting</code>,{" "}
+                                            <code className="dark:text-purple-400 text-purple-500">pub-state-cache-announcement</code>
                                         </p>
                                     </div>
                                 </div>

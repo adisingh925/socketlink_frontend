@@ -231,12 +231,12 @@ loop { sleep 1 }
 
             {/* Error Codes Section */}
             <div className="mt-8">
-                <h3 className="text-xl font-bold text-red-400 mb-4">Possible Error Codes & Their Causes</h3>
+                <h3 className="text-xl font-bold dark:text-red-400 text-red-500 mb-4">Possible Error Codes & Their Causes</h3>
 
                 <div className="space-y-4">
                     {/* 400 */}
-                    <div className="p-4 bg-yellow-800/20 border border-yellow-400 rounded-lg">
-                        <strong className="text-yellow-300">400 - Bad Request</strong>
+                    <div className="p-4 dark:bg-yellow-800/20 bg-yellow-800/20 border border-yellow-400 rounded-lg">
+                        <strong className="dark:text-yellow-300 text-yellow-500">400 - Bad Request</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> length must be between 1 and 4096 characters.</li>
                         </ul>
@@ -244,7 +244,7 @@ loop { sleep 1 }
 
                     {/* 401 */}
                     <div className="p-4 bg-red-800/20 border border-red-400 rounded-lg">
-                        <strong className="text-red-300">401 - Unauthorized</strong>
+                        <strong className="dark:text-red-300 text-red-500">401 - Unauthorized</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>api-key</code> is invalid.</li>
                         </ul>
@@ -252,7 +252,7 @@ loop { sleep 1 }
 
                     {/* 403 */}
                     <div className="p-4 bg-orange-800/20 border border-orange-400 rounded-lg">
-                        <strong className="text-orange-300">403 - Forbidden</strong>
+                        <strong className="dark:text-orange-300 text-orange-500">403 - Forbidden</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> is globally banned by the admin.</li>
                         </ul>
@@ -260,7 +260,7 @@ loop { sleep 1 }
 
                     {/* 404 */}
                     <div className="p-4 bg-pink-800/20 border border-pink-400 rounded-lg">
-                        <strong className="text-pink-300">409 Conflict</strong>
+                        <strong className="dark:text-pink-300 text-pink-500">409 Conflict</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li><code>uid</code> already exists.</li>
                         </ul>
@@ -268,7 +268,7 @@ loop { sleep 1 }
 
                     {/* 503 */}
                     <div className="p-4 bg-pink-800/20 border border-pink-400 rounded-lg">
-                        <strong className="text-pink-300">503 Service Unavailable</strong>
+                        <strong className="dark:text-pink-300 text-pink-500">503 Service Unavailable</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li>Max websocket connections limit reached, try again after sometime!</li>
                         </ul>
@@ -276,7 +276,7 @@ loop { sleep 1 }
 
                     {/* 500 */}
                     <div className="p-4 bg-red-900/20 border border-red-500 rounded-lg">
-                        <strong className="text-red-500">500 - Internal Server Error</strong>
+                        <strong className="dark:text-red-400 text-red-500">500 - Internal Server Error</strong>
                         <ul className="text-sm dark:text-gray-300 text-gray-900 mt-2 list-disc list-inside">
                             <li>Unexpected server issue.</li>
                             <li>Temporary outages or maintenance.</li>

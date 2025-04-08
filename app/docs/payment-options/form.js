@@ -149,14 +149,14 @@ export default function Docs() {
                                 <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">💳 Payment Options</h2>
 
                                 <p className=" dark:text-gray-300 text-gray-900 mb-10">
-                                    <strong>We’ve integrated <em className="text-blue-400">Razorpay</em> as our global payment gateway.</strong>
+                                    <strong>We’ve integrated <em className="dark:text-blue-400 text-blue-500">Razorpay</em> as our global payment gateway.</strong>
                                     <br /><br />
                                     Securely complete transactions using various payment methods supported worldwide.
                                 </p>
 
                                 {/* Security Notice */}
                                 <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
-                                    <h3 className="text-lg font-semibold text-yellow-400">⚠️ Security First</h3>
+                                    <h3 className="text-lg font-semibold dark:text-yellow-400 text-yellow-500">⚠️ Security First</h3>
                                     <p className="dark:text-gray-300 text-gray-900 mt-2">
                                         All payments are securely processed via Razorpay, ensuring encryption, fraud prevention, and compliance with international security standards.
                                     </p>
@@ -164,7 +164,7 @@ export default function Docs() {
 
                                 {/* Supported Payment Methods */}
                                 <div className="mb-10">
-                                    <h3 className="text-xl font-bold text-blue-400 mb-3">✅ Supported Payment Methods</h3>
+                                    <h3 className="text-xl font-bold dark:text-blue-400 text-blue-500 mb-3">✅ Supported Payment Methods</h3>
                                     <ul className="dark:text-gray-300 text-gray-900 space-y-3 list-disc list-inside">
                                         <li><strong>Credit & Debit Cards –</strong> Visa, MasterCard, AmEx, Rupay, Maestro, etc.</li>
                                         <li><strong>UPI –</strong> Google Pay, PhonePe, Paytm, etc. (India).</li>
@@ -176,7 +176,7 @@ export default function Docs() {
 
                                 {/* Need Help Section */}
                                 <div className="p-4 bg-gray-800/80 rounded-xl">
-                                    <h3 className="text-xl font-bold text-yellow-400">💡 Need Help?</h3>
+                                    <h3 className="text-xl font-bold dark:text-yellow-400 text-yellow-500">💡 Need Help?</h3>
                                     <p className="dark:text-gray-300 text-white mt-2">
                                         If you face any issues with payments, contact our 24/7 global support team.
                                     </p>

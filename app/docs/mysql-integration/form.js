@@ -151,26 +151,26 @@ export default function Docs() {
                                     This article describes how you can use the MySQL integration.
                                 </p>
 
-                                <div className="dark:bg-gray-800 bg-gray-200 p-6 rounded-2xl shadow-md border-2 dark:border-white/2 border-gray-500/20">
+                                <div className="dark:bg-gray-800 bg-gray-200 p-6 rounded-2xl border-2 dark:border-white/2 border-gray-500/20">
                                     <ul className="space-y-4 dark:text-gray-300 text-gray-900">
                                         <li>
-                                            <code className="dark:text-blue-300 text-blue-600 font-semibold">MySQL Hostname :</code>
+                                            <code className="dark:text-blue-400 text-blue-500 font-semibold">MySQL Hostname :</code>
                                             <span className="ml-2">Insert the DB URL and ensure the Socketlink server IP is whitelisted.</span>
                                         </li>
                                         <li>
-                                            <code className="dark:text-blue-300 text-blue-600 font-semibold">MySQL DB Username :</code>
+                                            <code className="dark:text-blue-400 text-blue-500 font-semibold">MySQL DB Username :</code>
                                             <span className="ml-2">Insert the database username for integration.</span>
                                         </li>
                                         <li>
-                                            <code className="dark:text-blue-300 text-blue-600 font-semibold">MySQL DB Password :</code>
+                                            <code className="dark:text-blue-400 text-blue-500 font-semibold">MySQL DB Password :</code>
                                             <span className="ml-2">Insert the database password.</span>
                                         </li>
                                         <li>
-                                            <code className="dark:text-blue-300 text-blue-600 font-semibold">MySQL DB Port :</code>
+                                            <code className="dark:text-blue-400 text-blue-500 font-semibold">MySQL DB Port :</code>
                                             <span className="ml-2">Insert the database port number.</span>
                                         </li>
                                         <li>
-                                            <code className="dark:text-blue-300 text-blue-600 font-semibold">MySQL Commit Batch Size :</code>
+                                            <code className="dark:text-blue-400 text-blue-500 font-semibold">MySQL Commit Batch Size :</code>
                                             <span className="ml-2">Set the batch size for message insertion. A higher value is recommended for high-frequency messaging.</span>
                                         </li>
                                     </ul>
@@ -202,14 +202,14 @@ export default function Docs() {
                                         />
                                     </svg>
                                     <div>
-                                        <p className="font-bold text-blue-600 items-center">To initiate a reconnection with the MySQL DB you can disable and re-enable the integration using the toggle.</p>
+                                        <p className="font-bold text-blue-500 items-center">To initiate a reconnection with the MySQL DB you can disable and re-enable the integration using the toggle.</p>
                                     </div>
                                 </div>
 
                                 <p className="dark:text-gray-300 text-gray-900 mt-4">
                                     After Enabling the integration this table (<code>socketlink_messages</code>) will be created automatically where the messages will be stored.
                                 </p>
-                                <pre className="mt-4 bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-pre-wrap">
+                                <pre className="mt-4 dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-pre-wrap">
                                     {`id : int (Auto Increment, Primary Key)
 insert_time : datetime
 message : text
