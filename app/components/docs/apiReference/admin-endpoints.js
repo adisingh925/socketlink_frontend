@@ -455,21 +455,21 @@ const AdminEndpoints = () => {
 
     return (
         <section id="api" className="mb-14">
-            <h2 className="text-3xl font-bold text-gray-300 mb-8">Admin Endpoints</h2>
+            <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">Admin Endpoints</h2>
 
-            <p className="text-gray-300 mb-6">
+            <p className="dark:text-gray-300 text-gray-900 mb-6">
                 Detailed documentation on how to use our API endpoints effectively.
             </p>
 
             <div id="test_the_server" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">1. Test if server is running</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">1. Test if server is running</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     Calling this api will return <code>Pong!</code>.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -510,14 +510,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_resources" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">2. Fetch usage metrics</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">2. Fetch usage metrics</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     You can fetch the latest usage metrics of the allocated resources.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -581,14 +581,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="sync_mysql" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">3. Sync MySQL buffers</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">3. Sync MySQL buffers</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     You can sync all the data stored in the server buffers to integrated MySQL server.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -645,14 +645,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_all_rooms" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">4. Fetch all the rooms and their users</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">4. Fetch all the rooms and their users</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will give all the rooms that are present and all the users present in each of the rooms.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -711,14 +711,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_member_in_given_room" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">5. Fetch all the users for the given rooms</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">5. Fetch all the users for the given rooms</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will fetch all the users present in the given rooms.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -749,7 +749,7 @@ const AdminEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Room ID for which you want to fetch the users.</li>
                         </ul>
                     </div>
@@ -795,14 +795,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="send_message_to_everyone" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">6. Send a message to everyone connected on the server</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">6. Send a message to everyone connected on the server</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will send the given message to everyone connected to the server.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -830,7 +830,7 @@ const AdminEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>message :</code> Insert the message that you want to send to everyone on the server.</li>
                         </ul>
                     </div>
@@ -874,14 +874,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="send_message_to_everyone_in_room" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">7. Send a message to everyone connected in a room</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">7. Send a message to everyone connected in a room</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will send message to all the users of the room.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -913,7 +913,7 @@ const AdminEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Insert all the rids you want to send the message to.</li>
                             <li><code>message :</code> Insert the message that you want to send to the given rooms.</li>
                         </ul>
@@ -958,14 +958,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="send_message_to_connection" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">8. Send a message to a particular connection</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">8. Send a message to a particular connection</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will send message to given users.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -997,7 +997,7 @@ const AdminEndpoints = () => {
                             &#125;
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>uid :</code> Insert all the uids you want to send the message to.</li>
                             <li><code>message :</code> Insert the message that you want to send to the given connections.</li>
                         </ul>
@@ -1042,9 +1042,9 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="ban_the_user" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">9. Ban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">9. Ban the user globally or in a room</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will ban the user globally or in multiple rooms.
                 </p>
 
@@ -1071,7 +1071,7 @@ const AdminEndpoints = () => {
                 </div>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -1106,7 +1106,7 @@ const AdminEndpoints = () => {
                             ]
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Insert the rid where you want to ban the provided uids.</li>
                             <li><code>uid :</code> Insert all the uids you want to ban in a given room.</li>
                         </ul>
@@ -1151,14 +1151,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="unban_the_user" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">10. Unban the user globally or in a room</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">10. Unban the user globally or in a room</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will unban the user globally or in the provided rooms.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -1193,7 +1193,7 @@ const AdminEndpoints = () => {
                             ]
                         </pre>
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Insert the rid where you want to unban the provided uids.</li>
                             <li><code>uid :</code> Insert all the uids you want to unban in a given room.</li>
                         </ul>
@@ -1238,14 +1238,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="enable_messaging_for_everyone" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">11. Enable messaging for everyone</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">11. Enable messaging for everyone</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will enable the messaging for everyone on the server.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -1303,14 +1303,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="disable_messaging_for_everyone" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">12. Disable messaging for everyone</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">12. Disable messaging for everyone</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will disable the messaging for everyone on the server.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -1368,14 +1368,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="disable_messaging_in_rooms" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">13. Disable the messaging for selected uids in selected rooms</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">13. Disable the messaging for selected uids in selected rooms</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will prevent the given users from sending the messages in the given rooms.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -1415,7 +1415,7 @@ const AdminEndpoints = () => {
                         </pre>
 
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Insert the rid where you want to stop the message sending.</li>
                             <li><code>uid :</code> Insert all the uids that you want to prevent sending messages to the corresponding rid.</li>
                         </ul>
@@ -1460,14 +1460,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="enable_messaging_in_rooms" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">14. Enable the messaging for selected uids in selected rooms</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">14. Enable the messaging for selected uids in selected rooms</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will allow the given users from sending the messages in the given rooms.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-yellow-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             POST
@@ -1507,7 +1507,7 @@ const AdminEndpoints = () => {
                         </pre>
 
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Insert the rid where you want to enable the message sending and was previously disabled</li>
                             <li><code>uid :</code> Insert all the uids that you want to allow sending messages to the corresponding rid, where it was previously disabled</li>
                         </ul>
@@ -1552,14 +1552,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_the_banned_users" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">15. Get all the banned users across different rooms on the server</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">15. Get all the banned users across different rooms on the server</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will return a json object containing all the banned users across different rooms on the server.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -1617,14 +1617,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="fetch_messages" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">16. Fetch the messages for the cache rooms</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">16. Fetch the messages for the cache rooms</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will fetch the messages for the cache room which the user is connected to.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             GET
@@ -1649,7 +1649,7 @@ const AdminEndpoints = () => {
                         </pre>
 
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>rid :</code> Replace the rid with the one you are connected to.</li>
                         </ul>
                     </div>
@@ -1662,7 +1662,7 @@ const AdminEndpoints = () => {
                         </pre>
 
                         {/* Body Key Descriptions */}
-                        <ul className="text-gray-300 text-sm mt-2 space-y-1">
+                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
                             <li><code>limit :</code> Max number of latest messages you want to fetch, can&apos;t be more than 10</li>
                             <li><code>uid :</code> Use the offset if you want to fetch more previous messages.</li>
                         </ul>
@@ -1707,14 +1707,14 @@ const AdminEndpoints = () => {
             </div>
 
             <div id="truncate_database" className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-300 mb-8">17. Truncate the cache rooms database</h2>
+                <h2 className="text-2xl font-bold dark:text-gray-300 text-gray-900 mb-8">17. Truncate the cache rooms database</h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="dark:text-gray-300 text-gray-900 mb-6">
                     This will delete all the messages from the cache rooms database, It should only be used when all the space is filled up.
                 </p>
 
                 {/* Endpoint URL */}
-                <div className="bg-gray-900 rounded-lg mb-4 space-y-4">
+                <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
                         <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
                             DEL

@@ -157,9 +157,9 @@ export default function Docs() {
                 </div>
 
                 {/* Right Sidebar */}
-                <aside className={`w-64 bg-gradient-to-b from-[#1a1a1a] to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
+                <aside className={`w-64 bg-gray-200 dark:bg-gradient-to-b dark:from-[#1a1a1a] dark:to-[#252525] p-8 pt-24 transition-all duration-300 ease-in-out 
       ${isRightDrawerOpen ? "translate-x-0 z-10 shadow-lg" : "translate-x-64"} md:translate-x-0 fixed md:relative 
-      h-full shadow-md rounded-l-lg overflow-y-auto border-l border-gray-700 right-0 top-0`}>
+      h-full shadow-md rounded-l-lg overflow-y-auto border-l border-gray-300 dark:border-gray-700 right-0 top-0`}>
                     <nav>
                         <ul className="space-y-6">
                             {[
@@ -188,7 +188,7 @@ export default function Docs() {
                                 }
                             ].map((item, index) => (
                                 <li key={item.id}>
-                                    <div className="text-gray-300 font-semibold text-lg mb-2 uppercase tracking-wide">
+                                    <div className="dark:text-gray-300 text-gray-900 font-semibold text-lg mb-2 uppercase tracking-wide">
                                         {item.title}
                                     </div>
                                     <ul className="pl-4 space-y-3 text-sm">
@@ -198,7 +198,7 @@ export default function Docs() {
                                                 className={`cursor-pointer transition-colors duration-200 ease-in-out px-2 py-1 rounded-lg 
                                     ${activeSection === sub.name
                                                         ? "text-white font-bold bg-gray-700/50"
-                                                        : "text-gray-400 hover:text-white hover:bg-gray-700/40"}`}
+                                                        : "dark:text-gray-400 text-gray-700 hover:text-white dark:hover:bg-gray-700/40 hover:bg-gray-700/60"}`}
                                                 onClick={() => scrollToSection(sub.id)}
                                             >
                                                 {sub.name}
