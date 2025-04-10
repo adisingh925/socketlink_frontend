@@ -465,8 +465,8 @@ function WebhookManagement() {
                             {/* Webhook Selection (Dropdown) */}
                             <div className="grow mb-3">
                                 <div className="relative">
-                                    <div className="bg-white border border-gray-300 rounded-2xl shadow-sm p-4 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
-                                        <div className="bg-white rounded-2xl shadow-sm pr-3.5 dark:bg-gray-800 dark:border-gray-600 dark:text-white max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
+                                    <div className="bg-white border border-gray-300 rounded-2xl p-4 dark:bg-gray-800 dark:border-gray-600 dark:text-white">
+                                        <div className="bg-white rounded-2xl pr-3.5 pt-2 pb-2 dark:bg-gray-800 dark:border-gray-600 dark:text-white max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
                             [&::-webkit-scrollbar-track]:rounded-full
                             [&::-webkit-scrollbar-track]:bg-gray-100
                             [&::-webkit-scrollbar-thumb]:rounded-full
