@@ -162,8 +162,8 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://apis.google.com https://www.googleadservices.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://googleads.g.doubleclick.net; connect-src 'self' https://master.socketlink.io wss://master.socketlink.io https://www.google-analytics.com https://apis.google.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
-          }                             
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.google.com https://*.google.co.in https://www.googletagmanager.com https://www.google-analytics.com https://apis.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.gstatic.com https://firebase.googleapis.com https://checkout.razorpay.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google.com https://*.google.co.in https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googletagmanager.com https://www.googleadservices.com https://lh3.googleusercontent.com; connect-src 'self' https://master.socketlink.io wss://master.socketlink.io https://*.google.com https://*.google.co.in https://www.google-analytics.com https://apis.google.com https://googleads.g.doubleclick.net https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebase.googleapis.com https://www.googleapis.com https://api.digitalocean.com https://lumberjack.razorpay.com; font-src 'self'; frame-src https://googleads.g.doubleclick.net https://www.googleadservices.com https://accounts.google.com https://*.firebaseapp.com https://api.razorpay.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+          }                                                                                                               
         ]
       }
     ]
