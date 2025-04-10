@@ -135,13 +135,13 @@ function SelectWebSocketPlan() {
                     setSnackbarState(true);
                 } else if (response.data.code === 2) {
                     const options = {
-                        key: "rzp_test_3jWpiXDU2zdqah",
+                        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                         amount: response.data.amount,
                         currency: "USD",
                         order_id: response.data.order_id,
                         name: 'Socketlink',
                         description: response.data.plan_name,
-                        image: 'https://socketlink.io/images/socketlink.png',
+                        image: 'https://socketlink.io/images/socketlink_short.png',
                         handler: function (response) {
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
