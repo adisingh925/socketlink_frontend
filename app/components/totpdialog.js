@@ -41,9 +41,9 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
                     </p>
                     <QRCodeCanvas
                         value={totpUri}
-                        className="mx-auto m-5"
-                        fgColor="#ffffff"
-                        bgColor="transparent"
+                        className="mx-auto m-5 rounded-lg p-2 bg-white shadow"
+                        fgColor="#000000"
+                        bgColor="#ffffff"
                     />
 
                     <div className="flex items-center pt-5 px-5">
