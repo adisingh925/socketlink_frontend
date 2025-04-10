@@ -205,6 +205,12 @@ function Billing() {
                         },
                         theme: {
                             color: '#F37254'
+                        },
+                        method: {
+                            upi: true, 
+                            card: true,
+                            netbanking: true,
+                            wallet: true,
                         }
                     };
 
