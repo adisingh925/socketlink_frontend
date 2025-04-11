@@ -40,15 +40,15 @@ function SubscribedPlans() {
             if (user) {
                 setLoading(false);
                 checkEmailVerificationAndGetSubscriptionDetails();
-                // intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 5000);
+                intervalId = setInterval(checkEmailVerificationAndGetSubscriptionDetails, 10000);
             } else {
-                // clearInterval(intervalId);
+                clearInterval(intervalId);
                 router.push("/login");
             }
         });
 
         return () => {
-            // clearInterval(intervalId);
+            clearInterval(intervalId);
         };
     }, [router]);
 
