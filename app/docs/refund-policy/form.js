@@ -71,8 +71,9 @@ export default function Docs() {
                                     id: "getting-started",
                                     title: "Getting Started",
                                     subcategories: [
-                                        { name: "Connecting to the Socketlink servers", path: "/docs/connecting-to-the-socketlink-servers" },
-                                        { name: "Sending Messages", path: "/docs/sending-messages" },
+                                        { name: "Javasript quick start", path: "/docs/javascript-quick-start" },
+                                        { name: "Android quick start", path: "/docs/android-quick-start" },
+                                        { name: "Third party libraries", path: "/docs/third-party-libraries" },
                                     ],
                                 },
                                 {

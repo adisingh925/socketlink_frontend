@@ -1,8 +1,9 @@
+import Link from "next/link";
 import CodeSnippet from "../../codeSnippet";
 
 const ConnectingToTheSocketlinkServers = () => (
     <section id="getting-started" className="mb-14">
-        <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">🌐 Connecting to the Socketlink servers</h2>
+        <h2 className="text-3xl font-bold dark:text-gray-300 text-gray-900 mb-8">🌐 Connecting to the Socketlink servers using third party libraries</h2>
         <div className="space-y-8">
             {/* Step 1 */}
             <div className="space-y-10">
@@ -33,7 +34,7 @@ const ConnectingToTheSocketlinkServers = () => (
                                 <code className="bg-gray-100 text-green-700 px-1 py-0.5 rounded">api-key</code> — Your <span className="font-semibold text-black">Client API Key</span>.
                             </li>
                             <li>
-                                <code className="bg-gray-100 text-green-700 px-1 py-0.5 rounded">uid</code> — Unique ID for the connection/user <span className="italic text-gray-600">(cannot be reused)</span>.
+                                <code className="bg-gray-100 text-green-700 px-1 py-0.5 rounded">uid</code> — Unique Id for the user <span className="italic text-gray-600">(cannot be reused)</span>.
                             </li>
                         </ul>
 
@@ -222,12 +223,42 @@ loop { sleep 1 }
                 />
             </div>
 
-
-
             {/* Connection Advice */}
             <p className="dark:text-gray-300 text-gray-900">
                 This is all you need to do to connect to our servers. It is recommended to establish the connection when your application starts.
             </p>
+
+            <p className="dark:text-gray-300 text-gray-900 font-bold">
+                Please refer to the below error codes in case of websocket connection failure.
+            </p>
+
+            <div className="flex items-start space-x-3 bg-blue-50 border border-blue-400 shadow-md p-4 rounded-lg">
+                <svg
+                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-500 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M21 12a9 9 0 10-18 0 9 9 0 0018 0z"
+                    />
+                </svg>
+                <div>
+                    <p className="font-bold text-blue-600">Please refer to our API Reference documentation to learn more.</p>
+                    <ul className="list-disc list-inside ml-4 mt-3 space-y-2 text-sm text-gray-800">
+                        <li>
+                            <Link href="/docs/client-endpoints" className="text-blue-500 hover:underline ml-1" target="_blank" rel="noopener noreferrer">Client Endpoints</Link>
+                        </li>
+                        <li>
+                            <Link href="/docs/admin-endpoints" className="text-blue-500 hover:underline ml-1" target="_blank" rel="noopener noreferrer">Admin Endpoints</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
             {/* Error Codes Section */}
             <div className="mt-8">

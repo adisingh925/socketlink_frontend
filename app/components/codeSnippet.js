@@ -29,7 +29,7 @@ const CodeSnippet = ({ snippets }) => {
             </div>
 
             {/* Fixed Layout with Scroll */}
-            <div className="relative" style={{ height: '300px' }}>
+            <div className="relative" >
                 {/* <button
                     onClick={handleCopy}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 mr-1"
@@ -46,7 +46,7 @@ const CodeSnippet = ({ snippets }) => {
                             padding: '1rem',
                             borderRadius: '0.5rem',
                             margin: 0,
-                            minHeight: '100%',
+                            
                         }}
                         codeTagProps={{
                             style: { fontSize: '14px' }
