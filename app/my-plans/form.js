@@ -34,7 +34,7 @@ function SubscribedPlans() {
     });
 
     useEffect(() => {
-        // let intervalId;
+        let intervalId;
 
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -218,10 +218,10 @@ function SubscribedPlans() {
                                             plan.subdomain ? (
                                                 <>
                                                     <span className="font-semibold dark:text-yellow-400 text-yellow-500 truncate glow">
-                                                        {`${plan.subdomain}.socketlink.io`.slice(0, 4)}••••••{`${plan.subdomain}.socketlink.io`.slice(-4)}
+                                                        {`https://${plan.subdomain}.socketlink.io`.slice(0, 8)}••••••{`https://${plan.subdomain}.socketlink.io`.slice(-4)}
                                                     </span>
                                                     <button
-                                                        onClick={() => navigator.clipboard.writeText(`${plan.subdomain}.socketlink.io`)}
+                                                        onClick={() => navigator.clipboard.writeText(`https://${plan.subdomain}.socketlink.io`)}
                                                         className="ml-2 px-3 py-1 bg-gray-700 text-white text-xs font-semibold rounded hover:bg-gray-600 transition duration-200"
                                                         title="Copy Connection URL"
                                                     >
@@ -233,6 +233,7 @@ function SubscribedPlans() {
                                             )
                                         }
                                     />
+
                                     {plan.plan.price === 0 && (
                                         <>
                                             <InfoRow
