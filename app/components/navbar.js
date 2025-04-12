@@ -159,6 +159,15 @@ export default function FloatingNavigationBar() {
                                 <div className="flex justify-between items-center" style={{ height: "150px" }}>
                                     <div className="space-x-4">
                                         <Link
+                                            href="/"
+                                            className={classNames(
+                                                isActive("/") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Home
+                                        </Link>
+                                        <Link
                                             href="/pricing"
                                             className={classNames(
                                                 isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
@@ -356,6 +365,15 @@ export default function FloatingNavigationBar() {
                         </>
                     ) : (
                         <>
+                            <Link
+                                href="/"
+                                className={classNames(
+                                    isActive("/") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
+                                    "block rounded-md px-3 py-2 text-base font-medium mt-5"
+                                )}
+                            >
+                                Home
+                            </Link>
                             <Link href="/pricing" className={classNames(
                                 isActive("/pricing") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium mt-5"

@@ -1,27 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { auth } from "./components/firebase";
-import { useRouter } from "next/navigation";
 import NavigationBar from "./components/navbar";
 
 export default function Home() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.title = "Home | Socketlink";
   });
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (!user) {
-        router.push("/login");
-      } else {
-        setLoading(false);
-      }
-    });
-  }, [router]);
 
   if (loading) {
     return (
