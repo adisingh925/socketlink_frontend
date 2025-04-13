@@ -196,13 +196,13 @@ export default function Docs() {
                                             </p>
                                             <CodeSnippet
                                                 snippets={{
-                                                    JavaScript: `const socketlink = require("socketlink-nodejs");
+                                                    JavaScript: `const socketlink = require("./socketlink-nodejs");
 
 const client = new socketlink({
     clientApiKey: 'sl_2aadbb9a5cf33fb77aa3be56c9d408166442d2747881d6bddedbf7b79bf24b4c',
-    adminApiKey: 'sl_2aadbb9a5cf33fb77aa3be56c9d408166442d2747881d6bddedbf7b79bf24b4c',
+    adminApiKey: 'sl_5144f66618aab51bbd584217822a2485ff80f8d9989329a3cdf1b93e89fed17a',
     connectionUrl: 'https://adisingh925.socketlink.io',
-    uid: "uid"
+    uid: "test"
 });
 
 client.onOpen = () => {
@@ -216,14 +216,6 @@ client.onOpen = () => {
  */
 client.onMessage = (msg, rid) => {
     console.log("Message received for rid " + rid + " : ", msg);
-};
-
-client.onClose = () => {
-    console.log("😴 Disconnected from server");
-};
-
-client.onError = (err) => {
-    console.error("❗ WebSocket error :", err.message);
 };
 
 /**
@@ -466,6 +458,172 @@ client.onAdminBroadcast = (msg, rid) => {
                                             <CodeSnippet
                                                 snippets={{
                                                     JavaScript: `client.broadcastMessageToGivenUsers("Hi there!", ["uid"]).then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">11. Ban users in given rooms</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to ban users from the given rooms, You can pass room ids as string array :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.broadcastMessageToGivenUsers("Hi there!", ["uid"]).then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">11. Ban users from the server</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to completely ban the users from the server :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.banUsersFromTheServer(["uid1", "uid2"]).then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">12. Unban users from given rooms</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to unban users from banned rooms :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.unbanUsersFromGivenRooms("pub-cache-test-groupchat", ["uid"]).then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">12. Unban users from the server</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to unban users from the server :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.unbanUsersFromTheServer(["uid"]).then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">13. Enable/Disable messaging on the server</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to enable or disable the messaging for everyone connected to the server :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `/**
+ * pass "enable" or "disable" to enable or disable messaging in server
+ */
+client.enableDisableMessagingInServer("enable").then((message) => {
+    console.log("Enable/Disable messaging in server : ", message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">14. Enable/Disable messaging for the users in given rooms</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to enable or disable the messaging for selected users in selected rooms :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `/**
+ * pass "enable" or "disable" to enable or disable messaging in server
+ */
+client.enableDisableMessagingInRoomsForGivenUsers("disable", "pub-cache-test-groupchat", ["uid"]).then((message) => {
+    console.log("Enable/Disable messaging in server : ", message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">15. Get banned users</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to fetch all the banned users accross different rooms :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.getBannedUsers().then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">16. Get users with messaging disabled</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to fetch all the users with messaging disabled across all the rooms :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.getUsersWithMessagingDisabled().then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">17. Get message for cache room</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to fetch the last message for the subscribed cache room :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.getMessageForCacheRoom("pub-cache-test-groupchat", "uid").then((message) => {
+    console.log(message);
+}).catch((err) => {
+    console.error(err.message);
+});`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">18. Truncate local database</h3>
+                                            <p className="dark:text-gray-300 text-gray-900 mb-5">
+                                                You can use this method to clear the cache rooms database, All the stored messages will be deleted :
+                                            </p>
+                                            <CodeSnippet
+                                                snippets={{
+                                                    JavaScript: `client.deleteLocalDatabase().then((message) => {
     console.log(message);
 }).catch((err) => {
     console.error(err.message);
