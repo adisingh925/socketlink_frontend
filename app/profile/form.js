@@ -126,13 +126,10 @@ function Profile() {
             const randomIndex = Math.floor(Math.random() * auth.currentUser.providerData.length);
             const randomProvider = auth.currentUser.providerData[randomIndex].providerId;
 
-            console.log("Using Provider : ", randomProvider);
-
             // Step 2: Get the multi-factor session after reauthentication
             multiFactor(auth.currentUser).getSession().then((session) => {
                 // Step 3: Generate the TOTP secret for two-factor authentication
                 TotpMultiFactorGenerator.generateSecret(session).then((secret) => {
-                    console.log("TOTP Secret : ", secret.secretKey);
                     setFullTotpSecret(secret);
                     setTotpSecret(secret.secretKey);
                     const totpUri = secret.generateQrCodeUrl(
@@ -140,19 +137,15 @@ function Profile() {
                         "socketlink.io"
                     );
 
-                    console.log("TOTP URI : ", totpUri);
-
                     setTotpUri(totpUri);
                     setIsTotpDialogopen(true);
                 }).catch((error) => {
                     if (error.code === "auth/requires-recent-login") {
                         // Step 1: Reauthenticate based on the current provider
-                        console.log("Reauthentication required.");
                         if (randomProvider === 'google.com') {
                             // Reauthenticate with Google
                             const provider = new GoogleAuthProvider();
                             reauthenticateWithPopup(auth.currentUser, provider).then(() => {
-                                console.log("Reauthenticated with Google.");
                                 handleEnable2FA(); // Retry enabling 2FA
                             }).catch((error) => {
                                 console.error("Error reauthenticating with Google : ", error.message);
@@ -162,7 +155,6 @@ function Profile() {
                             const password = prompt("Please enter your password to continue : "); // Prompt user for password
                             const credential = EmailAuthProvider.credential(auth.currentUser.email, password);
                             reauthenticateWithCredential(auth.currentUser, credential).then(() => {
-                                console.log("Reauthenticated with Email and Password.");
                                 handleEnable2FA(); // Retry enabling 2FA
                             }).catch((error) => {
                                 console.error("Error reauthenticating with Email and Password : ", error.message);
@@ -193,10 +185,8 @@ function Profile() {
         const enrolledFactors = multiFactorUser.enrolledFactors;
 
         if (enrolledFactors.length > 0) {
-            console.log("2FA is enabled for this user.");
             setIs2FAEnabled(true); // Update state to reflect 2FA is enabled
         } else {
-            console.log("2FA is not enabled.");
             setIs2FAEnabled(false); // Update state to reflect 2FA is disabled
         }
     };

@@ -282,8 +282,6 @@ function WebhookManagement() {
 
                     const { db_host, db_user, db_password, db_name, db_port, is_sql_integration_enabled, db_commit_batch_size } = response.data.subscription;
 
-                    console.log(is_sql_integration_enabled);
-
                     setDbHost(db_host || "");
                     setDbName(db_name || "");
                     setDbPassword(db_password || "");
