@@ -145,9 +145,11 @@ export default function Docs() {
 
                 {/* Sidebar Toggle Button (Mobile) */}
                 <button
-                    className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isSidebarOpen ? "left-[17rem]" : "left-4"
-                        }`}
-                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isSidebarOpen ? "left-[17rem]" : "left-4"}`}
+                    onClick={() => {
+                        setIsSidebarOpen(!isSidebarOpen);
+                        if (!isSidebarOpen) setIsRightDrawerOpen(false); // Close the right drawer if opening the left one
+                    }}
                 >
                     {isSidebarOpen ? <FiChevronLeft size={20} /> : <FiChevronRight size={20} />}
                 </button>
@@ -721,7 +723,10 @@ client.enableDisableMessagingInRoomsForGivenUsers("disable", "pub-cache-test-gro
                 {/* Right Sidebar Toggle Button (Mobile) */}
                 <button
                     className={`fixed top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-1.5 rounded-full shadow-md md:hidden transition-all opacity-70 hover:opacity-100 z-50 ${isRightDrawerOpen ? "right-[17rem]" : "right-4"}`}
-                    onClick={() => setIsRightDrawerOpen(!isRightDrawerOpen)}
+                    onClick={() => {
+                        setIsRightDrawerOpen(!isRightDrawerOpen);
+                        if (!isRightDrawerOpen) setIsSidebarOpen(false); // Close the left drawer if opening the right one
+                    }}
                 >
                     {isRightDrawerOpen ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
                 </button>
