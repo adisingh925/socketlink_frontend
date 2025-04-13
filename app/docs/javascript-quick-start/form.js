@@ -360,7 +360,7 @@ client.onAdminBroadcast = (msg, rid) => {
                                         </div>
 
                                         <div id="users_in_given_rooms">
-                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">9. Get users in given rooms</h3>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">9. Get users in selected rooms</h3>
                                             <p className="dark:text-gray-300 text-gray-900 mb-5">
                                                 You can use this method to fetch all the users in the given rooms, You can pass room ids as string array :
                                             </p>
@@ -376,7 +376,7 @@ client.onAdminBroadcast = (msg, rid) => {
                                         </div>
 
                                         <div id="get_all_uids">
-                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">10. Get rooms for all uids</h3>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">10. Get all uids</h3>
                                             <p className="dark:text-gray-300 text-gray-900 mb-5">
                                                 You can use this method to fetch all the uids and the rooms they are subscribed to :
                                             </p>
@@ -392,7 +392,7 @@ client.onAdminBroadcast = (msg, rid) => {
                                         </div>
 
                                         <div id="get_rooms_for_given_uids">
-                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">11. Get rooms for the given uids</h3>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">11. Get rooms for selected uids</h3>
                                             <p className="dark:text-gray-300 text-gray-900 mb-5">
                                                 You can use this method to fetch all rooms for the given uids, You can pass uids as string array :
                                             </p>
@@ -606,7 +606,7 @@ client.enableDisableMessagingInRoomsForGivenUsers("disable", "pub-cache-test-gro
                                         </div>
 
                                         <div id="get_messages_for_cache_room">
-                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">24. Get message for cache room</h3>
+                                            <h3 className="text-2xl font-semibold dark:text-gray-300 text-gray-900 mb-4">24. Get last message for cache room</h3>
                                             <p className="dark:text-gray-300 text-gray-900 mb-5">
                                                 You can use this method to fetch the last message for the subscribed cache room :
                                             </p>
@@ -708,7 +708,7 @@ client.enableDisableMessagingInRoomsForGivenUsers("disable", "pub-cache-test-gro
                                             </li>
                                         ))}
                                     </ul>
-                                    {index !== 5 && <hr className="border-gray-600 my-5" />}
+                                    {index !== 0 && <hr className="border-gray-600 my-5" />}
                                 </li>
                             ))}
                         </ul>
