@@ -14,12 +14,13 @@ const CodeSnippet = ({ snippets }) => {
     return (
         <div className="bg-gray-800 rounded-lg shadow-lg mb-8 border border-gray-700">
             {/* Tabs for languages */}
-            {/* Tabs for languages */}
             <div className="flex overflow-x-auto space-x-4 border-b border-gray-700 px-4 py-2 scrollbar-hide">
                 {Object.keys(snippets).map((lang) => (
                     <button
                         key={lang}
-                        className={`text-sm font-medium px-3 py-1 whitespace-nowrap rounded ${activeLanguage === lang ? "bg-gray-700 text-white" : "text-gray-400 hover:text-white"
+                        className={`text-sm font-medium px-3 py-1 whitespace-nowrap rounded ${activeLanguage === lang
+                            ? "bg-gray-700 text-white"
+                            : "text-gray-400 hover:text-white"
                             }`}
                         onClick={() => setActiveLanguage(lang)}
                     >
@@ -29,16 +30,18 @@ const CodeSnippet = ({ snippets }) => {
             </div>
 
             {/* Fixed Layout with Scroll */}
-            <div className="relative" >
-                {/* <button
+            <div className="relative">
+                {/* Copy button */}
+                <button
                     onClick={handleCopy}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 mr-1"
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
+                    title="Copy to clipboard"
                 >
                     <FiCopy size={18} />
-                </button> */}
+                </button>
 
                 {/* Scrollable Area */}
-                <div className="p-2 bg-gray-900 rounded-b-lg" style={{ height: '100%', overflowY: 'auto' }}>
+                <div className="p-2 bg-gray-900 rounded-b-lg overflow-auto">
                     <SyntaxHighlighter
                         language={activeLanguage.toLowerCase()}
                         style={oneDark}
@@ -46,7 +49,6 @@ const CodeSnippet = ({ snippets }) => {
                             padding: '1rem',
                             borderRadius: '0.5rem',
                             margin: 0,
-                            
                         }}
                         codeTagProps={{
                             style: { fontSize: '14px' }
