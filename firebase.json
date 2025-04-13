@@ -76,8 +76,8 @@
         "destination": "/docs/client-endpoints.html"
       },
       {
-        "source": "/docs/connecting-to-the-socketlink-servers",
-        "destination": "/docs/connecting-to-the-socketlink-servers.html"
+        "source": "docs/third-party-libraries",
+        "destination": "docs/third-party-libraries.html"
       },
       {
         "source": "/docs/features",
@@ -114,6 +114,10 @@
       {
         "source": "/docs/room-types",
         "destination": "/docs/room-types.html"
+      },
+      {
+        "source": "docs/javascript-quick-start",
+        "destination": "docs/javascript-quick-start.html"
       }
     ],
     "headers": [
