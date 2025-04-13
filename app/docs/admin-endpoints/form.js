@@ -19,7 +19,10 @@ export default function Docs() {
     }, []);
 
     const scrollToSection = (id) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
     };
 
     // Close sidebar when clicking outside

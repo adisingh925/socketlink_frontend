@@ -18,10 +18,6 @@ export default function Docs() {
         document.title = "Docs | Client Endpoints";
     }, []);
 
-    const goToSection = (id) => {
-        router.push(`#${id}`);
-    };
-
     useEffect(() => {
         function handleClickOutside(event) {
             if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -39,7 +35,10 @@ export default function Docs() {
     }, [isSidebarOpen]);
 
     const scrollToSection = (id) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
     };
 
     return (
