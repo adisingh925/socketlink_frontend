@@ -7,8 +7,40 @@ const CodeSnippet = ({ snippets }) => {
     const [activeLanguage, setActiveLanguage] = useState(Object.keys(snippets)[0]);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(snippets[activeLanguage]);
-        alert("Code copied to clipboard!");
+        const textToCopy = snippets[activeLanguage];
+
+        if (navigator.clipboard && window.isSecureContext) {
+            // Preferred method
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => alert("Code copied to clipboard!"))
+                .catch(() => fallbackCopy(textToCopy));
+        } else {
+            // Fallback method
+            fallbackCopy(textToCopy);
+        }
+    };
+
+    const fallbackCopy = (text) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.position = "fixed";
+        textArea.style.top = "-1000px";
+        textArea.style.left = "-1000px";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            alert(successful ? "Code copied to clipboard!" : "Failed to copy code.");
+        } catch (err) {
+            alert("Failed to copy code.");
+        }
+
+        document.body.removeChild(textArea);
     };
 
     return (
