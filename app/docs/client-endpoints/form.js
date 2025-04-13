@@ -80,7 +80,6 @@ export default function Docs() {
                                     title: "Getting Started",
                                     subcategories: [
                                         { name: "Javasript quick start", path: "/docs/javascript-quick-start" },
-                                        { name: "Android quick start", path: "/docs/android-quick-start" },
                                         { name: "Third party libraries", path: "/docs/third-party-libraries" },
                                     ],
                                 },
