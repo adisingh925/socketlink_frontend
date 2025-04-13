@@ -44,7 +44,7 @@ export default function Docs() {
                         p-8 pt-24 transition-all duration-300 ease-in-out 
                         ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64"} 
                         md:translate-x-0 fixed md:relative 
-                        h-full shadow-md rounded-r-lg overflow-y-auto border-r 
+                        h-full overflow-y-auto border-l border-gray-300 dark:border-gray-700
                       `}
                 >
                     <nav>
