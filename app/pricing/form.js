@@ -9,6 +9,7 @@ import Toast from "../components/toast";
 import Script from "next/script";
 import NavigationBar from "../components/navbar";
 import RegionSelectionDialog from "../components/region";
+import { gtag_report_conversion } from "../components/gtag";
 
 function SelectWebSocketPlan() {
     const router = useRouter();
@@ -143,6 +144,7 @@ function SelectWebSocketPlan() {
                         description: response.data.plan_name,
                         image: 'https://socketlink.io/images/socketlink_short.png',
                         handler: function (response) {
+                            gtag_report_conversion();
                             setSnackbarText(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
                             setSeverity("success");
                             setSnackbarState(true);
