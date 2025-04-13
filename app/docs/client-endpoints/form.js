@@ -166,7 +166,7 @@ export default function Docs() {
     p-8 pt-24 transition-all duration-300 ease-in-out 
     ${isRightDrawerOpen ? "translate-x-0 z-10 shadow-lg" : "translate-x-64"} 
     md:translate-x-0 fixed md:relative 
-    h-full shadow-md rounded-l-lg overflow-y-auto 
+    h-full overflow-y-auto 
     border-l border-gray-300 dark:border-gray-700 
     right-0 top-0`}
                 >

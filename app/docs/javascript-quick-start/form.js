@@ -53,7 +53,7 @@ export default function Docs() {
                     className={`w-64 
                         bg-gray-200 dark:bg-gradient-to-b dark:from-[#1a1a1a] dark:to-[#252525] 
                         p-8 pt-24 transition-all duration-300 ease-in-out 
-                        ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64"} 
+                        ${isSidebarOpen ? "translate-x-0 z-50 shadow-lg" : "-translate-x-64 z-50"} 
                         md:translate-x-0 fixed md:relative 
                         h-full overflow-y-auto border-l border-gray-300 dark:border-gray-700
                       `}
@@ -653,7 +653,7 @@ client.enableDisableMessagingInRoomsForGivenUsers("disable", "pub-cache-test-gro
                         p-8 pt-24 transition-all duration-300 ease-in-out 
                         ${isRightDrawerOpen ? "translate-x-0 z-10 shadow-lg" : "translate-x-64"} 
                         md:translate-x-0 fixed md:relative 
-                        h-full shadow-md rounded-l-lg overflow-y-auto 
+                        h-full overflow-y-auto 
                         border-l border-gray-300 dark:border-gray-700 
                         right-0 top-0`}
                 >
