@@ -184,6 +184,152 @@ export default function Home() {
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
+        {/* Comparison Section */}
+        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+              Socketlink vs Ably vs Pusher
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+              Here's the real cost of 10,000 connections sending 1 message/sec (1KB each) — totaling 260 million messages and 1TB per month.
+            </p>
+          </motion.div>
+
+          <div className="w-full overflow-x-auto">
+            <div className="inline-block min-w-[700px] sm:min-w-full align-middle">
+              <div className="shadow-lg overflow-hidden rounded-xl">
+                <table className="w-full text-sm md:text-base bg-gray-900 table-auto">
+                  <thead>
+                    <tr className="bg-gray-800 text-gray-300">
+                      <th className="px-4 py-3 text-left font-semibold">Provider</th>
+                      <th className="px-4 py-3 text-left font-semibold">Plan</th>
+                      <th className="px-4 py-3 text-left font-semibold">Connections</th>
+                      <th className="px-4 py-3 text-left font-semibold">Messages</th>
+                      <th className="px-4 py-3 text-left font-semibold">Data</th>
+                      <th className="px-4 py-3 text-left font-semibold">Overages</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      {
+                        provider: "Socketlink",
+                        cost: "$29/mo",
+                        connections: "10,000",
+                        messages: "~260M/mo",
+                        data: "1 TB",
+                        overages: "None",
+                        costColor: "text-green-400",
+                        overageColor: "text-green-400",
+                        badgeData: "Included",
+                        badgeOverage: "✔",
+                      },
+                      {
+                        provider: "Ably",
+                        cost: "~$2,600/mo",
+                        connections: "10,000",
+                        messages: "260M ≈ $2,600",
+                        data: "1TB ≈ $140",
+                        overages: "Msg & Data fees",
+                        costColor: "text-red-400",
+                        overageColor: "text-red-400",
+                        badgeData: "Extra Cost",
+                        badgeOverage: "Overage",
+                      },
+                      {
+                        provider: "Pusher",
+                        cost: "N/A",
+                        connections: "10,000",
+                        messages: "25M limit",
+                        data: "Over by 235M+",
+                        overages: "Not feasible",
+                        costColor: "text-red-400",
+                        overageColor: "text-red-400",
+                        badgeData: "Limited",
+                        badgeOverage: "❌",
+                      },
+                    ].map((row, idx) => (
+                      <tr
+                        key={row.provider}
+                        className={`${idx % 2 === 0 ? "bg-gray-800" : "bg-gray-850"} hover:bg-gray-700 transition duration-200 whitespace-nowrap`}
+                      >
+                        <td className="px-4 py-3 font-medium text-white">{row.provider}</td>
+                        <td className={`px-4 py-3 font-semibold ${row.costColor}`}>{row.cost}</td>
+                        <td className="px-4 py-3 text-gray-200">{row.connections}</td>
+                        <td className="px-4 py-3 text-gray-200">{row.messages}</td>
+                        <td className="px-4 py-3 text-gray-200">
+                          {row.data}
+                          <span className="ml-2 px-2 py-0.5 bg-gray-700 text-xs rounded-md">{row.badgeData}</span>
+                        </td>
+                        <td className={`px-4 py-3 ${row.overageColor}`}>
+                          {row.overages}
+                          <span className="ml-2 px-2 py-0.5 bg-gray-700 text-xs rounded-md">{row.badgeOverage}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-lg sm:text-xl font-medium text-white">
+              🧠 Choose smart — <span className="text-blue-400 font-bold">Socketlink saves you $2,500+/month</span> at scale.
+            </p>
+            <p className="text-sm text-gray-400 mt-2">
+              Built for scale. Priced for startups. Loved by engineers.
+            </p>
+          </motion.div>
+        </section>
+
+        <div className="my-20 border-t border-gray-700 w-full" />
+
+        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl mt-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+              Real-time Performance Metrics
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+              Here's a live snapshot of what matters most — from stable connections to blazing fast latency.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-gray-900 rounded-xl shadow-md overflow-hidden"
+          >
+
+            <img
+              src="/images/server_metrics.png"
+              alt="Real-Time Metrics"
+              className="w-full object-cover bg-gray-950"
+            />
+          </motion.div>
+        </section>
+
+        <div className="my-20 border-t border-gray-700 w-full" />
+
         {/* Metrics Section */}
         <section className="relative py-28 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto bg-gradient-to-br from-gray-950 to-black overflow-hidden rounded-2xl">
           <motion.div

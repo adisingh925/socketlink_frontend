@@ -208,8 +208,8 @@ export default function Docs() {
                                                     JavaScript: `const socketlink = require("./socketlink-nodejs");
 
 const client = new socketlink({
-    clientApiKey: 'sl_2aadbb9a5cf33fb77aa3be56c9d408166442d2747881d6bddedbf7b79bf24b4c',
-    adminApiKey: 'sl_5144f66618aab51bbd584217822a2485ff80f8d9989329a3cdf1b93e89fed17a',
+    clientApiKey: 'sl_70d6cafcc9acbaf964b541231361800f9ea006689491f83843dcb4f11a7e87be',
+    adminApiKey: 'sl_c1b87250805272a22fc56f2f904f450898b04211254c4da671f897050dc47fad',
     connectionUrl: 'https://adisingh925.socketlink.io',
     uid: "test"
 });
@@ -229,19 +229,18 @@ client.onMessage = (msg, rid) => {
 
 /**
  * 
- * @param {*} msg - Server error/warning response after sending a message
+ * @param {*} msg - Server warning response after sending a message
  */
-client.onServerBroadcast = (msg) => {
-    console.log("📩 Server broadcast received :", msg);
+client.onWarn = (msg) => {
+    console.log(msg);
 }
 
 /**
  * 
- * @param {*} msg - message sent by the admin
- * @param {*} rid - The rid for which the message is received
+ * @param {*} err - Server error response due to websocket or server error
  */
-client.onAdminBroadcast = (msg, rid) => {
-    console.log("📩 Admin broadcast received for rid " + rid + " : ", msg);
+client.onError = (err) => {
+    console.log(err);
 }
 `
                                                 }}

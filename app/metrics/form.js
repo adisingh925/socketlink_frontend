@@ -157,11 +157,6 @@ export default function Metrics() {
                             color="#4f46e5" // Indigo
                         />
                         <MetricsChart
-                            title="Dropped Websocket Messages"
-                            data={stats.droppedMessages}
-                            color="#14b8a6" // Teal
-                        />
-                        <MetricsChart
                             title="Average Latency for Message Transfer (ms)"
                             data={stats.averageLatency}
                             color="#f97316" // Orange
@@ -210,6 +205,11 @@ export default function Metrics() {
                             title="Total Failed Connection Attempts"
                             data={stats.totalFailedAPICalls}
                             color="#7c3aed" // Purple
+                        />
+                        <MetricsChart
+                            title="Dropped Websocket Messages"
+                            data={stats.droppedMessages}
+                            color="#14b8a6" // Teal
                         />
                     </div>
                 </div>

@@ -116,8 +116,8 @@
         "destination": "/docs/room-types.html"
       },
       {
-        "source": "docs/javascript-quick-start",
-        "destination": "docs/javascript-quick-start.html"
+        "source": "/docs/javascript-quick-start",
+        "destination": "/docs/javascript-quick-start.html"
       }
     ],
     "headers": [
