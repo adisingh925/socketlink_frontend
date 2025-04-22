@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import NavigationBar from "./components/navbar";
+import Image from "next/image";
 
 const containerVariants = {
   hidden: {},
@@ -197,7 +198,7 @@ export default function Home() {
               Socketlink vs Ably vs Pusher
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-              Here's the real cost of 10,000 connections sending 1 message/sec (1KB each) — totaling 260 million messages and 1TB per month.
+              Here&#39;s the real cost of 10,000 connections sending 1 message/sec (1KB each) — totaling 260 million messages and 1TB per month.
             </p>
           </motion.div>
 
@@ -319,8 +320,9 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="bg-gray-900 rounded-xl shadow-md overflow-hidden"
           >
-
-            <img
+            <Image
+              width={1200}
+              height={600}
               src="/images/server_metrics.png"
               alt="Real-Time Metrics"
               className="w-full object-cover bg-gray-950"
