@@ -313,7 +313,7 @@ export default function Home() {
               Real-time Performance Metrics
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-              Here's a live snapshot of what matters most — from stable connections to blazing fast latency.
+              Here&#39;s a live snapshot of what matters most — from stable connections to blazing fast latency.
             </p>
           </motion.div>
 
