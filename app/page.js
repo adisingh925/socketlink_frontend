@@ -104,7 +104,7 @@ export default function Home() {
             <motion.div
               key={i}
               variants={cardVariants}
-              className="bg-gray-800/70 border border-gray-700 rounded-xl p-6 shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 group backdrop-blur"
+              className="bg-gray-800/70 border-2 dark:border-white/20 rounded-xl p-6 shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 group backdrop-blur"
             >
               <div className="flex justify-center mb-4">
                 <svg
@@ -133,7 +133,7 @@ export default function Home() {
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Extended Features Section */}
-        <section className="bg-gray-950 text-white py-24 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl">
+        <section className="bg-gray-950 text-white py-24 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl border-2 dark:border-white/20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -173,7 +173,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2, duration: 0.8 }}
-                className="bg-gray-800/70 border border-gray-700 p-8 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
+                className="bg-gray-800/70 border-2 dark:border-white/20 p-8 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
               >
                 <div className="text-4xl mb-4">{item.emoji}</div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -186,7 +186,7 @@ export default function Home() {
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Comparison Section */}
-        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl">
+        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl border-2 dark:border-white/20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -204,16 +204,16 @@ export default function Home() {
 
           <div className="w-full overflow-x-auto">
             <div className="inline-block min-w-[700px] sm:min-w-full align-middle">
-              <div className="shadow-lg overflow-hidden rounded-xl">
+              <div className="shadow-2xl overflow-hidden rounded-2xl border border-gray-700">
                 <table className="w-full text-sm md:text-base bg-gray-900 table-auto">
                   <thead>
-                    <tr className="bg-gray-800 text-gray-300">
-                      <th className="px-4 py-3 text-left font-semibold">Provider</th>
-                      <th className="px-4 py-3 text-left font-semibold">Plan</th>
-                      <th className="px-4 py-3 text-left font-semibold">Connections</th>
-                      <th className="px-4 py-3 text-left font-semibold">Messages</th>
-                      <th className="px-4 py-3 text-left font-semibold">Data</th>
-                      <th className="px-4 py-3 text-left font-semibold">Overages</th>
+                    <tr className="bg-gradient-to-r from-gray-800 to-gray-700 text-gray-200">
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Provider</th>
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Plan</th>
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Connections</th>
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Messages</th>
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Data</th>
+                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Overages</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -259,17 +259,21 @@ export default function Home() {
                         key={row.provider}
                         className={`${idx % 2 === 0 ? "bg-gray-800" : "bg-gray-850"} hover:bg-gray-700 transition duration-200 whitespace-nowrap`}
                       >
-                        <td className="px-4 py-3 font-medium text-white">{row.provider}</td>
-                        <td className={`px-4 py-3 font-semibold ${row.costColor}`}>{row.cost}</td>
-                        <td className="px-4 py-3 text-gray-200">{row.connections}</td>
-                        <td className="px-4 py-3 text-gray-200">{row.messages}</td>
-                        <td className="px-4 py-3 text-gray-200">
+                        <td className="px-6 py-4 font-medium text-white">{row.provider}</td>
+                        <td className={`px-6 py-4 font-semibold ${row.costColor}`}>{row.cost}</td>
+                        <td className="px-6 py-4 text-gray-300">{row.connections}</td>
+                        <td className="px-6 py-4 text-gray-300">{row.messages}</td>
+                        <td className="px-6 py-4 text-gray-300">
                           {row.data}
-                          <span className="ml-2 px-2 py-0.5 bg-gray-700 text-xs rounded-md">{row.badgeData}</span>
+                          <span className="ml-2 px-2 py-1 bg-gray-700 text-xs font-semibold rounded-full shadow-sm">
+                            {row.badgeData}
+                          </span>
                         </td>
-                        <td className={`px-4 py-3 ${row.overageColor}`}>
+                        <td className={`px-6 py-4 ${row.overageColor}`}>
                           {row.overages}
-                          <span className="ml-2 px-2 py-0.5 bg-gray-700 text-xs rounded-md">{row.badgeOverage}</span>
+                          <span className="ml-2 px-2 py-1 bg-gray-700 text-xs font-semibold rounded-full shadow-sm">
+                            {row.badgeOverage}
+                          </span>
                         </td>
                       </tr>
                     ))}
@@ -297,7 +301,7 @@ export default function Home() {
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
-        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl mt-10">
+        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl mt-10 border-2 dark:border-white/20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -309,31 +313,52 @@ export default function Home() {
               Real-time Performance Metrics
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-              Here&#39;s a live snapshot of what matters most — from stable connections to blazing fast latency.
+              Here's a live snapshot of what matters most — from stable connections to blazing fast latency.
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gray-900 rounded-xl shadow-md overflow-hidden"
-          >
-            <Image
-              width={1200}
-              height={600}
-              src="/images/server_metrics.png"
-              alt="Real-Time Metrics"
-              className="w-full object-cover bg-gray-950"
-            />
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                src: "/images/connected_users.png",
+                title: "Total Connections",
+              },
+              {
+                src: "/images/total_messages.png",
+                title: "Messages Sent",
+              },
+              {
+                src: "/images/latency.png",
+                title: "Latency",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-gray-900 rounded-xl shadow-md overflow-hidden"
+              >
+                <Image
+                  width={500}
+                  height={300}
+                  src={item.src}
+                  alt={item.title}
+                  className="w-full object-cover bg-gray-950"
+                />
+                <div className="p-4 text-center">
+                  <h3 className="text-lg font-semibold text-blue-400">{item.title}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Metrics Section */}
-        <section className="relative py-28 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto bg-gradient-to-br from-gray-950 to-black overflow-hidden rounded-2xl">
+        <section className="relative py-28 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto bg-gradient-to-br from-gray-950 to-black overflow-hidden rounded-2xl border-2 dark:border-white/20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
