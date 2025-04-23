@@ -90,7 +90,7 @@ export default function Metrics() {
                     connectedUsers: [...prevStats.connectedUsers, { time: new Date().toLocaleTimeString(), value: connections || 0 }],
                     averagePayloadSize: [...prevStats.averagePayloadSize, { time: new Date().toLocaleTimeString(), value: ((total_payload_sent / messages_sent) || 0) / 1024 }],
                     totalPayloadSent: [...prevStats.totalPayloadSent, { time: new Date().toLocaleTimeString(), value: (total_payload_sent / (1024 * 1024)) || 0 }],
-                    averageLatency: [...prevStats.averageLatency, { time: new Date().toLocaleTimeString(), value: average_latency || 0 }],
+                    averageLatency: [...prevStats.averageLatency, { time: new Date().toLocaleTimeString(), value: (average_latency / 2) || 0 }],
                     droppedMessages: [...prevStats.droppedMessages, { time: new Date().toLocaleTimeString(), value: dropped_messages || 0 }],
                     totalSuccessAPICalls: [...prevStats.totalSuccessAPICalls, { time: new Date().toLocaleTimeString(), value: total_success_api_calls || 0 }],
                     totalFailedAPICalls: [...prevStats.totalFailedAPICalls, { time: new Date().toLocaleTimeString(), value: total_failed_api_calls || 0 }],
