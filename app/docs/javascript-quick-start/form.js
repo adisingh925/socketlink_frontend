@@ -208,9 +208,9 @@ export default function Docs() {
                                                     JavaScript: `const socketlink = require("./socketlink-nodejs");
 
 const client = new socketlink({
-    clientApiKey: 'sl_70d6cafcc9acbaf964b541231361800f9ea006689491f83843dcb4f11a7e87be',
-    adminApiKey: 'sl_c1b87250805272a22fc56f2f904f450898b04211254c4da671f897050dc47fad',
-    connectionUrl: 'https://adisingh925.socketlink.io',
+    clientApiKey: 'sl_683ff670596bada67111d24ffea7a462d6b20691bcc21a1bf0e5a8f31ccfcc1a',
+    adminApiKey: 'sl_0a1701dcb8daf4aef01e462aed98edaaf8e06f16fb63a4e4cc85f80b77018f3d',
+    connectionUrl: 'https://20051582.socketlink.io',
     uid: "test"
 });
 
@@ -241,6 +241,22 @@ client.onWarn = (msg) => {
  */
 client.onError = (err) => {
     console.log(err);
+}
+
+/**
+ * 
+ * @param {*} user - notify when a new user joins the state room
+ */
+client.onUserJoin = (uid, rid) => {
+    console.log("User joined : ", uid + " to room " + rid);
+}
+
+/**
+ * 
+ * @param {*} user - notify when a user leaves the state room
+ */
+client.onUserLeave = (uid, rid) => {
+    console.log("User left : ", uid + " from room " + rid);
 }
 `
                                                 }}
