@@ -34,7 +34,7 @@ export default function FloatingNavigationBar() {
     const isActive = (path) => pathname === path;
 
     return (
-        <Disclosure as="nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-8xl dark:bg-gray-800 bg-gray-200 rounded-2xl">
+        <Disclosure as="nav" className="fixed top-0 left-0 w-full z-50 dark:bg-gray-800 bg-gray-200 rounded-b-lg">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -186,6 +186,15 @@ export default function FloatingNavigationBar() {
                                             Docs
                                         </Link>
                                         <Link
+                                            href="/contact-us"
+                                            className={classNames(
+                                                isActive("/contact-us") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
+                                                "rounded-md px-3 py-2 text-sm font-medium"
+                                            )}
+                                        >
+                                            Contact Us
+                                        </Link>
+                                        <Link
                                             href="/terms-conditions"
                                             className={classNames(
                                                 isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
@@ -213,15 +222,6 @@ export default function FloatingNavigationBar() {
                                             )}
                                         >
                                             Login
-                                        </Link>
-                                        <Link
-                                            href="/signup"
-                                            className={classNames(
-                                                isActive("/signup") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
-                                                "rounded-md px-3 py-2 text-sm font-medium"
-                                            )}
-                                        >
-                                            Signup
                                         </Link>
                                     </div>
                                 </div>
@@ -386,6 +386,12 @@ export default function FloatingNavigationBar() {
                             )}>
                                 Docs
                             </Link>
+                            <Link href="/contact-us" className={classNames(
+                                isActive("/contact-us") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
+                                "block rounded-md px-3 py-2 text-base font-medium"
+                            )}>
+                                Contact Us
+                            </Link>
                             <Link href="/terms-conditions" className={classNames(
                                 isActive("/terms-conditions") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
                                 "block rounded-md px-3 py-2 text-base font-medium"
@@ -403,12 +409,6 @@ export default function FloatingNavigationBar() {
                                 "block rounded-md px-3 py-2 text-base font-medium"
                             )}>
                                 Login
-                            </Link>
-                            <Link href="/signup" className={classNames(
-                                isActive("/signup") ? "bg-gray-600 text-white" : "dark:text-white text-gray-900 dark:hover:bg-gray-600 hover:bg-gray-300",
-                                "block rounded-md px-3 py-2 text-base font-medium"
-                            )}>
-                                Sign up
                             </Link>
                         </>
                     )}

@@ -198,9 +198,11 @@ function Signup() {
                                             I accept the{" "}
                                             <Link
                                                 href="/terms-conditions"
-                                                className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+
                                             >
-                                                Terms and Conditions
+                                                <span className="text-blue-300 hover:underline hover:underline-offset-4 cursor-pointer">
+                                                    Terms and Conditions
+                                                </span>
                                             </Link>
                                         </label>
                                     </div>
@@ -228,9 +230,10 @@ function Signup() {
                                     Already have an account?{" "}
                                     <Link
                                         href="/login"
-                                        className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                     >
-                                        Login here
+                                        <span className="text-blue-300 hover:underline hover:underline-offset-4 cursor-pointer">
+                                            Login here
+                                        </span>
                                     </Link>
                                 </p>
                             </form>

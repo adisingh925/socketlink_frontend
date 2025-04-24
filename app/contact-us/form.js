@@ -5,12 +5,10 @@ import axios from "axios";
 import Toast from "../components/toast";
 import FloatingNavigationBar from "../components/navbar";
 import { auth } from "../components/firebase";
-import { useRouter } from "next/navigation";
 
 function ContactUs() {
-    const router = useRouter();
     const [query, setQuery] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [snackbarState, setSnackbarState] = useState(false);
     const [snackbarText, setSnackbarText] = useState("");
     const [severity, setSeverity] = useState("");
@@ -19,37 +17,37 @@ function ContactUs() {
         document.title = "Contact Us | Socketlink";
     });
 
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (!user) {
-                router.push("/login");
-            } else {
-                setLoading(false);
-            }
-        });
-    }, [router]);
-
     const checkEmailVerificationAndSendQuery = async (query) => {
-        if (auth.currentUser.emailVerified === false) {
-            auth.currentUser.reload().then(() => {
-                if (auth.currentUser.emailVerified === false) {
-                    setSnackbarText("Please verify your email using the link sent to your email inbox!");
+        const user = auth.currentUser;
+
+        if (!user) {
+            setSnackbarText("You must be logged in to perform this action.");
+            setSeverity("error");
+            setSnackbarState(true);
+            return;
+        }
+
+        if (!user.emailVerified) {
+            try {
+                await user.reload();
+                if (!auth.currentUser.emailVerified) {
+                    setSnackbarText("Please verify your email using the link sent to your inbox!");
                     setSeverity("error");
                     setSnackbarState(true);
                     return;
                 } else {
                     sendQuery(query, true);
                 }
-            }).catch((error) => {
+            } catch (error) {
                 setSnackbarText(error.message);
                 setSeverity("error");
                 setSnackbarState(true);
                 return;
-            });
+            }
         } else {
             sendQuery(query);
         }
-    }
+    };
 
     const sendQuery = async (message, refreshToken = false) => {
         auth.currentUser.getIdToken(refreshToken).then((token) => {

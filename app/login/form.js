@@ -201,8 +201,10 @@ function Login() {
                                             </label>
                                         </div>
                                     </div>
-                                    <Link href="/forgot-password" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                        Forgot password?
+                                    <Link href="/forgot-password">
+                                        <span className="text-blue-300 hover:underline hover:underline-offset-4 cursor-pointer">
+                                            Forgot password?
+                                        </span>
                                     </Link>
                                 </div>
 
@@ -227,8 +229,10 @@ function Login() {
 
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Don’t have an account yet?{" "}
-                                    <Link href="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                        Sign up
+                                    <Link href="/signup">
+                                        <span className="text-blue-300 hover:underline hover:underline-offset-4 cursor-pointer">
+                                            Sign up
+                                        </span>
                                     </Link>
                                 </p>
                             </form>

@@ -3,7 +3,6 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 
-// Import Roboto using next/font
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
@@ -18,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         {/* Google Ads Tag */}
         <Script

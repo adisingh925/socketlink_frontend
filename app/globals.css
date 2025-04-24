@@ -5,11 +5,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-family: var(--font-roboto), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #111827;    ;
+    --background: #111827;
+    ;
     --foreground: #ededed;
   }
 }
