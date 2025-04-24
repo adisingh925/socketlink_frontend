@@ -379,7 +379,7 @@ export default function Home() {
             {[
               {
                 title: "Latency",
-                value: "5ms",
+                value: "15ms",
                 desc: "Ultra-low latency for fast and smooth real-time interactions.",
                 icon: "M3 3v18h18V3H3z",
                 direction: "left",
