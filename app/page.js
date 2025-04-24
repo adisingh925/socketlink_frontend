@@ -154,7 +154,7 @@ export default function Home() {
               {
                 title: "Ultra Low Latency",
                 emoji: "⚡",
-                desc: "Deliver data at lightning speed with consistent sub-50ms latency.",
+                desc: "Deliver data at lightning speed with consistent ~15ms latency.",
               },
               {
                 title: "Built for Developers",
@@ -379,7 +379,7 @@ export default function Home() {
             {[
               {
                 title: "Latency",
-                value: "15ms",
+                value: "~15ms",
                 desc: "Ultra-low latency for fast and smooth real-time interactions.",
                 icon: "M3 3v18h18V3H3z",
                 direction: "left",

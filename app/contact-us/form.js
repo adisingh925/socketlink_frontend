@@ -115,11 +115,12 @@ function ContactUs() {
                             In case you have any queries or suggestions, send us your query using the form below or reach out to us at{" "}
                             <a
                                 href="https://mail.google.com/mail/?view=cm&fs=1&to=support@socketlink.io"
-                                className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                support@socketlink.io
+                                <span className="text-blue-300 hover:underline hover:underline-offset-4 cursor-pointer">
+                                    support@socketlink.io
+                                </span>
                             </a>
                         </p>
 
