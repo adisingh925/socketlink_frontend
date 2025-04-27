@@ -166,11 +166,8 @@ export default function Docs() {
                                 <div className="mb-10">
                                     <h3 className="text-xl font-bold dark:text-blue-400 text-blue-500 mb-3">✅ Supported Payment Methods</h3>
                                     <ul className="dark:text-gray-300 text-gray-900 space-y-3 list-disc list-inside">
-                                        <li><strong>Credit & Debit Cards –</strong> Visa, MasterCard, AmEx, Rupay, Maestro, etc.</li>
-                                        <li><strong>UPI –</strong> Google Pay, PhonePe, Paytm, etc. (India).</li>
-                                        <li><strong>Net Banking –</strong> Supports major banks globally.</li>
-                                        <li><strong>Wallets –</strong> Paytm, Mobikwik, FreeCharge, and more.</li>
-                                        <li><strong>International Payments –</strong> Accepts credit/debit cards & banking worldwide.</li>
+                                        <li><strong>Credit & Debit Cards –</strong> Visa and Mastercard.</li>
+                                        <li><strong>International Payments –</strong> Accepts Paypal.</li>
                                     </ul>
                                 </div>
 

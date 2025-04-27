@@ -12,13 +12,13 @@ const Introduction = () => (
         </div>
 
         {/* Important Note */}
-        <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
+        {/* <div className="mb-10 p-5 bg-yellow-500/10 border-l-4 border-yellow-400 rounded-xl">
             <h3 className="text-lg font-semibold dark:text-yellow-400 text-yellow-500">⚠️ Important Note</h3>
             <p className="mt-2 dark:text-gray-300 text-gray-900">
                 We do not provide any client-side libraries. This ensures developers have full flexibility in choosing their own WebSocket implementations,
                 preventing vendor lock-in and promoting an open ecosystem.
             </p>
-        </div>
+        </div> */}
 
         {/* What is socketlink.io? */}
         <div className="mb-10">

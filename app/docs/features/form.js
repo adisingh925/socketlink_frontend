@@ -252,7 +252,7 @@ export default function Docs() {
                                 </li>
 
 
-                                <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
+                                {/* <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
                                     <h4 className="text-xl font-bold dark:text-indigo-400 text-indigo-500">No Vendor Lock-in</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Socketlink provides a fully open WebSocket solution with no proprietary SDKs, allowing developers to use any frontend or backend framework without restrictions.
@@ -262,7 +262,7 @@ export default function Docs() {
                                         <li>🌍 <span className="dark:text-indigo-400 text-indigo-500 font-medium">Universal Compatibility</span> – Works with any language or framework.</li>
                                         <li>☁️ <span className="dark:text-indigo-400 text-indigo-500 font-medium">Flexible Deployment</span> – Run on any cloud provider or on-premises setup.</li>
                                     </ul>
-                                </li>
+                                </li> */}
 
                             </ul>
                         </div>

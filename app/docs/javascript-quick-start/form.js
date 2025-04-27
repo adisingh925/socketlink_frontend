@@ -208,10 +208,11 @@ export default function Docs() {
                                                     JavaScript: `const socketlink = require("./socketlink-nodejs");
 
 const client = new socketlink({
-    clientApiKey: 'sl_683ff670596bada67111d24ffea7a462d6b20691bcc21a1bf0e5a8f31ccfcc1a',
-    adminApiKey: 'sl_0a1701dcb8daf4aef01e462aed98edaaf8e06f16fb63a4e4cc85f80b77018f3d',
-    connectionUrl: 'https://20051582.socketlink.io',
-    uid: "test"
+    clientApiKey: 'sl_d94600b5fefdbc8c03ae63053478ef3a8f338cae4fd6ac3e59bc2fa95d2198e3',
+    adminApiKey: 'sl_b4c75523d7c37579df17facea3bdaebd311a2a45ad2fabc2c854e45b934acb62',
+    connectionUrl: 'https://adisingh925.socketlink.io',
+    uid: "test",
+    metadata: "This is test users metadata"
 });
 
 client.onOpen = () => {
@@ -245,18 +246,26 @@ client.onError = (err) => {
 
 /**
  * 
+ * @param {*} rid - If you get banned from a room you will get notified here
+ */
+client.onBanned = (rid) => {
+    console.log("you are banned from room " + rid);
+}
+
+/**
+ * 
  * @param {*} user - notify when a new user joins the state room
  */
-client.onUserJoin = (uid, rid) => {
-    console.log("User joined : ", uid + " to room " + rid);
+client.onUserJoin = (metadata, rid) => {
+    console.log("User joined : ", metadata + " to room " + rid);
 }
 
 /**
  * 
  * @param {*} user - notify when a user leaves the state room
  */
-client.onUserLeave = (uid, rid) => {
-    console.log("User left : ", uid + " from room " + rid);
+client.onUserLeave = (metadata, rid) => {
+    console.log("User left : ", metadata + " from room " + rid);
 }
 `
                                                 }}
