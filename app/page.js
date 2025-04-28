@@ -71,7 +71,38 @@ export default function Home() {
       iconPath: "M6 6l12 12",
       desc: "Stream stock market updates instantly to your users.",
     },
+    {
+      title: "IoT Device Monitoring",
+      iconPath: "M3 3h18v18H3V3z",
+      desc: "Monitor and control IoT devices with live data streams.",
+    },
+    {
+      title: "Online Auctions",
+      iconPath: "M5 13l4 4L19 7",
+      desc: "Provide real-time bidding experiences for auction platforms.",
+    },
+    {
+      title: "Customer Support Systems",
+      iconPath: "M18 8a6 6 0 00-12 0v5a6 6 0 0012 0V8z",
+      desc: "Deliver instant customer service via live chat support.",
+    },
+    {
+      title: "Real-time Analytics Dashboards",
+      iconPath: "M3 3h18v18H3V3z",
+      desc: "Display live metrics and insights without refreshing the page.",
+    },
+    {
+      title: "Sports Score Updates",
+      iconPath: "M5 3l14 9-14 9V3z",
+      desc: "Broadcast sports scores and events in real-time.",
+    },
+    {
+      title: "Social Media Notifications",
+      iconPath: "M15 17h5l-1.405-1.405M19 13v-1a6 6 0 00-6-6",
+      desc: "Push instant notifications for social media interactions.",
+    },
   ];
+
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-tr from-black via-gray-900 to-gray-950 text-white">
@@ -98,18 +129,18 @@ export default function Home() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >
           {cards.map((card, i) => (
             <motion.div
               key={i}
               variants={cardVariants}
-              className="bg-gray-800/70 border-2 dark:border-white/20 rounded-xl p-6 shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 group backdrop-blur"
+              className="bg-gray-800/70 border dark:border-white/20 rounded-2xl p-4 shadow-md hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 group backdrop-blur-sm"
             >
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-12 h-12 text-blue-400 group-hover:text-blue-500 transition-colors duration-300"
+                  className="w-8 h-8 text-blue-400 group-hover:text-blue-500 transition-colors duration-300"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -122,13 +153,11 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-center mb-2">
-                {card.title}
-              </h3>
-              <p className="text-gray-400 text-center text-sm">{card.desc}</p>
+              <h3 className="text-sm font-semibold text-center">{card.title}</h3>
             </motion.div>
           ))}
         </motion.div>
+
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
