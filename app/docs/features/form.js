@@ -156,14 +156,14 @@ export default function Docs() {
 
                             <ul className="space-y-8 mb-6">
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-green-400 text-green-500">Ultra-Fast WebSocket Connections</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">Ultra-Fast WebSocket Connections</h4>
                                     <p className="mt-2 dark:text-gray-400 text-gray-900">
                                         Socketlink leverages optimized WebSocket technology to provide ultra-fast, bidirectional communication. By minimizing latency and maximizing throughput, it enables real-time data exchange between clients and servers with minimal overhead.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li><span className="dark:text-green-400 text-green-500 font-medium">Low-latency, high-speed communication</span> with optimized WebSockets.</li>
-                                        <li><span className="dark:text-green-400 text-green-500 font-medium">No polling delays</span>, thanks to a persistent connection.</li>
-                                        <li><span className="dark:text-green-400 text-green-500 font-medium">Seamless data streaming</span> for chats, notifications, and live updates.</li>
+                                        <li><span className="dark:text-blue-400 text-blue-500 font-medium">Low-latency, high-speed communication</span> with optimized WebSockets.</li>
+                                        <li><span className="dark:text-blue-400 text-blue-500 font-medium">No polling delays</span>, thanks to a persistent connection.</li>
+                                        <li><span className="dark:text-blue-400 text-blue-500 font-medium">Seamless data streaming</span> for chats, notifications, and live updates.</li>
                                     </ul>
                                 </li>
 
@@ -180,74 +180,74 @@ export default function Docs() {
                                 </li>
 
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-red-400 text-red-500">Secure WebSocket Connections</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">Secure WebSocket Connections</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Security is a top priority in WebSocket communication. Socketlink implements advanced security protocols to prevent unauthorized access and data interception.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li>🔑 <span className="dark:text-red-400 text-red-5000 font-medium">Strong Authentication</span> – Only trusted clients can connect.</li>
-                                        <li>🔐 <span className="dark:text-red-400 text-red-500 font-medium">Perfect Forward Secrecy</span> – Ensures long-term confidentiality.</li>
-                                        <li>🛡️ <span className="dark:text-red-400 text-red-500 font-medium">Quantum-Resistant Strength</span> – Secure against emerging threats.</li>
-                                        <li>⚡ <span className="dark:text-red-400 text-red-500 font-medium">Efficient Performance</span> – Optimized for low-latency handshakes.</li>
-                                        <li>🛑 <span className="dark:text-red-400 text-red-500 font-medium">Protection Against MITM Attacks</span> – Prevents unauthorized interception.</li>
-                                        <li>📜 <span className="dark:text-red-400 text-red-500 font-medium">Data Integrity</span> – Ensures messages aren’t altered in transit.</li>
+                                        <li>🔑 <span className="dark:text-blue-400 text-blue-500 font-medium">Strong Authentication</span> – Only trusted clients can connect.</li>
+                                        <li>🔐 <span className="dark:text-blue-400 text-blue-500 font-medium">Perfect Forward Secrecy</span> – Ensures long-term confidentiality.</li>
+                                        <li>🛡️ <span className="dark:text-blue-400 text-blue-500 font-medium">Quantum-Resistant Strength</span> – Secure against emerging threats.</li>
+                                        <li>⚡ <span className="dark:text-blue-400 text-blue-500 font-medium">Efficient Performance</span> – Optimized for low-latency handshakes.</li>
+                                        <li>🛑 <span className="dark:text-blue-400 text-blue-500 font-medium">Protection Against MITM Attacks</span> – Prevents unauthorized interception.</li>
+                                        <li>📜 <span className="dark:text-blue-400 text-blue-500 font-medium">Data Integrity</span> – Ensures messages aren’t altered in transit.</li>
                                     </ul>
                                 </li>
 
 
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-yellow-400 text-yellow-500">Room & Channel Management</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">Room & Channel Management</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Socketlink offers powerful room and channel management capabilities, enabling developers to create structured communication environments tailored to their needs.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li>🟢 <span className="dark:text-yellow-400 text-yellow-500 font-medium">State Rooms</span> – Tracks when a user joins or leaves a room and informs the other users.</li>
-                                        <li>🗂️ <span className="dark:text-yellow-400 text-yellow-500 font-medium">Cache Channels</span> – Stores the last message sent on the room.</li>
-                                        <li>🔐 <span className="dark:text-yellow-400 text-yellow-500 font-medium">Private Channels</span> – Authenticate users before granting access.</li>
-                                        <li>🌍 <span className="dark:text-yellow-400 text-yellow-500 font-medium">Public Channels</span> – Open access with a valid client API key.</li>
+                                        <li>🟢 <span className="dark:text-blue-400 text-blue-500 font-medium">State Rooms</span> – Tracks when a user joins or leaves a room and informs the other users.</li>
+                                        <li>🗂️ <span className="dark:text-blue-400 text-blue-500 font-medium">Cache Channels</span> – Stores the last message sent on the room.</li>
+                                        <li>🔐 <span className="dark:text-blue-400 text-blue-500 font-medium">Private Channels</span> – Authenticate users before granting access.</li>
+                                        <li>🌍 <span className="dark:text-blue-400 text-blue-500 font-medium">Public Channels</span> – Open access with a valid client API key.</li>
                                     </ul>
                                 </li>
 
 
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-purple-400 text-purple-500">Real-Time Monitoring & Analytics</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">Real-Time Monitoring & Analytics</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Gain complete visibility into your WebSocket traffic with real-time analytics. Socketlink provides detailed insights into connection health, traffic volume, and user interactions.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li>💬 <span className="dark:text-purple-400 text-purple-500 font-medium">Total Messages Transferred</span> – View the total number of messages exchanged.</li>
-                                        <li>👥 <span className="dark:text-purple-400 text-purple-500 font-medium">Total Connected Users</span> – Monitor active users in real time.</li>
-                                        <li>📦 <span className="dark:text-purple-400 text-purple-500 font-medium">Average Payload Size</span> – Analyze the efficiency of message transmission.</li>
-                                        <li>📡 <span className="dark:text-purple-400 text-purple-500 font-medium">Total Payload Sent</span> – Track bandwidth usage.</li>
-                                        <li>🚫 <span className="dark:text-purple-400 text-purple-500 font-medium">Unauthorized Request Rejections</span> – Detect suspicious access attempts.</li>
-                                        <li>⏳ <span className="dark:text-purple-400 text-purple-500 font-medium">Average Message Latency</span> – Optimize communication speed.</li>
-                                        <li>❌ <span className="dark:text-purple-400 text-purple-500 font-medium">Total Messages Dropped</span> – Identify transmission issues.</li>
+                                        <li>💬 <span className="dark:text-blue-400 text-blue-500 font-medium">Total Messages Transferred</span> – View the total number of messages exchanged.</li>
+                                        <li>👥 <span className="dark:text-blue-400 text-blue-500 font-medium">Total Connected Users</span> – Monitor active users in real time.</li>
+                                        <li>📦 <span className="dark:text-blue-400 text-blue-500 font-medium">Average Payload Size</span> – Analyze the efficiency of message transmission.</li>
+                                        <li>📡 <span className="dark:text-blue-400 text-blue-500 font-medium">Total Payload Sent</span> – Track bandwidth usage.</li>
+                                        <li>🚫 <span className="dark:text-blue-400 text-blue-500 font-medium">Unauthorized Request Rejections</span> – Detect suspicious access attempts.</li>
+                                        <li>⏳ <span className="dark:text-blue-400 text-blue-500 font-medium">Average Message Latency</span> – Optimize communication speed.</li>
+                                        <li>❌ <span className="dark:text-blue-400 text-blue-500 font-medium">Total Messages Dropped</span> – Identify transmission issues.</li>
                                     </ul>
                                 </li>
 
 
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-pink-400 text-pink-500">High Availability & Auto Scaling</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">High Availability & Auto Scaling</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Socketlink automatically scales up or down based on traffic demand, ensuring consistent performance and reliability without requiring manual intervention.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li>⚡ <span className="dark:text-pink-400 text-pink-500 font-medium">Auto-Scaling Infrastructure</span> – Dynamically adjusts resources for 99.99% uptime.</li>
-                                        <li>🛑 <span className="dark:text-pink-400 text-pink-500 font-medium">Failover Mechanisms</span> – Prevents service disruptions with automatic redundancy.</li>
-                                        <li>🌍 <span className="dark:text-pink-400 text-pink-500 font-medium">Distributed Architecture</span> – Ensures reliability across multiple regions.</li>
+                                        <li>⚡ <span className="dark:text-blue-400 text-blue-500 font-medium">Auto-Scaling Infrastructure</span> – Dynamically adjusts resources for 99.99% uptime.</li>
+                                        <li>🛑 <span className="dark:text-blue-400 text-blue-500 font-medium">Failover Mechanisms</span> – Prevents service disruptions with automatic redundancy.</li>
+                                        <li>🌍 <span className="dark:text-blue-400 text-blue-500 font-medium">Distributed Architecture</span> – Ensures reliability across multiple regions.</li>
                                     </ul>
                                 </li>
 
 
                                 <li className="dark:bg-gray-800 bg-gray-200 p-4 rounded-2xl border-2 dark:border-white/20 border-gray-500/20">
-                                    <h4 className="text-xl font-bold dark:text-cyan-400 text-cyan-500">Event Broadcasting</h4>
+                                    <h4 className="text-xl font-bold dark:text-blue-400 text-blue-500">Event Broadcasting</h4>
                                     <p className="mt-2 dark:text-gray-300 text-gray-900">
                                         Instantly broadcast messages to multiple clients using Socketlink’s efficient event-driven architecture. Perfect for notifications, stock updates, live scores, and more.
                                     </p>
                                     <ul className="mt-3 space-y-2 list-disc list-inside dark:text-gray-300 text-gray-900">
-                                        <li>📡 <span className="dark:text-cyan-400 text-cyan-500 font-medium">Real-Time Notifications</span> – Instantly deliver updates to multiple clients.</li>
-                                        <li>🔄 <span className="dark:text-cyan-400 text-cyan-500 font-medium">Efficient Pub/Sub System</span> – Uses optimized channels for message distribution.</li>
-                                        <li>🎯 <span className="dark:text-cyan-400 text-cyan-500 font-medium">Targeted Broadcasts</span> – Send personalized messages to specific users or groups.</li>
+                                        <li>📡 <span className="dark:text-blue-400 text-blue-500 font-medium">Real-Time Notifications</span> – Instantly deliver updates to multiple clients.</li>
+                                        <li>🔄 <span className="dark:text-blue-400 text-blue-500 font-medium">Efficient Pub/Sub System</span> – Uses optimized channels for message distribution.</li>
+                                        <li>🎯 <span className="dark:text-blue-400 text-blue-500 font-medium">Targeted Broadcasts</span> – Send personalized messages to specific users or groups.</li>
                                     </ul>
                                 </li>
 
