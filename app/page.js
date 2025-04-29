@@ -555,8 +555,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-
-
         {/* Divider */}
         <div className="my-20 border-t border-gray-700 w-full" />
 
