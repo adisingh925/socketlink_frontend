@@ -3,7 +3,48 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import NavigationBar from "./components/navbar";
-import Image from "next/image";
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+import moment from "moment/moment";
+
+const generateIncreasingData = (start, count, min, max) => {
+  const data = [];
+  let current = moment(start);
+  let value = min;
+
+  const step = Math.floor((max - min) / count);
+
+  for (let i = 0; i < count; i++) {
+    value += Math.floor(Math.random() * step);
+    if (value > max) value = max;
+    data.push({
+      time: current.format("HH:mm:ss"),
+      value,
+    });
+    current = current.add(1, "minutes");
+  }
+
+  return data;
+};
+
+const generateRandomData = (start, count, min, max) => {
+  const data = [];
+  let current = moment(start);
+
+  for (let i = 0; i < count; i++) {
+    data.push({
+      time: current.format("HH:mm:ss"),
+      value: Math.floor(Math.random() * (max - min + 1)) + min,
+    });
+    current = current.add(1, "minutes");
+  }
+
+  return data;
+};
+
+const connectedUsersData = generateIncreasingData(moment().subtract(3, "minutes"), 3, 2000, 9000);
+const messagesSentData = generateIncreasingData(moment().subtract(3, "minutes"), 3, 2_000_000, 8_000_000);
+const latencyData = generateRandomData(moment().subtract(3, "minutes"), 3, 5, 14);
+
 
 const containerVariants = {
   hidden: {},
@@ -107,78 +148,62 @@ export default function Home() {
   return (
     <div className="min-h-[100dvh] bg-gradient-to-tr from-black via-gray-900 to-gray-950 text-white">
       <NavigationBar />
-      <main className="pt-40 pb-32 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
+      <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
         {/* Hero Section */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-blue-400 mb-4">
-            Unlock the Power of Real-Time
+          <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-4 leading-tight">
+            Unlock the Power<br />
+            of Real Time
           </h1>
+
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Build lightning-fast experiences for chat, video, games, IoT, and more.
           </p>
         </motion.div>
 
-        {/* Features Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3"
         >
           {cards.map((card, i) => (
             <motion.div
               key={i}
               variants={cardVariants}
-              className="bg-gray-800/70 border dark:border-white/20 rounded-2xl p-4 shadow-md hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 group backdrop-blur-sm"
+              className="text-xs sm:text-sm px-3 py-1 rounded-full bg-white/5 text-gray-300 hover:text-white hover:bg-blue-500/10 transition-colors duration-300 backdrop-blur-sm"
             >
-              <div className="flex justify-center mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 text-blue-400 group-hover:text-blue-500 transition-colors duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d={card.iconPath}
-                  />
-                </svg>
-              </div>
-              <h3 className="text-sm font-semibold text-center">{card.title}</h3>
+              {card.title}
             </motion.div>
           ))}
         </motion.div>
 
-
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Extended Features Section */}
-        <section className="bg-gray-950 text-white py-24 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl border-2 dark:border-white/20">
+        <section className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-14"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
               More Than Just Speed
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto">
               Explore the power behind our platform—designed for flexibility, scale, and developer joy.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10">
             {[
               {
                 title: "Ultra Low Latency",
@@ -202,10 +227,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2, duration: 0.8 }}
-                className="bg-gray-800/70 border-2 dark:border-white/20 p-8 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
+                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-md hover:shadow-blue-500/30 transition-all duration-300"
               >
-                <div className="text-4xl mb-4">{item.emoji}</div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xl shadow-md">
+                  {item.emoji}
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-white">{item.title}</h3>
                 <p className="text-gray-400 text-sm">{item.desc}</p>
               </motion.div>
             ))}
@@ -215,100 +242,120 @@ export default function Home() {
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Comparison Section */}
-        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl border-2 dark:border-white/20">
+        <section className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-10"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
               Socketlink vs Ably vs Pusher
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-              Here&#39;s the real cost of 10,000 connections sending 1 message/sec (1KB each) — totaling 260 million messages and 1TB per month.
+              A cost comparison for <span className="text-white font-medium">10,000 connections</span> sending 1 message/sec (1KB each) — that’s 260M messages and 1TB/month.
             </p>
           </motion.div>
 
-          <div className="w-full overflow-x-auto">
-            <div className="inline-block min-w-[700px] sm:min-w-full align-middle">
-              <div className="shadow-2xl overflow-hidden rounded-2xl border border-gray-700">
-                <table className="w-full text-sm md:text-base bg-gray-900 table-auto">
-                  <thead>
-                    <tr className="bg-gradient-to-r from-gray-800 to-gray-700 text-gray-200">
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Provider</th>
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Plan</th>
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Connections</th>
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Messages</th>
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Data</th>
-                      <th className="px-6 py-4 text-left font-bold uppercase tracking-wider">Overages</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      {
-                        provider: "Socketlink",
-                        cost: "$29/mo",
-                        connections: "10,000",
-                        messages: "~260M/mo",
-                        data: "1 TB",
-                        overages: "None",
-                        costColor: "text-green-400",
-                        overageColor: "text-green-400",
-                        badgeData: "Included",
-                        badgeOverage: "✔",
-                      },
-                      {
-                        provider: "Ably",
-                        cost: "~$2,600/mo",
-                        connections: "10,000",
-                        messages: "260M ≈ $2,600",
-                        data: "1TB ≈ $140",
-                        overages: "Msg & Data fees",
-                        costColor: "text-red-400",
-                        overageColor: "text-red-400",
-                        badgeData: "Extra Cost",
-                        badgeOverage: "Overage",
-                      },
-                      {
-                        provider: "Pusher",
-                        cost: "N/A",
-                        connections: "10,000",
-                        messages: "25M limit",
-                        data: "Over by 235M+",
-                        overages: "Not feasible",
-                        costColor: "text-red-400",
-                        overageColor: "text-red-400",
-                        badgeData: "Limited",
-                        badgeOverage: "❌",
-                      },
-                    ].map((row, idx) => (
-                      <tr
-                        key={row.provider}
-                        className={`${idx % 2 === 0 ? "bg-gray-800" : "bg-gray-850"} hover:bg-gray-700 transition duration-200 whitespace-nowrap`}
-                      >
-                        <td className="px-6 py-4 font-medium text-white">{row.provider}</td>
-                        <td className={`px-6 py-4 font-semibold ${row.costColor}`}>{row.cost}</td>
-                        <td className="px-6 py-4 text-gray-300">{row.connections}</td>
-                        <td className="px-6 py-4 text-gray-300">{row.messages}</td>
-                        <td className="px-6 py-4 text-gray-300">
-                          {row.data}
-                          <span className="ml-2 px-2 py-1 bg-gray-700 text-xs font-semibold rounded-full shadow-sm">
-                            {row.badgeData}
-                          </span>
-                        </td>
-                        <td className={`px-6 py-4 ${row.overageColor}`}>
-                          {row.overages}
-                          <span className="ml-2 px-2 py-1 bg-gray-700 text-xs font-semibold rounded-full shadow-sm">
-                            {row.badgeOverage}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Socketlink Card */}
+            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-2xl font-semibold text-white mb-4">Socketlink</h3>
+              <p className="text-sm text-gray-400 mb-6">
+                Ideal for high-scale projects with a predictable cost structure and no surprise overages.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Cost</span>
+                  <span className="text-green-400 font-bold">$29/mo</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Connections</span>
+                  <span className="text-white font-medium">10,000</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Messages</span>
+                  <span className="text-white font-medium">~260M/mo</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Data</span>
+                  <span className="text-white font-medium">1 TB</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Overage</span>
+                  <span className="text-green-400">None</span>
+                </li>
+              </ul>
+              <p className="mt-6 text-sm text-gray-500">
+                Built for high reliability and cost-effectiveness. Great for startups looking to scale.
+              </p>
+            </div>
+
+            {/* Ably Card */}
+            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-2xl font-semibold text-white mb-4">Ably</h3>
+              <p className="text-sm text-gray-400 mb-6">
+                Flexible pricing but higher costs due to message and data overages. Best for smaller-scale needs.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Cost</span>
+                  <span className="text-red-400 font-bold">~$2,600/mo</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Connections</span>
+                  <span className="text-white font-medium">10,000</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Messages</span>
+                  <span className="text-white font-medium">260M ≈ $2,600</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Data</span>
+                  <span className="text-white font-medium">1TB ≈ $140</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Overage</span>
+                  <span className="text-red-400">Msg & Data fees</span>
+                </li>
+              </ul>
+              <p className="mt-6 text-sm text-gray-500">
+                While flexible, be cautious of the cost escalation with higher usage.
+              </p>
+            </div>
+
+            {/* Pusher Card */}
+            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-2xl font-semibold text-white mb-4">Pusher</h3>
+              <p className="text-sm text-gray-400 mb-6">
+                A limited option due to message cap, not ideal for large-scale messaging.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Cost</span>
+                  <span className="text-red-400 font-bold">N/A</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Connections</span>
+                  <span className="text-white font-medium">10,000</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Messages</span>
+                  <span className="text-white font-medium">25M limit</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Data</span>
+                  <span className="text-red-400 font-medium">Over by 235M+</span>
+                </li>
+                <li className="flex justify-between items-center">
+                  <span className="text-gray-300">Overage</span>
+                  <span className="text-red-400">Not feasible</span>
+                </li>
+              </ul>
+              <p className="mt-6 text-sm text-gray-500">
+                Pusher is limited in scalability and not recommended for high-volume use cases.
+              </p>
             </div>
           </div>
 
@@ -319,10 +366,14 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-12 text-center"
           >
-            <p className="text-lg sm:text-xl font-medium text-white">
-              🧠 Choose smart — <span className="text-blue-400 font-bold">Socketlink saves you $2,500+/month</span> at scale.
+            <p className="text-lg sm:text-xl font-semibold text-white">
+              🚀 Choose smart —{" "}
+              <span className="text-blue-400 font-bold">
+                Socketlink saves you $2,500+/month
+              </span>{" "}
+              at scale.
             </p>
-            <p className="text-sm text-gray-400 mt-2">
+            <p className="text-xs text-gray-500 mt-2">
               Built for scale. Priced for startups. Loved by engineers.
             </p>
           </motion.div>
@@ -330,7 +381,7 @@ export default function Home() {
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
-        <section className="bg-gray-950 text-white py-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto rounded-2xl mt-10 border-2 dark:border-white/20">
+        <section className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -338,127 +389,173 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
               Real-time Performance Metrics
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-              Here&#39;s a live snapshot of what matters most — from stable connections to blazing fast latency.
+            <p className="text-gray-400 max-w-3xl mx-auto text-sm sm:text-base">
+              Here's a live snapshot of what matters most — from stable connections to blazing fast latency.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                src: "/images/connected_users.png",
-                title: "Total Connections",
-              },
-              {
-                src: "/images/total_messages.png",
-                title: "Messages Sent",
-              },
-              {
-                src: "/images/latency.png",
-                title: "Latency",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-gray-900 rounded-xl shadow-md overflow-hidden"
-              >
-                <Image
-                  width={500}
-                  height={300}
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full object-cover bg-gray-950"
-                />
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-semibold text-blue-400">{item.title}</h3>
-                </div>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10">
+            {/* Connected Users */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-md hover:shadow-blue-500/30 transition-all duration-300"
+            >
+              <MetricsChart
+                title="Connected Users"
+                data={connectedUsersData}
+                color="#3b82f6"
+              />
+              <div className="p-4 text-center">
+                <p className="text-sm sm:text-base text-gray-300 leading-tight">
+                  Track the number of connected users in real-time.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Messages Sent */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-md hover:shadow-green-500/30 transition-all duration-300"
+            >
+              <MetricsChart
+                title="Messages Sent"
+                data={messagesSentData}
+                color="#10b981"
+              />
+              <div className="p-4 text-center">
+                <p className="text-sm sm:text-base text-gray-300 leading-tight">
+                  Real-time data of the number of messages sent across the platform.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Latency */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-md hover:shadow-amber-500/30 transition-all duration-300"
+            >
+              <MetricsChart
+                title="Latency"
+                data={latencyData}
+                color="#f59e0b"
+              />
+              <div className="p-4 text-center">
+                <p className="text-sm sm:text-base text-gray-300 leading-tight">
+                  Monitor and track latency to ensure a smooth user experience.
+                </p>
+              </div>
+            </motion.div>
           </div>
+
+          {/* Bottom text added back */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-lg sm:text-xl font-semibold text-white">
+              🚀 Real-time insights help you scale —{" "}
+              <span className="text-blue-400 font-bold">Stay ahead of the curve.</span>
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              Keeping track of performance metrics to ensure smooth user experience.
+            </p>
+          </motion.div>
         </section>
+
 
         <div className="my-20 border-t border-gray-700 w-full" />
 
         {/* Metrics Section */}
-        <section className="relative py-28 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto bg-gradient-to-br from-gray-950 to-black overflow-hidden rounded-2xl border-2 dark:border-white/20">
+        <section className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-14"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-blue-400 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
               Key Metrics
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Discover how our service performs. Our focus is on providing top-tier speed, reliability, and scalability to ensure the best user experience.
+            <p className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto">
+              Experience enterprise-level performance. Built for speed, reliability, and scalability.
             </p>
           </motion.div>
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10">
             {[
               {
                 title: "Latency",
                 value: "~15ms",
-                desc: "Ultra-low latency for fast and smooth real-time interactions.",
-                icon: "M3 3v18h18V3H3z",
-                direction: "left",
+                desc: "Ultra-low latency ensures real-time experiences.",
+                emoji: "⚡",
               },
               {
                 title: "Uptime",
                 value: "99.99%",
-                desc: "Reliable infrastructure with nearly no downtime.",
-                icon: "M12 2l9 9-9 9-9-9 9-9z",
-                direction: "right",
+                desc: "Always-on infrastructure with near-perfect availability.",
+                emoji: "⏱️",
               },
               {
                 title: "Global Reach",
                 value: "150+ Countries",
-                desc: "Accessible to users across the globe with fast, secure connections.",
-                icon: "M12 2l9 9-9 9-9-9 9-9z",
-                direction: "left",
+                desc: "Optimized connectivity across global edge networks.",
+                emoji: "🌍",
               },
             ].map((metric, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: metric.direction === "left" ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.2 }}
-                className={`flex flex-col items-center gap-6 p-8 rounded-xl shadow-lg bg-gray-800/70 border border-gray-700 backdrop-blur transition-all duration-300 group hover:scale-105 max-w-full`}
+                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-md hover:shadow-blue-500/30 transition-all duration-300"
               >
-                <div className="flex justify-center mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-12 h-12 text-blue-400 group-hover:text-blue-500 transition-colors duration-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d={metric.icon}
-                    />
-                  </svg>
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl shadow-md">
+                  {metric.emoji}
                 </div>
-                <h3 className="text-2xl font-semibold text-white">{metric.title}</h3>
-                <p className="text-4xl font-bold text-blue-400">{metric.value}</p>
-                <p className="text-gray-400 text-sm">{metric.desc}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{metric.title}</h3>
+                <p className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 text-center mb-2">
+                  {metric.value}
+                </p>
+                <p className="text-gray-400 text-sm sm:text-base text-center leading-relaxed">{metric.desc}</p>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-lg sm:text-xl font-semibold text-white">
+              🚀 Experience unparalleled performance with{" "}
+              <span className="text-blue-400 font-bold">real-time insights</span> across global networks.
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              Built for scale. Priced for startups. Loved by engineers.
+            </p>
+          </motion.div>
         </section>
+
+
 
         {/* Divider */}
         <div className="my-20 border-t border-gray-700 w-full" />
@@ -469,22 +566,93 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-center"
+          className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg flex items-center justify-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-gray-400 mb-6">
-            Integrate real-time features into your app today.
-          </p>
-          <a
-            href="/docs"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-300"
-          >
-            Get Started
-          </a>
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-4">
+              Ready to get started?
+            </h2>
+            <p className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto mb-6">
+              Integrate real-time features into your app today.
+            </p>
+            <a
+              href="/docs"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02]"
+            >
+              <span className="transition-transform duration-200">Get Started</span>
+            </a>
+          </div>
         </motion.div>
+
       </main>
+    </div>
+  );
+}
+
+function MetricsChart({ title, data, color }) {
+  const [hovered, setHovered] = useState(false);
+  const interval = Math.ceil(data.length / 10);
+
+  return (
+    <div className="dark:bg-gray-800 bg-gray-200 rounded-2xl p-3 border-2 dark:border-white/20 border-gray-500/20">
+      <h2 className="text-md text-center dark:text-white text-gray-900 mb-3 font-semibold tracking-wide">
+        {title}
+      </h2>
+
+      {data.length === 0 ? (
+        <div className="flex items-center justify-center h-[250px] dark:text-gray-400 text-gray-900 text-sm">
+          No data available
+        </div>
+      ) : (
+        <ResponsiveContainer width="100%" height={250}>
+          <LineChart
+            data={data}
+            margin={{ top: 5, right: 20, left: 5, bottom: 5 }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+            <XAxis
+              dataKey="time"
+              interval={interval}
+              tick={{ fill: '#ccc', fontSize: 12 }}
+              dy={6}
+              tickFormatter={(t) =>
+                moment(t, "HH:mm:ss").format('HH:mm')
+              }
+            />
+            <YAxis
+              tick={{ fill: '#ccc', fontSize: 12 }}
+              tickFormatter={(v) =>
+                v >= 1_000_000
+                  ? `${(v / 1_000_000).toFixed(1)}M`
+                  : v >= 1_000
+                    ? `${(v / 1_000).toFixed(1)}K`
+                    : v
+              }
+            />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1f1f1f', borderColor: '#444' }}
+              labelStyle={{ color: '#eee' }}
+              itemStyle={{ color: '#fff', fontSize: 12 }}
+              formatter={(v) => new Intl.NumberFormat().format(v)}
+            />
+            <Legend
+              verticalAlign="top"
+              height={24}
+              wrapperStyle={{ color: '#bbb', fontSize: 12 }}
+            />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={color}
+              strokeWidth={2}
+              dot={hovered ? { stroke: color, strokeWidth: 2, r: 4 } : false}
+              activeDot={{ r: 6 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 }
