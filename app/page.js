@@ -144,47 +144,78 @@ export default function Home() {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // 100ms delay between child animations
+        ease: "easeOut",
+        duration: 0.3,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: "easeOut",
+        duration: 0.3, // Make the animation quick but smooth
+      },
+    },
+  };
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-tr from-black via-gray-900 to-gray-950 text-white">
       <NavigationBar />
-      <main className="pt-32 pb-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
+      <main className="pb-20 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
         {/* Hero Section */}
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="text-center mb-12"
+          className="min-h-screen w-full flex flex-col justify-center items-center text-center px-4 sm:px-6"
         >
-          <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-4 leading-tight">
-            Unlock the Power<br />
-            of Real Time
-          </h1>
+          {/* Text Animation for heading and paragraph */}
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mb-8 sm:mb-12"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-poppins font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-4 sm:mb-6 leading-tight">
+              Unlock the Power<br />
+              of Real Time
+            </h1>
 
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Build lightning-fast experiences for chat, video, games, IoT, and more.
-          </p>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg sm:text-xl">
+              Build lightning-fast experiences for chat, video, games, IoT, and more.
+            </p>
+          </motion.div>
+
+          {/* Cards section with individual animations */}
+          <motion.div
+            variants={containerVariants} // This controls the overall container's animation
+            initial="hidden"
+            animate="show"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3"
+          >
+            {cards.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants} // Individual card animation
+                className="text-[8px] sm:text-[10px] md:text-sm px-2 py-1 sm:px-3 sm:py-2 rounded-full bg-white/10 text-gray-300 
+      hover:text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 
+      transition-colors duration-150 backdrop-blur-md shadow-md"
+              >
+                {card.title}
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="flex flex-wrap justify-center gap-2 sm:gap-3"
-        >
-          {cards.map((card, i) => (
-            <motion.div
-              key={i}
-              variants={cardVariants}
-              className="text-xs sm:text-sm px-3 py-1 rounded-full bg-white/5 text-gray-300 hover:text-white hover:bg-blue-500/10 transition-colors duration-300 backdrop-blur-sm"
-            >
-              {card.title}
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="my-20 border-t border-gray-700 w-full" />
+        <div className="mb-20 border-t border-gray-700 w-full" />
 
         {/* Extended Features Section */}
         <section className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto rounded-3xl border border-white/10 shadow-2xl backdrop-blur-lg">

@@ -1,4 +1,4 @@
-import { Roboto } from "next/font/google";
+import { Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
@@ -7,6 +7,12 @@ const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
   weight: ["100", "300", "400", "500", "700", "900"],
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "600", "700"],
 });
 
 export const metadata = {
@@ -36,7 +42,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${roboto.variable} ${poppins.variable} antialiased`}>
         {children}
       </body>
       <GoogleAnalytics gaId="G-SGP3J8PTY5" />
