@@ -238,7 +238,7 @@ function MetricsChart({ title, data, color }) {
                 <ResponsiveContainer width="100%" height={250}>
                     <LineChart
                         data={data}
-                        margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+                        margin={{ top: 5, right: 20, left: 5, bottom: 5 }}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
                     >
