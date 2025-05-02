@@ -289,102 +289,102 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8 py-8">
             {/* Socketlink Card */}
-            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
-              <h3 className="text-2xl font-semibold text-white mb-4">Socketlink</h3>
-              <p className="text-sm text-gray-400 mb-6">
+            <div className="bg-gray-950/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4">Socketlink</h3>
+              <p className="text-xs sm:text-sm text-gray-400 mb-6">
                 Ideal for high-scale projects with a predictable cost structure and no surprise overages.
               </p>
               <ul className="space-y-4">
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Cost</span>
                   <span className="text-green-400 font-bold">$29/mo</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Connections</span>
                   <span className="text-white font-medium">10,000</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Messages</span>
                   <span className="text-white font-medium">~260M/mo</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Data</span>
                   <span className="text-white font-medium">1 TB</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Overage</span>
                   <span className="text-green-400">None</span>
                 </li>
               </ul>
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-xs sm:text-sm text-gray-500">
                 Built for high reliability and cost-effectiveness. Great for startups looking to scale.
               </p>
             </div>
 
             {/* Ably Card */}
-            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
-              <h3 className="text-2xl font-semibold text-white mb-4">Ably</h3>
-              <p className="text-sm text-gray-400 mb-6">
+            <div className="bg-gray-950/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4">Ably</h3>
+              <p className="text-xs sm:text-sm text-gray-400 mb-6">
                 Flexible pricing but higher costs due to message and data overages. Best for smaller-scale needs.
               </p>
               <ul className="space-y-4">
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Cost</span>
                   <span className="text-red-400 font-bold">~$2,600/mo</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Connections</span>
                   <span className="text-white font-medium">10,000</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Messages</span>
                   <span className="text-white font-medium">260M ≈ $2,600</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Data</span>
                   <span className="text-white font-medium">1TB ≈ $140</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Overage</span>
                   <span className="text-red-400">Msg & Data fees</span>
                 </li>
               </ul>
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-xs sm:text-sm text-gray-500">
                 While flexible, be cautious of the cost escalation with higher usage.
               </p>
             </div>
 
             {/* Pusher Card */}
-            <div className="bg-gray-950/60 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800">
-              <h3 className="text-2xl font-semibold text-white mb-4">Pusher</h3>
-              <p className="text-sm text-gray-400 mb-6">
+            <div className="bg-gray-950/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-800">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4">Pusher</h3>
+              <p className="text-xs sm:text-sm text-gray-400 mb-6">
                 A limited option due to message cap, not ideal for large-scale messaging.
               </p>
               <ul className="space-y-4">
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Cost</span>
                   <span className="text-red-400 font-bold">N/A</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Connections</span>
                   <span className="text-white font-medium">10,000</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Messages</span>
                   <span className="text-white font-medium">25M limit</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Data</span>
                   <span className="text-red-400 font-medium">Over by 235M+</span>
                 </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between text-sm">
                   <span className="text-gray-300">Overage</span>
                   <span className="text-red-400">Not feasible</span>
                 </li>
               </ul>
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-xs sm:text-sm text-gray-500">
                 Pusher is limited in scalability and not recommended for high-volume use cases.
               </p>
             </div>

@@ -91,14 +91,21 @@ const AdminEndpoints = () => {
 
     const metricsResponses = {
         '200': {
-            connections: 0,
-            messages_sent: 0,
-            average_payload_size: 0.000000,
-            total_payload_sent: 1848562260,
-            total_rejected_requests: 16,
-            average_latency: 0.000000,
-            dropped_messages: 0,
-            color: 'green-400'
+            "connections": 0,
+            "messages_sent": 0,
+            "average_payload_size": 0.000000,
+            "total_payload_sent": 1848562260,
+            "total_rejected_requests": 16,
+            "average_latency": 0.000000,
+            "dropped_messages": 0,
+            "color": "green-400",
+            "total_failed_api_calls": 62,
+            "total_success_api_calls": 1249,
+            "total_failed_connection_attempts": 0,
+            "total_mysql_db_batch_writes": 0,
+            "total_local_db_writes": 0,
+            "total_success_webhook_calls": 0,
+            "total_failed_webhook_calls": 0
         },
         '400': {
             message: 'some error message',
@@ -531,7 +538,7 @@ const AdminEndpoints = () => {
                     <div className="space-y-4">
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -566,13 +573,23 @@ const AdminEndpoints = () => {
                                         total_rejected_requests: metricsResponses[metricsResponsesTab].total_rejected_requests,
                                         average_latency: metricsResponses[metricsResponsesTab].average_latency,
                                         dropped_messages: metricsResponses[metricsResponsesTab].dropped_messages,
+                                        total_failed_api_calls: metricsResponses[metricsResponsesTab].total_failed_api_calls,
+                                        total_success_api_calls: metricsResponses[metricsResponsesTab].total_success_api_calls,
+                                        total_failed_connection_attempts: metricsResponses[metricsResponsesTab].total_failed_connection_attempts,
+                                        total_mysql_db_batch_writes: metricsResponses[metricsResponsesTab].total_mysql_db_batch_writes,
+                                        total_local_db_writes: metricsResponses[metricsResponsesTab].total_local_db_writes,
+                                        total_success_webhook_calls: metricsResponses[metricsResponsesTab].total_success_webhook_calls,
+                                        total_failed_webhook_calls: metricsResponses[metricsResponsesTab].total_failed_webhook_calls,
                                         message: metricsResponses[metricsResponsesTab].message,
                                         code: metricsResponses[metricsResponsesTab].code,
-                                        ...(metricsResponses[metricsResponsesTab].roomId && { roomId: metricsResponses[metricsResponsesTab].roomId })
+                                        ...(metricsResponses[metricsResponsesTab].roomId && {
+                                            roomId: metricsResponses[metricsResponsesTab].roomId
+                                        })
                                     },
                                     null,
                                     2
                                 )}
+
                             </pre>
                             <p className="text-gray-400 text-sm mt-2">{metricsResponses[metricsResponsesTab].description}</p>
                         </div>
@@ -602,7 +619,7 @@ const AdminEndpoints = () => {
                     <div className="space-y-4">
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -666,7 +683,7 @@ const AdminEndpoints = () => {
                     <div className="space-y-4">
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -733,7 +750,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -817,7 +834,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -896,7 +913,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -980,7 +997,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1086,7 +1103,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1173,7 +1190,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1260,7 +1277,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1325,7 +1342,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1390,7 +1407,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1482,7 +1499,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1574,7 +1591,7 @@ const AdminEndpoints = () => {
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1638,7 +1655,7 @@ const AdminEndpoints = () => {
                     <div className="space-y-4">
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 
@@ -1728,7 +1745,7 @@ const AdminEndpoints = () => {
                     <div className="space-y-4">
                         <strong className="text-blue-300">Headers</strong>
                         <pre className="bg-gray-800 p-2 rounded-2xl text-sm text-gray-200 border-2 border-white/20 overflow-x-auto whitespace-nowrap">
-                            api-key: ADMIN_API_KEY
+                            api-key: <span className="text-green-400">$ADMIN_API_KEY</span>
                         </pre>
                     </div>
 

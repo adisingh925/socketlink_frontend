@@ -118,11 +118,11 @@ const ClientEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
-                            POST
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
                         </span>
                         <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
-                            https://test.socketlink.io/api/v1/users/subscribe/room
+                            https://test.socketlink.io/api/v1/users/subscribe/room/<span className="text-green-400">$RID</span>
                         </pre>
                     </h4>
 
@@ -131,25 +131,13 @@ const ClientEndpoints = () => {
                         <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
                         <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: CLIENT_API_KEY
+                            api-key: <span className="text-green-400">$CLIENT_API_KEY</span><br />
+                            uid: <span className="text-green-400">$CLIENT_UID</span>
                         </pre>
                     </div>
 
                     {/* Request Body */}
-                    <div className="space-y-4">
-                        <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
-                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
-                            &#123;<br />
-                            &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
-                            &nbsp;&nbsp;&quot;rid&quot;: &quot;pub-test-0&quot;<br />
-                            &#125;
-                        </pre>
-                        {/* Body Key Descriptions */}
-                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
-                            <li><code>uid :</code> Unique identifier for the user, Same UID which was used for connecting to the socketlink servers.</li>
-                            <li><code>rid :</code> Room ID to which the user should be connected.</li>
-                        </ul>
-                    </div>
+
 
                     {/* Response Tabs */}
                     <div className="space-y-4 mt-6">
@@ -219,11 +207,11 @@ const ClientEndpoints = () => {
                 {/* Endpoint URL */}
                 <div className="dark:bg-gray-900 bg-white rounded-lg mb-4 space-y-4">
                     <h4 className="text-green-300 text-base mb-4 flex flex-row items-center flex-nowrap">
-                        <span className="bg-pink-800 text-white px-2 py-1 rounded mr-3 shrink-0">
-                            POST
+                        <span className="bg-green-800 text-white px-2 py-1 rounded mr-3 shrink-0">
+                            GET
                         </span>
                         <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
-                            https://test.socketlink.io/api/v1/users/unsubscribe/room
+                            https://test.socketlink.io/api/v1/users/unsubscribe/room<span className="text-green-400">$RID</span>
                         </pre>
                     </h4>
 
@@ -232,25 +220,13 @@ const ClientEndpoints = () => {
                         <strong className="dark:text-blue-300 text-blue-500">Headers</strong>
                         <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
                             Content-Type: application/json<br />
-                            api-key: CLIENT_API_KEY
+                            api-key: <span className="text-green-400">$CLIENT_API_KEY</span><br />
+                            uid: <span className="text-green-400">$CLIENT_UID</span>
                         </pre>
                     </div>
 
                     {/* Request Body */}
-                    <div className="space-y-4">
-                        <strong className="dark:text-yellow-300 text-yellow-500">Body</strong>
-                        <pre className="dark:bg-gray-800 bg-gray-200 p-2 rounded-2xl text-sm dark:text-gray-200 text-gray-900 border-2 dark:border-white/20 border-gray-500/20 overflow-x-auto whitespace-nowrap">
-                            &#123;<br />
-                            &nbsp;&nbsp;&quot;uid&quot;: &quot;test&quot;,<br />
-                            &nbsp;&nbsp;&quot;rid&quot;: &quot;pub-test-0&quot;<br />
-                            &#125;
-                        </pre>
-                        {/* Body Key Descriptions */}
-                        <ul className="dark:text-gray-300 text-gray-900 text-sm mt-2 space-y-1">
-                            <li><code>uid :</code> Unique identifier for the user, Same UID which was used for connecting to the socketlink servers.</li>
-                            <li><code>rid :</code> Room ID to which the user should be connected.</li>
-                        </ul>
-                    </div>
+                    
 
                     {/* Response Tabs */}
                     <div className="space-y-4 mt-6">
