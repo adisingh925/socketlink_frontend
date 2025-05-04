@@ -9,7 +9,7 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
             navigator.clipboard.writeText(secret).then(() => {
                 alert('Secret copied to clipboard!');
             }).catch(err => {
-                console.error('Failed to copy: ', err);
+                console.error('Failed to copy : ', err);
             });
         } else {
             // Fallback for older browsers or mobile
@@ -21,7 +21,7 @@ export default function TotpDialog({ isOpen, onClose, secret, totpUri, handleSub
                 document.execCommand('copy');
                 alert('Secret copied to clipboard!');
             } catch (err) {
-                console.error('Failed to copy: ', err);
+                console.error('Failed to copy : ', err);
             } finally {
                 document.body.removeChild(textarea);
             }
