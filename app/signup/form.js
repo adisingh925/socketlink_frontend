@@ -27,16 +27,20 @@ function Signup() {
 
     useEffect(() => {
         document.title = "Signup | Socketlink";
-    });
+    }, []);
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 router.push("/");
             } else {
                 setLoading(false);
             }
         });
+
+        return () => {
+            unsubscribe();
+        };
     }, [router]);
 
     const onChange = (event) => {
@@ -60,7 +64,6 @@ function Signup() {
 
             const result = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
             await sendEmailVerification(result.user);
-            router.push("/login");
         } catch (error) {
             setSnackbarState(true);
             setSnackbarText(error.message);

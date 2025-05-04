@@ -16,18 +16,22 @@ function ForgotPassword() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         router.push("/");
       } else {
         setLoading(false);
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, [router]);
 
   useEffect(() => {
     document.title = "Forget Password | Socketlink";
-  });
+  }, []);
 
   const onChange = (event) => {
     setEmail({ ...email, [event.target.name]: event.target.value });

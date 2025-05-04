@@ -25,18 +25,22 @@ function Login() {
     const [rememberMe, setRememberMe] = useState(false);
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 router.push("/");
             } else {
                 setLoading(false);
             }
         });
+
+        return () => {
+            unsubscribe();
+        };
     }, [router]);
 
     useEffect(() => {
         document.title = "Login | Socketlink";
-    });
+    }, []);
 
     const handleLoginClicked = async (e) => {
         e.preventDefault();
