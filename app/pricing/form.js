@@ -306,7 +306,7 @@ function SelectWebSocketPlan() {
                                                 />
                                                 <p className={`${plan.is_featured ? "text-white" : "dark:text-white text-gray-900"
                                                     }`}>
-                                                    <strong>Messages / Second :</strong> {"Upto 50,000 / second"}{" "}
+                                                    <strong>Messages / Second :</strong> {`Upto ${parseInt(plan.connections, 10).toLocaleString()} / second`}{" "}
                                                 </p>
                                             </div>
                                             <div className="flex items-center">

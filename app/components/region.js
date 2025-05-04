@@ -11,6 +11,7 @@ async function fetchRegions() {
         },
     });
     const data = await response.json();
+    console.log(data);
     return data.regions || [];
 }
 
