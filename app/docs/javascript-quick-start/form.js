@@ -210,7 +210,7 @@ export default function Docs() {
 const client = new socketlink({
     clientApiKey: 'sl_d94600b5fefdbc8c03ae63053478ef3a8f338cae4fd6ac3e59bc2fa95d2198e3',
     adminApiKey: 'sl_b4c75523d7c37579df17facea3bdaebd311a2a45ad2fabc2c854e45b934acb62',
-    connectionUrl: 'https://adisingh925.socketlink.io',
+    connectionUrl: 'https://test.socketlink.io',
     uid: "test",
     metadata: "This is test users metadata"
 });

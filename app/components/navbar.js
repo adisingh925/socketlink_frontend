@@ -26,8 +26,8 @@ export default function FloatingNavigationBar() {
     }, []);
 
     const handleLogout = async () => {
-        await signOut(auth);
         router.push("/login");
+        await signOut(auth);
     };
 
     /** Function to determine if the current path matches the link */
